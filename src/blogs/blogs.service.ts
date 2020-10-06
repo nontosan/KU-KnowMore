@@ -13,9 +13,10 @@ export class Blog_Service {
     ) {}
 
     async findAllBlogs() : Promise<Blogs[]> {  
-        return  this.Blog_Repository.find();
+        return this.Blog_Repository.find();
     }
     async findBlogsID(blog_id: ObjectID): Promise<Blogs[]> {
         return this.Blog_Repository.find({where: { _id: blog_id }});
     }
+
 }

@@ -14,9 +14,10 @@ export class Blog_Controller {
   async findAllBlogs(): Promise<Blogs[]> {
     return this.Service.findAllBlogs();
   }
-
-  @Get(':blog_id/')
+  
+  @Get('/:blog_id')
   async findBlogsID(@Param('blog_id', ParseObjectIdPipe) blog_id: ObjectID): Promise<Blogs[]> {
     return this.Service.findBlogsID(blog_id);
   }
+
 }

@@ -11,8 +11,11 @@ import { Blog_Module } from './blogs/blogs.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mongodb',
-      host: 'localhost',
-      database: 'testKU',
+      host: '188.166.178.33',
+      port: 27017,
+      username: 'backend',
+      password: 'Rahat_Khao_Da_Ta_Bet',
+      database: 'KU-KnowMore',
       entities: [Blogs],
       synchronize: true,
     }),
