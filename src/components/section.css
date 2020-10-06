@@ -1,0 +1,22 @@
+.bigupload{
+    width: 100%;
+}
+
+.textup{
+    float: left;
+}
+
+.uploadfile {
+    width: 93%;
+    height: 48px;
+    display: table;
+}
+
+.cancel-button {
+    float: right;
+}
+
+.submit-button {
+    float: right;
+    margin-right: 5px;
+}
