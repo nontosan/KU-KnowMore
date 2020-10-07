@@ -48,7 +48,7 @@ const WriteSection = () => {
             /><br />
             <Photo /><br />
             <Button className="cancel-button" variant="outline-secondary">Cancel</Button>
-            <Button className="submit-button" variant="outline-secondary">Submit</Button>
+            <Button className="submit-button" variant="outline-secondary" onClick={handleSectionSave}>Submit</Button>
         </div>
     );
 }
