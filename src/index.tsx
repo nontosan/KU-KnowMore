@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import App from './App';
+import WriteSection from './components/WriteSection';
 
 ReactDOM.render(
   <React.StrictMode>

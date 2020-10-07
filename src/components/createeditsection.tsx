@@ -1,6 +1,14 @@
 import React, { useState,useEffect, useImperativeHandle } from 'react'
+import { Redirect } from 'react-router-dom';
 import { Section_Edit } from '../interfaces/SectionEdit';
 import  loadeditsection from "../services/loadeditsection"
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+} from 'react-router-dom';
 
 type editsection={
   section:Section_Edit
@@ -36,15 +44,19 @@ const CreateEditSection = () => {
 
   return (
     <div>
-      {sections.map(item=>(
-        <div>
-          <div>hello</div>
-          <button onClick={handledeletesection}>edit</button>
-          <button onClick={handleeditsection}>delete</button> 
-        </div>
-      ))}
       <div>
-        <button onClick={handleaddsection}>addsection</button>
+        {sections.map(item=>(
+          <div>
+            <div>hello</div>
+            <button onClick={handledeletesection}>edit</button>
+            <button onClick={handleeditsection}>delete</button> 
+          </div>
+        ))}
+      </div>
+      <div>
+        <Link to="/writesection">
+          <button onClick={handleaddsection}>addsection</button>
+        </Link>
       </div>
     </div>
   );

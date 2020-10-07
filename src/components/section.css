@@ -9,7 +9,7 @@
 .uploadfile {
     width: 93%;
     height: 48px;
-    display: table;
+    float: left;
 }
 
 .cancel-button {
