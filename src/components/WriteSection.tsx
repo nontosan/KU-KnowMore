@@ -6,6 +6,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , draftStateToHTML} from 'react-wysiwyg-typescript';
 
+import SectionService from '../service/SectionService';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -17,6 +19,22 @@ const WriteSection = () => {
         setNewSectionName(e.target.value);
     };
     
+    const handleSectionSave = () => {
+        const writeSection = {
+            sectionname: newSectionName,
+            content: draftstate,
+        };
+
+        SectionService.createSection(writeSection)
+            .then(savedWriteSection => {
+                if (savedWriteSection !== null) {
+                    alert("Save Success");
+                } else{
+                    alert("Save Error");
+                }
+            });
+    };
+
     return (
         <div>
             <InputGroup size="lg">
