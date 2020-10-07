@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Section from './components/section'
+import WriteSection from './components/WriteSection'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Section />
+    <WriteSection />
   </React.StrictMode>,
   document.getElementById('root')
 );
