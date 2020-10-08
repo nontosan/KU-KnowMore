@@ -11,6 +11,8 @@ import SearchPic from './photo/Magnify.png';
 import BluePlus from './photo/BluePlus.png';
 import RedPlus from './photo/RedPlus.png';
 
+import Filtermodel from './modals/filter'
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -56,7 +58,7 @@ const App = () => {
                     <Route path="/">
                         <div className="main-div">
                             <FormControl aria-label="Large" aria-describedby="inputGroup-sizing-sm" className="search-bar"/>
-                            <Button variant="outline-primary" className="filter-button">Filter</Button>
+                            <Filtermodel />
                         </div>
                     </Route>
                 </Switch>
