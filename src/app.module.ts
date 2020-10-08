@@ -10,6 +10,8 @@ import Sections from './sections/sections.entity';
 import { Blog_Module } from './blogs/blogs.module';
 import { User_Module } from './users/users.module';
 import { Section_Module } from './sections/sections.module';
+import { Comments_Module } from './comments/comments.module'
+import Comments from './comments/comments.entity';
 
 @Module({
   imports: [
@@ -18,12 +20,13 @@ import { Section_Module } from './sections/sections.module';
       host: '188.166.178.33',
       port: 27017,
       database: 'KU-KnowMore',
-      entities: [Blogs, Users, Sections],
+      entities: [Blogs, Users, Sections ,Comments],
       synchronize: true,
     }),
     Blog_Module,
     User_Module,
     Section_Module,
+    Comments_Module,
   ],
   controllers: [AppController],
   providers: [AppService],
