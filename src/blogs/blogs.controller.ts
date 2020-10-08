@@ -5,12 +5,14 @@ import { pairs } from 'rxjs';
 import { ParseObjectIdPipe } from '../common/pipes';
 
 import Blogs from './blogs.entity';
+import Sections from '../sections/sections.entity';
 
 import { Blog_Service } from './blogs.service';
+import { Section_Service } from '../sections/sections.service';
 
 @Controller('blogs')
 export class Blog_Controller {
-  constructor(private Service: Blog_Service) {}
+  constructor(private Service: Blog_Service, private sectionService: Section_Service) {}
 
   @Get()
   async findAllBlogs(): Promise<Blogs[]> {
@@ -38,4 +40,8 @@ export class Blog_Controller {
     return this.Service.findBlogsID(blog_id);
   }
 
+  @Get('/:blog_id/sections')
+  async findSectionsBlogs(@Param('blog_id') blog_id: string): Promise<Sections[]> {
+    return this.sectionService.findSectionsBlogs(blog_id);
+  }
 }

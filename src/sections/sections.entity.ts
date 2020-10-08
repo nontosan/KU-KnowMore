@@ -2,24 +2,18 @@ import { Entity, Column, ObjectIdColumn } from 'typeorm';
 import { ObjectID } from 'mongodb';
 
 @Entity()
-export class Users {
+export class Sections {
     @ObjectIdColumn()
     id?: ObjectID;
 
     @Column()
-    name: string;
+    section_name: string;
 
     @Column()
-    profile_description: string;
+    content: string;
     
     @Column()
-    pic_name: string;
-    
-    @Column()
-    username: string;
-    
-    @Column()
-    pic_dir: string;
+    blog_id: string;
 }
 
-export default Users;
+export default Sections;
