@@ -39,7 +39,7 @@ const WriteSection = () => {
         <div>
             <InputGroup size="lg" className="div-sectionname">
                 <InputGroup.Prepend >
-                    <InputGroup.Text id="inputGroup-sizing-lg">Section name</InputGroup.Text>
+                    <InputGroup.Text id="inputGroup-sizing-lg">Section Name</InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl aria-label="Large" aria-describedby="inputGroup-sizing-sm" value={newSectionName} onChange={handleNewSectionNameChange}/>
             </InputGroup>

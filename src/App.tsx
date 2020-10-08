@@ -20,6 +20,8 @@ import {
 
 import WriteSection from "./components/WriteSection";
 import CreateEditSection from "./components/createeditsection";
+import UserPage from "./components/UserPage";
+import KnowledgeBlog from './components/KnowledgeBlog';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -32,7 +34,7 @@ const App = () => {
                 <Navbar bg="light" variant="light">
                     <Navbar.Brand href="/">KU KNOWMORE</Navbar.Brand>
                     <Nav className="mr-auto">
-                    <Nav.Link href="#features">KNOWLEDGE BLOG</Nav.Link>
+                    <Nav.Link href="/searchknowledgeblog">KNOWLEDGE BLOG</Nav.Link>
                     <Nav.Link href="#pricing">REVIEW BLOG</Nav.Link>
                     </Nav>
                     <Form inline >
@@ -43,7 +45,9 @@ const App = () => {
                             <NavDropdown.Item href="/knowledgeblog">Create Knowledge</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">Create Review</NavDropdown.Item>
                         </NavDropdown>
-                        <Image className="profile-pic" src={ProfilePic} roundedCircle />
+                        <Link to="/userpage">
+                            <Image className="profile-pic" src={ProfilePic} roundedCircle />
+                        </Link>
                     </Form>
                 </Navbar>
                 <Switch>
@@ -53,8 +57,14 @@ const App = () => {
                     <Route path="/writesection">
                         <WriteSection />
                     </Route>
+                    <Route path="/userpage">
+                        <UserPage />
+                    </Route>
+                    <Route path="/searchknowledgeblog">
+                        <KnowledgeBlog />
+                    </Route>
                     <Route path="/">
-                        <div className="main-div">
+                        <div className="main-div-main">
                             <FormControl aria-label="Large" aria-describedby="inputGroup-sizing-sm" className="search-bar"/>
                             <Button variant="outline-primary" className="filter-button">Filter</Button>
                         </div>
