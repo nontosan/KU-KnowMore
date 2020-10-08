@@ -2,7 +2,7 @@ import { IsNotEmpty } from "class-validator";
 
 export class CreateBlogDto {
     @IsNotEmpty()
-    course_code: string;
+    course_id: string;
 
     @IsNotEmpty()
     user_id: string;

@@ -47,7 +47,7 @@ export class Blog_Service {
         else if (filter2) tmp = await this.courseService.findAllCoursesCode(filter2);
         else if (filter2 && filter3) tmp = await this.courseService.findAllCoursesCodeTeacher(filter2,filter3);
 
-        console.log(tmp)
+        //console.log(tmp)
         
         if (filter2 || filter3) {
             //Get all associated course id
@@ -56,7 +56,7 @@ export class Blog_Service {
             for (var x in tmp) {
                 course_list.push(tmp[x].id.toString());
             }
-            console.log(course_list);
+            //console.log(course_list);
 
             //Make JSON
             for (var i = 0; i < course_list.length; i++) {
@@ -64,11 +64,11 @@ export class Blog_Service {
                 if (filter1) var tmp2 = await this.Blog_Repository.find({where: {type:filter1, course_id: course_list[i] }});
                 //filter2,3
                 else var tmp2 = await this.Blog_Repository.find({where: { course_id: course_list[i] }});
-                console.log(tmp2)
+                //console.log(tmp2)
                 //Add into Result
                 if (tmp2.length !== 0) for (var j = 0; j < tmp2.length; j++) res.push(tmp2[j]);
             }
-            console.log(res)
+            //console.log(res)
             return res;
         }
 
