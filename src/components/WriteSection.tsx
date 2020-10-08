@@ -6,7 +6,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , draftStateToHTML} from 'react-wysiwyg-typescript';
 
-import SectionService from '../service/SectionService';
+import SectionService from '../services/SectionService';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
