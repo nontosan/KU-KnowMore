@@ -68,7 +68,7 @@ const Comment_component=()=>{
 
     useEffect(()=>{
         fetchCommentblog()
-        //check is token id is userid??[!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!]
+        //check is token id is userid then set deleteVisible ??[!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!]
     },[])
 
     //DOM
