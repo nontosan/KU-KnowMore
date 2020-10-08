@@ -3,13 +3,11 @@
 }
 
 .textup{
-    float: left;
+    width: 10%;
 }
 
 .uploadfile {
-    width: 93%;
-    height: 48px;
-    float: left;
+    width: 90%;
 }
 
 .cancel-button {
@@ -18,5 +16,25 @@
 
 .submit-button {
     float: right;
-    margin-right: 5px;
+    margin-right: 10px;
+}
+
+.div-addsection{
+    padding-top: 50px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.button-addsection{
+    width: 100%;
+}
+
+.addsection{
+    height: 40px;
+    width: 40px;
+}
+.div-sectionname{
+    padding-top: 50px;
+    padding-left: 100px;
+    padding-right: 100px;
 }

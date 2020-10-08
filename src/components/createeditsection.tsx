@@ -1,7 +1,11 @@
 import React, { useState,useEffect, useImperativeHandle } from 'react'
 import { Redirect } from 'react-router-dom';
 import { Section_Edit } from '../interfaces/SectionEdit';
-import  loadeditsection from "../services/loadeditsection"
+import  loadeditsection from "../services/loadeditsection";
+import Button from 'react-bootstrap/Button';
+import Image from 'react-bootstrap/Image';
+
+import AddSection from '../photo/addsection.png';
 
 import {
   BrowserRouter as Router,
@@ -9,6 +13,9 @@ import {
   Route,
   Link,
 } from 'react-router-dom';
+
+import './section.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 type editsection={
   section:Section_Edit
@@ -18,9 +25,6 @@ const CreateEditSection = () => {
   const [sections,setsections] = useState<Section_Edit[]>([])
 
   //function fetch section form database
-  const fetchSection=()=>{
-    loadeditsection.fetchsection().then(sections =>{setsections(sections)})
-  }  
 
   //function handlesection  
   const handledeletesection=()=>{
@@ -38,9 +42,6 @@ const CreateEditSection = () => {
     console.log("addsection")
   }
   //fetch data every time refreh
-  useEffect(()=>{
-    fetchSection()
-  },[]);
 
   return (
     <div>
@@ -53,9 +54,11 @@ const CreateEditSection = () => {
           </div>
         ))}
       </div>
-      <div>
+      <div className="div-addsection">
         <Link to="/writesection">
-          <button onClick={handleaddsection}>addsection</button>
+          <Button variant="outline-secondary" className="add button-addsection">
+            <Image className="addsection" src={AddSection} roundedCircle />
+          </Button>
         </Link>
       </div>
     </div>

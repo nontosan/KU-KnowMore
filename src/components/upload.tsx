@@ -36,9 +36,7 @@ const Photo: React.FC = () => {
                         ></input>
                     </div>
                 </Card>
-                <InputGroup.Prepend className="textup">
-                <Button className="cancel-button" variant="outline-secondary">Upload File</Button>
-                </InputGroup.Prepend>
+                <Button className="textup" variant="outline-secondary">Upload File</Button>
             </InputGroup><br />
         </div>
     )
