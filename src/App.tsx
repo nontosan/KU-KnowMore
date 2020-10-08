@@ -29,6 +29,7 @@ const App = () => {
     return (
         <Router>
             <div>
+                Hellllllllllllllllllllllll
                 <Navbar bg="light" variant="light">
                     <Navbar.Brand href="/">KU KNOWMORE</Navbar.Brand>
                     <Nav className="mr-auto">
