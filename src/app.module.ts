@@ -4,23 +4,22 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import Blogs from './blogs/blogs.entity';
+import Courses from './courses/courses.entity';
 
 import { Blog_Module } from './blogs/blogs.module';
+import { Course_Module } from './courses/courses.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mongodb',
-      host: '188.166.178.33',
-      port: 27017,
-      username: 'backend',
-      password: 'Rahat_Khao_Da_Ta_Bet',
-      database: 'KU-KnowMore',
-      entities: [Blogs],
+      host: 'localhost',
+      database: 'testKU',
+      entities: [Blogs,Courses],
       synchronize: true,
     }),
 
-    Blog_Module,
+    Blog_Module, Course_Module
   ],
   controllers: [AppController],
   providers: [AppService],

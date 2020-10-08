@@ -5,10 +5,12 @@ import { Blog_Controller } from './blogs.controller';
 import { Blog_Service } from './blogs.service';
 
 import Blogs from './blogs.entity';
+import { Course_Module } from '../courses/courses.module';
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([Blogs])
+        TypeOrmModule.forFeature([Blogs]),
+        Course_Module,
     ],
     controllers: [Blog_Controller],
     providers: [Blog_Service]

@@ -7,7 +7,7 @@ export class Blogs {
     id?: ObjectID;
 
     @Column()
-    course_code: string;
+    course_id: string;
 
     @Column()
     user_id: string;
