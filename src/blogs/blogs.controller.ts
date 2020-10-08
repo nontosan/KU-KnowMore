@@ -3,19 +3,22 @@ import { ObjectID } from 'mongodb';
 import { ParseObjectIdPipe } from '../common/pipes';
 
 import Blogs from './blogs.entity';
+import Sections from '../sections/sections.entity';
 
 import { Blog_Service } from './blogs.service';
 import { CreateBlogDto } from '../dto/create-blog.dto'
 
-import { Course_Service } from 'src/courses/courses.service';
+import { Course_Service } from '../courses/courses.service';
+import { Section_Service } from '../sections/sections.service';
 
 @Controller('blogs')
 export class Blog_Controller {
-  constructor(private Service: Blog_Service, private courseService: Course_Service) {}
+  constructor(private Service: Blog_Service, private courseService: Course_Service,
+              private sectionService: Section_Service) {}
 
   @Get()
   async findAllBlogs(): Promise<Blogs[]> {
-    console.log(this.Service.getDate());
+    //console.log(this.Service.getDate());
     return this.Service.findAllBlogs();
   }
   
@@ -44,5 +47,10 @@ export class Blog_Controller {
     create.last_edit = this.Service.getDate();
     const newBlog = this.Service.createBlog(create);
     return newBlog;
+  }
+
+  @Get('/:blog_id/sections')
+  async findSectionsBlogs(@Param('blog_id') blog_id: string): Promise<Sections[]> {
+    return this.sectionService.findSectionsBlogs(blog_id);
   }
 }
