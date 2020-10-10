@@ -1,6 +1,5 @@
 import { Body, Controller, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
 import { ObjectID } from 'mongodb';
-import Blogs from 'src/blogs/blogs.entity';
 import { ParseObjectIdPipe } from '../common/pipes';
 
 import Sections from './sections.entity';

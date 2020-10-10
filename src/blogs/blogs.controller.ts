@@ -4,17 +4,20 @@ import { ParseObjectIdPipe } from '../common/pipes';
 
 import Blogs from './blogs.entity';
 import Sections from '../sections/sections.entity';
+import Reviews from '../reviews/reviews.entity';
 
 import { Blog_Service } from './blogs.service';
 import { CreateBlogDto } from '../dto/create-blog.dto'
 
 import { Course_Service } from '../courses/courses.service';
 import { Section_Service } from '../sections/sections.service';
+import { Review_Service } from '../reviews/reviews.service';
 
 @Controller('blogs')
 export class Blog_Controller {
   constructor(private Service: Blog_Service, private courseService: Course_Service,
-              private sectionService: Section_Service) {}
+              private sectionService: Section_Service,
+              private reviewService: Review_Service) {}
 
   @Get()
   async findAllBlogs(): Promise<Blogs[]> {
@@ -52,5 +55,10 @@ export class Blog_Controller {
   @Get('/:blog_id/sections')
   async findSectionsBlogs(@Param('blog_id') blog_id: string): Promise<Sections[]> {
     return this.sectionService.findSectionsBlogs(blog_id);
+  }
+
+  @Get('/:blog_id/reviews')
+  async findReviewsBlogs(@Param('blog_id') blog_id: string): Promise<Reviews[]> {
+    return this.reviewService.findReviewsBlogs(blog_id);
   }
 }
