@@ -1,14 +1,17 @@
 input{
     width: 95%
   }
+  .bg_color
+  {
+    background-color: #90caf9;
+  }
   .Blog_Info
   {
     display: grid;
-    
     grid-template-columns: auto auto ;
     grid-template-rows: auto auto auto;
-    grid-gap: 10px;
-    padding: 10px;
+    grid-gap: 25px;
+    padding: 150px;
   }
   
   .Blog_frame1
@@ -16,15 +19,15 @@ input{
     display: grid;
     grid-column: 1 / span 2;
     grid-template-columns: 1fr 9fr;
-    grid-gap: 10px;
-    background-color: rgba(0,153,255,0.5);
+    
+    background-color: #42a5f5;
   }
   .Blog_frame2
   {
     display: grid;
     grid-template-columns: 2fr 8fr ;
-    grid-gap: 10px;
-    background-color: rgba(0,153,255,0.5);
+    
+    background-color: #42a5f5;
   }
   
   .Blog_name
@@ -35,12 +38,17 @@ input{
     
     color: white;
     text-align: center;
-    background-color: hsl(185, 78%, 68%);
+    background-color: #90caf9;
     
   }
   .Blog_name2
   {
-    padding: 10px;
+    padding: 12px 10px 10px 12px;
+    color: white;
+  }
+  .Blog_name3
+  {
+    padding: 12px 54px 10px 12px;
     color: white;
   }
   
