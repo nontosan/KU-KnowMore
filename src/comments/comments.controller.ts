@@ -7,9 +7,14 @@ import { CreateCommentsDto } from '../dto/create-comments.dto';
 @Controller('comments')
 export class CommentsController {
     constructor(private commentsService: CommentsService) {}
+  
   @Get()
-  async findAll(): Promise<Comments[]> {
-      return this.commentsService.findAll();
+  async findAll():Promise<Comments[]>{
+    return this.commentsService.findAll();
+  }
+  @Get(':BlogId')
+  async find(@Param('BlogId') BlogId:string) :Promise<Comments[]> {
+      return this.commentsService.find(BlogId);
   }
 
   @Post()

@@ -3,7 +3,7 @@ import { ObjectID } from 'mongodb';
 import { ParseObjectIdPipe } from '../common/pipes';
 
 import Users from './users.entity';
-
+import { CreateUserDto } from '../dto/create-users.dto';
 import { User_Service } from './users.service';
 
 @Controller('users')
@@ -18,6 +18,11 @@ export class User_Controller {
   @Get('/:user_id')
   async findUsersID(@Param('user_id', ParseObjectIdPipe) user_id: ObjectID): Promise<Users[]> {
     return this.Service.findUsersID(user_id);
+  }
+  @Post()
+  async create(@Body() createuserDto: CreateUserDto) {
+    const newComment = this.Service.create(createuserDto);
+    return newComment;
   }
 
 }

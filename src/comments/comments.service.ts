@@ -25,6 +25,9 @@ export class CommentsService {
     async findAll(): Promise<Comments[]> {
         return this.commentsRepository.find();
     }
+    async find(BlogID:string): Promise<Comments[]> {
+        return this.commentsRepository.find({where:{blog_id:BlogID}});
+    }
     async create(createCommentsDto: CreateCommentsDto) {
         return this.commentsRepository.save(createCommentsDto);
       }

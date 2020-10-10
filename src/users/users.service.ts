@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { ObjectID } from 'mongodb';
 
 import Users from './users.entity';
+import {CreateUserDto} from '../dto/create-users.dto';
 
 @Injectable()
 export class User_Service {
@@ -18,5 +19,8 @@ export class User_Service {
     async findUsersID(blog_id: ObjectID): Promise<Users[]> {
         return this.User_Repository.find({where: { _id: blog_id }});
     }
+    async create(createUserDto: CreateUserDto) {
+        return this.User_Repository.save(createUserDto);
+      }
 
 }
