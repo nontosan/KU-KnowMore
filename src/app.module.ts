@@ -13,7 +13,7 @@ import { Blog_Module } from './blogs/blogs.module';
 import { Course_Module } from './courses/courses.module';
 import { User_Module } from './users/users.module';
 import { Section_Module } from './sections/sections.module';
-import { Comments_Module } from './comments/comments.module'
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [
@@ -22,14 +22,14 @@ import { Comments_Module } from './comments/comments.module'
       host: '188.166.178.33',
       port: 27017,
       database: 'KU-KnowMore',
-      entities: [Blogs, Courses, Users, Sections ,Comments],
+      entities: [Blogs, Courses, Users, Sections,Comments ],
       synchronize: true,
     }),
     Blog_Module,
     Course_Module,
     User_Module,
     Section_Module,
-    Comments_Module,
+    CommentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

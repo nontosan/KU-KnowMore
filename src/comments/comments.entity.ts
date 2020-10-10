@@ -1,22 +1,23 @@
-import { Entity, Column, ObjectIdColumn } from 'typeorm';
+import { Entity, Column, ObjectIdColumn} from 'typeorm';
 import { ObjectID } from 'mongodb';
 
 @Entity()
 export class Comments {
+
     @ObjectIdColumn()
-    id?: ObjectID;
+    id?:string;
 
     @Column()
-    blog_id: string;
+    blog_id:string;
 
     @Column()
-    user_id: string;
-    
+    user_id:string;
+
     @Column()
-    content: string;
-    
+    content:string;
+
     @Column()
-    date_time: number;
+    date_time:Date;
 }
 
 export default Comments;

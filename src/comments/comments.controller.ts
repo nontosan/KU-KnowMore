@@ -1,23 +1,21 @@
 import { Body, Controller, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
-import { ObjectID } from 'mongodb';
+import { CommentsService } from './comments.service';
 import { ParseObjectIdPipe } from '../common/pipes';
-
-import Users from './comments.entity';
-
-import { Comments_Service } from './comments.service';
+import   Comments  from './comments.entity';
+import { CreateCommentsDto } from '../dto/create-comments.dto';
 
 @Controller('comments')
-export class Comments_Controller {
-  constructor(private Service: Comments_Service) {}
-
+export class CommentsController {
+    constructor(private commentsService: CommentsService) {}
   @Get()
-  async findAllUsers(): Promise<Users[]> {
-    return this.Service.findAllUsers();
-  }
-  
-  @Get('/:user_id')
-  async findUsersID(@Param('user_id', ParseObjectIdPipe) user_id: ObjectID): Promise<Users[]> {
-    return this.Service.findUsersID(user_id);
+  async findAll(): Promise<Comments[]> {
+      return this.commentsService.findAll();
   }
 
+  @Post()
+  async create(@Body() createCommentsDto: CreateCommentsDto) {
+    createCommentsDto.date_time = this.commentsService.getDate();
+    const newComment = this.commentsService.create(createCommentsDto);
+    return newComment;
+  }
 }

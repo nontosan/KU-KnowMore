@@ -1,22 +1,31 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { ObjectID } from 'mongodb';
+import { Body, Get, Injectable, Post } from '@nestjs/common';
 
-import Users from './comments.entity';
+import { Repository } from 'typeorm';
+import {InjectRepository} from '@nestjs/typeorm';
+import { CreateCommentsDto } from '../dto/create-comments.dto';
+import Comments  from './comments.entity';
 
 @Injectable()
-export class Comments_Service {
-    constructor(
-        @InjectRepository(Users)
-        private User_Repository: Repository<Users>,
-    ) {}
+export class CommentsService {
+    constructor( 
+    @InjectRepository(Comments)
+    private commentsRepository: Repository<Comments>,
+    ){}
+    getDate() : string {
+        var today = new Date();
+        var day = today.getDate().toString();
+        var month = today.getMonth()+1;
+        var year = today.getFullYear();
 
-    async findAllUsers() : Promise<Users[]> {  
-        return this.User_Repository.find();
-    }
-    async findUsersID(blog_id: ObjectID): Promise<Users[]> {
-        return this.User_Repository.find({where: { _id: blog_id }});
+        day = day.length == 1 ? '0' + day : day
+
+        return day + '/' + month + '/' + year
     }
 
+    async findAll(): Promise<Comments[]> {
+        return this.commentsRepository.find();
+    }
+    async create(createCommentsDto: CreateCommentsDto) {
+        return this.commentsRepository.save(createCommentsDto);
+      }
 }
