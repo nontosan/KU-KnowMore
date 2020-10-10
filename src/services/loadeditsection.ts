@@ -1,7 +1,7 @@
 import { Section_Edit } from "../interfaces/SectionEdit"
 
 export async function fetchsection():Promise<Section_Edit[]>{
-    const res = await fetch("server path get all section")
+    const res = await fetch("http://188.166.178.33:3000/blogs/")
     const section = await res.json()
     return section
 } 

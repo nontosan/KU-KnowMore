@@ -54,7 +54,7 @@ const App = () => {
                 </Navbar>
                 <Switch>
                     <Route path="/knowledgeblog">
-                        <CreateEditSection />
+                        <CreateEditSection blog_id={"0120032"}/>
                     </Route>
                     <Route path="/writesection">
                         <WriteSection />

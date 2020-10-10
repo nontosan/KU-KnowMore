@@ -30,9 +30,11 @@ const Comment_component=()=>{
     const [deleteVisible,setdelete] = useState<boolean>(false)
     /*const [cmt_blogs,setcmt_blog] = useState<comment_blog[]>([]);*/
     const cmt_blogs:comment_blog[] = []
+    //const blog_id
     
-    
+    const fetchblog=()=>{
 
+    }
     //load comment form database
     const fetchCommentblog=()=>{
         loadcomment.fetchComment().then(comments=>{setcomment(comments)})

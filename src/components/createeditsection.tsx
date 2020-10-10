@@ -4,9 +4,9 @@ import { Section_Edit } from '../interfaces/SectionEdit';
 import  loadeditsection from "../services/loadeditsection";
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
-
+import { Blog }from '../interfaces/blog'
 import AddSection from '../photo/addsection.png';
-
+import BlogsService from "../services/BlogsService"
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,13 +20,26 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 type editsection={
   section:Section_Edit
 }
-
-const CreateEditSection = () => {
+type blogidformpagebefore={
+  blog_id:string
+}
+const CreateEditSection = (props:blogidformpagebefore) => {
   const [sections,setsections] = useState<Section_Edit[]>([])
+  const [blog,setBlogs] = useState<Blog>()
+  //fetch blog from database
+  const fetchBlogs = () => {
+    BlogsService.fetchBlogSpecific(props.blog_id)
+    .then(blog => {
+    setBlogs(blog);
+    });
+  }
 
   //function fetch section form database
+  const fetchsection=()=>{
 
-  //function handlesection  
+  }
+
+  //delete section  
   const handledeletesection=()=>{
     fetch("api_path for delete section",{
       method:"Post",
@@ -34,21 +47,24 @@ const CreateEditSection = () => {
       body:JSON.stringify(sections)
     }).then(res=>res.json())
   }
-  //function handle edit section
+
+
+  //edit section => create route with section data from backend
   const handleeditsection=()=>{
     console.log("create route to create section")
   }
-  const handleaddsection=()=>{
-    console.log("addsection")
-  }
-  //fetch data every time refreh
 
+  //refreh
+  useEffect(()=>{
+    console.log("refresh")
+  },[])
   return (
     <div>
+
       <div>
         {sections.map(item=>(
           <div>
-            <div>hello</div>
+            <div>{sections}</div>
             <button onClick={handledeletesection}>edit</button>
             <button onClick={handleeditsection}>delete</button> 
           </div>
