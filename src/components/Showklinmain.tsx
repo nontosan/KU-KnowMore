@@ -11,29 +11,28 @@ import "../css/blogforclick.css"
 
 const Showklinmain = () => {
     const [blogs, setBlogs] = useState<Blog[]>([]);
-    const [someblog,setsomeblog] = useState<Blog[]>([])
     const fetchBlogs = () => {
         BlogsService.fetchBlogs()
             .then(blogs => {
-                setBlogs(blogs);
+                setBlogs(blogs.slice(0,4));
             });
-        setsomeblog(blogs.slice(1,5))
     };
     useEffect(() => {
         fetchBlogs();
     },[]);
-    console.log(blogs)
-    console.log(someblog)
+    const readknowledge=()=>{
+        console.log("click readknowledge")
+    }
 
     return (
         <div>
             {blogs.map(blog => ( 
                         <ListGroup.Item className="blogcontainer" >
-                            <button className="blogclick">
-                            <div>{blog.blog_name}</div>
-                            <div>{blog.course_code}</div>
-                            <div>  viwer {blog.viewers}</div>
-                            <div>  last edit {blog.last_edit}</div>
+                            <button className="blogclick" onClick={readknowledge}>
+                                <div className="element">{blog.blog_name}</div>
+                                <div className="element">{blog.course_code}</div>
+                                <div className="element">  viwer {blog.viewers}</div>
+                                <div className="element">  last edit {blog.last_edit}</div>
                             </button>
                         </ListGroup.Item>
             ))}
