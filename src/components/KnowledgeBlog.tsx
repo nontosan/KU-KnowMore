@@ -9,6 +9,7 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
+
 const KnowledgeBlog = () => {
     const [blogs, setBlogs] = useState<Blog[]>([]);
 
@@ -17,8 +18,8 @@ const KnowledgeBlog = () => {
             .then(blogs => {
                 setBlogs(blogs);
             });
+        console.log(blogs)
     };
-
     useEffect(() => {
         fetchBlogs();
     },[]);

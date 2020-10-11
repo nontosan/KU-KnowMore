@@ -13,6 +13,8 @@ import SearchPic from './photo/Magnify.png';
 
 import Filtermodel from './modals/filter'
 
+import Showklinmain from "./components/Showklinmain"
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -82,9 +84,7 @@ const App = () => {
                         <div className="hot-kl">
                             <Card.Header>REVIEW BLOG</Card.Header>
                             <ListGroup variant="flush" className="show-blog">
-                                <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                                <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                                <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                                <Showklinmain />
                             </ListGroup>
                         </div>
                     </Route>

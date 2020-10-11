@@ -119,7 +119,7 @@ function Filtermodal() {
   return (
     <>
       <Button variant="primary" onClick={showmodal}>
-        Launch vertically centered modal
+        FILTER
       </Button>
 
       <FilterModal

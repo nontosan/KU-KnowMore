@@ -1,0 +1,17 @@
+
+.blogcontainer{
+    padding:0px;
+    height:3em;
+}
+.blogclick{
+    width: 100%;
+    display:grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+    border-color: none;
+    border-style:none;
+    height: 100%;
+    
+}
+.blogclick:hover{
+    background-color: #DADADA;
+}
