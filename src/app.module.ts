@@ -23,6 +23,8 @@ import { Review_Module } from './reviews/reviews.module';
       type: 'mongodb',
       host: '188.166.178.33',
       port: 27017,
+      username: 'admin-backend',
+      password: 'Rahat_Khao_Da_Ta_Bet',
       database: 'KU-KnowMore',
       entities: [Blogs, Courses, Users, Sections, Comments, Reviews],
       synchronize: true,
