@@ -187,8 +187,8 @@ export class Blog_Service {
         // console.log(course_list)
         
         // Make JSON
-        // If course_list is not empty: Check inside , else normal search
-        if (course_list.length != 0) {
+        // If searched for sname or pname: Check inside , else normal search
+        if (sname || pname) {
             // Specific Type, else all types
             for (var i = 0; i < course_list.length; i++) {
                 // Save all the courses with specific type into res , else any types
