@@ -21,7 +21,6 @@ import { Like_Module } from './likes/likes.module';
 
 @Module({
   imports: [
-    /*
     TypeOrmModule.forRoot({
       type: 'mongodb',
       host: '188.166.178.33',
@@ -32,14 +31,14 @@ import { Like_Module } from './likes/likes.module';
       entities: [Blogs, Courses, Users, Sections, Comments, Reviews, Likes],
       synchronize: true,
     }),
-    */
-    TypeOrmModule.forRoot({
-      type: 'mongodb',
-      host: 'localhost',
-      database: 'testKU',
-      entities: [Blogs, Courses, Users, Sections, Comments, Reviews, Likes],
-      synchronize: true,
-    }),
+    // TypeOrmModule.forRoot({
+    //   type: 'mongodb',
+    //   host: 'localhost',
+    //   database: 'testKU',
+    //   entities: [Blogs, Courses, Users, Sections, Comments, Reviews, Likes],
+    //   synchronize: true,
+    // }),
+    
     Blog_Module,
     Course_Module,
     User_Module,
