@@ -11,9 +11,9 @@
   margin-right: 15px;
 }
 .main-div-main {
-  padding-top: 50px;
-  padding-left: 100px;
-  padding-right: 100px;
+  margin-top: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
 .search-bar {
@@ -25,4 +25,13 @@
 .filter-button {
   width: 10%;
   height: 40px;
+}
+
+.hot-kl{
+  margin-top: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
+  border: rgba(0,0,0,.125) solid 1px;
+  border-bottom: 0px;
+  border-radius: calc(0.25rem - 1px);
 }

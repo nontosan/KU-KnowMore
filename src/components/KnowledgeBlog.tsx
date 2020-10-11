@@ -1,9 +1,11 @@
 import React, { useEffect , useState , Component } from 'react';
 import { Blog } from '../interfaces/blog';
 import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
 import BlogsService from '../services/BlogsService';
 
 import './section.css';
+import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -22,11 +24,12 @@ const KnowledgeBlog = () => {
     },[]);
     return (
         <div>
-            <div className="main-div">
+            <div className="hot-kl">
+                <Card.Header>KNOWLEDGE BLOG</Card.Header>
                 {blogs.map(blog => ( 
-                    <Card className="nav-link bg-light navbar-light navbar-nav">
-                        {blog.course_code} {blog.user_id} {blog.type} {blog.viewers} {blog.blog_name} {blog.last_edit}
-                    </Card>
+                    <ListGroup variant="flush" className="show-blog">
+                        <ListGroup.Item>{blog.course_code} {blog.user_id} {blog.type} {blog.viewers} {blog.blog_name} {blog.last_edit}</ListGroup.Item>
+                    </ListGroup>
                 ))}
             </div>
         </div>

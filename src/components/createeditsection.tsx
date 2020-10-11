@@ -72,7 +72,7 @@ const CreateEditSection = (props:blogidformpagebefore) => {
       </div>
       <div className="div-addsection">
         <Link to="/writesection">
-          <Button variant="outline-secondary" className="add button-addsection">
+          <Button variant="outline-secondary" className="button-addsection">
             <Image className="addsection" src={AddSection} roundedCircle />
           </Button>
         </Link>

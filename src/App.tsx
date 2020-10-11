@@ -5,11 +5,11 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Card from 'react-bootstrap/Card';
 
 import ProfilePic from './photo/profilepic.png';
 import SearchPic from './photo/Magnify.png';
-import BluePlus from './photo/BluePlus.png';
-import RedPlus from './photo/RedPlus.png';
 
 import Filtermodel from './modals/filter'
 
@@ -26,6 +26,7 @@ import UserPage from "./components/UserPage";
 import KnowledgeBlog from './components/KnowledgeBlog';
 
 import './App.css';
+import './components/section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavDropdown from 'react-bootstrap/esm/NavDropdown';
 
@@ -69,6 +70,22 @@ const App = () => {
                         <div className="main-div-main">
                             <FormControl aria-label="Large" aria-describedby="inputGroup-sizing-sm" className="search-bar"/>
                             <Filtermodel />
+                        </div>
+                        <div className="hot-kl">
+                            <Card.Header>KNOEWLEDGE BLOG</Card.Header>
+                            <ListGroup variant="flush" className="show-blog">
+                                <ListGroup.Item>Cras justo odio</ListGroup.Item>
+                                <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+                                <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                            </ListGroup>
+                        </div>
+                        <div className="hot-kl">
+                            <Card.Header>REVIEW BLOG</Card.Header>
+                            <ListGroup variant="flush" className="show-blog">
+                                <ListGroup.Item>Cras justo odio</ListGroup.Item>
+                                <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+                                <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                            </ListGroup>
                         </div>
                     </Route>
                 </Switch>
