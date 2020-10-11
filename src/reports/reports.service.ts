@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { ObjectID } from 'mongodb';
 
 import Reports from './reports.entity';
-import { CreateReportDto } from '../dto/create-report.dto';
+import { CreateReportDto } from '../dto/create-reports.dto';
 
 @Injectable()
 export class Report_Service {
@@ -21,5 +21,9 @@ export class Report_Service {
     }
     async createReport(create: CreateReportDto) {
         return this.Report_Repository.save(create);
+    }
+    async delete(report_id: ObjectID) {
+        let removeReport = await this.Report_Repository.find({where:{_id: report_id}})
+        return this.Report_Repository.remove(removeReport[0])
     }
 }

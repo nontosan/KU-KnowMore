@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Delete } from '@nestjs/common';
 import { ObjectID } from 'mongodb';
 import { ParseObjectIdPipe } from '../common/pipes';
 
@@ -20,4 +20,8 @@ export class Report_Controller {
     return this.Service.findReportsID(Report_id);
   }
 
+  @Delete('/:Report_id')
+  async deleteComment(@Param('Report_id', ParseObjectIdPipe) Report_id: ObjectID) {
+    return this.Service.delete(Report_id);
+  }
 }

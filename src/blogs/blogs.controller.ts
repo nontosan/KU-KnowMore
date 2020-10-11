@@ -8,11 +8,10 @@ import Reviews from '../reviews/reviews.entity';
 import Likes from '../likes/likes.entity';
 import Comments from '../comments/comments.entity';
 
-import { Blog_Service } from './blogs.service';
 import { CreateBlogDto } from '../dto/create-blog.dto';
-import { CreateReportDto } from '../dto/create-report.dto';
+import { CreateReportDto } from '../dto/create-reports.dto';
 
-import { Course_Service } from '../courses/courses.service';
+import { Blog_Service } from './blogs.service';
 import { Section_Service } from '../sections/sections.service';
 import { Review_Service } from '../reviews/reviews.service';
 import { Like_Service } from '../likes/likes.service';
@@ -22,7 +21,6 @@ import { Report_Service } from '../reports/reports.service';
 @Controller('blogs')
 export class Blog_Controller {
   constructor(private Service: Blog_Service,
-              private courseService: Course_Service,
               private sectionService: Section_Service,
               private reviewService: Review_Service,
               private likeService: Like_Service,
@@ -76,7 +74,7 @@ export class Blog_Controller {
   }
 
   @Get('/:blog_id/comments')
-  async find(@Param('blog_id') blog_id: string): Promise<Comments[]> {
+  async find(@Param('blog_id') blog_id: ObjectID): Promise<Comments[]> {
     return this.commentService.find(blog_id);
   }
 
