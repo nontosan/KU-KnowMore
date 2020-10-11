@@ -9,6 +9,7 @@ import Blogs from './blogs.entity';
 import { Course_Module } from '../courses/courses.module';
 import { Section_Module } from 'src/sections/sections.module';
 import { Review_Module } from 'src/reviews/reviews.module';
+import { Like_Module } from 'src/likes/likes.module';
 
 @Module({
     imports: [
@@ -16,8 +17,9 @@ import { Review_Module } from 'src/reviews/reviews.module';
         Course_Module,
         Section_Module,
         Review_Module,
+        Like_Module,
     ],
     controllers: [Blog_Controller],
-    providers: [Blog_Service]
+    providers: [Blog_Service],
 })
 export class Blog_Module {}
