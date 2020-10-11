@@ -15,7 +15,8 @@ import { Review_Service } from '../reviews/reviews.service';
 
 @Controller('blogs')
 export class Blog_Controller {
-  constructor(private Service: Blog_Service, private courseService: Course_Service,
+  constructor(private Service: Blog_Service,
+              private courseService: Course_Service,
               private sectionService: Section_Service,
               private reviewService: Review_Service) {}
 
@@ -25,6 +26,7 @@ export class Blog_Controller {
     return this.Service.findAllBlogs();
   }
   
+  //type=3&order=3&code=0012304&subname=comsys&teachername=A
   @Get('search')
   async findBlogsIDSearch(@Query() query): Promise<Blogs[]> {
     const keys = Object.keys(query);
@@ -32,9 +34,10 @@ export class Blog_Controller {
     const Obj = {};
     for (var i of keys) {
       var value = pairs.find(element => element[0] == i)[1];
-      Object.assign(Obj, i === "type" ? {type:value} : {});
-      Object.assign(Obj, i === "code" ? {code:value} : {});
-      Object.assign(Obj, i === "name" ? {name:value} : {});
+      Object.assign(Obj, i === "type" ? (value==3?{}:{type:value}) : {});
+      Object.assign(Obj, i === "subname" ? {sname:value} : {});
+      Object.assign(Obj, i === "teachername" ? {pname:value} : {});
+      Object.assign(Obj, i === "order" ? {order:value} : {});
     }
     return this.Service.findAllBlogsSearch(Obj);
   }
@@ -46,6 +49,20 @@ export class Blog_Controller {
 
   @Post()
   async create(@Body() create: CreateBlogDto) {
+    /* ---------------------- Version 2 --------------------------
+    // Backend need to send
+    // course_code, teacher_name, user_id, type, blog_name
+    // const tmp = await this.courseService.findAllCoursesCodeTeacher(Object.course_code,Object.teacher_name);
+    // create.course_id = tmp[0].id.toString()
+    // create.viewers = 0;
+    // create.last_edit = this.Service.getDate();
+    // const newBlog = this.Service.createBlog(create);
+    // return newBlog;
+    // -----------------------------------------------------------
+    */
+
+    // Backend need to send
+    // course_id, user_id, type, blog_name
     create.viewers = 0;
     create.last_edit = this.Service.getDate();
     const newBlog = this.Service.createBlog(create);

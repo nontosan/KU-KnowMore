@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ObjectID } from 'mongodb';
 import { Repository } from 'typeorm';
 
 import Courses from './courses.entity';
@@ -16,6 +17,10 @@ export class Course_Service {
         return this.Course_Repository.find();
     }
 
+    async findCourseID(course_id: ObjectID): Promise<Courses[]> {
+        return this.Course_Repository.find({where: { _id: course_id }});
+    }
+
     async findAllCoursesTeacher(pname: string) : Promise<Courses[]> {  
         return this.Course_Repository.find({where: { teacher_name: pname }});
     }
@@ -24,7 +29,7 @@ export class Course_Service {
         return this.Course_Repository.find({where: { course_code: code }});
     }
     
-    async findAllCoursesCodeTeacher(code: string, pname: string) : Promise<Courses[]> {  
-        return this.Course_Repository.find({where: { course_code: code, teacher_name: pname }});
+    async findAllCoursesName(cname: string) : Promise<Courses[]> {  
+        return this.Course_Repository.find({where: { course_name: cname }});
     }
 }
