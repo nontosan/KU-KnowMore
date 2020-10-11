@@ -2,6 +2,7 @@ import { Body, Controller, Get, HttpException, HttpStatus, Param, Post } from '@
 import { ObjectID } from 'mongodb';
 import { ParseObjectIdPipe } from '../common/pipes';
 
+import { CreateReviewsDto } from 'src/dto/create-review.dto';
 import Reviews from './reviews.entity';
 
 import { Review_Service } from './reviews.service';
@@ -18,6 +19,11 @@ export class Review_Controller {
   @Get('/:Review_id')
   async findReviewsID(@Param('Review_id', ParseObjectIdPipe) Review_id: ObjectID): Promise<Reviews[]> {
     return this.Service.findReviewsID(Review_id);
+  }
+  @Post()
+  async create(@Body() createreview: CreateReviewsDto) {
+    const newReview = this.Service.createReviews(createreview);
+    return newReview;
   }
 
 }

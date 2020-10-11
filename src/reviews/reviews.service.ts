@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { ObjectID } from 'mongodb';
 
 import Reviews from './reviews.entity';
+import {CreateReviewsDto} from '../dto/create-review.dto';
 
 @Injectable()
 export class Review_Service {
@@ -21,5 +22,8 @@ export class Review_Service {
     async findReviewsBlogs(blog_id: string): Promise<Reviews[]> {
         return this.Review_Repository.find({where: { blog_id: blog_id }});
     }
+    async createReviews(createReviewsDto: CreateReviewsDto) {
+        return this.Review_Repository.save(createReviewsDto);
+      }
 
 }

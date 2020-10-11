@@ -7,16 +7,16 @@ export class Reviews {
     id?: ObjectID;
 
     @Column()
-    teaching: string;
+    teaching: number;
 
     @Column()
-    hw: string;
+    hw: number;
     
     @Column()
-    classroom: string;
+    classroom: number;
 
     @Column()
-    overall: string;
+    overall: number;
 
     @Column()
     content: string;
