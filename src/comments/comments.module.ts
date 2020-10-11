@@ -10,5 +10,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       ],
   controllers: [CommentsController],
   providers: [CommentsService],
+  exports: [CommentsService]
 })
 export class CommentsModule {}

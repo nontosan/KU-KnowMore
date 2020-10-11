@@ -5,7 +5,7 @@ import { ObjectID } from 'mongodb';
 export class Comments {
 
     @ObjectIdColumn()
-    id?:string;
+    id?:ObjectID;
 
     @Column()
     blog_id:string;

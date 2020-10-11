@@ -10,6 +10,7 @@ import Sections from './sections/sections.entity';
 import Comments from './comments/comments.entity';
 import Reviews from './reviews/reviews.entity';
 import Likes from './likes/likes.entity';
+import Reports from './reports/reports.entity';
 
 import { Blog_Module } from './blogs/blogs.module';
 import { Course_Module } from './courses/courses.module';
@@ -18,6 +19,7 @@ import { Section_Module } from './sections/sections.module';
 import { CommentsModule } from './comments/comments.module';
 import { Review_Module } from './reviews/reviews.module';
 import { Like_Module } from './likes/likes.module';
+import { Report_Module } from './reports/reports.module';
 
 @Module({
   imports: [
@@ -28,7 +30,7 @@ import { Like_Module } from './likes/likes.module';
       username: 'admin-backend',
       password: 'Rahat_Khao_Da_Ta_Bet',
       database: 'KU-KnowMore',
-      entities: [Blogs, Courses, Users, Sections, Comments, Reviews, Likes],
+      entities: [Blogs, Courses, Users, Sections, Comments, Reviews, Likes, Reports],
       synchronize: true,
     }),
     // TypeOrmModule.forRoot({
@@ -46,6 +48,7 @@ import { Like_Module } from './likes/likes.module';
     CommentsModule,
     Review_Module,
     Like_Module,
+    Report_Module
   ],
   controllers: [AppController],
   providers: [AppService],
