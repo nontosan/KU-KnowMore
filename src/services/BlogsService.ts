@@ -6,6 +6,20 @@ async function fetchBlogs(): Promise<Blog[]> {
     return blogs;  
 }
 
+async function createBlog(newBlog: Blog): Promise<Blog|null> {
+    const res = await fetch(`http://188.166.178.33:3000/blogs`,{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(newBlog),
+    });
+    const savedNewBlog: Blog = await res.json();
+    if (savedNewBlog !== undefined) {
+        return savedNewBlog;
+    } else{
+        return null
+    }
+}
+
 async function fetchBlogSpecific(blogid:string): Promise<Blog> {
     const api:string = `http://188.166.178.33:3000/blogs`+blogid
     const res = await fetch(api);
@@ -14,5 +28,5 @@ async function fetchBlogSpecific(blogid:string): Promise<Blog> {
 }
 
 export default {
-    fetchBlogs,fetchBlogSpecific,
+    fetchBlogs,createBlog,fetchBlogSpecific,
 };

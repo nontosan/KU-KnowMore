@@ -29,7 +29,7 @@ const KnowledgeBlog = () => {
                 <Card.Header>KNOWLEDGE BLOG</Card.Header>
                 {blogs.map(blog => ( 
                     <ListGroup variant="flush" className="show-blog">
-                        <ListGroup.Item>{blog.course_code} {blog.user_id} {blog.type} {blog.viewers} {blog.blog_name} {blog.last_edit}</ListGroup.Item>
+                        <ListGroup.Item>{blog.course_id} {blog.user_id} {blog.type} {blog.viewers} {blog.blog_name} {blog.last_edit}</ListGroup.Item>
                     </ListGroup>
                 ))}
             </div>

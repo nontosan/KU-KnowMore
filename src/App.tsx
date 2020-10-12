@@ -13,9 +13,9 @@ import SearchPic from './photo/Magnify.png';
 
 import Filtermodel from './modals/filter'
 
-import Showklinmain from "./components/Showklinmain"
-import CreateKlBlog from "./components/createklblog"
-import CreateRwBlog from "./components/createrwblog"
+import Showklinmain from "./components/ShowKnowledgeInMain"
+import CreateKlBlog from "./components/CreateKnowledgeBlog"
+import CreateRwBlog from "./components/CreateReviewBlog"
 import {
     BrowserRouter as Router,
     Switch,
@@ -58,9 +58,7 @@ const App = () => {
                 </Navbar>
                 <Switch>
                     <Route path="/createklsection/:que" name="que" component={CreateEditSection}></Route>
-                    <Route path="/writesection">
-                        <WriteSection />
-                    </Route>
+                    <Route path="/writesection/:blogId" name="blogId" component={WriteSection}></Route>
                     <Route path="/userpage">
                         <UserPage />
                     </Route>

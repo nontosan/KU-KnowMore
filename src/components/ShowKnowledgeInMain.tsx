@@ -30,7 +30,7 @@ const Showklinmain = () => {
                         <ListGroup.Item className="blogcontainer" >
                             <button className="blogclick" onClick={readknowledge}>
                                 <div className="element">{blog.blog_name}</div>
-                                <div className="element">{blog.course_code}</div>
+                                <div className="element">{blog.course_id}</div>
                                 <div className="element">  viwer {blog.viewers}</div>
                                 <div className="element">  last edit {blog.last_edit}</div>
                             </button>

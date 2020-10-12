@@ -26,8 +26,9 @@ type blogidformpagebefore={
 const CreateEditSection = (props:any) => {
   const [sections,setsections] = useState<Section_Edit[]>([])
   const [blog,setBlogs] = useState<Blog>()
-
+  
   console.log(props.match.params)
+  const blogIdqq = props.match.params.que
   
   //fetch blog from database
   const fetchBlogs = () => {
@@ -63,7 +64,7 @@ const CreateEditSection = (props:any) => {
   },[])
   return (
     <div>
-
+      {blogIdqq}
       <div>
         {sections.map(item=>(
           <div>

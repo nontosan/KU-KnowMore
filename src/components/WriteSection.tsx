@@ -11,9 +11,11 @@ import './section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-const WriteSection = () => {
+const WriteSection = (props:any) => {
     const [newSectionName, setNewSectionName] = useState<string>('');
     const [draftstate, setdraftState] = useState<typeof EmptyState>();
+
+    const blogId = (props.match.params.blogId)
 
     const handleNewSectionNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewSectionName(e.target.value);
@@ -23,6 +25,7 @@ const WriteSection = () => {
         const writeSection = {
             sectionname: newSectionName,
             content: draftstate,
+            blogId: blogId,
         };
 
         SectionService.createSection(writeSection)
