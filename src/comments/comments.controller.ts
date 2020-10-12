@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 import { Body, Controller, Get,Delete, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
-import { CommentsService } from './comments.service';
-=======
-import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Delete } from '@nestjs/common';
+
 import { ObjectID } from 'mongodb';
->>>>>>> 12892c78b4592e493d569b96b58c4548e52f74e8
 import { ParseObjectIdPipe } from '../common/pipes';
 
 import Comments from './comments.entity';
@@ -36,12 +32,11 @@ export class CommentsController {
     const newComment = this.commentService.create(createCommentsDto);
     return newComment;
   }
-<<<<<<< HEAD
   @Delete('/:id')
   deleteGuide(@Param('id') id: string): Promise<void> {
-    return this.commentsService.remove(id);
+    return this.commentService.remove(id);
 }
-=======
+
 
   @Post('/:comment_id/reports')
   async createReport(@Param('comment_id', ParseObjectIdPipe) comment_id: ObjectID, @Body() createReport: CreateReportDto) {
@@ -54,9 +49,8 @@ export class CommentsController {
     });
   }
 
-  @Delete('/:comment_id')
-  async deleteComment(@Param('comment_id', ParseObjectIdPipe) comment_id: ObjectID) {
+  /*@Delete('/:comment_id')
+  async deleteComment(@Param('id') id: string): Promise<void> {
     return this.commentService.delete(comment_id);
-  }
->>>>>>> 12892c78b4592e493d569b96b58c4548e52f74e8
+  }*/
 }
