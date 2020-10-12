@@ -16,7 +16,7 @@ async function createBlog(newBlog: Blog): Promise<Blog|null> {
     if (savedNewBlog !== undefined) {
         return savedNewBlog;
     } else{
-        return null
+        return null;
     }
 }
 

@@ -17,17 +17,17 @@ import {
 
 import BlogsService from '../services/BlogsService';
 
-const CreateKlBlog=()=> {
+const CreateRwBlog=()=> {
   const [Nameblog, setNameblog]=useState("");
   const [Nameteacher, setNameteacher]=useState("");
   const [IDclass, setIDclass]=useState("");
   const [Nameclass, setNameclass]=useState("");
-  
+
   const handleNewBlogSave = () => {
     const newBlog: Blog = {
       course_id: IDclass,
       user_id: "5f82fd5504eb8600aa617b6b",
-      type: "knowledge",
+      type: "review",
       blog_name: Nameblog,
     };
     BlogsService.createBlog(newBlog) 
@@ -39,10 +39,10 @@ const CreateKlBlog=()=> {
         }
       });
   };
-
+  
   return (
     <div className="bg_color">
-      <div>Create Knowledge Blog</div>
+      <div>Create Review Blog</div>
      <div className="Blog_Info">
       <Input_Nameblog setNameblog={setNameblog} />
       <Input_Idclass setIDclass={setIDclass} />
@@ -54,10 +54,10 @@ const CreateKlBlog=()=> {
             <Button variant="danger"> Cancel </Button>
           </div>
         </Link>
-        <Link to="/">
+        <Link to="/writesection/1234">
           <div className="Submit">
             <Button variant="success" onClick={handleNewBlogSave}> Submit </Button>
-          </div> 
+          </div>
         </Link>
       </div>
     </div>
@@ -65,4 +65,4 @@ const CreateKlBlog=()=> {
 
   );
 }
-export default CreateKlBlog
+export default CreateRwBlog

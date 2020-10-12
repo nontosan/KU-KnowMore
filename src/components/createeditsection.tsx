@@ -28,7 +28,7 @@ const CreateEditSection = (props:any) => {
   const [blog,setBlogs] = useState<Blog>()
   
   console.log(props.match.params)
-  const blogIdqq = props.match.params.que
+  const blogIdqq = props.match.params.blogId
   
   //fetch blog from database
   const fetchBlogs = () => {

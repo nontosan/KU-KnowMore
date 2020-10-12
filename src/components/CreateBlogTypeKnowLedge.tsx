@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Blog, } from '../interfaces/blog';
@@ -12,56 +12,68 @@ import './createblog_component/input.css';
 import Button from 'react-bootstrap/Button';
 
 import {
-  Link,
+  Link, Redirect,
 } from 'react-router-dom';
 
 import BlogsService from '../services/BlogsService';
 
-const CreateRwBlog=()=> {
+const CreateKlBlog=()=> {
   const [Nameblog, setNameblog]=useState("");
   const [Nameteacher, setNameteacher]=useState("");
   const [IDclass, setIDclass]=useState("");
   const [Nameclass, setNameclass]=useState("");
+  const [UrlLink, setUrl]=useState<string>("");
+  const [formVisible, setFormVisible] = useState<boolean>(false);
 
   const handleNewBlogSave = () => {
     const newBlog: Blog = {
       course_id: IDclass,
       user_id: "5f82fd5504eb8600aa617b6b",
-      type: "review",
+      type: "knowledge",
       blog_name: Nameblog,
     };
     BlogsService.createBlog(newBlog) 
       .then(savedNewBlog => {
         if (savedNewBlog !== null) {
-          alert("Save Success");
+          setUrl(savedNewBlog.id!)
         } else{
           alert("Save Error");
         }
       });
+    console.log(UrlLink)
   };
+
+  useEffect(() => {
+    if (UrlLink !== ""){
+      console.log(UrlLink);
+      setFormVisible(!formVisible);
+    }
+  },[UrlLink]);
+
   return (
     <div className="bg_color">
-      <div>Create Review Blog</div>
+      <div>Create Knowledge Blog</div>
      <div className="Blog_Info">
       <Input_Nameblog setNameblog={setNameblog} />
       <Input_Idclass setIDclass={setIDclass} />
       <Input_Nameclass setNameclass={setNameclass} />
       <Input_Nameteacher setNameteacher={setNameteacher} />
       <div className="Confirm"> 
-        <Link to="/">
-          <div className="Cancel">
-            <Button variant="danger"> Cancel </Button>
-          </div>
-        </Link>
-        <Link to="/writesection/1234">
-          <div className="Submit">
-            <Button variant="success" onClick={handleNewBlogSave}> Submit </Button>
-          </div>
-        </Link>
+        <div className="Cancel">
+          <Button variant="danger"> Cancel </Button>
+        </div>
+        <div className="Submit">
+          <Button variant="success" onClick={handleNewBlogSave}> Submit </Button>
+          {formVisible &&
+            <div>
+              <Redirect to={`myKnowledge/${UrlLink}`} />
+            </div>
+          }
+        </div> 
       </div>
     </div>
     </div>
 
   );
 }
-export default CreateRwBlog
+export default CreateKlBlog;

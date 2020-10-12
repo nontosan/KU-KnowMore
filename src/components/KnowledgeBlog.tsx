@@ -16,11 +16,13 @@ const KnowledgeBlog = () => {
     const fetchBlogs = () => {
         BlogsService.fetchBlogs()
             .then(blogs => {
+                console.log(blogs);
                 setBlogs(blogs);
+                console.log(blogs);
             });
-        console.log(blogs)
     };
     useEffect(() => {
+        console.log(blogs);
         fetchBlogs();
     },[]);
     return (
