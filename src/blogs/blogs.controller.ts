@@ -5,20 +5,31 @@ import { ParseObjectIdPipe } from '../common/pipes';
 import Blogs from './blogs.entity';
 import Sections from '../sections/sections.entity';
 import Reviews from '../reviews/reviews.entity';
+import Likes from '../likes/likes.entity';
+import Comments from '../comments/comments.entity';
+
+import { CreateBlogDto } from '../dto/create-blog.dto';
+import { CreateReportDto } from '../dto/create-reports.dto';
 
 import { Blog_Service } from './blogs.service';
-import { CreateBlogDto } from '../dto/create-blog.dto'
-
-import { Course_Service } from '../courses/courses.service';
 import { Section_Service } from '../sections/sections.service';
 import { Review_Service } from '../reviews/reviews.service';
+import { Like_Service } from '../likes/likes.service';
+import { CommentsService } from '../comments/comments.service';
+import { Report_Service } from '../reports/reports.service';
 
 @Controller('blogs')
 export class Blog_Controller {
   constructor(private Service: Blog_Service,
-              private courseService: Course_Service,
               private sectionService: Section_Service,
-              private reviewService: Review_Service) {}
+              private reviewService: Review_Service,
+              private likeService: Like_Service,
+              private commentService: CommentsService,
+              private reportService: Report_Service) {}
+
+  // --------------------------------------------------------------------------------
+  // ========================              GET              =========================
+  // --------------------------------------------------------------------------------
 
   @Get()
   async findAllBlogs(): Promise<Blogs[]> {
@@ -47,6 +58,30 @@ export class Blog_Controller {
     return this.Service.findBlogsID(blog_id);
   }
 
+  @Get('/:blog_id/sections')
+  async findSectionsBlogs(@Param('blog_id') blog_id: string): Promise<Sections[]> {
+    return this.sectionService.findSectionsBlogs(blog_id);
+  }
+
+  @Get('/:blog_id/reviews')
+  async findReviewsBlogs(@Param('blog_id') blog_id: string): Promise<Reviews[]> {
+    return this.reviewService.findReviewsBlogs(blog_id);
+  }
+
+  @Get('/:blog_id/likes')
+  async getAllLikesFromBlog(@Param('blog_id') blog_id: string): Promise<Likes[]> {
+    return this.likeService.getAllLikesFromBlog(blog_id);
+  }
+
+  @Get('/:blog_id/comments')
+  async find(@Param('blog_id') blog_id: ObjectID): Promise<Comments[]> {
+    return this.commentService.find(blog_id);
+  }
+
+  // --------------------------------------------------------------------------------
+  // ========================              POST              ========================
+  // --------------------------------------------------------------------------------
+
   @Post()
   async create(@Body() create: CreateBlogDto) {
     /* ---------------------- Version 2 --------------------------
@@ -69,13 +104,14 @@ export class Blog_Controller {
     return newBlog;
   }
 
-  @Get('/:blog_id/sections')
-  async findSectionsBlogs(@Param('blog_id') blog_id: string): Promise<Sections[]> {
-    return this.sectionService.findSectionsBlogs(blog_id);
-  }
-
-  @Get('/:blog_id/reviews')
-  async findReviewsBlogs(@Param('blog_id') blog_id: string): Promise<Reviews[]> {
-    return this.reviewService.findReviewsBlogs(blog_id);
+  @Post('/:blog_id/reports')
+  async createReport(@Param('blog_id', ParseObjectIdPipe) blog_id: ObjectID, @Body() createReport: CreateReportDto) {
+    this.Service.findBlogsID(blog_id).then( res => {
+      createReport.content_type = res[0].type;
+      createReport.content_id = res[0].id.toString();
+      if (createReport.report_string == null) createReport.report_string = "";
+      const newReport = this.reportService.createReport(createReport);
+      return newReport;
+    });
   }
 }

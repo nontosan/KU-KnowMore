@@ -4,7 +4,7 @@ import { Entity, Column, ObjectIdColumn} from 'typeorm';
 export class Comments {
 
     @ObjectIdColumn()
-    id?:string;
+    id?:ObjectID;
 
     @Column()
     blog_id:string;
