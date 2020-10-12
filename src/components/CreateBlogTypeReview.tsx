@@ -43,7 +43,9 @@ const CreateRwBlog=()=> {
   
   return (
     <div className="bg_color">
-      <div>Create Review Blog</div>
+      <div className="header_word">
+        <h1>สร้าง Review ใหม่</h1>
+      </div>
      <div className="Blog_Info">
       <Input_Nameblog setNameblog={setNameblog} />
       <Input_Idclass setIDclass={setIDclass} />

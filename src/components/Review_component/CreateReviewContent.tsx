@@ -3,6 +3,9 @@ import { Col, Container, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , draftStateToHTML} from 'react-wysiwyg-typescript';
 //import { reviews,blogs } from '../test_interface/review_interface';
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import TextareaAutosize from 'react-textarea-autosize';
 
 //Service
 //import ReviewService from '../test_services/ReviewService';
@@ -12,6 +15,7 @@ import './CreateReviewContent.css';
 
 // Component
 import EditBlogScoreSlider from './EditBlogScoreSlider';
+import { convertToRaw } from 'draft-js';
 
 type BlogReview = {
     blog_type : string;
@@ -70,7 +74,7 @@ const CreateBlogReview = (props : BlogReview) => {
     }
 
     const call = () => {
-        alert(draftstate)
+        alert((draftstate?.getCurrentContent())?.getBlockMap().toOrderedMap())
         alert(teachScore)
         alert(workScore)
         alert(roomScore)
@@ -82,6 +86,7 @@ const CreateBlogReview = (props : BlogReview) => {
         <div>
             <div className ="div-content" >
                 <Draft 
+                    placeholder={"เขียนรีวิวที่นี้"}
                     onEditorStateChange={(editorState) => {setdraftState(editorState);}}
                 />
             </div>
