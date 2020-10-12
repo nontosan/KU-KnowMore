@@ -5,4 +5,4 @@ export interface User_Sch{
     pic_name:string;
     username:string;
     pic_dir:string;
-}
+} 

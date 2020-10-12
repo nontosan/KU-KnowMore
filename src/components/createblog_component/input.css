@@ -1,0 +1,59 @@
+input{
+    width: 95%
+  }
+  .bg_color
+  {
+    background-color: #90caf9;
+  }
+  .Blog_Info
+  {
+    display: grid;
+    grid-template-columns: auto auto ;
+    grid-template-rows: auto auto auto;
+    grid-gap: 25px;
+    padding: 150px;
+  }
+  
+  .Blog_frame1
+  {   
+    display: grid;
+    grid-column: 1 / span 2;
+    grid-template-columns: 1fr 9fr;
+    
+    background-color: #42a5f5;
+  }
+  .Blog_frame2
+  {
+    display: grid;
+    grid-template-columns: 2fr 8fr ;
+    
+    background-color: #42a5f5;
+  }
+  
+  .Blog_name
+  {  
+    margin: 6px;
+    border-radius: 18px;
+    padding: 10px;
+    
+    color: white;
+    text-align: center;
+    background-color: #90caf9;
+    
+  }
+  .Blog_name2
+  {
+    padding: 12px 10px 10px 12px;
+    color: white;
+  }
+  .Blog_name3
+  {
+    padding: 12px 54px 10px 12px;
+    color: white;
+  }
+  
+  .Comfirm{
+    display: grid;
+    grid-template-columns: auto auto ;
+  }
+  

@@ -1,5 +1,5 @@
 import React, { useState , Component } from 'react';
-import Filtermodal from "../modals/filter"
+import Filtermodal from "../../modals/filter"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';

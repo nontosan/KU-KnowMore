@@ -14,7 +14,8 @@ import SearchPic from './photo/Magnify.png';
 import Filtermodel from './modals/filter'
 
 import Showklinmain from "./components/Showklinmain"
-
+import CreateKlBlog from "./components/createklblog"
+import CreateRwBlog from "./components/createrwblog"
 import {
     BrowserRouter as Router,
     Switch,
@@ -47,8 +48,8 @@ const App = () => {
                             <Image className="search-pic" src={SearchPic}></Image>
                         </Link>
                         <NavDropdown title="Create Your Blog" id="collasible-nav-dropdown" >
-                            <NavDropdown.Item href="/knowledgeblog">Create Knowledge</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Create Review</NavDropdown.Item>
+                            <NavDropdown.Item href="/createklblog">Create Knowledge</NavDropdown.Item>
+                            <NavDropdown.Item href="/createrwblog">Create Review</NavDropdown.Item>
                         </NavDropdown>
                         <Link to="/userpage">
                             <Image className="profile-pic" src={ProfilePic} roundedCircle />
@@ -56,7 +57,7 @@ const App = () => {
                     </Form>
                 </Navbar>
                 <Switch>
-                    <Route path="/knowledgeblog">
+                    <Route path="/createklsection">
                         <CreateEditSection blog_id={"0120032"}/>
                     </Route>
                     <Route path="/writesection">
@@ -67,6 +68,12 @@ const App = () => {
                     </Route>
                     <Route path="/searchknowledgeblog">
                         <KnowledgeBlog />
+                    </Route>
+                    <Route path="/createklblog">
+                        <CreateKlBlog />
+                    </Route>
+                    <Route path="/createrwblog">
+                        <CreateRwBlog/>
                     </Route>
                     <Route path="/">
                         <div className="main-div-main">
