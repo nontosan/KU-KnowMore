@@ -8,7 +8,7 @@ import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , d
 //import ReviewService from '../test_services/ReviewService';
 
 //CSS
-import './CreateBlogReview.css';
+import './CreateReviewContent.css';
 
 // Component
 import EditBlogScoreSlider from './EditBlogScoreSlider';
@@ -80,9 +80,6 @@ const CreateBlogReview = (props : BlogReview) => {
 
     return (
         <div>
-            <div className ="div-content">
-                <h1>Blog Header</h1>
-            </div>
             <div className ="div-content" >
                 <Draft 
                     onEditorStateChange={(editorState) => {setdraftState(editorState);}}

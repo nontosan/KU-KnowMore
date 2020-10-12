@@ -3,7 +3,7 @@ input{
   }
   .bg_color
   {
-    background-color: #90caf9;
+    /*background-color: #90caf9;*/
   }
   .Blog_Info
   {
@@ -20,14 +20,14 @@ input{
     grid-column: 1 / span 2;
     grid-template-columns: 1fr 9fr;
     
-    background-color: #42a5f5;
+    /*background-color: #42a5f5;*/
   }
   .Blog_frame2
   {
     display: grid;
     grid-template-columns: 2fr 8fr ;
     
-    background-color: #42a5f5;
+    /*background-color: #42a5f5;*/
   }
   
   .Blog_name
@@ -36,20 +36,20 @@ input{
     border-radius: 18px;
     padding: 10px;
     
-    color: white;
+    color: black;
     text-align: center;
-    background-color: #90caf9;
+    /*background-color: #90caf9;*/
     
   }
   .Blog_name2
   {
     padding: 12px 10px 10px 12px;
-    color: white;
+    color: black;
   }
   .Blog_name3
   {
     padding: 12px 54px 10px 12px;
-    color: white;
+    color: black;
   }
   
   .Comfirm{
