@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get,Delete, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
 import { CommentsService } from './comments.service';
 import { ParseObjectIdPipe } from '../common/pipes';
 import   Comments  from './comments.entity';
@@ -23,4 +23,8 @@ export class CommentsController {
     const newComment = this.commentsService.create(createCommentsDto);
     return newComment;
   }
+  @Delete('/:id')
+  deleteGuide(@Param('id') id: string): Promise<void> {
+    return this.commentsService.remove(id);
+}
 }

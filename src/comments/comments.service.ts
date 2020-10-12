@@ -1,9 +1,10 @@
-import { Body, Get, Injectable, Post } from '@nestjs/common';
+import { Body, Get,Delete, Injectable, Post } from '@nestjs/common';
 
 import { Repository } from 'typeorm';
 import {InjectRepository} from '@nestjs/typeorm';
 import { CreateCommentsDto } from '../dto/create-comments.dto';
 import Comments  from './comments.entity';
+
 
 @Injectable()
 export class CommentsService {
@@ -30,5 +31,8 @@ export class CommentsService {
     }
     async create(createCommentsDto: CreateCommentsDto) {
         return this.commentsRepository.save(createCommentsDto);
+      }
+    async remove(id: string): Promise<void> {
+        await this.commentsRepository.delete(id);
       }
 }

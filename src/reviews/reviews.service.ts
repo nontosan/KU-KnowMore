@@ -25,5 +25,8 @@ export class Review_Service {
     async createReviews(createReviewsDto: CreateReviewsDto) {
         return this.Review_Repository.save(createReviewsDto);
       }
+    async remove(id: string): Promise<void> {
+        await this.Review_Repository.delete(id);
+      }
 
 }
