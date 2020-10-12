@@ -23,12 +23,15 @@ type editsection={
 type blogidformpagebefore={
   blog_id:string
 }
-const CreateEditSection = (props:blogidformpagebefore) => {
+const CreateEditSection = (props:any) => {
   const [sections,setsections] = useState<Section_Edit[]>([])
   const [blog,setBlogs] = useState<Blog>()
+
+  console.log(props.match.params)
+  
   //fetch blog from database
   const fetchBlogs = () => {
-    BlogsService.fetchBlogSpecific(props.blog_id)
+    BlogsService.fetchBlogSpecific("fetch apis")
     .then(blog => {
     setBlogs(blog);
     });

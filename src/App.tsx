@@ -57,9 +57,7 @@ const App = () => {
                     </Form>
                 </Navbar>
                 <Switch>
-                    <Route path="/createklsection">
-                        <CreateEditSection blog_id={"0120032"}/>
-                    </Route>
+                    <Route path="/createklsection/:que" name="que" component={CreateEditSection}></Route>
                     <Route path="/writesection">
                         <WriteSection />
                     </Route>
