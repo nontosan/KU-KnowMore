@@ -10,6 +10,7 @@ import Input_Nameteacher from './createblog_component/input_nameteacher';
 import Confirm from './createblog_component/confirm';
 import './createblog_component/input.css';
 import Button from 'react-bootstrap/Button';
+import CreateReviewContent from './Review_component/CreateReviewContent';
 
 import {
   Link,
@@ -48,6 +49,10 @@ const CreateRwBlog=()=> {
       <Input_Idclass setIDclass={setIDclass} />
       <Input_Nameclass setNameclass={setNameclass} />
       <Input_Nameteacher setNameteacher={setNameteacher} />
+    </div>
+    <div className="Blog_Content">
+      <CreateReviewContent blog_type={"create"} />
+    </div>
       <div className="Confirm"> 
         <Link to="/">
           <div className="Cancel">
@@ -60,7 +65,6 @@ const CreateRwBlog=()=> {
           </div>
         </Link>
       </div>
-    </div>
     </div>
 
   );
