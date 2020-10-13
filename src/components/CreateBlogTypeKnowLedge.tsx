@@ -23,7 +23,7 @@ const CreateKlBlog=()=> {
   const [IDclass, setIDclass]=useState("");
   const [Nameclass, setNameclass]=useState("");
   const [UrlLink, setUrl]=useState<string>("");
-  const [formVisible, setFormVisible] = useState<boolean>(false);
+  const [afterSave, setafterSave] = useState<boolean>(false);
 
   const handleNewBlogSave = () => {
     const newBlog: Blog = {
@@ -35,6 +35,7 @@ const CreateKlBlog=()=> {
     BlogsService.createBlog(newBlog) 
       .then(savedNewBlog => {
         if (savedNewBlog !== null) {
+          console.log(savedNewBlog);
           setUrl(savedNewBlog.id!)
         } else{
           alert("Save Error");
@@ -46,32 +47,32 @@ const CreateKlBlog=()=> {
   useEffect(() => {
     if (UrlLink !== ""){
       console.log(UrlLink);
-      setFormVisible(!formVisible);
+      setafterSave(!afterSave);
     }
   },[UrlLink]);
 
   return (
     <div className="bg_color">
       <div>Create Knowledge Blog</div>
-     <div className="Blog_Info">
-      <Input_Nameblog setNameblog={setNameblog} />
-      <Input_Idclass setIDclass={setIDclass} />
-      <Input_Nameclass setNameclass={setNameclass} />
-      <Input_Nameteacher setNameteacher={setNameteacher} />
-      <div className="Confirm"> 
-        <div className="Cancel">
-          <Button variant="danger"> Cancel </Button>
+      <div className="Blog_Info">
+        <Input_Nameblog setNameblog={setNameblog} />
+        <Input_Idclass setIDclass={setIDclass} />
+        <Input_Nameclass setNameclass={setNameclass} />
+        <Input_Nameteacher setNameteacher={setNameteacher} />
+        <div className="Confirm"> 
+          <div className="Cancel">
+            <Button variant="danger"> Cancel </Button>
+          </div>
+          <div className="Submit">
+            <Button variant="success" onClick={handleNewBlogSave}> Submit </Button>
+            {afterSave &&
+              <div>
+                <Redirect to={`myKnowledge/${UrlLink}`} />
+              </div>
+            }
+          </div> 
         </div>
-        <div className="Submit">
-          <Button variant="success" onClick={handleNewBlogSave}> Submit </Button>
-          {formVisible &&
-            <div>
-              <Redirect to={`myKnowledge/${UrlLink}`} />
-            </div>
-          }
-        </div> 
       </div>
-    </div>
     </div>
 
   );

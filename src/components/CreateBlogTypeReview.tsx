@@ -44,26 +44,26 @@ const CreateRwBlog=()=> {
   return (
     <div className="bg_color">
       <div>Create Review Blog</div>
-     <div className="Blog_Info">
-      <Input_Nameblog setNameblog={setNameblog} />
-      <Input_Idclass setIDclass={setIDclass} />
-      <Input_Nameclass setNameclass={setNameclass} />
-      <Input_Nameteacher setNameteacher={setNameteacher} />
-    </div>
-    <div className="Blog_Content">
-      <CreateReviewContent blog_type={"create"} />
-    </div>
-      <div className="Confirm"> 
-        <Link to="/">
-          <div className="Cancel">
-            <Button variant="danger"> Cancel </Button>
-          </div>
-        </Link>
-        <Link to="/writesection/1234">
-          <div className="Submit">
-            <Button variant="success" onClick={handleNewBlogSave}> Submit </Button>
-          </div>
-        </Link>
+      <div className="Blog_Info">
+        <Input_Nameblog setNameblog={setNameblog} />
+        <Input_Idclass setIDclass={setIDclass} />
+        <Input_Nameclass setNameclass={setNameclass} />
+        <Input_Nameteacher setNameteacher={setNameteacher} />
+        <div className="Blog_Content">
+          <CreateReviewContent blog_type={"create"} />
+        </div>
+        <div className="Confirm"> 
+          <Link to="/">
+            <div className="Cancel">
+              <Button variant="danger"> Cancel </Button>
+            </div>
+          </Link>
+          <Link to="/writesection/1234">
+            <div className="Submit">
+              <Button variant="success" onClick={handleNewBlogSave}> Submit </Button>
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
 

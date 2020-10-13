@@ -25,17 +25,18 @@ type blogidformpagebefore={
 }
 const CreateEditSection = (props:any) => {
   const [sections,setsections] = useState<Section_Edit[]>([])
-  const [blog,setBlogs] = useState<Blog>()
+  const [blogsInfomation,setBlogsInfomation] = useState<Blog[]>([])
   
   console.log(props.match.params)
-  const blogIdqq = props.match.params.blogId
+  const blogId = props.match.params.blogId
   
   //fetch blog from database
   const fetchBlogs = () => {
-    BlogsService.fetchBlogSpecific("fetch apis")
-    .then(blog => {
-    setBlogs(blog);
-    });
+    BlogsService.fetchBlogSpecific(blogId)
+      .then(blogInfo => {
+        setBlogsInfomation(blogInfo);
+        console.log(blogInfo);
+      });
   }
 
   //function fetch section form database
@@ -60,11 +61,17 @@ const CreateEditSection = (props:any) => {
 
   //refreh
   useEffect(()=>{
-    console.log("refresh")
+    fetchBlogs();
   },[])
+
   return (
     <div>
-      {blogIdqq}
+      {blogsInfomation.map(blogInfomation=>(
+        <div>
+          <h3>Blog Name : {blogInfomation.blog_name}</h3>
+          <h3>Course ID : {blogInfomation.course_id}</h3>
+        </div>
+      ))}
       <div>
         {sections.map(item=>(
           <div>
@@ -75,7 +82,7 @@ const CreateEditSection = (props:any) => {
         ))}
       </div>
       <div className="div-addsection">
-        <Link to="/writesection">
+        <Link to={`/writeSection/${blogId}`}>
           <Button variant="outline-secondary" className="button-addsection">
             <Image className="addsection" src={AddSection} roundedCircle />
           </Button>
