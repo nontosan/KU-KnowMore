@@ -21,12 +21,22 @@ async function createBlog(newBlog: Blog): Promise<Blog|null> {
 }
 
 async function fetchBlogSpecific(blogid:string): Promise<Blog> {
-    const api:string = `http://188.166.178.33:3000/blogs`+blogid
+    const api:string = `http://188.166.178.33:3000/blogs/`+blogid
     const res = await fetch(api);
     const blog = await res.json();
     return blog;  
 }
 
+async function fetchBlogfilter(blogid:string): Promise<Blog[]> {
+    const api:string = `http://188.166.178.33:3000/blogs/search/`+blogid
+    console.log(api)
+    const res = await fetch(api);
+    const blog = await res.json();
+    return blog;  
+}
+
+
+
 export default {
-    fetchBlogs,createBlog,fetchBlogSpecific,
+    fetchBlogs,createBlog,fetchBlogSpecific,fetchBlogfilter,
 };
