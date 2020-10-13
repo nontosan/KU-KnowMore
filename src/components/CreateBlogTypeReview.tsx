@@ -43,6 +43,7 @@ const CreateRwBlog=()=> {
   
   return (
     <div className="bg_color">
+<<<<<<< HEAD
       <div>Create Review Blog</div>
       <div className="Blog_Info">
         <Input_Nameblog setNameblog={setNameblog} />
@@ -64,6 +65,31 @@ const CreateRwBlog=()=> {
             </div>
           </Link>
         </div>
+=======
+      <div className="header_word">
+        <h1>สร้าง Review ใหม่</h1>
+      </div>
+     <div className="Blog_Info">
+      <Input_Nameblog setNameblog={setNameblog} />
+      <Input_Idclass setIDclass={setIDclass} />
+      <Input_Nameclass setNameclass={setNameclass} />
+      <Input_Nameteacher setNameteacher={setNameteacher} />
+    </div>
+    <div className="Blog_Content">
+      <CreateReviewContent blog_type={"create"} />
+    </div>
+      <div className="Confirm"> 
+        <Link to="/">
+          <div className="Cancel">
+            <Button variant="danger"> Cancel </Button>
+          </div>
+        </Link>
+        <Link to="/writesection/1234">
+          <div className="Submit">
+            <Button variant="success" onClick={handleNewBlogSave}> Submit </Button>
+          </div>
+        </Link>
+>>>>>>> fdfedf3dbe1799fcc1bc4648f7fdb544e6147884
       </div>
     </div>
 

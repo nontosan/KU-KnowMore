@@ -8,7 +8,9 @@ import Order from "../gadget/filter_gadget/order"
 import Subjectname from "../gadget/filter_gadget/Subjectname";
 import Subjectid from "../gadget/filter_gadget/Subjectid";
 import Teacher from "../gadget/filter_gadget/teacher"
-
+import {
+  Link, Redirect,
+} from 'react-router-dom'
 
 function FilterModal(props:any) {
   return (
@@ -35,7 +37,14 @@ function FilterModal(props:any) {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Submit</Button>
+        <div>
+          <Button onClick={props.onHide}>Submit</Button>
+          {props.formVisible &&
+            <div>
+              <Redirect to={`/filter/search?${props.query}`} />
+            </div>
+          }
+        </div>
       </Modal.Footer>
     </Modal>
   );
@@ -57,7 +66,8 @@ function Filtermodal() {
   const [input_subname,setsubname]= useState('');
   //teacher 
   const [teacher,setteacher]= useState('');
-
+  const [formVisible, setFormVisible] = useState<boolean>(false);
+  var [query,setquery]=useState('');
 
   //about modal
   const showmodal=()=>{
@@ -66,56 +76,52 @@ function Filtermodal() {
   }
   const Submit=()=>{
     setModalShow(false)
-    var querystring:String='ip/blogs/search/?'
+    var querystring:string=''
     var i:number=0;
     var istype=""
     
-    if(type.length==2){
+    if(type.length==2 || type.length==0){
       istype="3"
-      i=i+1
       querystring+="type="+istype
     }
     else if(type[0]==2){
       istype="2"
-      i=i+1
       querystring+="type="+istype
     }
     else if(type[0]==1){
       istype="1"
-      i=i+1
       querystring+="type="+istype
     }
     if(radioValue!=""){
-      if(i!=0){
-        querystring+="&"
-      }
-      querystring+="order="+radioValue.toString()
-      i=i+1
+      querystring+="&order="+radioValue.toString()
     }
     if(input_subname!=""){
-      if(i!=0){
-        querystring+="&"
-      }
-      querystring+="subname="+input_subname
-      i=i+1
+      querystring+="&subname="+input_subname
     }
     if(input_subid!=""){
-      if(i!=0){
-        querystring+="&"
-      }
-      querystring+="code="+input_subid
-      i=i+1
+      querystring+="&code="+input_subid
     }
     if(teacher!=""){
-      if(i!=0){
-        querystring+="&"
-      }
-      querystring+="teachname="+teacher
-      i=i+1
+      querystring+="&teachname="+teacher
     }
+    setquery(querystring)
     console.log(querystring)
-
+    reset()
   }
+  const reset=()=>{
+
+    setValue([1,2])
+    setChecked(false);
+    setRadioValue('');
+    setsubid('');
+    setsubname('');
+    setteacher('');
+  }
+  useEffect(()=>{
+    if (query !== ""){
+      setFormVisible(!formVisible);
+    }
+  },[query])
   return (
     <>
       <Button variant="primary" onClick={showmodal}>
@@ -137,6 +143,8 @@ function Filtermodal() {
         setsubname={setsubname}
         teacher={teacher}
         setteacher={setteacher}
+        formVisible={formVisible}
+        query={query}
 
       />
     </>

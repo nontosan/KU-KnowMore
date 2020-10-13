@@ -16,6 +16,8 @@ import Filtermodel from './modals/filter'
 import Showklinmain from "./components/ShowKnowledgeInMain"
 import CreateKlBlog from "./components/CreateBlogTypeKnowLedge"
 import CreateRwBlog from "./components/CreateBlogTypeReview"
+import SearchFilter from "./components/SearchFilter"
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -71,9 +73,11 @@ const App = () => {
                     <Route path="/createrwblog">
                         <CreateRwBlog/>
                     </Route>
+                    <Route path="/filter/:search" name="search">
+                        <SearchFilter />
+                    </Route>
                     <Route path="/">
                         <div className="main-div-main">
-                            <FormControl aria-label="Large" aria-describedby="inputGroup-sizing-sm" className="search-bar"/>
                             <Filtermodel />
                         </div>
                         <div className="hot-kl">
