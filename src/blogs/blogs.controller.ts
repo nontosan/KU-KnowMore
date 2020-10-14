@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Query, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Query, Post, Put } from '@nestjs/common';
 import { ObjectID } from 'mongodb';
 import { ParseObjectIdPipe } from '../common/pipes';
 
@@ -121,5 +121,10 @@ export class Blog_Controller {
     createSection.blog_id = blog_id;
     console.log(createSection);
     return this.sectionService.createSections(createSection);
+  }
+
+  @Put('/:blog_id/')
+  async updateBlog(@Param('blog_id') blog_id: string, @Body() updateBlog: Blogs) {
+    return this.Service.updateBlog(blog_id, updateBlog);
   }
 }
