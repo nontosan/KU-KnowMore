@@ -20,7 +20,7 @@ async function createBlog(newBlog: Blog): Promise<Blog|null> {
     }
 }
 
-async function fetchBlogSpecific(blogid:string): Promise<Blog> {
+async function fetchBlogSpecific(blogid:string): Promise<Blog[]> {
     const api:string = `http://188.166.178.33:3000/blogs/`+blogid
     const res = await fetch(api);
     const blog = await res.json();

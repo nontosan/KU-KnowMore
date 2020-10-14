@@ -9,7 +9,7 @@ import Subjectname from "../gadget/filter_gadget/Subjectname";
 import Subjectid from "../gadget/filter_gadget/Subjectid";
 import Teacher from "../gadget/filter_gadget/teacher"
 import {
-  Link, Redirect,
+  Link, Redirect
 } from 'react-router-dom'
 
 function FilterModal(props:any) {
@@ -38,10 +38,10 @@ function FilterModal(props:any) {
       </Modal.Body>
       <Modal.Footer>
         <div>
-          <Button onClick={props.onHide}>Submit</Button>
+          <Button onClick={props.click}>Submit</Button>
           {props.formVisible &&
             <div>
-              <Redirect to={`/filter/search?${props.query}`} />
+              <Redirect to={`/filter/search?${props.query}` } />
             </div>
           }
         </div>
@@ -69,6 +69,11 @@ function Filtermodal() {
   const [formVisible, setFormVisible] = useState<boolean>(false);
   var [query,setquery]=useState('');
 
+  const click=()=>{
+
+    Submit()
+    //window.location.reload(false);
+  }
   //about modal
   const showmodal=()=>{
     setModalShow(true);
@@ -145,7 +150,7 @@ function Filtermodal() {
         setteacher={setteacher}
         formVisible={formVisible}
         query={query}
-
+        click={click}
       />
     </>
   );

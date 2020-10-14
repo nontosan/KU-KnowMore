@@ -11,7 +11,7 @@ const Input_Nameblog=(a:any)=>{
                     ชื่อบล็อค 
                 </div>
                 <div className="Blog_name2">
-                    <input type="text" onChange={(e)=>changeValue(e)}/>
+                    <input type="text"  onChange={(e)=>changeValue(e)}/>
                 </div>
         
         </div>

@@ -45,7 +45,7 @@ const CreateKlBlog=()=> {
 
   useEffect(() => {
     if (UrlLink !== ""){
-      console.log(UrlLink);
+      //console.log(UrlLink);
       setFormVisible(!formVisible);
     }
   },[UrlLink]);

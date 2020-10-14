@@ -7,6 +7,7 @@ import Image from 'react-bootstrap/Image';
 import { Blog }from '../interfaces/blog'
 import AddSection from '../photo/addsection.png';
 import BlogsService from "../services/BlogsService"
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,6 +17,7 @@ import {
 
 import './section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import EditBlogContent from '../gadget/editblogcontent';
 
 type editsection={
   section:Section_Edit
@@ -25,16 +27,17 @@ type blogidformpagebefore={
 }
 const CreateEditSection = (props:any) => {
   const [sections,setsections] = useState<Section_Edit[]>([])
-  const [blog,setBlogs] = useState<Blog>()
+  const [blogs,setting] = useState<Blog[]>([])
   
-  console.log(props.match.params)
+  //console.log(props.match.params)
   const blogIdqq = props.match.params.blogId
   
   //fetch blog from database
-  const fetchBlogs = () => {
-    BlogsService.fetchBlogSpecific("fetch apis")
+  const fetchBlogs = ()=>{
+    BlogsService.fetchBlogSpecific(blogIdqq.toString())
     .then(blog => {
-    setBlogs(blog);
+    setting(blog)
+    console.info(blog)
     });
   }
 
@@ -60,11 +63,16 @@ const CreateEditSection = (props:any) => {
 
   //refreh
   useEffect(()=>{
+    fetchBlogs();
     console.log("refresh")
+    console.log("hello")
+    console.log(blogs);
   },[])
+  //<EditBlogContent blog={blogs}/>
   return (
     <div>
       {blogIdqq}
+      {blogs}
       <div>
         {sections.map(item=>(
           <div>
