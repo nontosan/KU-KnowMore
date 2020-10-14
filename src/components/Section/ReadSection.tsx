@@ -20,23 +20,6 @@ const ReadSection = (props:any) => {
     const handleNewSectionNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewSectionName(e.target.value);
     };
-    
-    const handleSectionSave = () => {
-        const writeSection = {
-            sectionname: newSectionName,
-            content: draftstate,
-            blogId: blogId,
-        };
-
-        SectionService.createSection(writeSection)
-            .then(savedWriteSection => {
-                if (savedWriteSection !== null) {
-                    alert("Save Success");
-                } else{
-                    alert("Save Error");
-                }
-            });
-    };
 
     return (
         <div>
@@ -53,10 +36,6 @@ const ReadSection = (props:any) => {
             </div>
             <div className="div-sectionname">
                 <Photo />
-            </div>
-            <div className="div-sectionname">
-                <Button className="cancel-button" variant="outline-secondary">Cancel</Button>
-                <Button className="submit-button" variant="outline-secondary" onClick={handleSectionSave}>Submit</Button>
             </div>
         </div>
     );

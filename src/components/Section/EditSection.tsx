@@ -23,9 +23,9 @@ const EditSection = (props:any) => {
     
     const handleSectionSave = () => {
         const writeSection = {
-            sectionname: newSectionName,
+            section_name: newSectionName,
             content: draftstate,
-            blogId: blogId,
+            blog_id: blogId,
         };
 
         SectionService.createSection(writeSection)

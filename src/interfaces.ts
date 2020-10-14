@@ -1,6 +1,8 @@
+import { RawDraftContentState } from "draft-js";
+
 export interface Section{
     id?: string;
-    sectionname: string;
+    section_name: string;
     content: any;
-    blogId?: string;
+    blog_id: string;
 };

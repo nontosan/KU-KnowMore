@@ -1,4 +1,4 @@
-import React, { useState , Component } from 'react';
+import React, { useState , Component, HtmlHTMLAttributes } from 'react';
 import Photo from '../upload';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -9,11 +9,12 @@ import SectionService from '../../services/SectionService';
 
 import '../section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { convertToRaw, EditorState } from 'draft-js';
 
 
 const WriteSection = (props:any) => {
     const [newSectionName, setNewSectionName] = useState<string>('');
-    const [draftstate, setdraftState] = useState<typeof EmptyState>();
+    const [draftstate, setdraftState] = useState(EditorState.createEmpty());
 
     const blogId = (props.match.params.blogId)
 
@@ -23,9 +24,9 @@ const WriteSection = (props:any) => {
     
     const handleSectionSave = () => {
         const writeSection = {
-            sectionname: newSectionName,
+            section_name: newSectionName,
             content: draftstate,
-            blogId: blogId,
+            blog_id: blogId,
         };
 
         SectionService.createSection(writeSection)
@@ -38,6 +39,12 @@ const WriteSection = (props:any) => {
             });
     };
 
+    const rawContentState = convertToRaw(draftstate.getCurrentContent());
+    
+    const markup = draftToHtml(
+        rawContentState, 
+      );
+
     return (
         <div>
             <InputGroup size="lg" className="div-sectionname">
@@ -48,9 +55,15 @@ const WriteSection = (props:any) => {
             </InputGroup>
             <div className="div-sectionname">
                 <Draft 
-                    onEditorStateChange={(editorState) => {setdraftState(draftstate);}}
+                    onEditorStateChange={
+                        (draftstate) => {
+                            setdraftState(draftstate);
+                            console.log(JSON.stringify(convertToRaw(draftstate.getCurrentContent())));
+                        }
+                    }
                 />
             </div>
+            <div dangerouslySetInnerHTML={{__html: markup}} />
             <div className="div-sectionname">
                 <Photo />
             </div>

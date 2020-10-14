@@ -14,6 +14,12 @@ async function createSection(writeSection: Section): Promise<Section|null> {
     }
 }
 
+async function fetchSections(blogid:string): Promise<Section[]> {
+    const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}/sections`);
+    const Arraysections = await res.json();
+    return Arraysections;  
+}
+
 export default {
-    createSection,
+    createSection, fetchSections,
 };

@@ -1,13 +1,17 @@
 import React, { useState,useEffect, useImperativeHandle } from 'react'
-import { Redirect } from 'react-router-dom';
-import { Section_Edit } from '../interfaces/SectionEdit';
-import  loadeditsection from "../services/loadeditsection";
+import  loadeditsection, { fetchsection } from "../services/loadeditsection";
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
-import { Blog }from '../interfaces/blog'
+import { Blog }from '../interfaces/blog';
+import { Section } from '../interfaces';
 import AddSection from '../photo/addsection.png';
 import Card from 'react-bootstrap/Card';
-import BlogsService from "../services/BlogsService"
+
+// IMPORT SERVICE //
+import BlogsService from "../services/BlogsService";
+import SectionService from "../services/SectionService";
+// END OF IMPORT SERVICE //
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -23,15 +27,9 @@ import './section.css';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-type editsection={
-  section:Section_Edit
-}
-type blogidformpagebefore={
-  blog_id:string
-}
 const ReadBlogKnowledge = (props:any) => {
-  const [sections,setsections] = useState<Section_Edit[]>([])
-  const [blogsInfomation,setBlogsInfomation] = useState<Blog[]>([])
+  const [sectionsInformation, setSectionsInformation] = useState<Section[]>([]);
+  const [blogsInformation,setBlogsInformation] = useState<Blog[]>([]);
   
   console.log(props.match.params)
   const blogId = props.match.params.blogId
@@ -40,34 +38,22 @@ const ReadBlogKnowledge = (props:any) => {
   const fetchBlogs = () => {
     BlogsService.fetchBlogSpecific(blogId)
       .then(blogInfo => {
-        setBlogsInfomation(blogInfo);
+        setBlogsInformation(blogInfo);
         console.log(blogInfo);
       });
   }
 
-  //function fetch section form database
-  const fetchsection=()=>{
-
-  }
-
-  //delete section  
-  const handledeletesection=()=>{
-    fetch("api_path for delete section",{
-      method:"Post",
-      headers:{'Content-Type':'appllication/json'},
-      body:JSON.stringify(sections)
-    }).then(res=>res.json())
-  }
-
-
-  //edit section => create route with section data from backend
-  const handleeditsection=()=>{
-    console.log("create route to create section")
+  const fetchsection = () => {
+    SectionService.fetchSections(blogId)
+      .then(Arraysections => {
+        setSectionsInformation(Arraysections);
+      });
   }
 
   //refreh
   useEffect(()=>{
     fetchBlogs();
+    fetchsection();
   },[])
 
   return (
@@ -76,17 +62,17 @@ const ReadBlogKnowledge = (props:any) => {
         <Card.Header>KNOWLEDGE ISUS</Card.Header>
       </div>
       <div className="hot-kl">
-        {blogsInfomation.map(blogInfomation=>(
+        {blogsInformation.map(blogInformation=>(
           <Card.Header>
-            Blog Name : {blogInfomation.blog_name} <br />
-            Course ID : {blogInfomation.course_id}
+            Blog Name : {blogInformation.blog_name} <br />
+            Course ID : {blogInformation.course_id}
           </Card.Header>
         ))}
       </div>
       <div className="hot-kl">
-        {sections.map(item=>(
+        {sectionsInformation.map(item=>(
           <div>
-            <div>{sections}13123123213</div>
+            <div><strong>{item.section_name}</strong> {item.blog_id} {item.id} {item.content} </div>
           </div>
         ))}
       </div>
