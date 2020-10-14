@@ -1,8 +1,7 @@
 import { IsNotEmpty } from "class-validator";
 
 export class CreateCommentsDto{
-    @IsNotEmpty()
-    blog_id: string;
+    blog_id?: string;
 
     @IsNotEmpty()
     user_id: string;
@@ -10,6 +9,5 @@ export class CreateCommentsDto{
     @IsNotEmpty()
     content: string
     
-    @IsNotEmpty()
-    date_time: string;
+    date_time?: string;
 }

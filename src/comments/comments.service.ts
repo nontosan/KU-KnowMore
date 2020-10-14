@@ -35,6 +35,7 @@ export class CommentsService {
         return this.commentsRepository.find({where:{_id: comment_id}});
     }
     async create(createCommentsDto: CreateCommentsDto) {
+        createCommentsDto.date_time = this.getDate();
         return this.commentsRepository.save(createCommentsDto);
     }
     async remove(id: string): Promise<void> {

@@ -12,6 +12,7 @@ import { CreateBlogDto } from '../dto/create-blog.dto';
 import { CreateReportDto } from '../dto/create-reports.dto';
 import { CreateSectionDto } from '../dto/create-section.dto';
 import { CreateReviewsDto } from '../dto/create-review.dto';
+import { CreateCommentsDto } from '../dto/create-comments.dto';
 
 import { Blog_Service } from './blogs.service';
 import { Section_Service } from '../sections/sections.service';
@@ -129,7 +130,13 @@ export class Blog_Controller {
     createReview.blog_id = blog_id;
     return this.reviewService.createReviews(createReview);
   }
-  
+
+  @Post('/:blog_id/comments')
+  async createComment(@Param('blog_id') blog_id: string, @Body() createComment: CreateCommentsDto) {
+    createComment.blog_id = blog_id;
+    return this.commentService.create(createComment);
+  }
+
   // --------------------------------------------------------------------------------
   // ========================              PUT              =========================
   // --------------------------------------------------------------------------------
