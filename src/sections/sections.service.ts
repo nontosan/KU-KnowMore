@@ -28,5 +28,8 @@ export class Section_Service {
     async update(section_id: string, updateSection: Sections) {
         return this.Section_Repository.update(section_id, updateSection);
     }
+    async delete(section_id: string) {
+        return this.Section_Repository.delete(section_id);
+    }
 
 }
