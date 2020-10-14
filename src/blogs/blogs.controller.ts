@@ -10,6 +10,7 @@ import Comments from '../comments/comments.entity';
 
 import { CreateBlogDto } from '../dto/create-blog.dto';
 import { CreateReportDto } from '../dto/create-reports.dto';
+import { CreateSectionDto } from '../dto/create-section.dto';
 
 import { Blog_Service } from './blogs.service';
 import { Section_Service } from '../sections/sections.service';
@@ -113,5 +114,12 @@ export class Blog_Controller {
       const newReport = this.reportService.createReport(createReport);
       return newReport;
     });
+  }
+
+  @Post('/:blog_id/sections')
+  async createSection(@Param('blog_id') blog_id: string, @Body() createSection: CreateSectionDto) {
+    createSection.blog_id = blog_id;
+    console.log(createSection);
+    return this.sectionService.createSections(createSection);
   }
 }

@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { ObjectID } from 'mongodb';
 
 import Sections from './sections.entity';
+import { CreateSectionDto } from 'src/dto/create-section.dto';
 
 @Injectable()
 export class Section_Service {
@@ -20,6 +21,9 @@ export class Section_Service {
     }
     async findSectionsBlogs(blog_id: string): Promise<Sections[]> {
         return this.Section_Repository.find({where: { blog_id: blog_id }});
+    }
+    async createSections(create: CreateSectionDto) {
+        return this.Section_Repository.save(create);
     }
 
 }
