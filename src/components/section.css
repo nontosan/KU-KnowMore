@@ -1,0 +1,62 @@
+.bigupload{
+    width: 100%;
+}
+
+.textup{
+    width: 10%;
+}
+
+.uploadfile {
+    width: 90%;
+}
+
+.cancel-button {
+    float: right;
+}
+
+.submit-button {
+    float: right;
+    margin-right: 10px;
+}
+
+.div-addsection{
+    padding-top: 50px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.button-addsection{
+    padding: 0px;
+    width: 100%;
+    height: 40px;
+}
+
+.addsection{
+    height: 30x;
+    width: 30px;
+}
+.div-sectionname{
+    padding-top: 50px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.main-div {
+    margin-top: 50px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.profile-page-pic{
+    height: 200px;
+    width: 200px;
+}
+
+.profile-info{
+    padding-left: 100px;
+}
+
+.show-blog{
+    color: rgb(153, 153, 153);
+    border-bottom: rgba(0,0,0,.125) solid 1px;
+}
