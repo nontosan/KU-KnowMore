@@ -19,6 +19,7 @@ import CreateRwBlog from "./components/CreateBlogTypeReview";
 import SearchFilter from "./components/SearchFilter";
 import ReadBlogKnowledge from './components/ReadBlogKnowledge';
 import ReadBlogReview from './components/ReadBlogReview';
+import ReadSection from './components/Section/ReadSection';
 
 import {
     BrowserRouter as Router,
@@ -66,6 +67,7 @@ const App = () => {
                     <Route path="/readKnowledge/:blogId" name="blogId" component={ReadBlogKnowledge}></Route>
                     <Route path="/readReview/:blogId" name="blogId" component={ReadBlogReview}></Route>
                     <Route path="/writeSection/:blogId" name="blogId" component={WriteSection}></Route>
+                    <Route path="/readSection/:sectionId" name="sectionId" component={ReadSection}></Route>
                     <Route path="/userpage">
                         <UserPage />
                     </Route>

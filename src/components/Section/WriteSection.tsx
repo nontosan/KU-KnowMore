@@ -25,13 +25,14 @@ const WriteSection = (props:any) => {
     const handleSectionSave = () => {
         const writeSection = {
             section_name: newSectionName,
-            content: draftstate,
+            content: rawContentState,
             blog_id: blogId,
         };
 
-        SectionService.createSection(writeSection)
+        SectionService.createSection(blogId, writeSection)
             .then(savedWriteSection => {
                 if (savedWriteSection !== null) {
+                    console.log(savedWriteSection);
                     alert("Save Success");
                 } else{
                     alert("Save Error");
@@ -39,8 +40,9 @@ const WriteSection = (props:any) => {
             });
     };
 
+
     const rawContentState = convertToRaw(draftstate.getCurrentContent());
-    
+
     const markup = draftToHtml(
         rawContentState, 
       );
@@ -58,7 +60,8 @@ const WriteSection = (props:any) => {
                     onEditorStateChange={
                         (draftstate) => {
                             setdraftState(draftstate);
-                            console.log(JSON.stringify(convertToRaw(draftstate.getCurrentContent())));
+                            console.log(draftstate);
+                            console.log(typeof(draftstate));
                         }
                     }
                 />

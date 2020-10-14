@@ -1,4 +1,4 @@
-import React, { useState , Component } from 'react';
+import React, { useState , useEffect , Component } from 'react';
 import Photo from '../upload';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -7,19 +7,50 @@ import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , d
 
 import SectionService from '../../services/SectionService';
 
-import './section.css';
+import '../section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Section } from '../../interfaces';
+import { convertToRaw, EditorState } from 'draft-js';
+import { type } from 'os';
 
 
 const ReadSection = (props:any) => {
-    const [newSectionName, setNewSectionName] = useState<string>('');
-    const [draftstate, setdraftState] = useState<typeof EmptyState>();
+    const [sectionsInformation, setSectionsInformation] = useState<Section[]>([]);
+    const [afterFetch, setafterFetch] = useState<boolean>(false);
+    const [displayHTML, setDisplayHTML] = useState<any>();
+    const sectionId = (props.match.params.sectionId);
+    const [stateCheck, setstateCheck] = useState<boolean>(false);
 
-    const blogId = (props.match.params.blogId)
+    const fetchSection = () => {
+        SectionService.fetchSectionsSpecific(sectionId)
+            .then(sectioninfo => {
+                setSectionsInformation(sectioninfo);
+                setstateCheck(true);
+            })
+    }
+    const initdraft = () => {
+        const draftstate = sectionsInformation[0].content
 
-    const handleNewSectionNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setNewSectionName(e.target.value);
-    };
+        const markup = draftToHtml(
+            draftstate, 
+        );
+        console.log(markup);
+        setDisplayHTML(markup);
+    }
+    
+    useEffect(() => {
+        fetchSection();
+    },[])
+    useEffect(() => {
+        if (stateCheck !== false){
+            initdraft();
+            setafterFetch(!afterFetch);
+        }
+    },[stateCheck])
+    //useEffect( () => {
+    //    initdraft();
+    //    setafterFetch(!afterFetch);
+    //},[sectionsInformation])
 
     return (
         <div>
@@ -27,16 +58,10 @@ const ReadSection = (props:any) => {
                 <InputGroup.Prepend >
                     <InputGroup.Text id="inputGroup-sizing-lg">Section Name</InputGroup.Text>
                 </InputGroup.Prepend>
-                <FormControl aria-label="Large" aria-describedby="inputGroup-sizing-sm" value={newSectionName} onChange={handleNewSectionNameChange}/>
             </InputGroup>
-            <div className="div-sectionname">
-                <Draft 
-                    onEditorStateChange={(editorState) => {setdraftState(draftstate);}}
-                />
-            </div>
-            <div className="div-sectionname">
-                <Photo />
-            </div>
+            {afterFetch &&
+                <div className="div-sectionname" dangerouslySetInnerHTML={{__html: displayHTML}} />
+            }
         </div>
     );
 }

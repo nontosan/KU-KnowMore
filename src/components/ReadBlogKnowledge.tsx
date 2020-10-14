@@ -72,7 +72,9 @@ const ReadBlogKnowledge = (props:any) => {
       <div className="hot-kl">
         {sectionsInformation.map(item=>(
           <div>
-            <div><strong>{item.section_name}</strong> {item.blog_id} {item.id} {item.content} </div>
+            <Link to={`/readSection/${item.id}`}>
+              <button><strong>{item.section_name}</strong> {item.blog_id} {item.id}</button>
+            </Link>
           </div>
         ))}
       </div>
