@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Put } from '@nestjs/common';
 import { ObjectID } from 'mongodb';
 import { ParseObjectIdPipe } from '../common/pipes';
 
@@ -18,6 +18,11 @@ export class Section_Controller {
   @Get('/:Section_id')
   async findSectionsID(@Param('Section_id', ParseObjectIdPipe) Section_id: ObjectID): Promise<Sections[]> {
     return this.Service.findSectionsID(Section_id);
+  }
+
+  @Put('/:Section_id')
+  async updateSection(@Param('Section_id') Section_id: string, @Body() updateSection: Sections) {
+    return this.Service.update(Section_id, updateSection);
   }
 
 }

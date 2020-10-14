@@ -25,5 +25,8 @@ export class Section_Service {
     async createSections(create: CreateSectionDto) {
         return this.Section_Repository.save(create);
     }
+    async update(section_id: string, updateSection: Sections) {
+        return this.Section_Repository.update(section_id, updateSection);
+    }
 
 }
