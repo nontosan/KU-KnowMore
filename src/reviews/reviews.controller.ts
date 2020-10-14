@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus,Delete, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus,Delete, Param, Post, Put } from '@nestjs/common';
 import { ObjectID } from 'mongodb';
 import { ParseObjectIdPipe } from '../common/pipes';
 
@@ -29,6 +29,11 @@ export class Review_Controller {
   @Delete('/:id')
   deleteReviews(@Param('id') id: string): Promise<void> {
     return this.Service.remove(id);
-}
+  }
+
+  @Put('/:Review_id')
+  async update(@Param('Review_id') Reviews_id: string, @Body() updateReview: Reviews) {
+    return this.Service.update(Reviews_id, updateReview);
+  }
 
 }

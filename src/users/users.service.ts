@@ -22,7 +22,7 @@ export class User_Service {
     async create(createUserDto: CreateUserDto) {
         return this.User_Repository.save(createUserDto);
     }
-    async updateUser(user_id: string, updateUser: CreateUserDto) {
+    async updateUser(user_id: string, updateUser: Users) {
         return this.User_Repository.update(user_id, updateUser);
     }
 
