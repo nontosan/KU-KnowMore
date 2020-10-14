@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Put } from '@nestjs/common';
 import { ObjectID } from 'mongodb';
 import { ParseObjectIdPipe } from '../common/pipes';
 
@@ -19,10 +19,16 @@ export class User_Controller {
   async findUsersID(@Param('user_id', ParseObjectIdPipe) user_id: ObjectID): Promise<Users[]> {
     return this.Service.findUsersID(user_id);
   }
+
   @Post()
   async create(@Body() createuserDto: CreateUserDto) {
     const newComment = this.Service.create(createuserDto);
     return newComment;
+  }
+
+  @Put('/:user_id')
+  async updateUsers(@Param('user_id') user_id: string, @Body() updateUser: Users) {
+    return this.Service.updateUser(user_id, updateUser);
   }
 
 }
