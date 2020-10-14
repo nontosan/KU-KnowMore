@@ -20,18 +20,10 @@ async function createBlog(newBlog: Blog): Promise<Blog|null> {
     }
 }
 
-<<<<<<< HEAD
 async function fetchBlogSpecific(blogid:string): Promise<Blog[]> {
     const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}`);
     const blogInfo = await res.json();
     return blogInfo;  
-=======
-async function fetchBlogSpecific(blogid:string): Promise<Blog> {
-    const api:string = `http://188.166.178.33:3000/blogs/`+blogid
-    const res = await fetch(api);
-    const blog = await res.json();
-    return blog;  
->>>>>>> fdfedf3dbe1799fcc1bc4648f7fdb544e6147884
 }
 
 async function fetchBlogfilter(blogid:string): Promise<Blog[]> {
@@ -42,8 +34,21 @@ async function fetchBlogfilter(blogid:string): Promise<Blog[]> {
     return blog;  
 }
 
+async function fetchKnowledgeBlogs(): Promise<Blog[]> {
+    const res = await fetch(`http://188.166.178.33:3000/blogs/search/?type=1`);
+    const blogs = await res.json();
+    return blogs;  
+}
+
+async function fetchReviewBlogs(): Promise<Blog[]> {
+    const res = await fetch(`http://188.166.178.33:3000/blogs/search/?type=2`);
+    const blogs = await res.json();
+    return blogs;  
+}
+
+
 
 
 export default {
-    fetchBlogs,createBlog,fetchBlogSpecific,fetchBlogfilter,
+    fetchBlogs,createBlog,fetchBlogSpecific,fetchBlogfilter,fetchKnowledgeBlogs,fetchReviewBlogs,
 };

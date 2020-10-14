@@ -11,12 +11,14 @@ import Card from 'react-bootstrap/Card';
 import ProfilePic from './photo/profilepic.png';
 import SearchPic from './photo/Magnify.png';
 
-import Filtermodel from './modals/filter'
+import Filtermodel from './modals/filter';
 
-import Showklinmain from "./components/ShowKnowledgeInMain"
-import CreateKlBlog from "./components/CreateBlogTypeKnowLedge"
-import CreateRwBlog from "./components/CreateBlogTypeReview"
-import SearchFilter from "./components/SearchFilter"
+import Showklinmain from "./components/ShowKnowledgeInMain";
+import CreateKlBlog from "./components/CreateBlogTypeKnowLedge";
+import CreateRwBlog from "./components/CreateBlogTypeReview";
+import SearchFilter from "./components/SearchFilter";
+import ReadBlogKnowledge from './components/ReadBlogKnowledge';
+import ReadBlogReview from './components/ReadBlogReview';
 
 import {
     BrowserRouter as Router,
@@ -25,10 +27,11 @@ import {
     Link,
 } from 'react-router-dom';
 
-import WriteSection from "./components/WriteSection";
+import WriteSection from "./components/Section/WriteSection";
 import CreateEditSection from "./components/CreateEditSection";
 import UserPage from "./components/UserPage";
 import KnowledgeBlog from './components/KnowledgeBlog';
+import ReviewBlog from './components/ReviewBlog';
 
 import './App.css';
 import './components/section.css';
@@ -43,7 +46,7 @@ const App = () => {
                     <Navbar.Brand href="/">KU KNOWMORE</Navbar.Brand>
                     <Nav className="mr-auto">
                     <Nav.Link href="/searchknowledgeblog">KNOWLEDGE BLOG</Nav.Link>
-                    <Nav.Link href="#pricing">REVIEW BLOG</Nav.Link>
+                    <Nav.Link href="/searchreviewblog">REVIEW BLOG</Nav.Link>
                     </Nav>
                     <Form inline >
                         <Link to="/">
@@ -60,12 +63,17 @@ const App = () => {
                 </Navbar>
                 <Switch>
                     <Route path="/myKnowledge/:blogId" name="blogId" component={CreateEditSection}></Route>
+                    <Route path="/readKnowledge/:blogId" name="blogId" component={ReadBlogKnowledge}></Route>
+                    <Route path="/readReview/:blogId" name="blogId" component={ReadBlogReview}></Route>
                     <Route path="/writeSection/:blogId" name="blogId" component={WriteSection}></Route>
                     <Route path="/userpage">
                         <UserPage />
                     </Route>
                     <Route path="/searchknowledgeblog">
                         <KnowledgeBlog />
+                    </Route>
+                    <Route path="/searchreviewblog">
+                        <ReviewBlog />
                     </Route>
                     <Route path="/createklblog">
                         <CreateKlBlog />

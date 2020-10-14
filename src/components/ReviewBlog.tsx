@@ -3,8 +3,6 @@ import { Blog } from '../interfaces/blog';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import BlogsService from '../services/BlogsService';
-import Image from 'react-bootstrap/Image';
-
 
 import {
     Link, Redirect,
@@ -16,11 +14,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
-const KnowledgeBlog = () => {
+const ReviewBlog = () => {
     const [blogs, setBlogs] = useState<Blog[]>([]);
 
     const fetchBlogs = () => {
-        BlogsService.fetchKnowledgeBlogs()
+        BlogsService.fetchReviewBlogs()
             .then(blogs => {
                 console.log(blogs);
                 setBlogs(blogs);
@@ -34,11 +32,13 @@ const KnowledgeBlog = () => {
     return (
         <div>
             <div className="hot-kl">
-                <Card.Header>KNOWLEDGE BLOG</Card.Header>
+                <Card.Header>REVIEW BLOG</Card.Header>
                 {blogs.map(blog => ( 
                     <Link to={`/read${blog.type}/${blog.id}`}>
                         <ListGroup variant="flush" className="show-blog">
-                            <ListGroup.Item>{blog.course_id} {blog.user_id} {blog.type} {blog.viewers} {blog.blog_name} {blog.last_edit}</ListGroup.Item>
+                            <ListGroup.Item>
+                                {blog.course_id} {blog.user_id} {blog.type} {blog.viewers} {blog.blog_name} {blog.last_edit}
+                            </ListGroup.Item>
                         </ListGroup>
                     </Link>
                 ))}
@@ -47,4 +47,4 @@ const KnowledgeBlog = () => {
     );
 }
 
-export default KnowledgeBlog;
+export default ReviewBlog;

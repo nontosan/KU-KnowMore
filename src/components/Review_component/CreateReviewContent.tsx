@@ -5,7 +5,6 @@ import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , d
 //import { reviews,blogs } from '../test_interface/review_interface';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import TextareaAutosize from 'react-textarea-autosize';
 
 //Service
 //import ReviewService from '../test_services/ReviewService';

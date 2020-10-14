@@ -1,17 +1,17 @@
 import React, { useState , Component } from 'react';
-import Photo from './upload';
+import Photo from '../upload';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , draftStateToHTML} from 'react-wysiwyg-typescript';
 
-import SectionService from '../services/SectionService';
+import SectionService from '../../services/SectionService';
 
 import './section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-const WriteSection = (props:any) => {
+const EditSection = (props:any) => {
     const [newSectionName, setNewSectionName] = useState<string>('');
     const [draftstate, setdraftState] = useState<typeof EmptyState>();
 
@@ -62,4 +62,4 @@ const WriteSection = (props:any) => {
     );
 }
 
-export default WriteSection;
+export default EditSection;
