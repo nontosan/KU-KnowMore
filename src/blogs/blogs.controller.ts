@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Query, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Query, Post, Put, Delete } from '@nestjs/common';
 import { ObjectID } from 'mongodb';
 import { ParseObjectIdPipe } from '../common/pipes';
 
@@ -11,6 +11,7 @@ import Comments from '../comments/comments.entity';
 import { CreateBlogDto } from '../dto/create-blog.dto';
 import { CreateReportDto } from '../dto/create-reports.dto';
 import { CreateSectionDto } from '../dto/create-section.dto';
+import { CreateReviewsDto } from '../dto/create-review.dto';
 
 import { Blog_Service } from './blogs.service';
 import { Section_Service } from '../sections/sections.service';
@@ -123,8 +124,27 @@ export class Blog_Controller {
     return this.sectionService.createSections(createSection);
   }
 
-  @Put('/:blog_id/')
+  @Post('/:blog_id/reviews')
+  async createReview(@Param('blog_id') blog_id: string, @Body() createReview: CreateReviewsDto) {
+    createReview.blog_id = blog_id;
+    return this.reviewService.createReviews(createReview);
+  }
+  
+  // --------------------------------------------------------------------------------
+  // ========================              PUT              =========================
+  // --------------------------------------------------------------------------------
+
+  @Put('/:blog_id')
   async updateBlog(@Param('blog_id') blog_id: string, @Body() updateBlog: Blogs) {
     return this.Service.updateBlog(blog_id, updateBlog);
+  }
+
+  // --------------------------------------------------------------------------------
+  // ========================              DELETE            ========================
+  // --------------------------------------------------------------------------------
+
+  @Delete('/:blog_id')
+  async deleteBlog(@Param('blog_id') blog_id: string) {
+    return this.Service.deleteBlog(blog_id);
   }
 }

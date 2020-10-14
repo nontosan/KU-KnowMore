@@ -224,4 +224,12 @@ export class Blog_Service {
     async updateBlog(blog_id: string, updateBlog: Blogs) {
         return this.Blog_Repository.update(blog_id, updateBlog);
     }
+
+    // --------------------------------------------------------------------------------
+    // ========================             DELETE           ==========================
+    // --------------------------------------------------------------------------------
+
+    async deleteBlog(blog_id: string) {
+        return this.Blog_Repository.delete(blog_id);
+    }
 }

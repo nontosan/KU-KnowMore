@@ -17,6 +17,5 @@ export class CreateReviewsDto {
     @IsNotEmpty()
     content: string;
 
-    @IsNotEmpty()
-    blog_id: string;
+    blog_id?: string;
 }
