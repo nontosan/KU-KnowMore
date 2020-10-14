@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, Query, Post } from '@nestjs/common';
+import { CreateLikeDto } from 'src/dto/create-like.dto';
 
 import Likes from './likes.entity';
 

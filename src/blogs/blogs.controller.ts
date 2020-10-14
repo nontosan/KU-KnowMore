@@ -13,6 +13,7 @@ import { CreateReportDto } from '../dto/create-reports.dto';
 import { CreateSectionDto } from '../dto/create-section.dto';
 import { CreateReviewsDto } from '../dto/create-review.dto';
 import { CreateCommentsDto } from '../dto/create-comments.dto';
+import { CreateLikeDto } from '../dto/create-like.dto';
 
 import { Blog_Service } from './blogs.service';
 import { Section_Service } from '../sections/sections.service';
@@ -135,6 +136,12 @@ export class Blog_Controller {
   async createComment(@Param('blog_id') blog_id: string, @Body() createComment: CreateCommentsDto) {
     createComment.blog_id = blog_id;
     return this.commentService.create(createComment);
+  }
+
+  @Post('/:blog_id/likes')
+  async postLike(@Param('blog_id') blog_id: string, @Body() likeDto: CreateLikeDto) {
+    likeDto.blog_id = blog_id;
+    return this.likeService.postLike(likeDto);
   }
 
   // --------------------------------------------------------------------------------
