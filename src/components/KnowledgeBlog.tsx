@@ -41,10 +41,10 @@ const KnowledgeBlog = () => {
                 {blogs.map(blog => ( 
                     <div>
                         <Link to={`/read${blog.type}/${blog.id}`}>
-                            <ListGroup variant="flush" className="show-blog">
-                                <ListGroup.Item>{blog.id} {blog.course_id} {blog.user_id} {blog.type} {blog.viewers} {blog.blog_name} {blog.last_edit}</ListGroup.Item>
-                            </ListGroup>        
+                            {blog.id} {blog.course_id} {blog.user_id} {blog.type} {blog.viewers} {blog.blog_name} {blog.last_edit}       
                         </Link>
+                        <Button variant="outline-danger">DELETE</Button>
+                        <Button variant="outline-warning">EDIT</Button>
                     </div>
                 ))}
             </div>

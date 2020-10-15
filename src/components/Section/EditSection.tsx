@@ -1,4 +1,4 @@
-import React, { useState , Component, HtmlHTMLAttributes } from 'react';
+import React, { useState , useEffect , Component } from 'react';
 import Photo from '../upload';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -9,41 +9,59 @@ import SectionService from '../../services/SectionService';
 
 import '../section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Section } from '../../interfaces';
 import { convertToRaw, EditorState } from 'draft-js';
+import { type } from 'os';
+import { convertToObject } from 'typescript';
 
 
 const EditSection = (props:any) => {
-    const [newSectionName, setNewSectionName] = useState<string>('');
-    const [draftstate, setdraftState] = useState(EditorState.createEmpty());
+    const [sectionsInformation, setSectionsInformation] = useState<Section[]>([]);
+    const [afterFetch, setafterFetch] = useState<boolean>(false);
+    const [displayHTML, setDisplayHTML] = useState<any>();
+    const sectionId = (props.match.params.sectionId);
+    const [stateCheck, setstateCheck] = useState<boolean>(false);
+    const [draftedstate, setdraftedState] = useState(EditorState.createEmpty());
 
-    const blogId = (props.match.params.blogId)
-
-    const handleNewSectionNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setNewSectionName(e.target.value);
-    };
+    const fetchSection = () => {
+        SectionService.fetchSectionsSpecific(sectionId)
+            .then(sectioninfo => {
+                setSectionsInformation(sectioninfo);
+                setstateCheck(true);
+            })
+    }
+    const initdraft = () => {
+        const draftstate = sectionsInformation[0].content;
+        const drrrr = rawToDraft(JSON.stringify(draftstate));
+        console.log(drrrr);
+        setdraftedState(drrrr!);
+        const markup = draftToHtml(
+            draftstate, 
+        );
+        console.log(markup);
+        setDisplayHTML(markup);
+    }
     
-    const handleSectionSave = () => {
-        const writeSection = {
-            section_name: newSectionName,
-            content: rawContentState,
-            blog_id: blogId,
-        };
+    useEffect(() => {
+        fetchSection();
+    },[])
 
-        SectionService.createSection(blogId ,writeSection)
-            .then(savedWriteSection => {
-                if (savedWriteSection !== null) {
-                    alert("Save Success");
-                } else{
-                    alert("Save Error");
-                }
-            });
-    };
+    useEffect(() => {
+        if (stateCheck !== false){
+            initdraft();
+            setafterFetch(!afterFetch);
+        }
+    },[stateCheck])
 
-    const rawContentState = convertToRaw(draftstate.getCurrentContent());
-
-    const markup = draftToHtml(
-        rawContentState, 
-      );
+    useEffect(() => {
+        if (draftedstate !== EmptyState){
+            //console.log(JSON.stringify(draftstate));
+        }
+    },[draftedstate])
+    //useEffect( () => {
+    //    initdraft();
+    //    setafterFetch(!afterFetch);
+    //},[sectionsInformation])
 
     return (
         <div>
@@ -51,25 +69,19 @@ const EditSection = (props:any) => {
                 <InputGroup.Prepend >
                     <InputGroup.Text id="inputGroup-sizing-lg">Section Name</InputGroup.Text>
                 </InputGroup.Prepend>
-                <FormControl aria-label="Large" aria-describedby="inputGroup-sizing-sm" value={newSectionName} onChange={handleNewSectionNameChange}/>
             </InputGroup>
+            {afterFetch &&
+                <div className="div-sectionname" dangerouslySetInnerHTML={{__html: displayHTML}} />
+            }
             <div className="div-sectionname">
                 <Draft 
                     onEditorStateChange={
                         (draftstate) => {
-                            setdraftState(draftstate);
-                            console.log(rawContentState);
+                            setdraftedState(draftstate);
+                            console.log(JSON.stringify(draftstate));
                         }
                     }
                 />
-            </div>
-            <div dangerouslySetInnerHTML={{__html: markup}} />
-            <div className="div-sectionname">
-                <Photo />
-            </div>
-            <div className="div-sectionname">
-                <Button className="cancel-button" variant="outline-secondary">Cancel</Button>
-                <Button className="submit-button" variant="outline-secondary" onClick={handleSectionSave}>Submit</Button>
             </div>
         </div>
     );

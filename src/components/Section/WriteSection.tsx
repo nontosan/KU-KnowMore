@@ -10,6 +10,8 @@ import SectionService from '../../services/SectionService';
 import '../section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { convertToRaw, EditorState } from 'draft-js';
+import { convertToObject } from 'typescript';
+import { reverse } from 'dns';
 
 
 const WriteSection = (props:any) => {
@@ -42,7 +44,6 @@ const WriteSection = (props:any) => {
 
 
     const rawContentState = convertToRaw(draftstate.getCurrentContent());
-
     return (
         <div>
             <InputGroup size="lg" className="div-sectionname">

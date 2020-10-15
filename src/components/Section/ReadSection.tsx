@@ -12,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Section } from '../../interfaces';
 import { convertToRaw, EditorState } from 'draft-js';
 import { type } from 'os';
+import { convertToObject } from 'typescript';
 
 
 const ReadSection = (props:any) => {
@@ -29,8 +30,7 @@ const ReadSection = (props:any) => {
             })
     }
     const initdraft = () => {
-        const draftstate = sectionsInformation[0].content
-
+        const draftstate = sectionsInformation[0].content;
         const markup = draftToHtml(
             draftstate, 
         );
