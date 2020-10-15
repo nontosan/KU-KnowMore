@@ -26,7 +26,7 @@ import {
 } from 'react-router-dom';
 
 import WriteSection from "./components/WriteSection";
-import CreateEditSection from "./components/createeditsection";
+import CreateEditSection from "./components/CreateEditSection";
 import UserPage from "./components/UserPage";
 import KnowledgeBlog from './components/KnowledgeBlog';
 
@@ -60,7 +60,7 @@ const App = () => {
                 </Navbar>
                 <Switch>
                     <Route path="/myKnowledge/:blogId" name="blogId" component={CreateEditSection}></Route>
-                    <Route path="/writesection/:blogId" name="blogId" component={WriteSection}></Route>
+                    <Route path="/writeSection/:blogId" name="blogId" component={WriteSection}></Route>
                     <Route path="/userpage">
                         <UserPage />
                     </Route>
@@ -81,7 +81,7 @@ const App = () => {
                             <Filtermodel />
                         </div>
                         <div className="hot-kl">
-                            <Card.Header>KNOEWLEDGE BLOG</Card.Header>
+                            <Card.Header>KNOWLEDGE BLOG</Card.Header>
                             <ListGroup variant="flush" className="show-blog">
                                 <ListGroup.Item>Cras justo odio</ListGroup.Item>
                                 <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>

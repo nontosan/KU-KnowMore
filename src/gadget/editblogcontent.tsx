@@ -28,19 +28,39 @@ const EditBlogContent=(props:any)=> {
   
   const changeBlogName=(a:string)=>{
     setNameblog(a)
-    setVisibleEdit(true)
+    if(Nameblog!=null){
+      setVisibleEdit(true)
+    }
+    else{
+      setVisibleEdit(false)
+    }
   }
   const changeClassId=(a:string)=>{
     setIDclass(a)
-    setVisibleEdit(true)
+    if(Nameblog!=null){
+      setVisibleEdit(true)
+    }
+    else{
+      setVisibleEdit(false)
+    }
   }
   const changeClassName=(a:string)=>{
     setNameclass(a)
-    setVisibleEdit(true)
+    if(Nameblog!=null){
+      setVisibleEdit(true)
+    }
+    else{
+      setVisibleEdit(false)
+    }
   }
   const changeTeacherName=(a:string)=>{
     setNameteacher(a)
-    setVisibleEdit(true)
+    if(Nameblog!=null){
+      setVisibleEdit(true)
+    }
+    else{
+      setVisibleEdit(false)
+    }
   }
   const handleEdit = () => {
     console.log("edit")
@@ -67,7 +87,7 @@ const EditBlogContent=(props:any)=> {
                 ชื่อวิชา
         </div>
         <div className="Blog_name2">
-          <input type="text " onChange={(e:any)=>changeClassName(e)}/>
+          <input type="text "  onChange={(e:any)=>changeClassName(e)}/>
         </div>
       </div>
       <div className="Blog_frame2">
