@@ -46,8 +46,13 @@ const CreateKlBlog=()=> {
 
   useEffect(() => {
     if (UrlLink !== ""){
+<<<<<<< HEAD
+      //console.log(UrlLink);
+      setFormVisible(!formVisible);
+=======
       console.log(UrlLink);
       setafterSave(!afterSave);
+>>>>>>> 70f9acacb18d292f1b5fd21ee8056f704c4e35c8
     }
   },[UrlLink]);
 

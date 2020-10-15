@@ -7,6 +7,7 @@ import Image from 'react-bootstrap/Image';
 import { Blog }from '../interfaces/blog'
 import AddSection from '../photo/addsection.png';
 import BlogsService from "../services/BlogsService"
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,6 +17,7 @@ import {
 
 import './section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import EditBlogContent from '../gadget/editblogcontent';
 
 type editsection={
   section:Section_Edit
@@ -25,6 +27,20 @@ type blogidformpagebefore={
 }
 const CreateEditSection = (props:any) => {
   const [sections,setsections] = useState<Section_Edit[]>([])
+<<<<<<< HEAD
+  const [blogs,setting] = useState<Blog[]>([])
+  
+  //console.log(props.match.params)
+  const blogIdqq = props.match.params.blogId
+  
+  //fetch blog from database
+  const fetchBlogs = ()=>{
+    BlogsService.fetchBlogSpecific(blogIdqq.toString())
+    .then(blog => {
+    setting(blog)
+    console.info(blog)
+    });
+=======
   const [blogsInfomation,setBlogsInfomation] = useState<Blog[]>([])
   
   console.log(props.match.params)
@@ -37,6 +53,7 @@ const CreateEditSection = (props:any) => {
         setBlogsInfomation(blogInfo);
         console.log(blogInfo);
       });
+>>>>>>> 70f9acacb18d292f1b5fd21ee8056f704c4e35c8
   }
 
   //function fetch section form database
@@ -62,6 +79,17 @@ const CreateEditSection = (props:any) => {
   //refreh
   useEffect(()=>{
     fetchBlogs();
+<<<<<<< HEAD
+    console.log("refresh")
+    console.log("hello")
+    console.log(blogs);
+  },[])
+  //<EditBlogContent blog={blogs}/>
+  return (
+    <div>
+      {blogIdqq}
+      {blogs}
+=======
   },[])
 
   return (
@@ -72,6 +100,7 @@ const CreateEditSection = (props:any) => {
           <h3>Course ID : {blogInfomation.course_id}</h3>
         </div>
       ))}
+>>>>>>> 70f9acacb18d292f1b5fd21ee8056f704c4e35c8
       <div>
         {sections.map(item=>(
           <div>
