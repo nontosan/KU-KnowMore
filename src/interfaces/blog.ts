@@ -1,3 +1,5 @@
+import { RawDraftContentState } from "draft-js";
+
 export interface Blog{
     id?: string;
     user_id: string;

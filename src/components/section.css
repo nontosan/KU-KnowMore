@@ -60,3 +60,16 @@
     color: rgb(153, 153, 153);
     border-bottom: rgba(0,0,0,.125) solid 1px;
 }
+
+.link-no-border{
+    border: 0px;
+}
+
+.bg-black{
+    background-color: black;
+}
+
+.likebar-pic{
+    height: 33px;
+    width: 33px;
+}

@@ -1,19 +1,20 @@
-import React, { useState , Component } from 'react';
-import Photo from './upload';
+import React, { useState , Component, HtmlHTMLAttributes } from 'react';
+import Photo from '../upload';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , draftStateToHTML} from 'react-wysiwyg-typescript';
 
-import SectionService from '../services/SectionService';
+import SectionService from '../../services/SectionService';
 
-import './section.css';
+import '../section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { convertToRaw, EditorState } from 'draft-js';
 
 
-const WriteSection = (props:any) => {
+const EditSection = (props:any) => {
     const [newSectionName, setNewSectionName] = useState<string>('');
-    const [draftstate, setdraftState] = useState<typeof EmptyState>();
+    const [draftstate, setdraftState] = useState(EditorState.createEmpty());
 
     const blogId = (props.match.params.blogId)
 
@@ -23,12 +24,12 @@ const WriteSection = (props:any) => {
     
     const handleSectionSave = () => {
         const writeSection = {
-            sectionname: newSectionName,
-            content: draftstate,
-            blogId: blogId,
+            section_name: newSectionName,
+            content: rawContentState,
+            blog_id: blogId,
         };
 
-        SectionService.createSection(writeSection)
+        SectionService.createSection(blogId ,writeSection)
             .then(savedWriteSection => {
                 if (savedWriteSection !== null) {
                     alert("Save Success");
@@ -37,6 +38,12 @@ const WriteSection = (props:any) => {
                 }
             });
     };
+
+    const rawContentState = convertToRaw(draftstate.getCurrentContent());
+
+    const markup = draftToHtml(
+        rawContentState, 
+      );
 
     return (
         <div>
@@ -48,9 +55,15 @@ const WriteSection = (props:any) => {
             </InputGroup>
             <div className="div-sectionname">
                 <Draft 
-                    onEditorStateChange={(editorState) => {setdraftState(draftstate);}}
+                    onEditorStateChange={
+                        (draftstate) => {
+                            setdraftState(draftstate);
+                            console.log(rawContentState);
+                        }
+                    }
                 />
             </div>
+            <div dangerouslySetInnerHTML={{__html: markup}} />
             <div className="div-sectionname">
                 <Photo />
             </div>
@@ -62,4 +75,4 @@ const WriteSection = (props:any) => {
     );
 }
 
-export default WriteSection;
+export default EditSection;
