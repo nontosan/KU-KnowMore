@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { MulterModule } from '@nestjs/platform-express';
 
 import { Blog_Controller } from './blogs.controller';
 import { Blog_Service } from './blogs.service';
@@ -22,6 +23,7 @@ import { Report_Module } from 'src/reports/reports.module';
         Like_Module,
         CommentsModule,
         Report_Module,
+        MulterModule.register({ dest: './attachments' })
     ],
     controllers: [Blog_Controller],
     providers: [Blog_Service],

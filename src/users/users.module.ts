@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { MulterModule } from '@nestjs/platform-express';
 
 import { User_Controller } from './users.controller';
 import { User_Service } from './users.service';
@@ -8,7 +9,8 @@ import Users from './users.entity';
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([Users])
+        TypeOrmModule.forFeature([Users]),
+        MulterModule.register({ dest: './profile_pic' })
     ],
     controllers: [User_Controller],
     providers: [User_Service]

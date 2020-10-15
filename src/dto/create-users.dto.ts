@@ -7,12 +7,10 @@ export class CreateUserDto {
     @IsNotEmpty()
     profile_description: string;
     
-    @IsNotEmpty()
-    pic_name: string;
+    pic_name?: string;
     
     @IsNotEmpty()
     username: string;
     
-    @IsNotEmpty()
-    pic_dir: string;
+    pic_dir?: string;
 }

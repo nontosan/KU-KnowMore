@@ -1,4 +1,5 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { ObjectID } from 'mongodb';
 import { ParseObjectIdPipe } from '../common/pipes';
 
@@ -19,13 +20,20 @@ export class User_Controller {
   async findUsersID(@Param('user_id', ParseObjectIdPipe) user_id: ObjectID): Promise<Users[]> {
     return this.Service.findUsersID(user_id);
   }
-
+  
   @Post()
-  async create(@Body() createuserDto: CreateUserDto) {
-    const newComment = this.Service.create(createuserDto);
-    return newComment;
+  @UseInterceptors(FileInterceptor('profile_pic'))
+  async create(@Body() createuserDto: CreateUserDto, @UploadedFile() profile_pic) {
+    var newCreateUserDto: CreateUserDto = {
+      "name": createuserDto.name,
+      "pic_dir":profile_pic.path,
+      "pic_name": profile_pic.filename,
+      "profile_description": createuserDto.profile_description,
+      "username": createuserDto.username
+    };
+    return this.Service.create(newCreateUserDto);
   }
-
+  
   @Put('/:user_id')
   async updateUsers(@Param('user_id') user_id: string, @Body() updateUser: Users) {
     return this.Service.updateUser(user_id, updateUser);

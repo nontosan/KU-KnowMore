@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Param, Query, Post, Put, Delete } from '@nestjs/common';
+import { Body, Controller, Get, Param, Query, Post, Put, Delete, UseInterceptors, UploadedFiles } from '@nestjs/common';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { ObjectID } from 'mongodb';
 import { ParseObjectIdPipe } from '../common/pipes';
 
@@ -120,10 +121,14 @@ export class Blog_Controller {
   }
 
   @Post('/:blog_id/sections')
-  async createSection(@Param('blog_id') blog_id: string, @Body() createSection: CreateSectionDto) {
-    createSection.blog_id = blog_id;
-    console.log(createSection);
-    return this.sectionService.createSections(createSection);
+  @UseInterceptors(FilesInterceptor('attachments_upload'))
+  async createSection(@Param('blog_id') blog_id: string, @Body() createSection: CreateSectionDto, @UploadedFiles() attachments_upload) {
+    var newCreateSection: CreateSectionDto = {
+      "blog_id": blog_id,
+      "content": createSection.content,
+      "section_name": createSection.section_name
+    }
+    return this.sectionService.createSections(newCreateSection, attachments_upload);
   }
 
   @Post('/:blog_id/reviews')

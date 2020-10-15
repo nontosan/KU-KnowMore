@@ -6,4 +6,5 @@ WORKDIR /root/data/backend
 COPY . .
 
 RUN npm install
+
 CMD [ "npm", "run", "start:dev" ]
