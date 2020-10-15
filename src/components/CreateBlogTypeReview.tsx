@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Blog, } from '../interfaces/blog';
+import { Blog,Review } from '../interfaces/blog';
 
 import Input_Nameblog from './createblog_component/input_nameblog';
 import Input_Idclass from './createblog_component/input_idclass';
@@ -17,12 +17,22 @@ import {
 } from 'react-router-dom';
 
 import BlogsService from '../services/BlogsService';
+import { EmptyState } from 'react-wysiwyg-typescript';
+import { convertToRaw } from 'draft-js';
 
 const CreateRwBlog=()=> {
   const [Nameblog, setNameblog]=useState("");
   const [Nameteacher, setNameteacher]=useState("");
   const [IDclass, setIDclass]=useState("");
   const [Nameclass, setNameclass]=useState("");
+  // State from CreateReviewContent
+  const [teachScore, setTeachScore] = useState(0);
+  const [workScore, setWorkScore] = useState(0);
+  const [roomScore, setRoomScore] = useState(0);
+  const [overallScore, setOverallScore] = useState(0);
+  const [draftstate, setdraftState] = useState<typeof EmptyState>();
+  // Etc
+  const [blogID, setBlogID] = useState("");
 
   const handleNewBlogSave = () => {
     const newBlog: Blog = {
@@ -34,12 +44,39 @@ const CreateRwBlog=()=> {
     BlogsService.createBlog(newBlog) 
       .then(savedNewBlog => {
         if (savedNewBlog !== null) {
-          alert("Save Success");
+          alert("Save Blog Success");
+          if(savedNewBlog.id){
+            setBlogID(savedNewBlog.id);
+          }
         } else{
           alert("Save Error");
         }
       });
   };
+
+  const handleNewReviewSave = (blogid : string) => {
+    const newReview: Review = {
+      blog_id: blogid,
+      teaching: teachScore,
+      hw: workScore,
+      classroom: roomScore,
+      overall: overallScore,
+      content: draftstate,
+    };
+    BlogsService.createReview(newReview,blogid) 
+      .then(savedNewReview => {
+        if (savedNewReview !== null) {
+          alert("Save Review Success");
+        } else{
+          alert("Save Error");
+        }
+      });
+  }
+
+  const handleSave = () => {
+    handleNewBlogSave();
+    handleNewReviewSave(blogID);
+  }
   
   return (
     <div className="bg_color">
@@ -53,20 +90,29 @@ const CreateRwBlog=()=> {
       <Input_Nameteacher setNameteacher={setNameteacher} />
     </div>
     <div className="Blog_Content">
-      <CreateReviewContent blog_type={"create"} />
+      <CreateReviewContent 
+        blog_type={"create"} 
+        setTeachScore={setTeachScore} 
+        setWorkScore={setWorkScore} 
+        setRoomScore={setRoomScore} 
+        setOverallScore={setOverallScore} 
+        setdraftState={setdraftState} 
+      />
     </div>
       <div className="Confirm"> 
         <Link to="/">
           <div className="Cancel">
-            <Button variant="danger"> Cancel </Button>
+            <Button className="cancel-button" variant="danger">Cancel</Button>
           </div>
         </Link>
         <Link to="/writesection/1234">
           <div className="Submit">
-            <Button variant="success" onClick={handleNewBlogSave}> Submit </Button>
+            <Button className="submit-button" variant="success" onClick={handleNewBlogSave}>Submit</Button>
           </div>
         </Link>
       </div>
+       <div className="div-button">
+        </div>
     </div>
 
   );

@@ -16,24 +16,16 @@ import './CreateReviewContent.css';
 import EditBlogScoreSlider from './EditBlogScoreSlider';
 import { convertToRaw } from 'draft-js';
 
-type BlogReview = {
-    blog_type : string;
-}
-
 
 // NewReview Parent Component
-const CreateBlogReview = (props : BlogReview) => {
+const CreateBlogReview = (props : any) => {
     const [teachScore, setTeachScore] = useState(0);
     const [workScore, setWorkScore] = useState(0);
     const [roomScore, setRoomScore] = useState(0);
     const [overallScore, setOverallScore] = useState(0);
     const [draftstate, setdraftState] = useState<typeof EmptyState>();
-    const [status, setStatus] = useState(false);
 
     
-    const send = () => {
-        setStatus(true)
-    }
 
     useEffect(() => {
         /*
@@ -72,21 +64,13 @@ const CreateBlogReview = (props : BlogReview) => {
         // return value to parent to router
     }
 
-    const call = () => {
-        alert((draftstate?.getCurrentContent())?.getBlockMap().toOrderedMap())
-        alert(teachScore)
-        alert(workScore)
-        alert(roomScore)
-        alert(overallScore)      
-    } 
-
 
     return (
         <div>
             <div className ="div-content" >
                 <Draft 
                     placeholder={"เขียนรีวิวที่นี้"}
-                    onEditorStateChange={(editorState) => {setdraftState(editorState);}}
+                    onEditorStateChange={(editorState) => {props.setdraftState(editorState);}}
                 />
             </div>
         
@@ -97,7 +81,7 @@ const CreateBlogReview = (props : BlogReview) => {
                             <label className="label">สอนได้เข้าใจ</label>
                         </Col>
                         <Col>
-                            <EditBlogScoreSlider setParentScore={setTeachScore} sending={status}/>
+                            <EditBlogScoreSlider setParentScore={props.setTeachScore} />
                         </Col>
                     </Row>
                 </Container>
@@ -109,7 +93,7 @@ const CreateBlogReview = (props : BlogReview) => {
                             <label className="label">จำนวนงาน</label>
                         </Col>
                         <Col>
-                            <EditBlogScoreSlider setParentScore={setWorkScore} sending={status}/>
+                            <EditBlogScoreSlider setParentScore={props.setWorkScore} />
                         </Col>
                     </Row>
                 </Container>
@@ -121,7 +105,7 @@ const CreateBlogReview = (props : BlogReview) => {
                             <label className="label">ความสำคัญในการเข้าเรียน</label>
                         </Col>
                         <Col >
-                            <EditBlogScoreSlider setParentScore={setRoomScore} sending={status}/>
+                            <EditBlogScoreSlider setParentScore={props.setRoomScore}/>
                         </Col>
                     </Row>
                 </Container>
@@ -133,17 +117,10 @@ const CreateBlogReview = (props : BlogReview) => {
                             <label className="label">ภาพรวม</label>
                         </Col>
                         <Col>
-                            <EditBlogScoreSlider setParentScore={setOverallScore} sending={status}/>
+                            <EditBlogScoreSlider setParentScore={props.setOverallScore} />
                         </Col>
                     </Row>
                 </Container>
-            </div>
-            <div className="div-button">
-                <Button className="cancel-button" variant="outline-secondary">Cancel</Button>
-                <Button className="submit-button" variant="outline-secondary" onClick={creatingBlog}>Submit</Button>
-            </div>
-            <div className ="div-content">
-                <button onClick={call}>test_state</button>
             </div>
         </div>
     )
