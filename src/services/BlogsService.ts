@@ -46,9 +46,17 @@ async function fetchReviewBlogs(): Promise<Blog[]> {
     return blogs;  
 }
 
+async function deleteBlog(blogid:string): Promise<string> {
+    const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}`,{
+        method: 'DELETE',
+    });
+    const blogs = await res.json();
+    return blogs;  
+}
 
 
 
 export default {
     fetchBlogs,createBlog,fetchBlogSpecific,fetchBlogfilter,fetchKnowledgeBlogs,fetchReviewBlogs,
+    deleteBlog,
 };

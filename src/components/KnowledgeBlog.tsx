@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import BlogsService from '../services/BlogsService';
 import Image from 'react-bootstrap/Image';
+import Button from 'react-bootstrap/Button';
 
 
 import {
@@ -27,6 +28,8 @@ const KnowledgeBlog = () => {
                 console.log(blogs);
             });
     };
+
+
     useEffect(() => {
         console.log(blogs);
         fetchBlogs();
@@ -36,11 +39,13 @@ const KnowledgeBlog = () => {
             <div className="hot-kl">
                 <Card.Header>KNOWLEDGE BLOG</Card.Header>
                 {blogs.map(blog => ( 
-                    <Link to={`/read${blog.type}/${blog.id}`}>
-                        <ListGroup variant="flush" className="show-blog">
-                            <ListGroup.Item>{blog.id} {blog.course_id} {blog.user_id} {blog.type} {blog.viewers} {blog.blog_name} {blog.last_edit}</ListGroup.Item>
-                        </ListGroup>
-                    </Link>
+                    <div>
+                        <Link to={`/read${blog.type}/${blog.id}`}>
+                            <ListGroup variant="flush" className="show-blog">
+                                <ListGroup.Item>{blog.id} {blog.course_id} {blog.user_id} {blog.type} {blog.viewers} {blog.blog_name} {blog.last_edit}</ListGroup.Item>
+                            </ListGroup>        
+                        </Link>
+                    </div>
                 ))}
             </div>
         </div>

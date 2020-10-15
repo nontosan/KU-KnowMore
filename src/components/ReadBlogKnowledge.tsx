@@ -6,6 +6,7 @@ import { Blog }from '../interfaces/blog';
 import { Section } from '../interfaces';
 import AddSection from '../photo/addsection.png';
 import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 // IMPORT SERVICE //
 import BlogsService from "../services/BlogsService";
@@ -73,7 +74,9 @@ const ReadBlogKnowledge = (props:any) => {
         {sectionsInformation.map(item=>(
           <div>
             <Link to={`/readSection/${item.id}`}>
-              <button><strong>{item.section_name}</strong> {item.blog_id} {item.id}</button>
+              <ListGroup variant="flush" className="show-blog">
+                <ListGroup.Item><strong>{item.section_name}</strong> {item.blog_id} {item.id}</ListGroup.Item>
+              </ListGroup>
             </Link>
           </div>
         ))}

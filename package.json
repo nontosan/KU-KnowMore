@@ -20,6 +20,7 @@
     "react-draft-wysiwyg": "^1.14.5",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
+    "react-searchable-dropdown": "^1.2.5",
     "react-textarea-autosize": "^8.2.0",
     "react-wysiwyg-typescript": "^1.0.2",
     "typescript": "^3.8.3"

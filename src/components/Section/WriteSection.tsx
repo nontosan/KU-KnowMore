@@ -43,10 +43,6 @@ const WriteSection = (props:any) => {
 
     const rawContentState = convertToRaw(draftstate.getCurrentContent());
 
-    const markup = draftToHtml(
-        rawContentState, 
-      );
-
     return (
         <div>
             <InputGroup size="lg" className="div-sectionname">
@@ -61,12 +57,10 @@ const WriteSection = (props:any) => {
                         (draftstate) => {
                             setdraftState(draftstate);
                             console.log(draftstate);
-                            console.log(typeof(draftstate));
                         }
                     }
                 />
             </div>
-            <div dangerouslySetInnerHTML={{__html: markup}} />
             <div className="div-sectionname">
                 <Photo />
             </div>

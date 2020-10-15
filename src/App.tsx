@@ -57,7 +57,7 @@ const App = () => {
                             <NavDropdown.Item href="/createklblog">Create Knowledge</NavDropdown.Item>
                             <NavDropdown.Item href="/createrwblog">Create Review</NavDropdown.Item>
                         </NavDropdown>
-                        <Link to="/userpage">
+                        <Link to="/userpage/5f82fd5504eb8600aa617b6b">
                             <Image className="profile-pic" src={ProfilePic} roundedCircle />
                         </Link>
                     </Form>
@@ -68,9 +68,7 @@ const App = () => {
                     <Route path="/readReview/:blogId" name="blogId" component={ReadBlogReview}></Route>
                     <Route path="/writeSection/:blogId" name="blogId" component={WriteSection}></Route>
                     <Route path="/readSection/:sectionId" name="sectionId" component={ReadSection}></Route>
-                    <Route path="/userpage">
-                        <UserPage />
-                    </Route>
+                    <Route path="/userpage/:userId" name="userId" component={UserPage}></Route>
                     <Route path="/searchknowledgeblog">
                         <KnowledgeBlog />
                     </Route>

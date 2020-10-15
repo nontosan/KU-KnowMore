@@ -59,6 +59,7 @@
 .show-blog{
     color: rgb(153, 153, 153);
     border-bottom: rgba(0,0,0,.125) solid 1px;
+    width: 80%;
 }
 
 .link-no-border{
@@ -72,4 +73,8 @@
 .likebar-pic{
     height: 33px;
     width: 33px;
+}
+
+.delete-button{
+    float: left;
 }
