@@ -32,7 +32,6 @@ const CreateRwBlog=()=> {
   const [overallScore, setOverallScore] = useState(0);
   const [draftstate, setdraftState] = useState<typeof EmptyState>();
   // Etc
-  const [blogID, setBlogID] = useState("");
 
   const handleNewBlogSave = () => {
     const newBlog: Blog = {
@@ -46,7 +45,8 @@ const CreateRwBlog=()=> {
         if (savedNewBlog !== null) {
           alert("Save Blog Success");
           if(savedNewBlog.id){
-            setBlogID(savedNewBlog.id);
+            alert(savedNewBlog.id);
+            handleNewReviewSave(savedNewBlog.id);
           }
         } else{
           alert("Save Error");
@@ -73,11 +73,6 @@ const CreateRwBlog=()=> {
       });
   }
 
-  const handleSave = () => {
-    handleNewBlogSave();
-    handleNewReviewSave(blogID);
-  }
-  
   return (
     <div className="bg_color">
       <div className="header_word">
@@ -107,7 +102,7 @@ const CreateRwBlog=()=> {
         </Link>
         <Link to="/writesection/1234">
           <div className="Submit">
-            <Button className="submit-button" variant="success" onClick={handleSave}>Submit</Button>
+            <Button className="submit-button" variant="success" onClick={handleNewBlogSave}>Submit</Button>
           </div>
         </Link>
       </div>
