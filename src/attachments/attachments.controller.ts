@@ -19,13 +19,6 @@ export class Attachment_Controller {
   async findCommentsID(@Param('atm_id', ParseObjectIdPipe) atm_id: ObjectID): Promise<Attachments[]> {
     return this.Service.find(atm_id);
   }
-  /*
-  @Post()
-  async create(@Body() createCommentsDto: CreateCommentsDto) {
-    createCommentsDto.date_time = this.Service.getDate();
-    const newComment = this.Service.create(createCommentsDto);
-    return newComment;
-  }*/
 
   @Delete('/:id')
   async delete(@Param('id') id: string): Promise<void> {
