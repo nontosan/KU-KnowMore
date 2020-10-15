@@ -107,7 +107,7 @@ const CreateRwBlog=()=> {
         </Link>
         <Link to="/writesection/1234">
           <div className="Submit">
-            <Button className="submit-button" variant="success" onClick={handleNewBlogSave}>Submit</Button>
+            <Button className="submit-button" variant="success" onClick={handleSave}>Submit</Button>
           </div>
         </Link>
       </div>
