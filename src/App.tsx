@@ -7,35 +7,28 @@ import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Card from 'react-bootstrap/Card';
-
 import ProfilePic from './photo/profilepic.png';
 import SearchPic from './photo/Magnify.png';
-
-
-
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     Link,
-} from 'react-router-dom';
-
-
+} 
+from 'react-router-dom';
 import ProfileAdmin from "./components/ProfileAdmin";
-
-
 import './App.css';
 import './components/section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { fetchreport } from './Fetch/FetchReport';
+import FetchReport from './Fetch/FetchReport';
 
 const App = () =>
 {
+  
   return(
-  <div> 
-    
+  <div>
     <ProfileAdmin />
-    
+    <FetchReport />
   </div>
   )
 }
