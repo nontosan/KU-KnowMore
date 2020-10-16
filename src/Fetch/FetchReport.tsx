@@ -10,7 +10,7 @@ const FetchReport = () => {
         const res =  await fetch("http://188.166.178.33:3000/reports/")
         res
             .json()
-            .then(res => setReport(res.id))
+            .then(res => setReport(res))
             .catch(err => setErrors(err))
     }
 
@@ -20,7 +20,7 @@ const FetchReport = () => {
 
     return(
         <div>
-            {JSON.stringify(reportedBlog)}
+            {JSON.stringify(reportedBlog)[0]}
             {console.log(reportedBlog)}
             <br/>
             {JSON.stringify(hasError)}
