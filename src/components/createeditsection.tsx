@@ -4,9 +4,10 @@ import { Section_Edit } from '../interfaces/SectionEdit';
 import  loadeditsection from "../services/loadeditsection";
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
+import { Section } from '../interfaces';
+import ListGroup from 'react-bootstrap/ListGroup';
 import { Blog }from '../interfaces/blog'
 import AddSection from '../photo/addsection.png';
-import BlogsService from "../services/BlogsService"
 
 import {
   BrowserRouter as Router,
@@ -14,6 +15,9 @@ import {
   Route,
   Link,
 } from 'react-router-dom';
+
+import BlogsService from "../services/BlogsService"
+import SectionService from "../services/SectionService";
 
 import './section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -26,12 +30,13 @@ type blogidformpagebefore={
   blog_id:string
 }
 const CreateEditSection = (props:any) => {
+  const [sectionsInformation, setSectionsInformation] = useState<Section[]>([]);
   const [sections,setsections] = useState<Section_Edit[]>([])
   const [blogsInfomation,setBlogsInfomation] = useState<Blog[]>([])
   
   console.log(props.match.params)
   const blogId = props.match.params.blogId
-  
+
   //fetch blog from database
   const fetchBlogs = () => {
     BlogsService.fetchBlogSpecific(blogId)
@@ -41,9 +46,11 @@ const CreateEditSection = (props:any) => {
       });
   }
 
-  //function fetch section form database
-  const fetchsection=()=>{
-
+  const fetchsection = () => {
+    SectionService.fetchSections(blogId)
+      .then(Arraysections => {
+        setSectionsInformation(Arraysections);
+      });
   }
 
   //delete section  
@@ -64,16 +71,20 @@ const CreateEditSection = (props:any) => {
   //refreh
   useEffect(()=>{
     fetchBlogs();
+    fetchsection();
   },[])
 
   return (
     <div>
-      {blogsInfomation.map(blogInfomation=>(
+      <div className="hot-kl">
+        {blogsInfomation.map(blogInfomation=>(
         <div>
           <h3>Blog Name : {blogInfomation.blog_name}</h3>
           <h3>Course ID : {blogInfomation.course_id}</h3>
         </div>
-      ))}
+        ))}
+      </div>
+
       <div>
         {sections.map(item=>(
           <div>
@@ -83,6 +94,19 @@ const CreateEditSection = (props:any) => {
           </div>
         ))}
       </div>
+      
+      <div className="hot-kl">
+        {sectionsInformation.map(item=>(
+          <div>
+            <Link to={`/readSection/${item.id}`}>
+              <ListGroup variant="flush" className="show-blog">
+                <ListGroup.Item><strong>{item.section_name}</strong> {item.blog_id} {item.id}</ListGroup.Item>
+              </ListGroup>
+            </Link>
+          </div>
+        ))}
+      </div>
+      
       <div className="div-addsection">
         <Link to={`/writeSection/${blogId}`}>
           <Button variant="outline-secondary" className="button-addsection">

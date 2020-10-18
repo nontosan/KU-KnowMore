@@ -1,0 +1,34 @@
+.profile {
+    text-align: left;
+    padding-left: 10px;
+}
+
+.pic {
+    padding: 10px;
+}
+
+.Name {
+    padding: 10px;
+    
+}
+
+.Username {
+    padding: 10px
+}
+
+.Des {
+    padding: 10px;
+}
+
+.input {
+    width:30%;
+}
+
+.text {
+    width: 300px;
+    height: 100px;
+}
+
+.button{
+    text-align: center;
+}

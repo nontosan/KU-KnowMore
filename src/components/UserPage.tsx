@@ -10,6 +10,11 @@ import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , d
 import { User_Sch } from '../interfaces/user';
 
 
+import {
+    Link, Redirect,
+  } from 'react-router-dom';
+
+  
 import ProfilePic from '../photo/profilepic.png';
 
 // IMPORT SERVICE //
@@ -54,6 +59,9 @@ const UserPage = (props:any) => {
                     </div>
                 ))} 
             </Form>
+            <Link to="/editProfile">
+                <Button variant="outline-danger">EDIT</Button>
+            </Link>
         </div>
     );
 }

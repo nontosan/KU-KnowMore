@@ -34,6 +34,7 @@ import CreateEditSection from "./components/CreateEditSection";
 import UserPage from "./components/UserPage";
 import KnowledgeBlog from './components/KnowledgeBlog';
 import ReviewBlog from './components/ReviewBlog';
+import EditProfile from './components/EditProfile';
 
 import './App.css';
 import './components/section.css';
@@ -71,6 +72,9 @@ const App = () => {
                     <Route path="/readSection/:sectionId" name="sectionId" component={ReadSection}></Route>
                     <Route path="/editSection/:sectionId" name="sectionId" component={EditSection}></Route>
                     <Route path="/userpage/:userId" name="userId" component={UserPage}></Route>
+                    <Route path="/editProfile">
+                        <EditProfile />
+                    </Route>
                     <Route path="/searchknowledgeblog">
                         <KnowledgeBlog />
                     </Route>

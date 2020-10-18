@@ -33,7 +33,7 @@ const Photo: React.FC = () => {
                         accept=''
                         onChange={onChange}
                         value={photo}
-                        ></input>
+                        multiple></input>
                     </div>
                 </Card>
                 <Button className="textup" variant="outline-secondary">Upload File</Button>
