@@ -57,7 +57,7 @@ const WriteSection = (props:any) => {
                     onEditorStateChange={
                         (draftstate) => {
                             setdraftState(draftstate);
-                            console.log(draftstate);
+                            console.log(draftstate.getCurrentContent());
                         }
                     }
                 />
