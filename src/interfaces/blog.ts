@@ -1,5 +1,3 @@
-import { RawDraftContentState } from "draft-js";
-
 export interface Blog{
     id?: string;
     user_id: string;
@@ -10,4 +8,14 @@ export interface Blog{
     //teacher_name
     last_edit?: Date;
     viewers?: number;
+}
+
+export interface Review{
+    blog_id : string;
+    id?: string;
+    teaching: number;
+    hw:number;
+    classroom:number;
+    overall:number;
+    content:any;
 }
