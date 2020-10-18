@@ -79,8 +79,8 @@ export class Blog_Controller {
   }
 
   @Get('/:blog_id/comments')
-  async find(@Param('blog_id') blog_id: ObjectID): Promise<Comments[]> {
-    return this.commentService.find(blog_id);
+  async find(@Param('blog_id') blog_id: string): Promise<Comments[]> {
+    return this.commentService.findFromBlogs(blog_id);
   }
 
   // --------------------------------------------------------------------------------

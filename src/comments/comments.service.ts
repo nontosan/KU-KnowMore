@@ -34,6 +34,9 @@ export class CommentsService {
     async find(comment_id: ObjectID): Promise<Comments[]> {
         return this.commentsRepository.find({where:{_id: comment_id}});
     }
+    async findFromBlogs(blog_id: string): Promise<Comments[]> {
+        return this.commentsRepository.find({ where: { blog_id: blog_id }});
+    }
     async create(createCommentsDto: CreateCommentsDto) {
         createCommentsDto.date_time = this.getDate();
         return this.commentsRepository.save(createCommentsDto);
