@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Blog,Review } from '../interfaces/blog';
@@ -19,20 +19,44 @@ import {
 import BlogsService from '../services/BlogsService';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
-const CreateRwBlog=()=> {
+// Component head
+const CreateRwBlog=(props : any)=> {
   const [Nameblog, setNameblog]=useState("");
   const [Nameteacher, setNameteacher]=useState("");
   const [IDclass, setIDclass]=useState("");
   const [Nameclass, setNameclass]=useState("");
-  // State from CreateReviewContent
+  // Review State
   const [teachScore, setTeachScore] = useState(0);
   const [workScore, setWorkScore] = useState(0);
   const [roomScore, setRoomScore] = useState(0);
   const [overallScore, setOverallScore] = useState(0);
   const [editorValue, setEditorValue] = useState("");
-  // Etc
 
+  useEffect(() => {
+    alert("component rendered")
+    if(props.blogtype == "edit"){
+      BlogsService.fetchReviewOfBlog(props.blogid)
+      .then(reviewArray => {
+        let review_info = reviewArray[0];
+        setTeachScore(review_info.teaching);
+        setWorkScore(review_info.hw);
+        setRoomScore(review_info.classroom);
+        setOverallScore(review_info.overall);
+        setEditorValue(review_info.content);
+        BlogsService.fetchBlogSpecific(props.blogid)
+        .then(blogArray => {
+          let blog_info = blogArray[0];
+          setNameblog(blog_info.blog_name);
+          setIDclass(blog_info.course_id);
+          // To be continue 
+        })
+      });
+    }
+  },[])
+
+  // CreateNewBlog function
   const handleNewBlogSave = () => {
     const newBlog: Blog = {
       course_id: IDclass,
