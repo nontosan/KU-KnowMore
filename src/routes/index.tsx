@@ -1,19 +1,15 @@
 import React from 'react'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import ProfileAdmin from '../Pages/ProfileAdmin'
-import ReadBlog_Admin from '../Pages/ReadBlog_Admin'
+import ReadBlogReview from '../Pages/ReadBlog_Admin'
 
 export default () => (
   <Router>
     <Switch> 
       <Route exact path="/">
-        <ProfileAdmin/>
+       <ProfileAdmin/>
       </Route>
-      
-      
-      <Route path='/:blogID'>
-        <ReadBlog_Admin/>
-      </Route>
+      <Route path="/readReview/:blogId" name="blogId" component={ReadBlogReview} />
     </Switch>
   </Router>
 )

@@ -21,7 +21,12 @@ const ProfileAdmin = () => {
                     <h4>Username : eieizaza</h4>
                 </div>
             </Form>
+            
             <FetchReport/>
+            
+            
+            
+            
         </div>
     );
 }
