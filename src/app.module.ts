@@ -12,6 +12,7 @@ import Reviews from './reviews/reviews.entity';
 import Likes from './likes/likes.entity';
 import Reports from './reports/reports.entity';
 import Attachments from './attachments/attachments.entity';
+import loginpage from './loginpage/loginpage.entity';
 
 import { Blog_Module } from './blogs/blogs.module';
 import { Course_Module } from './courses/courses.module';
@@ -22,6 +23,7 @@ import { Review_Module } from './reviews/reviews.module';
 import { Like_Module } from './likes/likes.module';
 import { Report_Module } from './reports/reports.module';
 import { Attachment_Module } from './attachments/attachments.module';
+import { LoginPage_Module } from './loginpage/loginpage.module';
 
 @Module({
   imports: [
@@ -32,7 +34,7 @@ import { Attachment_Module } from './attachments/attachments.module';
       username: 'admin-backend',
       password: 'Rahat_Khao_Da_Ta_Bet',
       database: 'KU-KnowMore',
-      entities: [Blogs, Courses, Users, Sections, Comments, Reviews, Likes, Reports, Attachments],
+      entities: [Blogs, Courses, Users, Sections, Comments, Reviews, Likes, Reports, Attachments,loginpage],
       synchronize: true,
     }),
     // TypeOrmModule.forRoot({
@@ -51,7 +53,9 @@ import { Attachment_Module } from './attachments/attachments.module';
     Review_Module,
     Like_Module,
     Report_Module,
-    Attachment_Module
+    Attachment_Module,
+    LoginPage_Module,
+
   ],
   controllers: [AppController],
   providers: [AppService],
