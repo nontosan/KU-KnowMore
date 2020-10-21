@@ -61,4 +61,13 @@ input{
     padding-top: 30px;
     text-align: center;
   }
+
+  .Editor {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+
+  .Confirm {
+    padding-right: 100px;
+  }
   

@@ -67,12 +67,6 @@ const CreateBlogReview = (props : any) => {
 
     return (
         <div>
-            <div className ="div-content" >
-                <Draft 
-                    placeholder={"เขียนรีวิวที่นี้"}
-                    onEditorStateChange={(editorState) => {props.setdraftState(editorState);}}
-                />
-            </div>
         
             <div className ="div-scrollbar">
                 <Container>

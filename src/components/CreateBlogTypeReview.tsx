@@ -19,6 +19,8 @@ import {
 import BlogsService from '../services/BlogsService';
 import { EmptyState } from 'react-wysiwyg-typescript';
 import { convertToRaw } from 'draft-js';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const CreateRwBlog=()=> {
   const [Nameblog, setNameblog]=useState("");
@@ -31,6 +33,7 @@ const CreateRwBlog=()=> {
   const [roomScore, setRoomScore] = useState(0);
   const [overallScore, setOverallScore] = useState(0);
   const [draftstate, setdraftState] = useState<typeof EmptyState>();
+  const [editorValue, setEditorValue] = useState("");
   // Etc
 
   const handleNewBlogSave = () => {
@@ -85,6 +88,14 @@ const CreateRwBlog=()=> {
       <Input_Nameteacher setNameteacher={setNameteacher} />
     </div>
     <div className="Blog_Content">
+      <div className="Editor">
+          <ReactQuill 
+            placeholder={"เขียนรีวิวลงที่นี้"}
+            theme="snow" 
+            value={editorValue} 
+            onChange={setEditorValue}
+          />
+      </div>
       <CreateReviewContent 
         blog_type={"create"} 
         setTeachScore={setTeachScore} 
@@ -106,8 +117,6 @@ const CreateRwBlog=()=> {
           </div>
         </Link>
       </div>
-       <div className="div-button">
-        </div>
     </div>
 
   );
