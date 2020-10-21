@@ -63,8 +63,8 @@ input{
   }
 
   .Editor {
-    padding-left: 100px;
-    padding-right: 100px;
+    margin-left: 100px;
+    margin-right: 100px;
   }
 
   .Confirm {

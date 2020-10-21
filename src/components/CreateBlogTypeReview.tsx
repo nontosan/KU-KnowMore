@@ -17,8 +17,6 @@ import {
 } from 'react-router-dom';
 
 import BlogsService from '../services/BlogsService';
-import { EmptyState } from 'react-wysiwyg-typescript';
-import { convertToRaw } from 'draft-js';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
@@ -32,7 +30,6 @@ const CreateRwBlog=()=> {
   const [workScore, setWorkScore] = useState(0);
   const [roomScore, setRoomScore] = useState(0);
   const [overallScore, setOverallScore] = useState(0);
-  const [draftstate, setdraftState] = useState<typeof EmptyState>();
   const [editorValue, setEditorValue] = useState("");
   // Etc
 
@@ -64,7 +61,7 @@ const CreateRwBlog=()=> {
       hw: workScore,
       classroom: roomScore,
       overall: overallScore,
-      content: draftstate,
+      content: editorValue,
     };
     BlogsService.createReview(newReview,blogid) 
       .then(savedNewReview => {
@@ -96,14 +93,14 @@ const CreateRwBlog=()=> {
             onChange={setEditorValue}
           />
       </div>
-      <CreateReviewContent 
-        blog_type={"create"} 
+      <div className="Slider">
+        <CreateReviewContent 
         setTeachScore={setTeachScore} 
         setWorkScore={setWorkScore} 
         setRoomScore={setRoomScore} 
         setOverallScore={setOverallScore} 
-        setdraftState={setdraftState} 
-      />
+        />
+      </div>
     </div>
       <div className="Confirm"> 
         <Link to="/">
