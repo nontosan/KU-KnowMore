@@ -3,6 +3,9 @@ import React, { useState,useEffect } from 'react'
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Comment_component from "./comment"
+import LikeViewReport from "../gadget/LikeViewReport"
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -88,15 +91,10 @@ const ReadBlogKnowledge = (props:any) => {
           </div>
         ))}
       </div>
-      <div className="hot-kl">
-        <Card.Header>
-          <Image className="likebar-pic" src={Like} /> 100
-          <Image className="likebar-pic" src={Viewer} />50
-          <Image className="likebar-pic" src={Alert} />
-        </Card.Header>
-      </div>
+      <LikeViewReport x={blogsInformation}/>
       <div  className="hot-kl">
         <Card.Header>COMMENT</Card.Header>
+        <Comment_component />
       </div>
     </div>
   );

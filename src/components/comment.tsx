@@ -15,6 +15,9 @@ import { User_Sch } from "../interfaces/user"
 
 //------------------------------------------------------------------//
 
+import {Formik,Form,Field,ErrorMessage} from "formik"
+import CommentService from "../services/CommentService"
+
 type comment_loaded={
     comments:Comment_Sch
 }
@@ -40,7 +43,7 @@ const Comment_component=()=>{
     /*const [cmt_blogs,setcmt_blog] = useState<comment_blog[]>([]);*/
     const cmt_blogs:comment_blog[] = []
     //const blog_id
-    
+    const blogId:string = window.location.pathname.split("/")[2]
     const fetchblog=()=>{
 
     }
@@ -99,6 +102,44 @@ const Comment_component=()=>{
                     <button onClick={handlereport}>report</button> 
                 </div>
             ))}
+            <Formik
+            initialValues={{CommentContent:"",errorMess:""}}
+            validate={(value)=>{
+                const errors:any={};
+                if(value.CommentContent===""){
+                    errors.errorMess="noCommentdata";
+                }
+                return errors
+            }}
+            onSubmit={(values,actions)=>{
+                const cont:any={
+                        blog_id:blogId,
+                        user_id:"5f82fd4604eb8600aa617b69",
+                        content:values.CommentContent,
+                    }
+                if(values.CommentContent!==""){
+                    //console.log(cont)
+                    const res = CommentService.createComment(cont)
+                    //console.log(res)
+                }
+                else{
+                    actions.setSubmitting(true)
+                }
+                actions.setSubmitting(false)
+            }}
+            >
+            {({isSubmitting})=>(
+                <Form>
+                    <div className="Blog_frame1">
+                        <Field type="input" name="CommentContent"/>
+                        <ErrorMessage name="errorMess" component="div"/>
+                    </div>
+                    <button disabled={isSubmitting}> send </button>
+                </Form>
+            )}
+        </Formik>
         </div>
     )
 }
+
+export default Comment_component

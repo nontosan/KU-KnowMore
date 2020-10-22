@@ -34,6 +34,19 @@ async function createReview(newReview: Review, blogid:string): Promise<Review|nu
     }
 }
 
+async function fetchReviewOfBlog(blogid:string): Promise<Review[]> {
+    const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}/reviews`);
+    const reviewInfo = await res.json();
+    return reviewInfo;  
+}
+
+async function fetchReviewSpecific(reviewid:string): Promise<Review|null> {
+    const res = await fetch(`http://188.166.178.33:3000/reviews/${reviewid}`);
+    const reviewInfo = await res.json();
+    return reviewInfo;  
+}
+
+
 async function fetchBlogSpecific(blogid:string): Promise<Blog[]> {
     const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}`);
     const blogInfo = await res.json();
@@ -72,5 +85,5 @@ async function deleteBlog(blogid:string): Promise<string> {
 
 export default {
     fetchBlogs,createBlog,fetchBlogSpecific,fetchBlogfilter,fetchKnowledgeBlogs,fetchReviewBlogs,
-    deleteBlog,createReview,
+    deleteBlog,createReview,fetchReviewSpecific,fetchReviewOfBlog
 };

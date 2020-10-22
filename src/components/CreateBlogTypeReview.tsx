@@ -1,5 +1,4 @@
 // IMPORT LIBRARY //
-import React, { useState } from 'react';
 import {
   Link,
 } from 'react-router-dom';
@@ -7,6 +6,10 @@ import { EmptyState } from 'react-wysiwyg-typescript';
 import { convertToRaw } from 'draft-js';
 import Button from 'react-bootstrap/Button';
 // END OF IMPORT LIBRARY //
+import React, { useState, useEffect, useMemo } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { Blog,Review } from '../interfaces/blog';
 
 // IMPORT COMPONENT //
 import Input_Nameblog from './createblog_component/input_nameblog';
@@ -23,7 +26,6 @@ import BlogsService from '../services/BlogsService';
 // END OF IMPORT SERVICE //
 
 // IMPORT INTERFACE //
-import { Blog,Review } from '../interfaces/blog';
 // END OF IMPORT INTERFACE//
 
 // IMPORT CSS //
@@ -31,20 +33,46 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // END OF IMPORT CSS //
 
 //------------------------------------------------------------------//
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
-const CreateRwBlog=()=> {
+// Component head
+const CreateRwBlog=(props : any)=> {
   const [Nameblog, setNameblog]=useState("");
   const [Nameteacher, setNameteacher]=useState("");
   const [IDclass, setIDclass]=useState("");
   const [Nameclass, setNameclass]=useState("");
-  // State from CreateReviewContent
+  // Review State
   const [teachScore, setTeachScore] = useState(0);
   const [workScore, setWorkScore] = useState(0);
   const [roomScore, setRoomScore] = useState(0);
   const [overallScore, setOverallScore] = useState(0);
-  const [draftstate, setdraftState] = useState<typeof EmptyState>();
-  // Etc
+  const [editorValue, setEditorValue] = useState("");
 
+  useEffect(() => {
+    alert("component rendered")
+    if(props.blogtype == "edit"){
+      BlogsService.fetchReviewOfBlog(props.blogid)
+      .then(reviewArray => {
+        let review_info = reviewArray[0];
+        setTeachScore(review_info.teaching);
+        setWorkScore(review_info.hw);
+        setRoomScore(review_info.classroom);
+        setOverallScore(review_info.overall);
+        setEditorValue(review_info.content);
+        BlogsService.fetchBlogSpecific(props.blogid)
+        .then(blogArray => {
+          let blog_info = blogArray[0];
+          setNameblog(blog_info.blog_name);
+          setIDclass(blog_info.course_id);
+          // To be continue 
+        })
+      });
+    }
+  },[])
+
+  // CreateNewBlog function
   const handleNewBlogSave = () => {
     const newBlog: Blog = {
       course_id: IDclass,
@@ -73,7 +101,7 @@ const CreateRwBlog=()=> {
       hw: workScore,
       classroom: roomScore,
       overall: overallScore,
-      content: draftstate,
+      content: editorValue,
     };
     BlogsService.createReview(newReview,blogid) 
       .then(savedNewReview => {
@@ -97,14 +125,22 @@ const CreateRwBlog=()=> {
       <Input_Nameteacher setNameteacher={setNameteacher} />
     </div>
     <div className="Blog_Content">
-      <CreateReviewContent 
-        blog_type={"create"} 
+      <div className="Editor">
+          <ReactQuill 
+            placeholder={"เขียนรีวิวลงที่นี้"}
+            theme="snow" 
+            value={editorValue} 
+            onChange={setEditorValue}
+          />
+      </div>
+      <div className="Slider">
+        <CreateReviewContent 
         setTeachScore={setTeachScore} 
         setWorkScore={setWorkScore} 
         setRoomScore={setRoomScore} 
         setOverallScore={setOverallScore} 
-        setdraftState={setdraftState} 
-      />
+        />
+      </div>
     </div>
       <div className="Confirm"> 
         <Link to="/">
@@ -118,8 +154,6 @@ const CreateRwBlog=()=> {
           </div>
         </Link>
       </div>
-       <div className="div-button">
-        </div>
     </div>
 
   );
