@@ -2,6 +2,7 @@
 /dist
 /node_modules
 /profile_pic
+/attachments
 
 # Logs
 logs
