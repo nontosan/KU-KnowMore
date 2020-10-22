@@ -4,6 +4,9 @@
 /profile_pic
 /attachments
 
+# course
+/src/courses/final section.json
+
 # Logs
 logs
 *.log

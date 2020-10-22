@@ -7,13 +7,16 @@ export class Courses {
     id?: ObjectID;
 
     @Column()
-    course_code: string;
+    Code: string;
 
     @Column()
-    course_name: string;
+    NameTh: string;
+
+    @Column()
+    NameEn: string;
     
     @Column()
-    teacher_name: string;
+    Teacher: string;
 }
 
 export default Courses;

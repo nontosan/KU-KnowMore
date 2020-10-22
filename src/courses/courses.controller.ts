@@ -6,6 +6,8 @@ import Courses from './courses.entity';
 
 import { Course_Service } from './courses.service';
 
+//import { CreateCourseDto } from '../dto/create-courses.dto';
+
 @Controller('courses')
 export class Course_Controller {
   constructor(private Service: Course_Service) {}
@@ -14,4 +16,9 @@ export class Course_Controller {
   async findAllCourses(): Promise<Courses[]> {
     return this.Service.findAllCourses();
   }
+  /*
+  @Post()
+  async add() {
+    return this.Service.add();
+  }*/
 }
