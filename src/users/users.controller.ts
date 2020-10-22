@@ -33,6 +33,16 @@ export class User_Controller {
     };
     return this.Service.create(newCreateUserDto);
   }
+
+  @Post('/:user_id/profile_pic')
+  @UseInterceptors(FileInterceptor('profile_pic'))
+  async uploadProfilePic(@Param('user_id') user_id: string, @UploadedFile() profile_pic) {
+    var uploadUserProfile = {
+      "pic_dir": profile_pic.path,
+      "pic_name": profile_pic.filename
+    };
+    return this.Service.uploadUserProfilePic(user_id, uploadUserProfile);
+  }
   
   @Put('/:user_id')
   async updateUsers(@Param('user_id') user_id: string, @Body() updateUser: Users) {

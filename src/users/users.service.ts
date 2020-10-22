@@ -46,4 +46,7 @@ export class User_Service {
         return this.User_Repository.update(user_id, updateUser);
     }
 
+    async uploadUserProfilePic(user_id: string, uploadUserProfile) {
+        return this.User_Repository.update(user_id, uploadUserProfile)
+    }
 }
