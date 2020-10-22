@@ -1,32 +1,39 @@
-import React, { useState,useEffect, useImperativeHandle } from 'react'
-import  loadeditsection, { fetchsection } from "../services/loadeditsection";
-import Button from 'react-bootstrap/Button';
+// IMPORT LIBRARY //
+import React, { useState,useEffect } from 'react'
 import Image from 'react-bootstrap/Image';
-import { Blog }from '../interfaces/blog';
-import { Section } from '../interfaces';
-import AddSection from '../photo/addsection.png';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-
-// IMPORT SERVICE //
-import BlogsService from "../services/BlogsService";
-import SectionService from "../services/SectionService";
-// END OF IMPORT SERVICE //
-
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
 } from 'react-router-dom';
+// END OF IMPORT LIBRARY //
 
-import Like from '../photo/like.png';
-import Viewer from '../photo/viewer.png';
-import Alert from '../photo/alert.png';
+// IMPORT SERVICE //
+import BlogsService from "../services/BlogsService";
+import SectionService from "../services/SectionService";
+// END OF IMPORT SERVICE //
 
+// IMPORT INTERFACE //
+import { Blog }from '../interfaces/blog';
+import { Section } from '../interfaces';
+// END OF IMPORT INTERFACE//
+
+// IMPORT CSS //
 import './section.css';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+// END OF IMPORT CSS //
+
+// IMPORT PHOTO //
+import Like from '../photo/like.png';
+import Viewer from '../photo/viewer.png';
+import Alert from '../photo/alert.png';
+// END OF IMPORT PHOTO //
+
+//------------------------------------------------------------------//
 
 const ReadBlogKnowledge = (props:any) => {
   const [sectionsInformation, setSectionsInformation] = useState<Section[]>([]);

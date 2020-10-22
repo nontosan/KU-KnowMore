@@ -1,10 +1,15 @@
-import React, { useState , useEffect , Component } from 'react';
-import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , draftStateToHTML} from 'react-wysiwyg-typescript';
+// IMPORT LIBRARY //
+import React, { useState } from 'react';
+import Draft from 'react-wysiwyg-typescript';
+import { EditorState } from 'draft-js';
+// END OF IMPORT LIBRARY //
 
+// IMPORT CSS //
 import '../section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { ContentState, convertFromRaw, convertToRaw, EditorState } from 'draft-js';
+// END OF IMPORT CSS //
 
+//------------------------------------------------------------------//
 
 const DraftEditor = (props:any) => {
     const [draftedstate, setdraftedState] = useState(EditorState.createWithContent(props.cont!));

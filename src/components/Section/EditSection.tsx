@@ -1,19 +1,27 @@
+// IMPORT LIBRARY //
 import React, { useState , useEffect , Component } from 'react';
-import Photo from '../upload';
-import Button from 'react-bootstrap/Button';
+import { ContentState, convertFromRaw, convertToRaw, EditorState } from 'draft-js';
 import InputGroup from 'react-bootstrap/InputGroup';
-import FormControl from 'react-bootstrap/FormControl';
-import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , draftStateToHTML} from 'react-wysiwyg-typescript';
+// END OF IMPORT LIBRARY //
 
+// IMPORT COMPONENT //
+import DraftEditor from './DraftEditor';
+// END OF IMPORT COMPONENT //
+
+// IMPORT SERVICE //
 import SectionService from '../../services/SectionService';
+// END OF IMPORT SERVICE //
 
+// IMPORT INTERFACE //
+import { Section } from '../../interfaces';
+// END OF IMPORT INTERFACE//
+
+// IMPORT CSS //
 import '../section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Section } from '../../interfaces';
-import { ContentState, convertFromRaw, convertToRaw, EditorState } from 'draft-js';
-import { type } from 'os';
-import { convertToObject } from 'typescript';
-import DraftEditor from './DraftEditor';
+// END OF IMPORT CSS //
+
+//------------------------------------------------------------------//
 
 const EditSection = (props:any) => {
     const [sectionsInformation, setSectionsInformation] = useState<Section[]>([]);

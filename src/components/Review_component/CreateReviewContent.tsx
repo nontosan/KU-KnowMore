@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
-import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , draftStateToHTML} from 'react-wysiwyg-typescript';
+import Draft, { EmptyState } from 'react-wysiwyg-typescript';
 //import { reviews,blogs } from '../test_interface/review_interface';
-import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 //Service
@@ -14,7 +12,6 @@ import './CreateReviewContent.css';
 
 // Component
 import EditBlogScoreSlider from './EditBlogScoreSlider';
-import { convertToRaw } from 'draft-js';
 
 
 // NewReview Parent Component

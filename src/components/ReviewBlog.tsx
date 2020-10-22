@@ -1,18 +1,27 @@
+// IMPORT LIBRARY //
 import React, { useEffect , useState , Component } from 'react';
-import { Blog } from '../interfaces/blog';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-import BlogsService from '../services/BlogsService';
-
 import {
-    Link, Redirect,
+    Link,
   } from 'react-router-dom';
+// END OF IMPORT LIBRARY //
 
+// IMPORT SERVICE //
+import BlogsService from '../services/BlogsService';
+// END OF IMPORT SERVICE //
+
+// IMPORT INTERFACE //
+import { Blog } from '../interfaces/blog';
+// END OF IMPORT INTERFACE//
+
+// IMPORT CSS //
 import './section.css';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+// END OF IMPORT CSS //
 
-
+//------------------------------------------------------------------//
 
 const ReviewBlog = () => {
     const [blogs, setBlogs] = useState<Blog[]>([]);

@@ -1,11 +1,23 @@
+// IMPORT LIBRARY //
 import React , { useState , useEffect } from "react";
-import { User_Sch} from "../interfaces/user";
-import profile from '../services/profile';
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './editprofile.css';
 import Button from 'react-bootstrap/Button';
 import { Col, Container, Row } from 'react-bootstrap';
+// END OF IMPORT LIBRARY //
+
+// IMPORT SERVICE //
+import ProfileService from '../services/ProfileService';
+// END OF IMPORT SERVICE //
+
+// IMPORT INTERFACE //
+import { User_Sch} from "../interfaces/user";
+// END OF IMPORT INTERFACE//
+
+// IMPORT CSS //
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './editprofile.css';
+// END OF IMPORT CSS //
+
+//------------------------------------------------------------------//
 
 function EditProfile () {
 
@@ -21,20 +33,20 @@ const buttonstate = () => {
   const newProfile :User_Sch = {
     name:nme,
     profile_description:descriptions,
-    pic_name:"picture can't send",//has problem with upload pic
+    pic_name:"81082cfe10658c7ea8f4bfdd85da05ea",//has problem with upload pic
     username:usrname,
-    pic_dir:"picture can't send" //has problem with upload pic
+    pic_dir:"profile_pic/81082cfe10658c7ea8f4bfdd85da05ea" //has problem with upload pic
   };
-
-profile.createprofile(newProfile) 
-      .then(savedNewProfile => {
-        if (savedNewProfile !== null) {
-          console.log(savedNewProfile);
-        } else{
-          alert("Save Error");
-        }
-      });
-  }; 
+  console.log(newProfile);
+  ProfileService.CreateProfile(newProfile) 
+    .then(savedNewProfile => {
+      if (savedNewProfile !== null) {
+        console.log(savedNewProfile);
+      } else{
+        alert("Save Error");
+      }
+    });
+}; 
 
 /*note
         <div className = "Upload">

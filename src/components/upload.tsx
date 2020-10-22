@@ -1,9 +1,15 @@
+// IMPORT LIBRARY //
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup';
 import Card from 'react-bootstrap/Card';
+// END OF IMPORT LIBRARY //
 
+// IMPORT CSS //
 import 'bootstrap/dist/css/bootstrap.min.css';
+// END OF IMPORT CSS //
+
+//------------------------------------------------------------------//
 
 const Photo: React.FC = () => {
 

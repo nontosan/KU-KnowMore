@@ -1,11 +1,22 @@
+// IMPORT LIBRARY //
 import React, { useEffect , useState , Component  } from 'react';
-import Filtermodel from '../modals/filter'
-import BlogsService from "../services/BlogsService"
-import { Blog } from "../interfaces/blog"
 import ListGroup from 'react-bootstrap/ListGroup';
 import { useLocation } from 'react-router-dom';
+// END OF IMPORT LIBRARY //
 
+// IMPORT COMPONENT //
+import Filtermodel from '../modals/filter'
+// END OF IMPORT COMPONENT //
 
+// IMPORT SERVICE //
+import BlogsService from "../services/BlogsService"
+// END OF IMPORT SERVICE //
+
+// IMPORT INTERFACE //
+import { Blog } from "../interfaces/blog"
+// END OF IMPORT INTERFACE//
+
+//------------------------------------------------------------------//
 
 const SearchFilter=()=>{
     const [blogs, setBlogs] = useState<Blog[]>([]);

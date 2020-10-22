@@ -1,17 +1,30 @@
+// IMPORT LIBRARY //
 import React, { useState,useEffect } from 'react';
-import BlogsService from "../services/BlogsService"
-import {Blog}  from "../interfaces/blog"
-import ListGroup from 'react-bootstrap/ListGroup';
-import CreateEditSection from './CreateEditSection';
-
 import {
     Link, Redirect, NavLink
   } from 'react-router-dom';
+import ListGroup from 'react-bootstrap/ListGroup';
+// END OF IMPORT LIBRARY //
 
+// IMPORT COMPONENT //
+// END OF IMPORT COMPONENT //
+
+// IMPORT SERVICE //
+import BlogsService from "../services/BlogsService"
+// END OF IMPORT SERVICE //
+
+// IMPORT INTERFACE //
+import {Blog}  from "../interfaces/blog"
+// END OF IMPORT INTERFACE//
+
+// IMPORT CSS //
 import './section.css';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../css/blogforclick.css"
+// END OF IMPORT CSS //
+
+//------------------------------------------------------------------//
 
 const Showklinmain = () => {
     const [blogs, setBlogs] = useState<Blog[]>([]);

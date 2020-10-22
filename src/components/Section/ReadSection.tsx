@@ -1,19 +1,23 @@
+// IMPORT LIBRARY //
 import React, { useState , useEffect , Component } from 'react';
-import Photo from '../upload';
-import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
-import FormControl from 'react-bootstrap/FormControl';
-import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , draftStateToHTML} from 'react-wysiwyg-typescript';
+import { draftToHtml } from 'react-wysiwyg-typescript';
+// END OF IMPORT LIBRARY //
 
+// IMPORT SERVICE //
 import SectionService from '../../services/SectionService';
+// END OF IMPORT SERVICE //
 
+// IMPORT INTERFACE //
+import { Section } from '../../interfaces';
+// END OF IMPORT INTERFACE//
+
+// IMPORT CSS //
 import '../section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Section } from '../../interfaces';
-import { convertToRaw, EditorState } from 'draft-js';
-import { type } from 'os';
-import { convertToObject } from 'typescript';
+// END OF IMPORT CSS //
 
+//------------------------------------------------------------------//
 
 const ReadSection = (props:any) => {
     const [sectionsInformation, setSectionsInformation] = useState<Section[]>([]);
