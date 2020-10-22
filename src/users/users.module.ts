@@ -13,6 +13,7 @@ import Users from './users.entity';
         MulterModule.register({ dest: './profile_pic' })
     ],
     controllers: [User_Controller],
-    providers: [User_Service]
+    providers: [User_Service],
+    exports: [User_Service]
 })
 export class User_Module {}

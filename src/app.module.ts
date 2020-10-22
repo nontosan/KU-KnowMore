@@ -24,6 +24,7 @@ import { Like_Module } from './likes/likes.module';
 import { Report_Module } from './reports/reports.module';
 import { Attachment_Module } from './attachments/attachments.module';
 import { LoginPage_Module } from './loginpage/loginpage.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -55,6 +56,7 @@ import { LoginPage_Module } from './loginpage/loginpage.module';
     Report_Module,
     Attachment_Module,
     LoginPage_Module,
+    AuthModule,
 
   ],
   controllers: [AppController],
