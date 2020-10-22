@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react';
 import BlogsService from "../services/BlogsService"
 import {Blog}  from "../interfaces/blog"
 import ListGroup from 'react-bootstrap/ListGroup';
-import CreateEditSection from './CreateEditSection';
+import CreateEditSection from './createeditsection';
 
 import {
     Link, Redirect, NavLink

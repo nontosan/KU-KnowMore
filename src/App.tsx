@@ -30,7 +30,7 @@ import {
 } from 'react-router-dom';
 
 import WriteSection from "./components/Section/WriteSection";
-import CreateEditSection from "./components/CreateEditSection";
+import CreateEditSection from "./components/createeditsection";
 import UserPage from "./components/UserPage";
 import KnowledgeBlog from './components/KnowledgeBlog';
 import ReviewBlog from './components/ReviewBlog';

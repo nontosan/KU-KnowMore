@@ -7,7 +7,8 @@ import { Section } from '../interfaces';
 import AddSection from '../photo/addsection.png';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-
+import Comment_component from "./comment"
+import LikeViewReport from "../gadget/LikeViewReport"
 // IMPORT SERVICE //
 import BlogsService from "../services/BlogsService";
 import SectionService from "../services/SectionService";
@@ -81,15 +82,10 @@ const ReadBlogKnowledge = (props:any) => {
           </div>
         ))}
       </div>
-      <div className="hot-kl">
-        <Card.Header>
-          <Image className="likebar-pic" src={Like} /> 100
-          <Image className="likebar-pic" src={Viewer} />50
-          <Image className="likebar-pic" src={Alert} />
-        </Card.Header>
-      </div>
+      <LikeViewReport x={blogsInformation}/>
       <div  className="hot-kl">
         <Card.Header>COMMENT</Card.Header>
+        <Comment_component />
       </div>
     </div>
   );
