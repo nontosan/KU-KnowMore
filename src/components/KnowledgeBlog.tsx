@@ -43,8 +43,6 @@ const KnowledgeBlog = () => {
                         <Link to={`/read${blog.type}/${blog.id}`}>
                             {blog.id} {blog.course_id} {blog.user_id} {blog.type} {blog.viewers} {blog.blog_name} {blog.last_edit}       
                         </Link>
-                        <Button variant="outline-danger">DELETE</Button>
-                        <Button variant="outline-warning">EDIT</Button>
                     </div>
                 ))}
             </div>

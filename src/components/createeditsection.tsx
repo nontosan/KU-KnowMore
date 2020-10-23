@@ -8,7 +8,7 @@ import { Section } from '../interfaces';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { Blog }from '../interfaces/blog'
 import AddSection from '../photo/addsection.png';
-
+import {useHistory} from "react-router"
 import {
   BrowserRouter as Router,
   Switch,
@@ -33,9 +33,8 @@ const CreateEditSection = (props:any) => {
   const [sectionsInformation, setSectionsInformation] = useState<Section[]>([]);
   const [sections,setsections] = useState<Section_Edit[]>([])
   const [blogsInfomation,setBlogsInfomation] = useState<Blog[]>([])
-  
-  console.log(props.match.params)
   const blogId = props.match.params.blogId
+  const history = useHistory()
 
   //fetch blog from database
   const fetchBlogs = () => {
@@ -54,12 +53,8 @@ const CreateEditSection = (props:any) => {
   }
 
   //delete section  
-  const handledeletesection=()=>{
-    fetch("api_path for delete section",{
-      method:"Post",
-      headers:{'Content-Type':'appllication/json'},
-      body:JSON.stringify(sections)
-    }).then(res=>res.json())
+  const handledeletesection=(sectionId:any)=>{
+    SectionService.deleteSection(sectionId).then()
   }
 
 
@@ -85,24 +80,16 @@ const CreateEditSection = (props:any) => {
         ))}
       </div>
 
-      <div>
-        {sections.map(item=>(
-          <div>
-            <div>{sections}</div>
-            <button onClick={handledeletesection}>edit</button>
-            <button onClick={handleeditsection}>delete</button> 
-          </div>
-        ))}
-      </div>
-      
       <div className="hot-kl">
         {sectionsInformation.map(item=>(
           <div>
-            <Link to={`/readSection/${item.id}`}>
-              <ListGroup variant="flush" className="show-blog">
+            <ListGroup variant="flush" className="show-blog">
+              <Link to={`/readSection/${item.id}`}>
                 <ListGroup.Item><strong>{item.section_name}</strong> {item.blog_id} {item.id}</ListGroup.Item>
-              </ListGroup>
-            </Link>
+              </Link>
+              <Button className="cancel-button" variant="outline-secondary">Edit</Button>
+              <Button className="submit-button" variant="outline-secondary" onClick={e=>handledeletesection(item.id)}>Delete</Button>
+            </ListGroup>
           </div>
         ))}
       </div>

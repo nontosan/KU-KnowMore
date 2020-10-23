@@ -6,9 +6,10 @@ import FormControl from 'react-bootstrap/FormControl';
 import Image from 'react-bootstrap/Image';
 import Form from 'react-bootstrap/Form';
 import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , draftStateToHTML} from 'react-wysiwyg-typescript';
-
+import BlogService from "../services/BlogsService"
 import { User_Sch } from '../interfaces/user';
-
+import {Blog} from "../interfaces/blog"
+import ListGroup from 'react-bootstrap/ListGroup';
 
 import {
     Link, Redirect,
@@ -24,14 +25,31 @@ import ProfileService from '../services/ProfileService';
 
 import './section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { truncate } from 'fs';
 
 
 
 const UserPage = (props:any) => {
     const [userInformation, setUserInformation] = useState<User_Sch[]>([]);
-
+    const [blogs,setBlogs] = useState<Blog[]>([])
     const userId = props.match.params.userId
-
+    const fetchBlogs=()=>{
+        //may use userid from location
+        BlogService.fetchBlogfilter(`?userid=${userId}`).then(res=>{
+            setBlogs(res)
+            console.log(res)
+        })
+    }
+    const handledelete=(blogId:any)=>{
+        BlogService.deleteBlog(blogId).then(res=>{
+            if(res!==null){
+                alert("already delete")
+            }
+            else{
+                alert("delete error??")
+            }
+        })
+    }
     const fetchProfile = () => {
         ProfileService.fetchProfileSpecific(userId)
             .then(userInfo => {
@@ -39,9 +57,18 @@ const UserPage = (props:any) => {
                 console.log(userInfo);
             })
     }
+    const checktype=(item:string)=>{
+        if(item==="knowledge"){
+            return true
+        }
+        else{
+            return false
+        }
+    }
 
     useEffect(() => {
         fetchProfile();
+        fetchBlogs()
     },[])
 
     return (
@@ -59,6 +86,28 @@ const UserPage = (props:any) => {
                     </div>
                 ))} 
             </Form>
+            {
+                blogs.map((item:Blog)=>{
+                    return checktype(item.type)?
+                        <ListGroup variant="flush" className="show-blog">
+                            <Link to={`/readknowledge/${item.id}`}>
+                                <ListGroup.Item><strong>{item.blog_name}</strong></ListGroup.Item>
+                            </Link>
+                            <Button variant="outline-danger">EDIT</Button>
+                            <Button variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
+                        </ListGroup>
+                    :
+                        <ListGroup variant="flush" className="show-blog">
+                            <Link to={`/readSection/${item.id}`}>
+                                <ListGroup.Item><strong>{item.blog_name}</strong></ListGroup.Item>
+                            </Link>  
+                            <Button variant="outline-danger">EDIT</Button>
+                            <Button variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
+                        </ListGroup>
+                        
+                })
+            }
+
             <Link to="/editProfile">
                 <Button variant="outline-danger">EDIT</Button>
             </Link>

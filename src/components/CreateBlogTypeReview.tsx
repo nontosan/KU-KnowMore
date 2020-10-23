@@ -35,7 +35,7 @@ const CreateRwBlog=(props : any)=> {
   const [editorValue, setEditorValue] = useState("");
 
   useEffect(() => {
-    alert("component rendered")
+    //alert("component rendered")
     if(props.blogtype == "edit"){
       BlogsService.fetchReviewOfBlog(props.blogid)
       .then(reviewArray => {
@@ -69,11 +69,11 @@ const CreateRwBlog=(props : any)=> {
         if (savedNewBlog !== null) {
           alert("Save Blog Success");
           if(savedNewBlog.id){
-            alert(savedNewBlog.id);
+            //alert(savedNewBlog.id);
             handleNewReviewSave(savedNewBlog.id);
           }
         } else{
-          alert("Save Error");
+          //alert("Save Error");
         }
       });
   };
@@ -92,7 +92,7 @@ const CreateRwBlog=(props : any)=> {
         if (savedNewReview !== null) {
           alert("Save Review Success");
         } else{
-          alert("Save Error");
+          //alert("Save Error");
         }
       });
   }
@@ -132,7 +132,7 @@ const CreateRwBlog=(props : any)=> {
             <Button className="cancel-button" variant="danger">Cancel</Button>
           </div>
         </Link>
-        <Link to="/writesection/1234">
+        <Link to="/">
           <div className="Submit">
             <Button className="submit-button" variant="success" onClick={handleNewBlogSave}>Submit</Button>
           </div>

@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './editprofile.css';
 import Button from 'react-bootstrap/Button';
 import { Col, Container, Row } from 'react-bootstrap';
-
+import {useHistory} from "react-router"
 function EditProfile () {
 
 const [usrname,setusername] = useState("");
@@ -14,7 +14,7 @@ const [descriptions,setdescriptions] = useState ("");
 const [nme,setname] = useState("");
 const [picture,setpicture] = useState("");
 const [directory,setdir] = useState("");
-
+const history=useHistory()
 
 const buttonstate = () => {
 
@@ -66,7 +66,7 @@ profile.createprofile(newProfile)
       </div>
     <div className="button">
         <Button variant="success" onClick = {buttonstate}>Submit</Button>
-        <Button variant="danger"> Cancel </Button>
+        <Button variant="danger" onClick={e=>history.goBack()}> Cancel </Button>
     </div>
     </div>
   );

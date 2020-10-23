@@ -11,10 +11,8 @@ import Confirm from './createblog_component/confirm';
 import './createblog_component/input.css';
 import Button from 'react-bootstrap/Button';
 
-import {
-  Link, Redirect,
-} from 'react-router-dom';
-
+import {Link, Redirect} from 'react-router-dom';
+import {useHistory} from "react-router"
 import BlogsService from '../services/BlogsService';
 
 const CreateKlBlog=()=> {
@@ -24,7 +22,7 @@ const CreateKlBlog=()=> {
   const [Nameclass, setNameclass]=useState("");
   const [UrlLink, setUrl]=useState<string>("");
   const [afterSave, setafterSave] = useState<boolean>(false);
-
+  const history = useHistory()
   const handleNewBlogSave = () => {
     const newBlog: Blog = {
       course_id: IDclass,
@@ -61,7 +59,7 @@ const CreateKlBlog=()=> {
         <Input_Nameteacher setNameteacher={setNameteacher} />
         <div className="Confirm"> 
           <div className="Cancel">
-            <Button variant="danger"> Cancel </Button>
+            <Button variant="danger" onClick={e=>history.goBack()}> Cancel </Button>
           </div>
           <div className="Submit">
             <Button variant="success" onClick={handleNewBlogSave}> Submit </Button>
