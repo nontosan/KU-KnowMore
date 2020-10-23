@@ -14,6 +14,7 @@ import SearchPic from './photo/Magnify.png';
 import Filtermodel from './modals/filter';
 
 import Showklinmain from "./components/ShowKnowledgeInMain";
+import Showrwinmain from "./components/ShowReviewInMain";
 import CreateKlBlog from "./components/CreateBlogTypeKnowLedge";
 import CreateRwBlog from "./components/CreateBlogTypeReview";
 import SearchFilter from "./components/SearchFilter";
@@ -134,8 +135,8 @@ const App = () => {
                         </div>
                         <div className="hot-kl">
                             <Card.Header>REVIEW BLOG</Card.Header>
-                            <ListGroup variant="flush" className="show-blog">
-                                <Showklinmain />
+                            <ListGroup variant="flush">
+                                <Showrwinmain />
                             </ListGroup>
                         </div>
                     </Route>
