@@ -1,6 +1,6 @@
 import { User_Sch} from "../interfaces/user";
 
-async function createprofile(newProfile: User_Sch): Promise<User_Sch|null> {
+async function CreateProfile(newProfile: User_Sch): Promise<User_Sch|null> {
     const res = await fetch(`http://188.166.178.33:3000/users`,{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -15,5 +15,5 @@ async function createprofile(newProfile: User_Sch): Promise<User_Sch|null> {
 }
 
 export default {
-    createprofile
+    CreateProfile
 };

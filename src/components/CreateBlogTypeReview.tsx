@@ -1,23 +1,39 @@
+// IMPORT LIBRARY //
+import {
+  Link,
+} from 'react-router-dom';
+import { EmptyState } from 'react-wysiwyg-typescript';
+import { convertToRaw } from 'draft-js';
+import Button from 'react-bootstrap/Button';
+// END OF IMPORT LIBRARY //
 import React, { useState, useEffect, useMemo } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Blog,Review } from '../interfaces/blog';
 import { Course } from '../interfaces/course';
 
+// IMPORT COMPONENT //
 import Input_Nameblog from './createblog_component/input_nameblog';
 import Input_Idclass from './createblog_component/input_idclass';
 import Input_Nameclass from './createblog_component/input_nameclass';
 import Input_Nameteacher from './createblog_component/input_nameteacher';
 import Confirm from './createblog_component/confirm';
 import './createblog_component/input.css';
-import Button from 'react-bootstrap/Button';
 import CreateReviewContent from './Review_component/CreateReviewContent';
+// END OF IMPORT COMPONENT //
 
-import {
-  Link,
-} from 'react-router-dom';
-
+// IMPORT SERVICE //
 import BlogsService from '../services/BlogsService';
+// END OF IMPORT SERVICE //
+
+// IMPORT INTERFACE //
+// END OF IMPORT INTERFACE//
+
+// IMPORT CSS //
+import 'bootstrap/dist/css/bootstrap.min.css';
+// END OF IMPORT CSS //
+
+//------------------------------------------------------------------//
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { propTypes } from 'react-bootstrap/esm/Image';
@@ -37,6 +53,7 @@ const CreateRwBlog=(props : any)=> {
   const [editorValue, setEditorValue] = useState("");
 
   useEffect(() => {
+    //alert("component rendered")
     if(props.blogtype == "edit"){
       BlogsService.fetchReviewOfBlog(props.blogid)
       .then(reviewArray => {
@@ -75,11 +92,11 @@ const CreateRwBlog=(props : any)=> {
         if (savedNewBlog !== null) {
           alert("Save Blog Success");
           if(savedNewBlog.id){
-            alert(savedNewBlog.id);
+            //alert(savedNewBlog.id);
             handleNewReviewSave(savedNewBlog.id);
           }
         } else{
-          alert("Save Error");
+          //alert("Save Error");
         }
       });
   };
@@ -98,7 +115,7 @@ const CreateRwBlog=(props : any)=> {
         if (savedNewReview !== null) {
           alert("Save Review Success");
         } else{
-          alert("Save Error");
+          //alert("Save Error");
         }
       });
   }
@@ -138,7 +155,7 @@ const CreateRwBlog=(props : any)=> {
             <Button className="cancel-button" variant="danger">Cancel</Button>
           </div>
         </Link>
-        <Link to="/writesection/1234">
+        <Link to="/">
           <div className="Submit">
             <Button className="submit-button" variant="success" onClick={handleNewBlogSave}>Submit</Button>
           </div>

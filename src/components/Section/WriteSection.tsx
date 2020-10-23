@@ -1,25 +1,33 @@
+// IMPORT LIBRARY //
 import React, { useState , Component, HtmlHTMLAttributes } from 'react';
-import Photo from '../upload';
 import Button from 'react-bootstrap/Button';
+import { convertToRaw, EditorState } from 'draft-js';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , draftStateToHTML} from 'react-wysiwyg-typescript';
+// END OF IMPORT LIBRARY //
 
+// IMPORT COMPONENT //
+import Photo from '../upload';
+// END OF IMPORT COMPONENT //
+
+// IMPORT SERVICE //
 import SectionService from '../../services/SectionService';
+// END OF IMPORT SERVICE //
 
+// IMPORT CSS //
 import '../section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { convertToRaw, EditorState } from 'draft-js';
 import { convertToObject } from 'typescript';
 import { reverse } from 'dns';
-
+import {useHistory, Redirect} from "react-router"
 
 const WriteSection = (props:any) => {
     const [newSectionName, setNewSectionName] = useState<string>('');
     const [draftstate, setdraftState] = useState(EditorState.createEmpty());
 
     const blogId = (props.match.params.blogId)
-
+    const history = useHistory()
     const handleNewSectionNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewSectionName(e.target.value);
     };
@@ -33,16 +41,13 @@ const WriteSection = (props:any) => {
 
         SectionService.createSection(blogId, writeSection)
             .then(savedWriteSection => {
-                if (savedWriteSection !== null) {
-                    console.log(savedWriteSection);
-                    alert("Save Success");
-                } else{
-                    alert("Save Error");
-                }
+                console.log("save success")
             });
+            //console.log(history)
+            history.goBack()
     };
 
-
+    console.log(history.go)
     const rawContentState = convertToRaw(draftstate.getCurrentContent());
     return (
         <div>
@@ -57,7 +62,7 @@ const WriteSection = (props:any) => {
                     onEditorStateChange={
                         (draftstate) => {
                             setdraftState(draftstate);
-                            console.log(draftstate.getCurrentContent());
+                            //console.log(draftstate.getCurrentContent());
                         }
                     }
                 />
@@ -66,7 +71,7 @@ const WriteSection = (props:any) => {
                 <Photo />
             </div>
             <div className="div-sectionname">
-                <Button className="cancel-button" variant="outline-secondary">Cancel</Button>
+                <Button className="cancel-button" variant="outline-secondary" onClick={e=>history.goBack()}>Cancel</Button>
                 <Button className="submit-button" variant="outline-secondary" onClick={handleSectionSave}>Submit</Button>
             </div>
         </div>

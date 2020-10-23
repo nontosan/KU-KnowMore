@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect , useState} from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
@@ -14,6 +14,7 @@ import SearchPic from './photo/Magnify.png';
 import Filtermodel from './modals/filter';
 
 import Showklinmain from "./components/ShowKnowledgeInMain";
+import Showrwinmain from "./components/ShowReviewInMain";
 import CreateKlBlog from "./components/CreateBlogTypeKnowLedge";
 import CreateRwBlog from "./components/CreateBlogTypeReview";
 import SearchFilter from "./components/SearchFilter";
@@ -21,7 +22,8 @@ import ReadBlogKnowledge from './components/ReadBlogKnowledge';
 import ReadBlogReview from './components/ReadBlogReview';
 import ReadSection from './components/Section/ReadSection';
 import EditSection from './components/Section/EditSection';
-
+import LoginPage from './components/LoginPage';
+import LoginService from './services/LoginService';
 import {
     BrowserRouter as Router,
     Switch,
@@ -30,7 +32,7 @@ import {
 } from 'react-router-dom';
 
 import WriteSection from "./components/Section/WriteSection";
-import CreateEditSection from "./components/CreateEditSection";
+import CreateEditSection from "./components/createeditsection";
 import UserPage from "./components/UserPage";
 import KnowledgeBlog from './components/KnowledgeBlog';
 import ReviewBlog from './components/ReviewBlog';
@@ -42,14 +44,32 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavDropdown from 'react-bootstrap/esm/NavDropdown';
 
 const App = () => {
+    const [username, setUsername] = useState<string|null>(null);
+
+    useEffect(() => {
+        setUsername(LoginService.getUsername());
+    },[])
+
+    const handleUserLogin = () => {
+        setUsername(LoginService.getUsername());
+        alert('ยินดีต้อนรับสู่ KU-KNOWMORE')
+    }
+
+    console.log(username);
+    const logout = () => {
+        LoginService.UserLogout();
+        setUsername(null);
+        alert('ออกจากระบบแล้ว')
+    };
+    console.log(localStorage.accessToken)
     return (
         <Router>
             <div>
                 <Navbar bg="light" variant="light">
                     <Navbar.Brand href="/">KU KNOWMORE</Navbar.Brand>
                     <Nav className="mr-auto">
-                    <Nav.Link href="/searchknowledgeblog">KNOWLEDGE BLOG</Nav.Link>
-                    <Nav.Link href="/searchreviewblog">REVIEW BLOG</Nav.Link>
+                        <Nav.Link href="/searchknowledgeblog">KNOWLEDGE BLOG</Nav.Link>
+                        <Nav.Link href="/searchreviewblog">REVIEW BLOG</Nav.Link>
                     </Nav>
                     <Form inline >
                         <Link to="/">
@@ -63,6 +83,16 @@ const App = () => {
                             <Image className="profile-pic" src={ProfilePic} roundedCircle />
                         </Link>
                     </Form>
+                    { username && (
+                        <div>
+                            &nbsp;&nbsp;&nbsp;
+                            {username}
+                        </div>
+                    )}
+                    <Nav>
+                        <Nav.Link href="/login">LOGIN</Nav.Link>
+                        <Button onClick={logout}>LOGOUT</Button>
+                    </Nav>
                 </Navbar>
                 <Switch>
                     <Route path="/myKnowledge/:blogId" name="blogId" component={CreateEditSection}></Route>
@@ -72,6 +102,9 @@ const App = () => {
                     <Route path="/readSection/:sectionId" name="sectionId" component={ReadSection}></Route>
                     <Route path="/editSection/:sectionId" name="sectionId" component={EditSection}></Route>
                     <Route path="/userpage/:userId" name="userId" component={UserPage}></Route>
+                    <Route path="/login">
+                        <LoginPage loginCallback={handleUserLogin}/>
+                    </Route>
                     <Route path="/editProfile">
                         <EditProfile />
                     </Route>
@@ -96,16 +129,14 @@ const App = () => {
                         </div>
                         <div className="hot-kl">
                             <Card.Header>KNOWLEDGE BLOG</Card.Header>
-                            <ListGroup variant="flush" className="show-blog">
-                                <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                                <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                                <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                            <ListGroup variant="flush">
+                                <Showklinmain />
                             </ListGroup>
                         </div>
                         <div className="hot-kl">
                             <Card.Header>REVIEW BLOG</Card.Header>
-                            <ListGroup variant="flush" className="show-blog">
-                                <Showklinmain />
+                            <ListGroup variant="flush">
+                                <Showrwinmain />
                             </ListGroup>
                         </div>
                     </Route>

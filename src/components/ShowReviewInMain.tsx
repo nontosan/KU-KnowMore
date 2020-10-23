@@ -28,10 +28,10 @@ import "../css/blogforclick.css"
 
 //------------------------------------------------------------------//
 
-const Showklinmain = () => {
+const Showrwinmain = () => {
     const [blogs, setBlogs] = useState<Blog[]>([]);
     const fetchBlogs = () => {
-        BlogsService.fetchBlogfilter("?type=1&order=1")
+        BlogsService.fetchBlogfilter("?type=2&order=1")
             .then(blogs => {
                 setBlogs(blogs.slice(0,7));
             });
@@ -60,4 +60,4 @@ const Showklinmain = () => {
     )
 };
 
-export default Showklinmain;
+export default Showrwinmain;

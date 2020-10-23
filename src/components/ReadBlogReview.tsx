@@ -1,27 +1,39 @@
+// IMPORT LIBRARY //
 import React, { useState,useEffect, useImperativeHandle } from 'react'
-import { Redirect } from 'react-router-dom';
-import { Section_Edit } from '../interfaces/SectionEdit';
-import  loadeditsection from "../services/loadeditsection";
-import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
-import { Blog }from '../interfaces/blog'
-import AddSection from '../photo/addsection.png';
 import Card from 'react-bootstrap/Card';
+// END OF IMPORT LIBRARY //
+
+// IMPORT SERVICE //
 import BlogsService from "../services/BlogsService"
+import Comment_component from "./comment"
+import LikeViewReport from "../gadget/LikeViewReport"
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
 } from 'react-router-dom';
+import {useHistory} from "react-router"
 
-import Like from '../photo/like.png';
-import Viewer from '../photo/viewer.png';
-import Alert from '../photo/alert.png';
+// IMPORT INTERFACE //
+import { Section_Edit } from '../interfaces/SectionEdit';
+import { Blog }from '../interfaces/blog'
+// END OF IMPORT INTERFACE//
 
+// IMPORT CSS //
 import './section.css';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+// END OF IMPORT CSS //
+
+// IMPORT PHOTO //
+import Like from '../photo/like.png';
+import Viewer from '../photo/viewer.png';
+import Alert from '../photo/alert.png';
+// END OF IMPORT PHOTO //
+
+//------------------------------------------------------------------//
 
 type editsection={
   section:Section_Edit
@@ -32,8 +44,7 @@ type blogidformpagebefore={
 const ReadBlogReview = (props:any) => {
   const [sections,setsections] = useState<Section_Edit[]>([])
   const [blogsInfomation,setBlogsInfomation] = useState<Blog[]>([])
-  
-  console.log(props.match.params)
+  const history=useHistory()
   const blogId = props.match.params.blogId
   
   //fetch blog from database
@@ -90,16 +101,12 @@ const ReadBlogReview = (props:any) => {
           </div>
         ))}
       </div>
-      <div className="hot-kl">
-        <Card.Header>
-          <Image className="likebar-pic" src={Like} /> 100
-          <Image className="likebar-pic" src={Viewer} />50
-          <Image className="likebar-pic" src={Alert} />
-        </Card.Header>
-      </div>
+      <LikeViewReport x={blogsInfomation}/>
       <div  className="hot-kl">
         <Card.Header>COMMENT</Card.Header>
+        <Comment_component />
       </div>
+      <button onClick={e=>history.goBack()}>back</button>
     </div>
   );
 };
