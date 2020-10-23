@@ -128,10 +128,8 @@ const App = () => {
                         </div>
                         <div className="hot-kl">
                             <Card.Header>KNOWLEDGE BLOG</Card.Header>
-                            <ListGroup variant="flush" className="show-blog">
-                                <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                                <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                                <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                            <ListGroup variant="flush">
+                                <Showklinmain />
                             </ListGroup>
                         </div>
                         <div className="hot-kl">
