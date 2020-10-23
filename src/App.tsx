@@ -85,7 +85,7 @@ const App = () => {
                         <CreateKlBlog />
                     </Route>
                     <Route path="/createrwblog">
-                        <CreateRwBlog/>
+                        <CreateRwBlog blogtype="edit" blogid="5f92bdd4b285fb001b031d06" teacher_name="ทวีเดช ศิริธนาพิพัฒน์"/>
                     </Route>
                     <Route path="/filter/:search" name="search">
                         <SearchFilter />

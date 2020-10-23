@@ -1,5 +1,6 @@
 import React from 'react';
 import './input.css'
+import { propTypes } from 'react-bootstrap/esm/Image';
 
 const Input_Idclass=(a:any)=>{
     const changeValue=(e:any)=>{
@@ -11,7 +12,7 @@ const Input_Idclass=(a:any)=>{
                 รหัสวิชา
             </div>
             <div className="Blog_name2">
-                <input type="text " onChange={(e)=>changeValue(e)}/>
+                <input type="text " onChange={(e)=>changeValue(e)} value={a.value}/>
             </div>
         </div>
     )

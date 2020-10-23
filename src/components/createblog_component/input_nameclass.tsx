@@ -13,7 +13,7 @@ const Input_Nameclass = (a:any) =>
                 ชื่อวิชา
             </div>
             <div className="Blog_name3">
-                <input type="text" onChange={(e)=>changeValue(e)}/>
+                <input type="text" onChange={(e)=>changeValue(e)} value={a.value}/>
             </div>
         </div>
     )
