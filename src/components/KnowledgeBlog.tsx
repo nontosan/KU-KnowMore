@@ -1,9 +1,10 @@
 // IMPORT LIBRARY //
 import React, { useEffect , useState , Component } from 'react';
 import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import {
-    Link, Redirect,
+    Link, Redirect, NavLink
   } from 'react-router-dom';
 // END OF IMPORT LIBRARY //
 
@@ -78,13 +79,13 @@ const KnowledgeBlog = () => {
             <div className="hot-kl">
                 <Card.Header>KNOWLEDGE BLOG</Card.Header>
                 {blogs.map(blog => (
-                    <div>
-                        <Link to={`/read${blog.type}/${blog.id}`}>
-                            {blog.id} {blog.course_id} {blog.user_id} {blog.type} {blog.viewers} {blog.blog_name} {blog.last_edit}       
-                        </Link>
+                    <ListGroup.Item className="blogcontainer blogclick" >
+                        <NavLink to={`/read${blog.type}/${blog.id}`}>
+                            <div className="element">{blog.blog_name}  viewer {blog.viewers}  last edit {blog.last_edit}</div>
+                        </NavLink>
                         <Button variant="outline-danger" onClick={() => handleDelete(blog)}>DELETE</Button>
                         <Button variant="outline-warning">EDIT</Button>
-                    </div>
+                    </ListGroup.Item>
                 ))}
             </div>
             {showDeleteModal && 
