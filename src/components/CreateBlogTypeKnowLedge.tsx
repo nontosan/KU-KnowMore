@@ -1,19 +1,34 @@
+// IMPORT LIBRARY //
 import React, { useState , useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+import {
+  Link, Redirect,
+} from 'react-router-dom';
+// END OF IMPORT LIBRARY //
 
-import { Blog, } from '../interfaces/blog';
-
+// IMPORT COMPONENT //
 import Input_Nameblog from './createblog_component/input_nameblog';
 import Input_Idclass from './createblog_component/input_idclass';
 import Input_Nameclass from './createblog_component/input_nameclass';
 import Input_Nameteacher from './createblog_component/input_nameteacher';
 import Confirm from './createblog_component/confirm';
 import './createblog_component/input.css';
-import Button from 'react-bootstrap/Button';
 
-import {Link, Redirect} from 'react-router-dom';
+
+
 import {useHistory} from "react-router"
 import BlogsService from '../services/BlogsService';
+// END OF IMPORT SERVICE //
+
+// IMPORT INTERFACE //
+import { Blog, } from '../interfaces/blog';
+// END OF IMPORT INTERFACE//
+
+// IMPORT CSS //
+import 'bootstrap/dist/css/bootstrap.min.css';
+// END OF IMPORT CSS //
+
+//------------------------------------------------------------------//
 
 const CreateKlBlog=()=> {
   const [Nameblog, setNameblog]=useState("");

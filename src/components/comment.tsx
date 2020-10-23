@@ -1,11 +1,23 @@
+// IMPORT LIBRARY //
 import React,{useState,useEffect,useCallback} from "react"
-import {Comment_Sch} from "../interfaces/comment"
-import loadcomment from "../services/loadcomment"
-import { User_Sch } from "../interfaces/user"
-import loaduser from "../services/loaduser"
 import { useParams } from "react-router-dom"
+// END OF IMPORT LIBRARY //
+
+// IMPORT SERVICE //
+import loadcomment from "../services/loadcomment"
+import loaduser from "../services/loaduser"
+// END OF IMPORT SERVICE //
+
+// IMPORT INTERFACE //
+import {Comment_Sch} from "../interfaces/comment"
+import { User_Sch } from "../interfaces/user"
+// END OF IMPORT INTERFACE//
+
+//------------------------------------------------------------------//
+
 import {Formik,Form,Field,ErrorMessage} from "formik"
 import CommentService from "../services/CommentService"
+
 type comment_loaded={
     comments:Comment_Sch
 }

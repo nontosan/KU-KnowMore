@@ -1,7 +1,6 @@
+// IMPORT LIBRARY //
 import React, { useState,useEffect, useImperativeHandle } from 'react'
 import { Redirect } from 'react-router-dom';
-import { Section_Edit } from '../interfaces/SectionEdit';
-import  loadeditsection from "../services/loadeditsection";
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 import { Section } from '../interfaces';
@@ -11,17 +10,35 @@ import AddSection from '../photo/addsection.png';
 import {useHistory} from "react-router"
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
   Link,
 } from 'react-router-dom';
 
+// END OF IMPORT LIBRARY //
+
+// IMPORT COMPONENT //
+import EditBlogContent from '../gadget/editblogcontent';
+// END OF IMPORT COMPONENT //
+
+// IMPORT SERVICE //
+import  loadeditsection from "../services/loadeditsection";
 import BlogsService from "../services/BlogsService"
 import SectionService from "../services/SectionService";
+// END OF IMPORT SERVICE //
 
+// IMPORT INTERFACE //
+import { Section_Edit } from '../interfaces/SectionEdit';
+
+// END OF IMPORT INTERFACE//
+
+// IMPORT CSS //
 import './section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import EditBlogContent from '../gadget/editblogcontent';
+// END OF IMPORT CSS //
+
+// IMPORT PHOTO //
+// END OF IMPORT PHOTO //
+
+//------------------------------------------------------------------//
 
 type editsection={
   section:Section_Edit

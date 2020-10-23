@@ -1,15 +1,23 @@
+// IMPORT LIBRARY //
 import React, { useState , Component, HtmlHTMLAttributes } from 'react';
-import Photo from '../upload';
 import Button from 'react-bootstrap/Button';
+import { convertToRaw, EditorState } from 'draft-js';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , draftStateToHTML} from 'react-wysiwyg-typescript';
+// END OF IMPORT LIBRARY //
 
+// IMPORT COMPONENT //
+import Photo from '../upload';
+// END OF IMPORT COMPONENT //
+
+// IMPORT SERVICE //
 import SectionService from '../../services/SectionService';
+// END OF IMPORT SERVICE //
 
+// IMPORT CSS //
 import '../section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { convertToRaw, EditorState } from 'draft-js';
 import { convertToObject } from 'typescript';
 import { reverse } from 'dns';
 import {useHistory, Redirect} from "react-router"

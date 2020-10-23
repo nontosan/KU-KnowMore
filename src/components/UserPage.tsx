@@ -1,8 +1,6 @@
+// IMPORT LIBRARY //
 import React, { useState , Component, useEffect } from 'react';
-import Photo from './upload';
 import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup';
-import FormControl from 'react-bootstrap/FormControl';
 import Image from 'react-bootstrap/Image';
 import Form from 'react-bootstrap/Form';
 import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , draftStateToHTML} from 'react-wysiwyg-typescript';
@@ -14,20 +12,27 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import {
     Link, Redirect,
   } from 'react-router-dom';
-
-  
-import ProfilePic from '../photo/profilepic.png';
+// END OF IMPORT LIBRARY //
 
 // IMPORT SERVICE //
 import SectionService from '../services/SectionService';
 import ProfileService from '../services/ProfileService';
 // END OF IMPORT SERVICE //
 
+// IMPORT INTERFACE //
+
+// END OF IMPORT INTERFACE//
+
+// IMPORT CSS //
 import './section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { truncate } from 'fs';
+// END OF IMPORT CSS //
 
+// IMPORT PHOTO //
+import ProfilePic from '../photo/profilepic.png';
+// END OF IMPORT PHOTO //
 
+//------------------------------------------------------------------//
 
 const UserPage = (props:any) => {
     const [userInformation, setUserInformation] = useState<User_Sch[]>([]);
@@ -84,7 +89,7 @@ const UserPage = (props:any) => {
                         <h4>Profile Description : {userInformation.profile_description} </h4>
                         <h4>Activity : </h4>
                     </div>
-                ))} 
+                ))}
             </Form>
             {
                 blogs.map((item:Blog)=>{
