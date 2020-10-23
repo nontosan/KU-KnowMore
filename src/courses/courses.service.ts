@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { json } from 'express';
 import { ObjectID } from 'mongodb';
 import { Repository } from 'typeorm';
 //import * as fs from 'fs';
@@ -34,6 +35,44 @@ export class Course_Service {
     
     async findAllCoursesName(cname: string) : Promise<Courses[]> {  
         return this.Course_Repository.find({where: { NameEn: cname }});
+    }
+
+    async findAllCoursesNameTh(name: string) : Promise<Courses[]> {
+        return this.Course_Repository.find({where: { NameTh: name }});
+    }
+
+    async Search(obj) : Promise<Courses[]> {
+        var courses_list = [];
+        if (obj.Code) {
+            (await this.findAllCoursesCode(obj.Code)).forEach( element => {
+                courses_list.push(element);
+            });
+        }
+        if (obj.NameEn) {
+            (await this.findAllCoursesName(obj.NameEn)).forEach( element => {
+                courses_list.push(element);
+            });
+        }
+        if (obj.NameTh) {
+            (await this.findAllCoursesNameTh(obj.NameTh)).forEach( element => {
+                courses_list.push(element);
+            });
+        }
+        if (obj.Teacher) {
+            (await this.findAllCoursesTeacher(obj.Teacher)).forEach( element => {
+                courses_list.push(element);
+            });
+        }
+        let myArrSerialized = courses_list.map(e => JSON.stringify(e));
+        const mySetSerialized = new Set(myArrSerialized);
+        const myUniqueArrSerialized = [...mySetSerialized];
+        const myUniqueArr = myUniqueArrSerialized.map(e => JSON.parse(e));
+        var result = myUniqueArr;
+        if (obj.Code) result = result.filter(jsonobj => jsonobj.Code == obj.Code);
+        if (obj.NameEn) result = result.filter(jsonobj => jsonobj.NameEn == obj.NameEn);
+        if (obj.NameTh) result = result.filter(jsonobj => jsonobj.NameTh == obj.NameTh);
+        if (obj.Teacher) result = result.filter(jsonobj => jsonobj.Teacher == obj.Teacher);
+        return result;
     }
     /*
     async add() {
