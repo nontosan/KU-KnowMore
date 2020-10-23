@@ -3,58 +3,17 @@ import ReactDOM from "react-dom";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Choosefilter from "../gadget/filter_gadget/klorrwfilter"
-import Order from "../gadget/filter_gadget/order"
-import Subjectname from "../gadget/filter_gadget/Subjectname";
-import Subjectid from "../gadget/filter_gadget/Subjectid";
-import Teacher from "../gadget/filter_gadget/teacher"
 import {
   Link, Redirect
 } from 'react-router-dom'
+import ModalFilter from './ModalFilter';
 
-function FilterModal(props:any) {
-  return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          FILTER BLOGS
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <h4>Centered Modal</h4>
-        <div>
-          <div>Choose Blog type </div>
-          <Choosefilter type={props.type} handle={props.handle_type} />
-          <Order checked={props.checked} setChecked={props.setChecked} radioValue={props.radioValue} setRadioValue={props.setRadioValue}/>
-          <Subjectname subname={props.subname} setsubname={props.setsubname}/>
-          <Subjectid subid={props.subjectid} setsubid={props.setsubid}/>
-          <Teacher teacher={props.teacher} setteacher={props.setteacher}/>
-        </div>
-      </Modal.Body>
-      <Modal.Footer>
-        <div>
-          <Button onClick={props.click}>Submit</Button>
-          {props.formVisible &&
-            <div>
-              <Redirect to={`/filter/search?${props.query}` } />
-            </div>
-          }
-        </div>
-      </Modal.Footer>
-    </Modal>
-  );
-}
-
-function Filtermodal() {
+const Filtermodal = () => {
   const [modalShow, setModalShow] = React.useState(false);
   //choose filter parameter
   const [type, setValue] = useState([1,2]);
   const handleChange = (val:any) => {
+    console.log(val);
     setValue(val);
   }
   //ordertype
@@ -73,6 +32,9 @@ function Filtermodal() {
 
     Submit()
     //window.location.reload(false);
+  }
+  const closeModal = () => {
+    setModalShow(false);
   }
   //about modal
   const showmodal=()=>{
@@ -127,32 +89,43 @@ function Filtermodal() {
       setFormVisible(!formVisible);
     }
   },[query])
+
   return (
-    <>
+    <div>
       <Button variant="primary" onClick={showmodal}>
         FILTER
       </Button>
 
-      <FilterModal
-        show={modalShow}
-        onHide={Submit}
-        type={type}
-        handle_type={handleChange}
-        checked={checked}
-        setChecked={setChecked}
-        radiovalue={radioValue}
-        setRadioValue={setRadioValue}
-        subjectid={input_subid} 
-        setsubid={setsubid}
-        subname={input_subname}
-        setsubname={setsubname}
-        teacher={teacher}
-        setteacher={setteacher}
-        formVisible={formVisible}
-        query={query}
-        click={click}
-      />
-    </>
+      {modalShow &&
+        <div>
+          <ModalFilter
+            show={modalShow}
+            onHide={closeModal}
+            type={type}
+            handle_type={handleChange}
+            checked={checked}
+            setChecked={setChecked}
+            radiovalue={radioValue}
+            setRadioValue={setRadioValue}
+            subjectid={input_subid} 
+            setsubid={setsubid}
+            subname={input_subname}
+            setsubname={setsubname}
+            teacher={teacher}
+            setteacher={setteacher}
+            formVisible={formVisible}
+            query={query}
+            click={click}
+          />
+        </div>
+      }
+
+      {formVisible &&
+        <div>
+          <Redirect to={`/filter/search?${query}`} />
+        </div>
+      }
+    </div>
   );
 }
   

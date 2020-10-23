@@ -44,13 +44,14 @@ import NavDropdown from 'react-bootstrap/esm/NavDropdown';
 
 const App = () => {
     const [username, setUsername] = useState<string|null>(null);
-
+    const [log, setLog] = useState<boolean>(true);
     useEffect(() => {
         setUsername(LoginService.getUsername());
     },[])
 
     const handleUserLogin = () => {
         setUsername(LoginService.getUsername());
+        setLog(false);
         alert('ยินดีต้อนรับสู่ KU-KNOWMORE')
     }
 
@@ -58,6 +59,7 @@ const App = () => {
     const logout = () => {
         LoginService.UserLogout();
         setUsername(null);
+        setLog(true);
         alert('ออกจากระบบแล้ว')
     };
     console.log(localStorage.accessToken)
@@ -89,8 +91,16 @@ const App = () => {
                         </div>
                     )}
                     <Nav>
-                        <Nav.Link href="/login">LOGIN</Nav.Link>
-                        <Button onClick={logout}>LOGOUT</Button>
+                        {log && (
+                            <div>
+                                <Nav.Link href="/login">LOGIN</Nav.Link>
+                            </div>
+                        )}
+                        {!log && (
+                            <div>
+                                &nbsp;&nbsp;&nbsp;<Button onClick={logout}>LOGOUT</Button>
+                            </div>
+                        )}
                     </Nav>
                 </Navbar>
                 <Switch>

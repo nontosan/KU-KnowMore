@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Comment_component from "./comment"
 import LikeViewReport from "../gadget/LikeViewReport"
+import Button from 'react-bootstrap/Button';
 
 import {
   BrowserRouter as Router,
@@ -83,11 +84,13 @@ const ReadBlogKnowledge = (props:any) => {
       <div className="hot-kl">
         {sectionsInformation.map(item=>(
           <div>
-            <Link to={`/readSection/${item.id}`}>
-              <ListGroup variant="flush" className="show-blog">
+            <Link className="show-blog" to={`/readSection/${item.id}`}>
+              <ListGroup variant="flush">
                 <ListGroup.Item><strong>{item.section_name}</strong> {item.blog_id} {item.id}</ListGroup.Item>
               </ListGroup>
             </Link>
+            <Button variant="outline-danger">DELETE</Button>
+            <Button variant="outline-warning">EDIT</Button>
           </div>
         ))}
       </div>
