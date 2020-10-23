@@ -15,10 +15,7 @@ import { User_Sch} from "../interfaces/user";
 // IMPORT CSS //
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './editprofile.css';
-// END OF IMPORT CSS //
-
-//------------------------------------------------------------------//
-
+import {useHistory} from "react-router"
 function EditProfile () {
 
 const [usrname,setusername] = useState("");
@@ -26,7 +23,7 @@ const [descriptions,setdescriptions] = useState ("");
 const [nme,setname] = useState("");
 const [picture,setpicture] = useState("");
 const [directory,setdir] = useState("");
-
+const history=useHistory()
 
 const buttonstate = () => {
 
@@ -78,7 +75,7 @@ const buttonstate = () => {
       </div>
     <div className="button">
         <Button variant="success" onClick = {buttonstate}>Submit</Button>
-        <Button variant="danger"> Cancel </Button>
+        <Button variant="danger" onClick={e=>history.goBack()}> Cancel </Button>
     </div>
     </div>
   );

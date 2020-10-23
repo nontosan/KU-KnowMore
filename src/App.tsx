@@ -14,6 +14,7 @@ import SearchPic from './photo/Magnify.png';
 import Filtermodel from './modals/filter';
 
 import Showklinmain from "./components/ShowKnowledgeInMain";
+import Showrwinmain from "./components/ShowReviewInMain";
 import CreateKlBlog from "./components/CreateBlogTypeKnowLedge";
 import CreateRwBlog from "./components/CreateBlogTypeReview";
 import SearchFilter from "./components/SearchFilter";
@@ -31,7 +32,7 @@ import {
 } from 'react-router-dom';
 
 import WriteSection from "./components/Section/WriteSection";
-import CreateEditSection from "./components/CreateEditSection";
+import CreateEditSection from "./components/createeditsection";
 import UserPage from "./components/UserPage";
 import KnowledgeBlog from './components/KnowledgeBlog';
 import ReviewBlog from './components/ReviewBlog';
@@ -127,7 +128,7 @@ const App = () => {
                         <CreateKlBlog />
                     </Route>
                     <Route path="/createrwblog">
-                        <CreateRwBlog/>
+                        <CreateRwBlog blogtype="edit" blogid="5f92bdd4b285fb001b031d06" teacher_name="ทวีเดช ศิริธนาพิพัฒน์"/>
                     </Route>
                     <Route path="/filter/:search" name="search">
                         <SearchFilter />
@@ -144,8 +145,8 @@ const App = () => {
                         </div>
                         <div className="hot-kl">
                             <Card.Header>REVIEW BLOG</Card.Header>
-                            <ListGroup variant="flush" className="show-blog">
-                                <Showklinmain />
+                            <ListGroup variant="flush">
+                                <Showrwinmain />
                             </ListGroup>
                         </div>
                     </Route>

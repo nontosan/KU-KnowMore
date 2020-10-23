@@ -15,7 +15,12 @@ import { Section } from '../../interfaces';
 // IMPORT CSS //
 import '../section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// END OF IMPORT CSS //
+
+import { convertToRaw, EditorState } from 'draft-js';
+import { type } from 'os';
+import { convertToObject } from 'typescript';
+import { useLocation,useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 //------------------------------------------------------------------//
 
@@ -25,6 +30,10 @@ const ReadSection = (props:any) => {
     const [displayHTML, setDisplayHTML] = useState<any>();
     const sectionId = (props.match.params.sectionId);
     const [stateCheck, setstateCheck] = useState<boolean>(false);
+    const blogId = window.location.pathname.split("/")[2]
+    const location=useLocation();
+    const history=useHistory()
+    //console.log(blogId)
 
     const fetchSection = () => {
         SectionService.fetchSectionsSpecific(sectionId)
@@ -38,7 +47,7 @@ const ReadSection = (props:any) => {
         const markup = draftToHtml(
             draftstate, 
         );
-        console.log(markup);
+        //console.log(markup);
         setDisplayHTML(markup);
     }
     
@@ -66,6 +75,8 @@ const ReadSection = (props:any) => {
             {afterFetch &&
                 <div className="div-sectionname" dangerouslySetInnerHTML={{__html: displayHTML}} />
             }
+            <button onClick={e=>history.goBack()}>back</button>
+            
         </div>
     );
 }

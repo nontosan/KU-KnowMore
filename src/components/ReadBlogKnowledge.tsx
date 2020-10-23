@@ -13,7 +13,7 @@ import {
   Route,
   Link,
 } from 'react-router-dom';
-// END OF IMPORT LIBRARY //
+import {useHistory} from "react-router"
 
 // IMPORT SERVICE //
 import BlogsService from "../services/BlogsService";
@@ -42,8 +42,8 @@ import Alert from '../photo/alert.png';
 const ReadBlogKnowledge = (props:any) => {
   const [sectionsInformation, setSectionsInformation] = useState<Section[]>([]);
   const [blogsInformation,setBlogsInformation] = useState<Blog[]>([]);
-  
-  console.log(props.match.params)
+  const history = useHistory()
+  //console.log(props.match.params)
   const blogId = props.match.params.blogId
   
   //fetch blog from database
@@ -51,7 +51,7 @@ const ReadBlogKnowledge = (props:any) => {
     BlogsService.fetchBlogSpecific(blogId)
       .then(blogInfo => {
         setBlogsInformation(blogInfo);
-        console.log(blogInfo);
+        //console.log(blogInfo);
       });
   }
 
@@ -99,6 +99,7 @@ const ReadBlogKnowledge = (props:any) => {
         <Card.Header>COMMENT</Card.Header>
         <Comment_component />
       </div>
+      <button onClick={e=>{history.goBack()}}>back</button>
     </div>
   );
 };

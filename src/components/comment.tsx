@@ -126,6 +126,7 @@ const Comment_component=()=>{
                     actions.setSubmitting(true)
                 }
                 actions.setSubmitting(false)
+                values.CommentContent=""
             }}
             >
             {({isSubmitting})=>(

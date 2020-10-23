@@ -10,6 +10,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Blog,Review } from '../interfaces/blog';
+import { Course } from '../interfaces/course';
 
 // IMPORT COMPONENT //
 import Input_Nameblog from './createblog_component/input_nameblog';
@@ -36,13 +37,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { propTypes } from 'react-bootstrap/esm/Image';
+import CourseService from '../services/CourseService';
 
 // Component head
 const CreateRwBlog=(props : any)=> {
-  const [Nameblog, setNameblog]=useState("");
-  const [Nameteacher, setNameteacher]=useState("");
-  const [IDclass, setIDclass]=useState("");
-  const [Nameclass, setNameclass]=useState("");
+  const [blogName, setBlogName]=useState("");
+  const [teacherName, setTeacherName]=useState("");
+  const [courseCode, setCourseCode]=useState("");
+  const [courseName, setCourseName]=useState("");
   // Review State
   const [teachScore, setTeachScore] = useState(0);
   const [workScore, setWorkScore] = useState(0);
@@ -51,7 +53,7 @@ const CreateRwBlog=(props : any)=> {
   const [editorValue, setEditorValue] = useState("");
 
   useEffect(() => {
-    alert("component rendered")
+    //alert("component rendered")
     if(props.blogtype == "edit"){
       BlogsService.fetchReviewOfBlog(props.blogid)
       .then(reviewArray => {
@@ -60,13 +62,18 @@ const CreateRwBlog=(props : any)=> {
         setWorkScore(review_info.hw);
         setRoomScore(review_info.classroom);
         setOverallScore(review_info.overall);
-        setEditorValue(review_info.content);
+        setEditorValue(review_info.content);  // Done
         BlogsService.fetchBlogSpecific(props.blogid)
         .then(blogArray => {
           let blog_info = blogArray[0];
-          setNameblog(blog_info.blog_name);
-          setIDclass(blog_info.course_id);
-          // To be continue 
+          setBlogName(blog_info.blog_name); // Done
+          setCourseCode(blog_info.course_id); // Done
+          CourseService.fetchCourseFilter(blog_info.course_id,props.teacher_name)
+          .then(courseArray => {
+            let course_info = courseArray[1];
+            setTeacherName(course_info.teacher_name);
+            setCourseName(course_info.course_name);         
+          })
         })
       });
     }
@@ -75,21 +82,21 @@ const CreateRwBlog=(props : any)=> {
   // CreateNewBlog function
   const handleNewBlogSave = () => {
     const newBlog: Blog = {
-      course_id: IDclass,
+      course_id: courseCode,
       user_id: "5f82fd5504eb8600aa617b6b",
       type: "review",
-      blog_name: Nameblog,
+      blog_name: blogName,
     };
     BlogsService.createBlog(newBlog) 
       .then(savedNewBlog => {
         if (savedNewBlog !== null) {
           alert("Save Blog Success");
           if(savedNewBlog.id){
-            alert(savedNewBlog.id);
+            //alert(savedNewBlog.id);
             handleNewReviewSave(savedNewBlog.id);
           }
         } else{
-          alert("Save Error");
+          //alert("Save Error");
         }
       });
   };
@@ -108,7 +115,7 @@ const CreateRwBlog=(props : any)=> {
         if (savedNewReview !== null) {
           alert("Save Review Success");
         } else{
-          alert("Save Error");
+          //alert("Save Error");
         }
       });
   }
@@ -119,10 +126,10 @@ const CreateRwBlog=(props : any)=> {
         <h1>สร้าง Review ใหม่</h1>
       </div>
      <div className="Blog_Info">
-      <Input_Nameblog setNameblog={setNameblog} />
-      <Input_Idclass setIDclass={setIDclass} />
-      <Input_Nameclass setNameclass={setNameclass} />
-      <Input_Nameteacher setNameteacher={setNameteacher} />
+      <Input_Nameblog setNameblog={setBlogName} type={props.blogtype} value={blogName}/>
+      <Input_Idclass setIDclass={setCourseCode} type={props.blogtype} value={courseCode}/>
+      <Input_Nameclass setNameclass={setCourseName} type={props.blogtype} value={courseName}/>
+      <Input_Nameteacher setNameteacher={setTeacherName} type={props.blogtype} value={teacherName}/>
     </div>
     <div className="Blog_Content">
       <div className="Editor">
@@ -148,7 +155,7 @@ const CreateRwBlog=(props : any)=> {
             <Button className="cancel-button" variant="danger">Cancel</Button>
           </div>
         </Link>
-        <Link to="/writesection/1234">
+        <Link to="/">
           <div className="Submit">
             <Button className="submit-button" variant="success" onClick={handleNewBlogSave}>Submit</Button>
           </div>

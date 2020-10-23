@@ -6,7 +6,15 @@ import Card from 'react-bootstrap/Card';
 
 // IMPORT SERVICE //
 import BlogsService from "../services/BlogsService"
-// END OF IMPORT SERVICE //
+import Comment_component from "./comment"
+import LikeViewReport from "../gadget/LikeViewReport"
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+} from 'react-router-dom';
+import {useHistory} from "react-router"
 
 // IMPORT INTERFACE //
 import { Section_Edit } from '../interfaces/SectionEdit';
@@ -36,8 +44,7 @@ type blogidformpagebefore={
 const ReadBlogReview = (props:any) => {
   const [sections,setsections] = useState<Section_Edit[]>([])
   const [blogsInfomation,setBlogsInfomation] = useState<Blog[]>([])
-  
-  console.log(props.match.params)
+  const history=useHistory()
   const blogId = props.match.params.blogId
   
   //fetch blog from database
@@ -94,16 +101,12 @@ const ReadBlogReview = (props:any) => {
           </div>
         ))}
       </div>
-      <div className="hot-kl">
-        <Card.Header>
-          <Image className="likebar-pic" src={Like} /> 100
-          <Image className="likebar-pic" src={Viewer} />50
-          <Image className="likebar-pic" src={Alert} />
-        </Card.Header>
-      </div>
+      <LikeViewReport x={blogsInfomation}/>
       <div  className="hot-kl">
         <Card.Header>COMMENT</Card.Header>
+        <Comment_component />
       </div>
+      <button onClick={e=>history.goBack()}>back</button>
     </div>
   );
 };

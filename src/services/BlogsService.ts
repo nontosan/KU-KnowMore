@@ -49,6 +49,7 @@ async function fetchReviewSpecific(reviewid:string): Promise<Review|null> {
 
 async function fetchBlogSpecific(blogid:string): Promise<Blog[]> {
     const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}`);
+    console.log(blogid)
     const blogInfo = await res.json();
     return blogInfo;  
 }

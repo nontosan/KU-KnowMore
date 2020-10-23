@@ -18,16 +18,16 @@ import SectionService from '../../services/SectionService';
 // IMPORT CSS //
 import '../section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// END OF IMPORT CSS //
-
-//------------------------------------------------------------------//
+import { convertToObject } from 'typescript';
+import { reverse } from 'dns';
+import {useHistory, Redirect} from "react-router"
 
 const WriteSection = (props:any) => {
     const [newSectionName, setNewSectionName] = useState<string>('');
     const [draftstate, setdraftState] = useState(EditorState.createEmpty());
 
     const blogId = (props.match.params.blogId)
-
+    const history = useHistory()
     const handleNewSectionNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewSectionName(e.target.value);
     };
@@ -41,16 +41,13 @@ const WriteSection = (props:any) => {
 
         SectionService.createSection(blogId, writeSection)
             .then(savedWriteSection => {
-                if (savedWriteSection !== null) {
-                    console.log(savedWriteSection);
-                    alert("Save Success");
-                } else{
-                    alert("Save Error");
-                }
+                console.log("save success")
             });
+            //console.log(history)
+            history.goBack()
     };
 
-
+    console.log(history.go)
     const rawContentState = convertToRaw(draftstate.getCurrentContent());
     return (
         <div>
@@ -65,7 +62,7 @@ const WriteSection = (props:any) => {
                     onEditorStateChange={
                         (draftstate) => {
                             setdraftState(draftstate);
-                            console.log(draftstate.getCurrentContent());
+                            //console.log(draftstate.getCurrentContent());
                         }
                     }
                 />
@@ -74,7 +71,7 @@ const WriteSection = (props:any) => {
                 <Photo />
             </div>
             <div className="div-sectionname">
-                <Button className="cancel-button" variant="outline-secondary">Cancel</Button>
+                <Button className="cancel-button" variant="outline-secondary" onClick={e=>history.goBack()}>Cancel</Button>
                 <Button className="submit-button" variant="outline-secondary" onClick={handleSectionSave}>Submit</Button>
             </div>
         </div>

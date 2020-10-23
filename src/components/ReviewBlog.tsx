@@ -29,13 +29,13 @@ const ReviewBlog = () => {
     const fetchBlogs = () => {
         BlogsService.fetchReviewBlogs()
             .then(blogs => {
-                console.log(blogs);
+                //console.log(blogs);
                 setBlogs(blogs);
-                console.log(blogs);
+                //console.log(blogs);
             });
     };
     useEffect(() => {
-        console.log(blogs);
+        //console.log(blogs);
         fetchBlogs();
     },[]);
     return (
@@ -43,13 +43,11 @@ const ReviewBlog = () => {
             <div className="hot-kl">
                 <Card.Header>REVIEW BLOG</Card.Header>
                 {blogs.map(blog => ( 
-                    <Link to={`/read${blog.type}/${blog.id}`}>
-                        <ListGroup variant="flush" className="show-blog">
-                            <ListGroup.Item>
-                                {blog.course_id} {blog.user_id} {blog.type} {blog.viewers} {blog.blog_name} {blog.last_edit}
-                            </ListGroup.Item>
-                        </ListGroup>
-                    </Link>
+                    <div>
+                        <Link to={`/read${blog.type}/${blog.id}`}>
+                            {blog.id} {blog.course_id} {blog.user_id} {blog.type} {blog.viewers} {blog.blog_name} {blog.last_edit}       
+                        </Link>
+                    </div>
                 ))}
             </div>
         </div>
