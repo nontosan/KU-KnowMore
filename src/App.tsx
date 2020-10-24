@@ -48,6 +48,12 @@ const App = () => {
     const [log, setLog] = useState<boolean>(true);
     useEffect(() => {
         setUsername(LoginService.getUsername());
+        console.log("HELLOMAIN");
+        console.log(localStorage.accessToken);
+        if (localStorage.accessToken !== undefined){
+            console.log("HELLOLOG");
+            setLog(false);
+        }
     },[])
 
     const handleUserLogin = () => {

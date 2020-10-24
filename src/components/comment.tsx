@@ -49,7 +49,9 @@ const Comment_component=()=>{
     }
     //load comment form database
     const fetchCommentblog=()=>{
-        loadcomment.fetchComment().then(comments=>{setcomment(comments)})
+        loadcomment.fetchComment().then(comments=>{
+            console.log(comments)
+            setcomment(comments)})
         comments.forEach((comment)=>{
             loaduser.fetchUser(comment).then(user=>setuser(user))
             const cmt_blog:comment_blog={
@@ -130,7 +132,7 @@ const Comment_component=()=>{
             }}
             >
             {({isSubmitting})=>(
-                <Form>
+                <Form autoComplete="off">
                     <div className="Blog_frame1">
                         <Field type="input" name="CommentContent"/>
                         <ErrorMessage name="errorMess" component="div"/>
