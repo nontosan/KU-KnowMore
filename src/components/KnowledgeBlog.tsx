@@ -40,7 +40,7 @@ const KnowledgeBlog = () => {
             .then(blogs => {
                 console.log(blogs);
                 setBlogs(blogs);
-                console.log(blogs);
+                //console.log(blogs);
             });
     };
 

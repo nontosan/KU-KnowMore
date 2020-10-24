@@ -48,8 +48,8 @@
 }
 
 .profile-page-pic{
-    height: 300px;
-    width: 300px;
+    height: 200px;
+    width: 200px;
 }
 
 .profile-info{
@@ -86,4 +86,8 @@
 .blog-fl{
     float: left;
 
+}
+
+.blog-fr{
+    float: right;
 }

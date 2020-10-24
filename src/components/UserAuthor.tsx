@@ -32,12 +32,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const UserAuthor = (props:any) => {
     const [userInformation, setUserInformation] = useState<User_Sch[]>([]);
-    console.log(props.userid);
+    //console.log(props.userid);
     const fetchUser = () => {
         ProfileService.fetchProfileSpecific(props.userid)
             .then(userInfo => {
                 setUserInformation(userInfo);
-                console.log(userInfo);
+                //console.log(userInfo);
             })
     }
 
@@ -47,7 +47,7 @@ const UserAuthor = (props:any) => {
     return (
         <div className="author-user">
             {userInformation.map(userInformation => (
-                <div className="author-user">
+                <div >
                     Author : {userInformation.name} &nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
             ))}
