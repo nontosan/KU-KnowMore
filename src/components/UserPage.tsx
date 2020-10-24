@@ -103,7 +103,7 @@ const UserPage = (props:any) => {
                         </ListGroup>
                     :
                         <ListGroup variant="flush" className="show-blog">
-                            <Link to={`/readSection/${item.id}`}>
+                            <Link to={`/readreview/${item.id}`}>
                                 <ListGroup.Item><strong>{item.blog_name}</strong></ListGroup.Item>
                             </Link>  
                             <Button variant="outline-danger">EDIT</Button>

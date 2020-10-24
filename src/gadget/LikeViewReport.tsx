@@ -12,6 +12,7 @@ import Viewer from '../photo/viewer.png';
 import Alert from '../photo/alert.png';
 import {Like} from "../interfaces/Like"
 import {Blog} from "../interfaces/blog"
+import ReportModal from "../modals/report"
 const LikeViewReport=(props:any)=> {
     const [like,setLike] = useState<boolean>(false)
     const [liker ,setliker] = useState<Like[]>([]) 
@@ -42,7 +43,7 @@ const LikeViewReport=(props:any)=> {
                     {like ? <button onClick={clicklike}><Image className="likebar-pic" src={afterLike} /></button> : <button onClick={clicklike}><Image className="likebar-pic" src={beforeLike} /></button> }
                     <div>{liker.length}</div>
                     <Image className="likebar-pic" src={Viewer} />{bloginfo.map(x=>(<div>{x.viewers}</div>))}
-                    <Image className="likebar-pic" src={Alert} />
+                    <ReportModal />
                 </Card.Header>
             </div>
         </div>
