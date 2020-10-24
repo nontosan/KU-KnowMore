@@ -64,7 +64,7 @@ export class Blog_Controller {
     return this.Service.findBlogsID(blog_id);
   }
 
-  @Get('/byusers/:user_id')
+  @Get('/users/:user_id')
   async findUserBlogsID(@Param('user_id') user_id: string): Promise<Blogs[]> {
     return this.Service.findUserBlogsID(user_id);
   }
