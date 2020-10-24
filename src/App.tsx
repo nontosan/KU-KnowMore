@@ -24,6 +24,9 @@ import ReadSection from './components/Section/ReadSection';
 import EditSection from './components/Section/EditSection';
 import LoginPage from './components/LoginPage';
 import LoginService from './services/LoginService';
+
+import Dropdowntest from './gadget/create_blog';
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -37,7 +40,6 @@ import UserPage from "./components/UserPage";
 import KnowledgeBlog from './components/KnowledgeBlog';
 import ReviewBlog from './components/ReviewBlog';
 import EditProfile from './components/EditProfile';
-import Dropdowntest from "./gadget/create_blog"
 
 import './App.css';
 import './components/section.css';
@@ -79,6 +81,7 @@ const App = () => {
                     <Nav className="mr-auto">
                         <Nav.Link href="/searchknowledgeblog">KNOWLEDGE BLOG</Nav.Link>
                         <Nav.Link href="/searchreviewblog">REVIEW BLOG</Nav.Link>
+                        <Nav.Link href="/dropdowntest">dropdowntest</Nav.Link>
                     </Nav>
                     <Form inline >
                         <Link to="/">
@@ -119,6 +122,9 @@ const App = () => {
                     <Route path="/readSection/:sectionId" name="sectionId" component={ReadSection}></Route>
                     <Route path="/editSection/:sectionId" name="sectionId" component={EditSection}></Route>
                     <Route path="/userpage/:userId" name="userId" component={UserPage}></Route>
+                    <Route path="/dropdowntest">
+                        <Dropdowntest />
+                    </Route>
                     <Route path="/login">
                         <LoginPage loginCallback={handleUserLogin}/>
                     </Route>
@@ -154,7 +160,6 @@ const App = () => {
                                 <Showrwinmain />
                             </ListGroup>
                         </div>
-                        <Dropdowntest />
                     </Route>
                 </Switch>
             </div>
