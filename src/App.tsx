@@ -48,10 +48,10 @@ const App = () => {
     const [log, setLog] = useState<boolean>(true);
     useEffect(() => {
         setUsername(LoginService.getUsername());
-        console.log("HELLOMAIN");
-        console.log(localStorage.accessToken);
+        //console.log("HELLOMAIN");
+        //console.log(localStorage.accessToken);
         if (localStorage.accessToken !== undefined){
-            console.log("HELLOLOG");
+            //console.log("HELLOLOG");
             setLog(false);
         }
     },[])
@@ -62,14 +62,14 @@ const App = () => {
         alert('ยินดีต้อนรับสู่ KU-KNOWMORE')
     }
 
-    console.log(username);
+    //console.log(username);
     const logout = () => {
         LoginService.UserLogout();
         setUsername(null);
         setLog(true);
         alert('ออกจากระบบแล้ว')
     };
-    console.log(localStorage.accessToken)
+    //console.log(localStorage.accessToken)
     return (
         <Router>
             <div>

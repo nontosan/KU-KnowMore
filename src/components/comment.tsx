@@ -1,22 +1,27 @@
 // IMPORT LIBRARY //
-import React,{useState,useEffect,useCallback} from "react"
-import { useParams } from "react-router-dom"
+import React,{useState,useEffect,useCallback} from "react";
+import { useParams } from "react-router-dom";
 // END OF IMPORT LIBRARY //
 
+// IMPORT COMPONENT //
+import UserAuthor from "./UserAuthor";
+// END OF IMPORT COMPONENT //
+
 // IMPORT SERVICE //
-import loadcomment from "../services/loadcomment"
-import loaduser from "../services/loaduser"
+import loadcomment from "../services/loadcomment";
+import CommentService from "../services/CommentService";
+import loaduser from "../services/loaduser";
 // END OF IMPORT SERVICE //
 
 // IMPORT INTERFACE //
-import {Comment_Sch} from "../interfaces/comment"
-import { User_Sch } from "../interfaces/user"
+import {Comment_Sch} from "../interfaces/comment";
+import { User_Sch } from "../interfaces/user";
 // END OF IMPORT INTERFACE//
 
 //------------------------------------------------------------------//
 
-import {Formik,Form,Field,ErrorMessage} from "formik"
-import CommentService from "../services/CommentService"
+import {Formik,Form,Field,ErrorMessage} from "formik";
+
 
 type comment_loaded={
     comments:Comment_Sch
@@ -36,7 +41,7 @@ type comment_blog={
     pic_dir?:string;
 }
 
-const Comment_component=()=>{
+const Comment_component=(props:any)=>{
     const [comments,setcomment] = useState<Comment_Sch[]>([])
     const [user,setuser] = useState<User_Sch>()
     const [deleteVisible,setdelete] = useState<boolean>(false)
@@ -44,34 +49,36 @@ const Comment_component=()=>{
     const cmt_blogs:comment_blog[] = []
     //const blog_id
     const blogId:string = window.location.pathname.split("/")[2]
+
     const fetchblog=()=>{
-
     }
+
     //load comment form database
+
     const fetchCommentblog=()=>{
-        loadcomment.fetchComment().then(comments=>{
-            console.log(comments)
-            setcomment(comments)})
-        comments.forEach((comment)=>{
-            loaduser.fetchUser(comment).then(user=>setuser(user))
-            const cmt_blog:comment_blog={
-                    comment_id:comment.blog_id,
-                    blog_id:comment.blog_id,
-                    user_id:comment.user_id,
-                    content:comment.content,
-                    date_time:comment.date_time,
-                    profile_description:user?.profile_description,
-                    pic_name:user?.pic_name,
-                    username:user?.username,
-                    pic_dir:user?.pic_dir
-            }
-            /*setcmt_blog(cmt_blogs)*/
-            cmt_blogs.push(cmt_blog)
-            
-        })
+        CommentService.fetchComment(props.blogId)
+            .then(comments => {
+                setcomment(comments)
+            });
+//        comments.forEach((comment)=>{
+//            loaduser.fetchUser(comment).then(user=>setuser(user))
+//            const cmt_blog:comment_blog={
+//                    comment_id:comment.blog_id,
+//                    blog_id:comment.blog_id,
+//                    user_id:comment.user_id,
+//                    content:comment.content,
+//                    date_time:comment.date_time,
+//                    profile_description:user?.profile_description,
+//                    pic_name:user?.pic_name,
+//                    username:user?.username,
+//                    pic_dir:user?.pic_dir
+//           }
+//            /*setcmt_blog(cmt_blogs)*/
+//            cmt_blogs.push(cmt_blog)
+//            
+//        })
     }
 
-    
     const handledelete=()=>{
         console.log("handledelete comment")
     }
@@ -84,6 +91,7 @@ const Comment_component=()=>{
 
     useEffect(()=>{
         fetchCommentblog()
+        console.log("HELLOEIEIZACOMMENT");
         //check is token id is userid then set deleteVisible ??[!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!]
     },[])
 
@@ -91,17 +99,19 @@ const Comment_component=()=>{
 
     return (
         <div>
-            <div>Comment</div>
-            {cmt_blogs.map(item=>(
+            {comments.map(item=>(
                 <div>
-                    <img src={item.pic_dir}></img>
-                    <div>{item.username}</div>
-                    <div>{item.content}</div>
-                    <div>{item.date_time}</div>
-                    {deleteVisible &&
-                        <button onClick={handledelete}>delete</button>
-                    }
-                    <button onClick={handlereport}>report</button> 
+                    <UserAuthor 
+                        userid = {item.user_id}
+                    />
+                    <div>
+                        {item.content} &nbsp;&nbsp;&nbsp;&nbsp;{item.date_time} &nbsp;&nbsp;&nbsp;&nbsp;
+                        {deleteVisible &&
+                            <button onClick={handledelete}>delete</button>
+                        }
+                        &nbsp;&nbsp;&nbsp;&nbsp;<button onClick={handlereport}>report</button> 
+                    </div>
+                    
                 </div>
             ))}
             <Formik

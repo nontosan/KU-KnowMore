@@ -30,7 +30,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 //------------------------------------------------------------------//
 
-const WhoCreateBlog = (props:any) => {
+const UserAuthor = (props:any) => {
     const [userInformation, setUserInformation] = useState<User_Sch[]>([]);
     console.log(props.userid);
     const fetchUser = () => {
@@ -58,4 +58,4 @@ const WhoCreateBlog = (props:any) => {
 
 }
 
-export default WhoCreateBlog;
+export default UserAuthor;

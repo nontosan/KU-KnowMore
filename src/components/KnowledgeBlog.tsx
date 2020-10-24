@@ -10,7 +10,7 @@ import {
 
 // IMPORT COMPONENT //
 import DeleteModal from '../modals/DeleteModal';
-import WhoCreateBlog from './WhoCreateBlog';
+import UserAuthor from './UserAuthor';
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
@@ -54,7 +54,6 @@ const KnowledgeBlog = () => {
     }
     
     const submitDeleteBlog = () => {
-        console.log('EIEI');
         setShowDeleteModal(false);
         BlogsService.deleteBlog(BlogDelete?.id!)
             .then(res => {
@@ -89,7 +88,7 @@ const KnowledgeBlog = () => {
                             <div className="blog-fl">
                                 &nbsp;&nbsp;&nbsp;&nbsp;Blog Name : {blog.blog_name} &nbsp;&nbsp;&nbsp;&nbsp; Viewer :{blog.viewers} &nbsp;&nbsp;&nbsp;&nbsp; Last Edit :{blog.last_edit}  
                             </div> 
-                            <WhoCreateBlog
+                            <UserAuthor
                                 userid = {blog.user_id}
                             />
                         </Link>
