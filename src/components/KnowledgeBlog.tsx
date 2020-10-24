@@ -10,6 +10,7 @@ import {
 
 // IMPORT COMPONENT //
 import DeleteModal from '../modals/DeleteModal';
+import UserAuthor from './UserAuthor';
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
@@ -53,7 +54,6 @@ const KnowledgeBlog = () => {
     }
     
     const submitDeleteBlog = () => {
-        console.log('EIEI');
         setShowDeleteModal(false);
         BlogsService.deleteBlog(BlogDelete?.id!)
             .then(res => {
@@ -61,6 +61,10 @@ const KnowledgeBlog = () => {
                     setStatusDelete(true);
                 }
             })
+    }
+
+    const UserInfo = () => {
+        console.log("HELLO");
     }
 
     useEffect(() => {
@@ -81,8 +85,14 @@ const KnowledgeBlog = () => {
                 {blogs.map(blog => (
                     <div>
                         <Link to={`/read${blog.type}/${blog.id}`}>
-                            {blog.id} {blog.course_id} {blog.user_id} {blog.type} {blog.viewers} {blog.blog_name} {blog.last_edit}       
+                            <div className="blog-fl">
+                                &nbsp;&nbsp;&nbsp;&nbsp;Blog Name : {blog.blog_name} &nbsp;&nbsp;&nbsp;&nbsp; Viewer :{blog.viewers} &nbsp;&nbsp;&nbsp;&nbsp; Last Edit :{blog.last_edit}  
+                            </div> 
+                            <UserAuthor
+                                userid = {blog.user_id}
+                            />
                         </Link>
+                        <br />
                     </div>
                 ))}
             </div>

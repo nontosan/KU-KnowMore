@@ -5,7 +5,6 @@ import Image from 'react-bootstrap/Image';
 import Form from 'react-bootstrap/Form';
 import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , draftStateToHTML} from 'react-wysiwyg-typescript';
 import BlogService from "../services/BlogsService"
-import { User_Sch } from '../interfaces/user';
 import {Blog} from "../interfaces/blog"
 import ListGroup from 'react-bootstrap/ListGroup';
 
@@ -20,7 +19,7 @@ import ProfileService from '../services/ProfileService';
 // END OF IMPORT SERVICE //
 
 // IMPORT INTERFACE //
-
+import { User_Sch } from '../interfaces/user';
 // END OF IMPORT INTERFACE//
 
 // IMPORT CSS //
