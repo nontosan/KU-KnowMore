@@ -4,6 +4,8 @@ import { Reports_data } from "../interfaces/reports";
 import { Blog, Review } from "../interfaces/blog";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
+import BlogsService from "../services/BlogsService"
+import Modalcom from "../components/Modalcom";
 import {
     BrowserRouter as Router,
     Switch,
@@ -11,86 +13,83 @@ import {
     Link,
     useParams
 } from 'react-router-dom';
-import Routing from '../routes/index'
+
 
 const FetchReport = () => {
 
     const [hasError,setErrors] = useState<boolean>(false)
     const [reportedBlog,setReport] = useState<Reports_data[]>([])
     const [DataBlog,setBlog] = useState<Blog[]>([])
-    /*const [DataBlog_RV,setBlogRV] = useState<Review[]>([])*/
     
     async function fetchDataRe(){
         const res =  await fetch("http://188.166.178.33:3000/reports/")
         res
             .json()
             .then(res => setReport(res))
-            
             .catch(err => setErrors(err))
     }
     async function fetchDataBlogRV(){
-        const res =  await fetch(`http://188.166.178.33:3000/blogs/search/?type=2`)
+        const res =  await fetch("http://188.166.178.33:3000/blogs/")
         res
             .json()
             .then(resp => setBlog(resp))
             .catch(errb => setErrors(errb))
     }
+    
+    
 
     useEffect(() =>{ 
         fetchDataRe();
         fetchDataBlogRV();
+
     },[])
-
-    const DeleteBlog = () => {
-        console.log('This blog was deleted')
-    }
-
-
-    const listreport = reportedBlog.map(rblog => (
-        <ListGroup.Item className="blogcontainer" >
-            <div className="element"> 
-            <Link to= {`/readReview/${rblog.content_id}`}>
-                <Button > View</Button>
-            </Link>
-            {rblog.content_id} 
-            </div>
-        </ListGroup.Item>
         
+    let Listreport_review = reportedBlog.filter(blog => blog.content_type === 'review');
+    let Listreport_knowledge = reportedBlog.filter(blog => blog.content_type === 'knowledge');
+    let Listreport_comment = reportedBlog.filter(blog => blog.content_type === 'comment');
+
+    const Modalreport_review = Listreport_review.map(rblog => (
+        <Modalcom rblog = {rblog} reportedBlog = {reportedBlog}/>
+    ))
+    const Modalreport_knowledge = Listreport_knowledge.map(rblog => (
+        <Modalcom rblog = {rblog} reportedBlog = {reportedBlog}/>
+    ))
+    const Modalreport_comment = Listreport_comment.map(rblog => (
+        <Modalcom rblog = {rblog} reportedBlog = {reportedBlog}/>
     ))
 
-    const listdata = DataBlog.map(blog => (
-        <ListGroup.Item className="blogcontainer" >
-            <div className="element">                        
-            <Link to= {`/readReview/${blog.id}`}>
-                <Button > View</Button>
-            </Link>
-            {blog.id} ,
-            {blog.course_id} ,
-            {blog.blog_name} ,
-            {blog.type}
-            </div>
-        </ListGroup.Item>
-    ))
-    const Fuck = () => {
-        if (listdata === listreport)
-        {
-            console.log('id = id')
-        }
-        console.log('Fuck',{listreport},{listdata})
-    }
     
+
+
+    
+/*
+    const blogname = () => { reportedBlog.map(a=>{
+        console.log(a.content_id)
+        DataBlog.map(b=>{
+            if(a.content_id === b.id)
+                {
+                ilovethis.push(b.blog_name)
+                console.log(b.id)
+                console.log("ok")
+                }
+            console.log("not match")
+        })
+    })}
+    console.log(ilovethis)
+*/
     
     return(
         <div>
-            <button onClick = {Fuck}> Check </button>
-            
-            <h1>Report</h1>
-            {listreport}
-            <h1>BlogRV</h1>
-            {listdata}
+            <h1>Report List</h1><br></br>
+            <h3>Review</h3> <br></br>
+            {Modalreport_review}
+            <h3>Knowledge</h3> <br></br>
+            {Modalreport_knowledge}
+            <h3>Comment</h3> <br></br>
+            {Modalreport_comment}
             
         </div>
     )
 };
 
-export default FetchReport 
+export default FetchReport
