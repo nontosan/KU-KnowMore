@@ -12,6 +12,7 @@ import Viewer from '../photo/viewer.png';
 import Alert from '../photo/alert.png';
 import {Like} from "../interfaces/Like"
 import {Blog} from "../interfaces/blog"
+import ReportModal from "../modals/report"
 const LikeViewReport=(props:any)=> {
     const [like,setLike] = useState<boolean>(false)
     const [liker ,setliker] = useState<Like[]>([]) 
@@ -27,12 +28,19 @@ const LikeViewReport=(props:any)=> {
             setliker(res)
         })
     }
-    const clicklike=()=>{
-        setLike(!like)
+    const clicklike=async()=>{
+        const data:any={
+            blog_id:blogId,
+            //sending userid of token
+            user_id:"5f82fd5504eb8600aa617b6b",
+        }
+        const likestate = await LikeServive.createLike(blogId,data)
+        setLike(likestate)
     }
     useEffect(() => {
         fetchBlog()
         fetchLiker()
+        clicklike()
     },[]);
 
     return (
@@ -42,7 +50,7 @@ const LikeViewReport=(props:any)=> {
                     {like ? <button onClick={clicklike}><Image className="likebar-pic" src={afterLike} /></button> : <button onClick={clicklike}><Image className="likebar-pic" src={beforeLike} /></button> }
                     <div>{liker.length}</div>
                     <Image className="likebar-pic" src={Viewer} />{bloginfo.map(x=>(<div>{x.viewers}</div>))}
-                    <Image className="likebar-pic" src={Alert} />
+                    <ReportModal />
                 </Card.Header>
             </div>
         </div>
