@@ -138,6 +138,9 @@ export class Blog_Service {
         return this.Blog_Repository.find({where: { _id: blog_id }});
     }
 
+    async findUserBlogsID(user_id: string): Promise<Blogs[]> {
+        return this.Blog_Repository.find({where: { user_id: user_id }});
+    }
     async findAllBlogsSearch(Obj): Promise<Blogs[]> {
         var res = [];
         var course_list = [];
