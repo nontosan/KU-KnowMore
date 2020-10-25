@@ -30,8 +30,8 @@ function isUserLoggedIn() {
 function getUsername(): string|null {
     if ( isUserLoggedIn() ) {
         const decode:any = jwt_decode(localStorage.accessToken);
-        console.log(decode);
-        console.log(decode.username);
+        //console.log(decode);
+        //console.log(decode.username);
         return decode.username
     } else {
         return null;

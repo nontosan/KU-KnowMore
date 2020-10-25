@@ -77,44 +77,46 @@ const UserPage = (props:any) => {
 
     return (
         <div>
-            <Form inline className="main-div">
-                <div>
-                    <Image className="profile-page-pic" src={ProfilePic} roundedCircle />
-                </div>
+            <div className="main-div">
+                <Image className="profile-page-pic blog-fl" src={ProfilePic} roundedCircle />
                 {userInformation.map(userInformation => (
-                    <div className="profile-info">
+                    <div className="profile-info blog-fl">
                         <h4>Name : {userInformation.name}</h4>
                         <h4>Username : {userInformation.username}</h4>
                         <h4>Profile Description : {userInformation.profile_description} </h4>
                         <h4>Activity : </h4>
                     </div>
                 ))}
-            </Form>
+                <Link className="blog-fr" to="/editProfile">
+                    <Button className="blog-fr" variant="danger">EDIT USER INFORMATION</Button>
+                </Link>
+            </div>
             {
                 blogs.map((item:Blog)=>{
                     return checktype(item.type)?
                         <ListGroup variant="flush" className="show-blog">
-                            <Link to={`/readknowledge/${item.id}`}>
-                                <ListGroup.Item><strong>{item.blog_name}</strong></ListGroup.Item>
-                            </Link>
-                            <Button variant="outline-danger">EDIT</Button>
-                            <Button variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
+                            <div>
+                                <Link className="blog-fl" to={`/readknowledge/${item.id}`}>
+                                    <ListGroup.Item><strong>{item.blog_name}</strong></ListGroup.Item>
+                                </Link>
+                                <Button className="blog-fl" variant="outline-danger">EDIT</Button>
+                                <Button className="blog-fl" variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
+                            </div>
                         </ListGroup>
                     :
                         <ListGroup variant="flush" className="show-blog">
-                            <Link to={`/readreview/${item.id}`}>
-                                <ListGroup.Item><strong>{item.blog_name}</strong></ListGroup.Item>
-                            </Link>  
-                            <Button variant="outline-danger">EDIT</Button>
-                            <Button variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
+                            <div>
+                                <Link className="blog-fl" to={`/readSection/${item.id}`}>
+                                    <ListGroup.Item><strong>{item.blog_name}</strong></ListGroup.Item>
+                                </Link>  
+                                <Button className="blog-fl" variant="outline-danger">EDIT</Button>
+                                <Button className="blog-fl" variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
+                            </div>
+                            
                         </ListGroup>
                         
                 })
             }
-
-            <Link to="/editProfile">
-                <Button variant="outline-danger">EDIT</Button>
-            </Link>
         </div>
     );
 }
