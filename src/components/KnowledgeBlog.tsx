@@ -35,8 +35,8 @@ const KnowledgeBlog = () => {
     const [BlogDelete, setBlogDelete] = useState<Blog>();
     const [statusDelete, setStatusDelete] = useState<boolean>(false);
 
-    const fetchBlogs = () => {
-        BlogsService.fetchKnowledgeBlogs()
+    const fetchBlogs = async() => {
+        const x =await BlogsService.fetchKnowledgeBlogs()
             .then(blogs => {
                 console.log(blogs);
                 setBlogs(blogs);

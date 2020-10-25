@@ -28,12 +28,19 @@ const LikeViewReport=(props:any)=> {
             setliker(res)
         })
     }
-    const clicklike=()=>{
-        setLike(!like)
+    const clicklike=async()=>{
+        const data:any={
+            blog_id:blogId,
+            //sending userid of token
+            user_id:"5f82fd5504eb8600aa617b6b",
+        }
+        const likestate = await LikeServive.createLike(blogId,data)
+        setLike(likestate)
     }
     useEffect(() => {
         fetchBlog()
         fetchLiker()
+        clicklike()
     },[]);
 
     return (

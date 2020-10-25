@@ -71,8 +71,8 @@ const CreateRwBlog=(props : any)=> {
           CourseService.fetchCourseFilter(blog_info.course_id,props.teacher_name)
           .then(courseArray => {
             let course_info = courseArray[1];
-            setTeacherName(course_info.teacher_name);
-            setCourseName(course_info.course_name);         
+            //setTeacherName(course_info.teacher_name);
+            //setCourseName(course_info.course_name);         
           })
         })
       });

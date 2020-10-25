@@ -79,13 +79,16 @@ function MyVerticallyCenteredModal(props:any) {
                         if(overthrow===true){
                           reportstr+="โพสล้มล้านสถาบัน,"
                         }
+                        console.log(values.etc)
                         const Report:any={
                           user_id:"5f82fcc904eb8600aa617b60",
-                          content_id:blogIdisd,
-                          report_string:reportstr,
-                          report_reason:values.etc
+                          content_id:blogId,
+                          report_string:values.etc,
+                          report_reason:reportstr
                         }
-                        ReportService.createReport(Report,blogId).then(res=>console.log(res))
+                        ReportService.createReport(Report,blogId).then(res=>
+                            console.log(res)
+                          )
                     }
                 }}
             >
@@ -99,7 +102,7 @@ function MyVerticallyCenteredModal(props:any) {
                             {wrongcontent?<Button variant="danger" onClick={e=>setwrongcontent(!wrongcontent)}>โพสไม่ตรงวิชา</Button>:<Button variant="secondary" onClick={e=>setwrongcontent(!wrongcontent)}>โพสไม่ตรงวิชา</Button>}
                             {overthrow?<Button variant="danger" onClick={e=>setoverthrow(!overthrow)}>โพสล้มล้านสถาบัน</Button>:<Button variant="secondary" onClick={e=>setoverthrow(!wrongcontent)}>โพสล้มล้านสถาบัน</Button>}
                             <Field type="input" name="etc"/>
-                            <button disabled={isSubmitting}> Edit </button>
+                            <button disabled={isSubmitting}> submit </button>
                         </div>
                     </Form>
                     )}

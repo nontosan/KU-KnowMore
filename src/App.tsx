@@ -37,6 +37,7 @@ import UserPage from "./components/UserPage";
 import KnowledgeBlog from './components/KnowledgeBlog';
 import ReviewBlog from './components/ReviewBlog';
 import EditProfile from './components/EditProfile';
+import Dropdowntest from "./gadget/create_blog"
 
 import './App.css';
 import './components/section.css';
@@ -155,6 +156,7 @@ const App = () => {
                                 <Showrwinmain />
                             </ListGroup>
                         </div>
+                        <Dropdowntest />
                     </Route>
                 </Switch>
             </div>
