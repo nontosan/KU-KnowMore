@@ -17,20 +17,24 @@ export class User_Service {
     ) {
         this.users = [
             {
-                id: '1',
-                username: 'john',
+                id: '5f82fd2e04eb8600aa617b66',
+                username: 'aaaaaaaa',
                 password: 'test'
             },
             {
-                id: '2',
+                id: '5f82fd3504eb8600aa617b67',
                 username: 'mary',
                 password: 'ishappy'
-            }
+            },
         ]
     }
 
     async findOne(username: string): Promise<User | undefined> {
         return this.users.find(user => user.username === username);
+    }
+
+    async findUserIDFromUsername(username: string): Promise<Users[]> {
+        return this.User_Repository.find({ where: { username: username }});
     }
 
     async findUserFromUserID(user_id: ObjectID): Promise<Users[]> {
