@@ -24,18 +24,24 @@ const options = [
 
 const Dropdowntest=()=> {
     const resultLimit = 10
-    let i = 0
+    let i = 0;
+    let k = 0;
+    let check = 0;
+    const [allCourse,setAllCourse] = useState<any[]>([]);
     const codeoption:any[]=[]
-    const [codeOptions,setCodeOptions] = useState<any[]>([]);
     const NameThoption:any[]=[]
-    const [nameThOptions,setNameThOptions] = useState<any[]>([]);
     const NameEnoption:any[]=[]
-    const [nameEnOptions,setNameEnOptions] = useState<any[]>([]);
     const Teacheroption:any[]=[]
+    const [codeOptions,setCodeOptions] = useState<any[]>([]);
+    const [nameThOptions,setNameThOptions] = useState<any[]>([]);
+    const [nameEnOptions,setNameEnOptions] = useState<any[]>([]);
     const [teacherOptions,setTeacherOptions] = useState<any[]>([]);
     const [course,setCourse] = useState<Course_real[]>([])
     const code:any[]=[]
-    const [selectCode,setSelectCode] =useState<any[]>([]);
+    const [selectCode,setSelectCode] =useState<string>('');
+    const [selectNameTh, setSelectNameTh] = useState<string>('');
+    const [selectNameEn, setSelectNameEn] = useState<string>('');
+    const [selectTeacher, setSelectTeacher] = useState<string>('');
     const [NameTh,setNameTh] =useState({})
     const [NameEn,setNameEn] =useState({})
     const [Teacher,setTeacher] =useState({})
@@ -50,8 +56,8 @@ const Dropdowntest=()=> {
 //    }
     const handleChangeCode = (selectedOption:any) => {
         code.push({ selectedOption })
-        console.log(code[0].selectedOption);
-        setSelectCode(code[0].selectedOption);
+        console.log((code[0].selectedOption).value);
+        setSelectCode((code[0].selectedOption).value);
     }
     const handleChangeNameTh = (selectedOption:any) => {
         setNameTh({ selectedOption });
@@ -69,68 +75,84 @@ const Dropdowntest=()=> {
         const x = await CourseService.fetchCourse().then(res=>{
             setCourse(res)
             //console.log(res);
+            setAllCourse(res);
             res.forEach((value,index)=>{
                 codeoption.push({ value: value.Code, label: value.Code })
-                NameThoption.push({ value: value.Code, label: value.NameTh })
-                NameEnoption.push({ value: value.Code, label: value.NameEn})
-                Teacheroption.push({ value: value.Code, label: value.Teacher })
+                //NameThoption.push({ value: value.NameTh, label: value.NameTh })
+                //NameEnoption.push({ value: value.NameEn, label: value.NameEn })
+                //Teacheroption.push({ value: value.Teacher, label: value.Teacher })
             })
         })
         setCodeOptions(codeoption);
-        setNameThOptions(NameThoption);
-        setNameEnOptions(NameEnoption);
-        setTeacherOptions(Teacheroption);
+        //setNameThOptions(NameThoption);
+        //setNameEnOptions(NameEnoption);
+        //setTeacherOptions(Teacheroption);
         setAvailable(true);
         //setVisible(true)
         //console.log(codeoption);
-        console.log(options);
+        //console.log(Teacheroption);
     }
     useEffect(()=>{
         fetchCourse()
     },[])
-
     useEffect(()=>{
-        if (available!==false){
+        if (available!==undefined){
+            //console.log(teacherOptions);
             setVisible(true);
-            console.log(available);
-            console.log(nameThOptions[0].value);
+            //console.log(available);
         }
     },[available])
-    //console.log(codesOption);
+
+    useEffect(()=>{
+        if(selectCode!==undefined){
+            console.log(selectCode);
+            console.log("HELLO");
+            {allCourse.map(item => {
+                if(item.Code==selectCode){
+                    if(check == 0){
+                        setSelectNameTh(item.NameTh)
+                        setSelectNameEn(item.NameEn)
+                        check = 1;
+                    }
+                    Teacheroption.push({ value: item.Teacher, label: item.Teacher })
+                }
+            })}
+            setTeacherOptions(Teacheroption);
+        }
+    },[selectCode])
+
     return (
         <div className="hot-kl">
             {visible &&
-            <div>
-                <div>mee data</div>
-                {codeoption[0]}
-                <div>code</div>
-                    <Select 
-                        options = {codeOptions} 
-                        onChange={handleChangeCode}
-                        isSearchable
-                        filterOption={({label}, query) => label.indexOf(query.toLowerCase()) >= 0 && i++ < resultLimit}
-                        onInputChange={() => { i = 0 }}
-                    />
-                <div>NameTh</div>
-                    <Select 
-                        options = {nameThOptions} 
-                        onChange={handleChangeNameTh}
-                        isSearchable
-                    />
-                <div>NameEn</div>
-                    <Select 
-                        options = {nameEnOptions} 
-                        onChange={handleChangeNameEn}
-                        isSearchable
-                    />
+                <div>
+                    <div>mee data</div>
+                    {codeoption[0]}
+                    <div>code</div>
+                        <Select 
+                            options = {codeOptions} 
+                            onChange={handleChangeCode}
+                            isSearchable
+                            filterOption={({label}, query) => label.indexOf(query.toLowerCase()) >= 0 && i++ < resultLimit}
+                            onInputChange={() => { i = 0 }}
+                        />
+                    <div>NameTh</div>
+                        <Select 
+                            isDisabled
+                            placeholder={selectNameTh}
+                        />
+                    <div>NameEn</div>
+                        <Select 
+                            isDisabled
+                            placeholder={selectNameEn}
+                        />
 
-                <div>Teacher</div>
-                    <Select 
-                        options = {options} 
-                        onChange={handleChangeTeacher}
-                        isSearchable
-                    />
-            </div>
+                    <div>Teacher</div>
+                        <Select 
+                            options = {teacherOptions} 
+                            onChange={handleChangeTeacher}
+                            isSearchable
+                        />
+                </div>
             }
         </div>
         
