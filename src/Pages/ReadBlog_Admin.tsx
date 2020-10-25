@@ -61,6 +61,13 @@ const ReadBlogReview = (props:any) => {
   const handleeditsection=()=>{
     console.log("create route to create section")
   }
+  const DeleteBest = () => {
+    BlogsService.deleteBlog(blogId)
+    .then(blogs => {
+        console.log(blogs)
+        console.log("done")
+    })
+  }
 
   //refreh
   useEffect(()=>{
@@ -89,7 +96,7 @@ const ReadBlogReview = (props:any) => {
       </div>
       <div className="hot-kl">
         <Card.Header>
-            <button> DELETE</button>
+            <button onClick = {e => DeleteBest()}> DELETE</button>
         </Card.Header>
       </div>
       <div  className="hot-kl">

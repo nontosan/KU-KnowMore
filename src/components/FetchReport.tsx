@@ -5,7 +5,7 @@ import { Blog, Review } from "../interfaces/blog";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import BlogsService from "../services/BlogsService"
-import Modalcom from "../components/Modalcom";
+import ModalAuy from "../components/ModalAuy"
 import {
     BrowserRouter as Router,
     Switch,
@@ -47,18 +47,19 @@ const FetchReport = () => {
     let Listreport_review = reportedBlog.filter(blog => blog.content_type === 'review');
     let Listreport_knowledge = reportedBlog.filter(blog => blog.content_type === 'knowledge');
     let Listreport_comment = reportedBlog.filter(blog => blog.content_type === 'comment');
-
-    const Modalreport_review = Listreport_review.map(rblog => (
-        <Modalcom rblog = {rblog} reportedBlog = {reportedBlog}/>
-    ))
-    const Modalreport_knowledge = Listreport_knowledge.map(rblog => (
-        <Modalcom rblog = {rblog} reportedBlog = {reportedBlog}/>
-    ))
-    const Modalreport_comment = Listreport_comment.map(rblog => (
-        <Modalcom rblog = {rblog} reportedBlog = {reportedBlog}/>
-    ))
-
     
+    const Modalreport_review = Listreport_review.map(rblog => (
+        <ModalAuy rblog={rblog} />
+    ))
+
+    const Modalreport_knowledge = Listreport_knowledge.map(rblog => (
+        <ModalAuy rblog={rblog} />
+    ))
+    
+    const Modalreport_comment = Listreport_comment.map(rblog => (
+        <ModalAuy rblog ={rblog} />
+    ))
+
 
 
     
