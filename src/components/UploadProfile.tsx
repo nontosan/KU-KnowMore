@@ -1,9 +1,11 @@
 import React, { Component} from 'react';
 import axios from 'axios'
-import { render } from '@testing-library/react';
 
-class Upload extends Component {
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
 
+class Upload extends React.Component<any,any> {
+    
     state = {
         file: ""
     }
@@ -23,28 +25,30 @@ class Upload extends Component {
         const profile_pic = new FormData()
         profile_pic.append('profile_pic',file)
         //formdata.append('name','test')
+
         axios({
-            url: `http://188.166.178.33:3000/users/5f82fd5504eb8600aa617b6b/profile_pic`,
+            url: `http://188.166.178.33:3000/users/${this.props.userID}/profile_pic`, //Sample API 
             method: "POST",
             headers:{
                 authorization: 'test'
             },
             data: profile_pic
-        })
+        });
+        alert("Upload Complete");
     }
 
     render() {
         return (
             <div className="Up">
-                <h1>THE FORM</h1>
+                <h1>Upload Pic</h1>
                 <form>
                     <div className="">
                         <label>Select File </label>
-                        <input multiple type="file" name="profile_pic" 
+                        <input type="file" multiple name="profile_pic" 
                         onChange={(e)=>this.handleFile(e)} />
                     </div>
                     <br />
-                    <button type="button" onClick={(e)=>this.handleUpload(e)}>Upload</button>
+                    <Button variant="primary"  onClick={(e)=>this.handleUpload(e)}>Upload</Button>
                 </form>
             </div>
         );
