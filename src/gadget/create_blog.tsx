@@ -23,10 +23,10 @@ const options = [
   ];
 
 const Dropdowntest=()=> {
-    const codeoption=[{}]
-    const NameThoption=[{}]
-    const NameEnoption=[{}]
-    const Teacheroption=[{}]
+    const [codeoption,setCodeopt] = useState<[{value:string,label:string}]>([{value:"test",label:"test"}])
+    const [NameThoption,setNameThopt]=useState<[{value:string,label:string}]>([{value:"test",label:"test"}])
+    const [NameEnoption,setNameEnopt]=useState<[{value:string,label:string}]>([{value:"test",label:"test"}])
+    const [Teacheroption,setTeacheropt]=useState<[{value:string,label:string}]>([{value:"test",label:"test"}])
     const [course,setCourse] = useState<Course_real[]>([])
     const [code,setCode] =useState({})
     const [NameTh,setNameTh] =useState({})
@@ -59,10 +59,11 @@ const Dropdowntest=()=> {
         const x = await CourseService.fetchCourse().then(res=>{
             setCourse(res)
             res.forEach((value,index)=>{
-                codeoption.push({ value: value.Code, label: value.Code })
-                NameThoption.push({ value: value.NameTh, label: value.NameTh })
-                NameEnoption.push({ value: value.NameEn, label: value.NameEn})
-                Teacheroption.push({ value: value.Teacher, label: value.Teacher })
+                //codeoption.push({ value: value.Code, label: value.Code })
+                //NameThoption.push({ value: value.NameTh, label: value.NameTh })
+                //NameEnoption.push({ value: value.NameEn, label: value.NameEn})
+                //Teacheroption.push({ value: value.Teacher, label: value.Teacher })
+               
             })
         })
         //setVisible(true)
@@ -70,7 +71,9 @@ const Dropdowntest=()=> {
         setVisible(true)
     }
     useEffect(()=>{
-        fetchCourse()
+        if(codeoption.length==1){
+            fetchCourse()
+        }
     },[])
     return (
         <div>
