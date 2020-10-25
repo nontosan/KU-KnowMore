@@ -9,7 +9,7 @@ import { Attachment_Module } from 'src/attachments/attachments.module';
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([Sections]),
+        TypeOrmModule.forFeature([Sections,]),
         Attachment_Module
     ],
     controllers: [Section_Controller],

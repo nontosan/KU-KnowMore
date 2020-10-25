@@ -3,15 +3,19 @@ import { ObjectID } from 'mongodb';
 import { ParseObjectIdPipe } from '../common/pipes';
 
 import Sections from './sections.entity';
-
+import Attachments from '../attachments/attachments.entity';
 import { Section_Service } from './sections.service';
 import { Attachment_Service } from '../attachments/attachments.service';
+
+
+
 import { CreateSectionDto } from 'src/dto/create-section.dto';
+import { CreateAttachmentDto } from '../dto/create-attachment.dto';
 
 @Controller('Sections')
 export class Section_Controller {
   constructor(private Service: Section_Service,
-              private attachmentService: Attachment_Service) {}
+              private attachmentService: Attachment_Service,) {}
 
   @Get()
   async findAllSections(): Promise<Sections[]> {
@@ -40,5 +44,10 @@ export class Section_Controller {
   async deleteSection(@Param('section_id') section_id: string) {
     return this.Service.delete(section_id);
   }
+  @Get('/:section_id/attachments')
+  async findAttachmentSection(@Param('section_id') section_id: string): Promise<Attachments[]> {
+    return this.attachmentService.findAttachmentSection(section_id);
+  }
+
 
 }

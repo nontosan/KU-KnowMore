@@ -36,4 +36,7 @@ export class Attachment_Service {
     async delete(id: string): Promise<void> {
         await this.attachmentsRepository.delete(id);
     }
+    async findAttachmentSection(section_id: string): Promise<Attachments[]>{
+        return this.attachmentsRepository.find({where: { section_id: section_id }});
+    }
 }

@@ -24,5 +24,4 @@ export class Attachment_Controller {
   async delete(@Param('id') id: string): Promise<void> {
     return this.Service.delete(id);
   }
-
 }

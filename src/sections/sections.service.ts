@@ -4,13 +4,14 @@ import { Repository } from 'typeorm';
 import { ObjectID } from 'mongodb';
 
 import Sections from './sections.entity';
+import Attachments from 'src/attachments/attachments.entity';
+
 import { CreateSectionDto } from 'src/dto/create-section.dto';
 import { Attachment_Service } from 'src/attachments/attachments.service';
 
 @Injectable()
 export class Section_Service {
-    constructor(
-        @InjectRepository(Sections)
+    constructor(@InjectRepository(Sections)
         private Section_Repository: Repository<Sections>,
         private attachmentService: Attachment_Service) {}
 
