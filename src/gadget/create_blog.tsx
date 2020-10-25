@@ -29,12 +29,8 @@ const Dropdowntest=()=> {
     let check = 0;
     const [allCourse,setAllCourse] = useState<any[]>([]);
     const codeoption:any[]=[]
-    const NameThoption:any[]=[]
-    const NameEnoption:any[]=[]
     const Teacheroption:any[]=[]
     const [codeOptions,setCodeOptions] = useState<any[]>([]);
-    const [nameThOptions,setNameThOptions] = useState<any[]>([]);
-    const [nameEnOptions,setNameEnOptions] = useState<any[]>([]);
     const [teacherOptions,setTeacherOptions] = useState<any[]>([]);
     const [course,setCourse] = useState<Course_real[]>([])
     const code:any[]=[]
@@ -42,6 +38,7 @@ const Dropdowntest=()=> {
     const [selectNameTh, setSelectNameTh] = useState<string>('');
     const [selectNameEn, setSelectNameEn] = useState<string>('');
     const [selectTeacher, setSelectTeacher] = useState<string>('');
+    const [selectCourseId, setSelectCourseId] = useState<string>('');
     const [NameTh,setNameTh] =useState({})
     const [NameEn,setNameEn] =useState({})
     const [Teacher,setTeacher] =useState({})
@@ -56,57 +53,41 @@ const Dropdowntest=()=> {
 //    }
     const handleChangeCode = (selectedOption:any) => {
         code.push({ selectedOption })
-        console.log((code[0].selectedOption).value);
+        //console.log((code[0].selectedOption).value);
         setSelectCode((code[0].selectedOption).value);
     }
-    const handleChangeNameTh = (selectedOption:any) => {
-        setNameTh({ selectedOption });
-    }
-    const handleChangeNameEn = (selectedOption:any) => {
-        setNameEn({ selectedOption });
 
-    }
     const handleChangeTeacher = (selectedOption:any) => {
-        setTeacher({ selectedOption });
+        setSelectCourseId(selectedOption.value);
+        setSelectTeacher(selectedOption.label);
     }
     
-
     const fetchCourse =async()=>{
         const x = await CourseService.fetchCourse().then(res=>{
             setCourse(res)
-            //console.log(res);
             setAllCourse(res);
             res.forEach((value,index)=>{
                 codeoption.push({ value: value.Code, label: value.Code })
-                //NameThoption.push({ value: value.NameTh, label: value.NameTh })
-                //NameEnoption.push({ value: value.NameEn, label: value.NameEn })
-                //Teacheroption.push({ value: value.Teacher, label: value.Teacher })
             })
         })
         setCodeOptions(codeoption);
-        //setNameThOptions(NameThoption);
-        //setNameEnOptions(NameEnoption);
-        //setTeacherOptions(Teacheroption);
         setAvailable(true);
-        //setVisible(true)
-        //console.log(codeoption);
-        //console.log(Teacheroption);
     }
+
     useEffect(()=>{
         fetchCourse()
     },[])
+
     useEffect(()=>{
         if (available!==undefined){
-            //console.log(teacherOptions);
             setVisible(true);
-            //console.log(available);
         }
     },[available])
 
     useEffect(()=>{
         if(selectCode!==undefined){
-            console.log(selectCode);
-            console.log("HELLO");
+            //console.log(selectCode);
+            //console.log("HELLO");
             {allCourse.map(item => {
                 if(item.Code==selectCode){
                     if(check == 0){
@@ -114,13 +95,21 @@ const Dropdowntest=()=> {
                         setSelectNameEn(item.NameEn)
                         check = 1;
                     }
-                    Teacheroption.push({ value: item.Teacher, label: item.Teacher })
+                    Teacheroption.push({ value: item.id, label: item.Teacher })
                 }
             })}
+            console.log(Teacheroption);
             setTeacherOptions(Teacheroption);
         }
     },[selectCode])
 
+    useEffect(()=>{
+        if(selectCourseId!==undefined){
+            console.log(selectCourseId);
+            console.log(selectTeacher);
+        }
+    },[selectCourseId])
+    
     return (
         <div className="hot-kl">
             {visible &&
@@ -154,9 +143,8 @@ const Dropdowntest=()=> {
                         />
                 </div>
             }
-        </div>
-        
-      );
+        </div>  
+    );
 }
       
 
