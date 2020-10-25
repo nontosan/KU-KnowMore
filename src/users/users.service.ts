@@ -33,6 +33,10 @@ export class User_Service {
         return this.users.find(user => user.username === username);
     }
 
+    async findUserFromUserID(user_id: ObjectID): Promise<Users[]> {
+        return this.User_Repository.find({ where: { _id: user_id }});
+    }
+
     async findAllUsers() : Promise<Users[]> {  
         return this.User_Repository.find();
     }
@@ -45,8 +49,9 @@ export class User_Service {
     async updateUser(user_id: string, updateUser: Users) {
         return this.User_Repository.update(user_id, updateUser);
     }
-
-    async uploadUserProfilePic(user_id: string, uploadUserProfile) {
-        return this.User_Repository.update(user_id, uploadUserProfile)
+    
+    async uploadUserProfilePic(user_id: ObjectID, uploadUserProfile): Promise<Users[]>{
+        this.User_Repository.update(user_id.toString(), uploadUserProfile);
+        return this.findUserFromUserID(user_id);
     }
 }

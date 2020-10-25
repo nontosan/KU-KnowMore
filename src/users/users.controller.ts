@@ -42,7 +42,7 @@ export class User_Controller {
   
   @Post('/:user_id/profile_pic')
   @UseInterceptors(FileInterceptor('profile_pic', { storage: diskStorage({ destination: './profile_pic', filename: editFileName }) }))
-  async uploadProfilePic(@Param('user_id') user_id: string, @UploadedFile() profile_pic) {
+  async uploadProfilePic(@Param('user_id', ParseObjectIdPipe) user_id: ObjectID, @UploadedFile() profile_pic): Promise<Users[]> {
     var uploadUserProfile = {
       "pic_dir": profile_pic.path,
       "pic_name": profile_pic.filename
