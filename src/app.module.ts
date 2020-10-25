@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 import Blogs from './blogs/blogs.entity';
 import Courses from './courses/courses.entity';
@@ -37,6 +39,9 @@ import { AuthModule } from './auth/auth.module';
       database: 'KU-KnowMore',
       entities: [Blogs, Courses, Users, Sections, Comments, Reviews, Likes, Reports, Attachments,loginpage],
       synchronize: true,
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..'),
     }),
     // TypeOrmModule.forRoot({
     //   type: 'mongodb',

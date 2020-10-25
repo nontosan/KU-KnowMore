@@ -2,10 +2,24 @@ import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Put, Upl
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ObjectID } from 'mongodb';
 import { ParseObjectIdPipe } from '../common/pipes';
+import { diskStorage } from 'multer';
 
 import Users from './users.entity';
+
 import { CreateUserDto } from '../dto/create-users.dto';
 import { User_Service } from './users.service';
+
+const editFileName = (req, file, callback) => {
+  const original = file.originalname;
+  const name = original.split('.')[0];
+  const extIndex = original.split('.').length - 1;
+  const fileExtName =(original.split('.')[extIndex]);
+  const randomName = Array(4)
+    .fill(null)
+    .map(() => Math.round(Math.random() * 16).toString(16))
+    .join('');
+  callback(null, `${name}_${randomName}.${fileExtName}`);
+};
 
 @Controller('users')
 export class User_Controller {
@@ -22,20 +36,12 @@ export class User_Controller {
   }
   
   @Post()
-  @UseInterceptors(FileInterceptor('profile_pic'))
-  async create(@Body() createuserDto: CreateUserDto, @UploadedFile() profile_pic) {
-    var newCreateUserDto: CreateUserDto = {
-      "name": createuserDto.name,
-      "pic_dir":profile_pic.path,
-      "pic_name": profile_pic.filename,
-      "profile_description": createuserDto.profile_description,
-      "username": createuserDto.username
-    };
-    return this.Service.create(newCreateUserDto);
+  async create(@Body() createuserDto: CreateUserDto): Promise<Users> {
+    return this.Service.create(createuserDto);
   }
-
+  
   @Post('/:user_id/profile_pic')
-  @UseInterceptors(FileInterceptor('profile_pic'))
+  @UseInterceptors(FileInterceptor('profile_pic', { storage: diskStorage({ destination: './profile_pic', filename: editFileName }) }))
   async uploadProfilePic(@Param('user_id') user_id: string, @UploadedFile() profile_pic) {
     var uploadUserProfile = {
       "pic_dir": profile_pic.path,

@@ -10,7 +10,7 @@ import Users from './users.entity';
 @Module({
     imports: [
         TypeOrmModule.forFeature([Users]),
-        MulterModule.register({ dest: './profile_pic' })
+        MulterModule.register({ dest: './profile_pic' }),
     ],
     controllers: [User_Controller],
     providers: [User_Service],
