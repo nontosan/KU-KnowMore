@@ -2,8 +2,6 @@
 import React, { useState , Component, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
-import Form from 'react-bootstrap/Form';
-import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , draftStateToHTML} from 'react-wysiwyg-typescript';
 import BlogService from "../services/BlogsService"
 import {Blog} from "../interfaces/blog"
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -14,7 +12,6 @@ import {
 // END OF IMPORT LIBRARY //
 
 // IMPORT SERVICE //
-import SectionService from '../services/SectionService';
 import ProfileService from '../services/ProfileService';
 // END OF IMPORT SERVICE //
 
@@ -70,6 +67,15 @@ const UserPage = (props:any) => {
         }
     }
 
+    const isCanEdit = (usid:any) => {
+        if (usid == userId){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     useEffect(() => {
         fetchProfile();
         fetchBlogs()
@@ -87,7 +93,7 @@ const UserPage = (props:any) => {
                         <h4>Activity : </h4>
                     </div>
                 ))}
-                <Link className="blog-fr" to="/editProfile">
+                <Link className="blog-fr" to={`/editProfile/${userId}`}>
                     <Button className="blog-fr" variant="danger">EDIT USER INFORMATION</Button>
                 </Link>
             </div>
@@ -97,20 +103,28 @@ const UserPage = (props:any) => {
                         <ListGroup variant="flush" className="show-blog">
                             <div>
                                 <Link className="blog-fl" to={`/readknowledge/${item.id}`}>
-                                    <ListGroup.Item><strong>{item.blog_name}</strong></ListGroup.Item>
+                                    <ListGroup.Item><strong>{item.blog_name} {item.user_id}</strong></ListGroup.Item>
                                 </Link>
-                                <Button className="blog-fl" variant="outline-danger">EDIT</Button>
-                                <Button className="blog-fl" variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
+                                {isCanEdit(item.user_id) &&
+                                    <div>
+                                        <Button className="blog-fl" variant="outline-danger">EDIT</Button>
+                                        <Button className="blog-fl" variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
+                                    </div>
+                                }
                             </div>
                         </ListGroup>
                     :
                         <ListGroup variant="flush" className="show-blog">
                             <div>
                                 <Link className="blog-fl" to={`/readSection/${item.id}`}>
-                                    <ListGroup.Item><strong>{item.blog_name}</strong></ListGroup.Item>
+                                    <ListGroup.Item><strong>{item.blog_name} {item.user_id}</strong></ListGroup.Item>
                                 </Link>  
-                                <Button className="blog-fl" variant="outline-danger">EDIT</Button>
-                                <Button className="blog-fl" variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
+                                {isCanEdit(item.user_id) &&
+                                    <div>
+                                        <Button className="blog-fl" variant="outline-danger">EDIT</Button>
+                                        <Button className="blog-fl" variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
+                                    </div>
+                                }
                             </div>
                             
                         </ListGroup>

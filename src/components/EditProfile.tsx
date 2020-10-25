@@ -4,6 +4,10 @@ import Button from 'react-bootstrap/Button';
 import { Col, Container, Row } from 'react-bootstrap';
 // END OF IMPORT LIBRARY //
 
+// IMPORT COMPONENT //
+import Upload from './UploadProfile';
+// END OF IMPORT COMPONENT //
+
 // IMPORT SERVICE //
 import ProfileService from '../services/ProfileService';
 // END OF IMPORT SERVICE //
@@ -25,7 +29,7 @@ const [picture,setpicture] = useState("");
 const [directory,setdir] = useState("");
 const history=useHistory()
 
-const buttonstate = () => {
+const buttonstate = (props:any) => {
 
   const newProfile :User_Sch = {
     name:nme,
@@ -68,15 +72,8 @@ const buttonstate = () => {
           onChange={e => setdescriptions(e.target.value)}>
           </textarea>
         </div>
-        <div className = "pic">
-            <input multiple type ="file" value = {picture}
-            onChange = {e => setpicture(e.target.value)}></input>
+        <Upload />
         </div>
-      </div>
-    <div className="button">
-        <Button variant="success" onClick = {buttonstate}>Submit</Button>
-        <Button variant="danger" onClick={e=>history.goBack()}> Cancel </Button>
-    </div>
     </div>
   );
 }
