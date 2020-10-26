@@ -1,4 +1,3 @@
-// IMPORT LIBRARY //
 import React, { useState,useEffect } from 'react';
 import Select from 'react-select';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -149,6 +148,3 @@ const Dropdowntest=()=> {
       
 
 export default Dropdowntest;
-
-
-

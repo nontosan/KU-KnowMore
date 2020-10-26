@@ -1,12 +1,11 @@
 // IMPORT LIBRARY //
-import React , { useState , useEffect } from "react";
+import React , { useState , useEffect , Suspense} from "react";
 import Button from 'react-bootstrap/Button';
+import Upload from './UploadProfile';
+import DownloadFile from './DownloadFile';
+import ImageComponent from './Display';
 import { Col, Container, Row } from 'react-bootstrap';
 // END OF IMPORT LIBRARY //
-
-// IMPORT COMPONENT //
-import Upload from './UploadProfile';
-// END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
 import ProfileService from '../services/ProfileService';
@@ -20,52 +19,71 @@ import { User_Sch} from "../interfaces/user";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './editprofile.css';
 import {useHistory} from "react-router"
+
 function EditProfile (props:any) {
-const userId = props.match.params.userId
-console.log(userId);
-const [usrname,setusername] = useState("");
-const [descriptions,setdescriptions] = useState ("");
-const [nme,setname] = useState("");
-const [picture,setpicture] = useState("");
-const [directory,setdir] = useState("");
-const history=useHistory()
+  const userId = props.match.params.userId
+  //console.log(userId)
+  
+  const fetchProfile = () => {
+    ProfileService.fetchProfileSpecific(userId)
+    .then(userInfo => {
+      setUserInformation(userInfo);
+      console.log(userInfo);
+    })
+  }
+  
+  useEffect(() => {
+    fetchProfile();
+  },[])
+  
+  const [userInformation, setUserInformation] = useState<User_Sch[]>([]);
+  const [usrname,setusername] = useState("");
+  const [descriptions,setdescriptions] = useState ("");
+  const [nme,setname] = useState("");
+  const history=useHistory();
+  
+  const buttonstate = () => {
+    //const userId = props.match.params.userId
+    //console.log(userId)
+    const editedProfile :User_Sch = {
+      name:nme,
+      profile_description:descriptions,
+      username:usrname,
+    };
 
-const buttonstate = (props:any) => {
 
-  const newProfile :User_Sch = {
-    name:nme,
-    profile_description:descriptions,
-    pic_name:"81082cfe10658c7ea8f4bfdd85da05ea",//has problem with upload pic
-    username:usrname,
-    pic_dir:"profile_pic/81082cfe10658c7ea8f4bfdd85da05ea" //has problem with upload pic
-  };
-  console.log(newProfile);
-  ProfileService.CreateProfile(newProfile) 
-    .then(savedNewProfile => {
-      if (savedNewProfile !== null) {
-        console.log(savedNewProfile);
-      } else{
-        alert("Save Error");
-      }
-    });
-}; 
+    /*
+    console.log(newProfile);
+    ProfileService.CreateProfile(newProfile) 
+      .then(savedNewProfile => {
+        if (savedNewProfile !== null) {
+          console.log(savedNewProfile);
+        } else{
+          alert("Save Error");
+        }
+      });*/
 
-/*note
-        <div className = "Upload">
-            <button onClick = {buttonstate}>Upload</button>
-      </div>
-*/
+      console.log(editedProfile);
+      ProfileService.EditPro(editedProfile,userId)
+        .then(savedEditedProfile => {
+          console.log(savedEditedProfile)
+        });
+  }; 
 
   return (
     <div className ="EditProfile">
       <div className="profile">
         <div className = "Name">
-          <input className="input" placeholder="Name" type="text" value={nme}
+          {userInformation.map(UserInfo=>
+          <input className="input" placeholder={UserInfo.name} type="text" value={nme}
           onChange={e => setname(e.target.value)}></input>
+            )}
         </div>
         <div className = "Username">
-          <input className="input" placeholder="Username" type="text" value={usrname}
+          {userInformation.map(UserInfo=>
+          <input className="input" placeholder={UserInfo.username} type="text" value={usrname}
           onChange={e => setusername(e.target.value)}></input>
+            )}
         </div>
         <div className = "Des">
           Profile Descriptions: <br/>
@@ -73,7 +91,21 @@ const buttonstate = (props:any) => {
           onChange={e => setdescriptions(e.target.value)}>
           </textarea>
         </div>
-        <Upload />
+        <div className="button">
+        <Button variant="success" onClick = {buttonstate}>Submit</Button>
+        <Button variant="danger"> Cancel </Button>
+        </div>
+        ---------------
+        <Upload userID={userId}/>
+        ---------------
+        This is my Profile_Pic
+        <div className="Pro_pic">
+        <Suspense fallback={<div>Loading... </div>}>
+          {userInformation.map(a=>
+          <ImageComponent userid={a.pic_dir}/>
+          )}
+        </Suspense>
+        </div>
         </div>
     </div>
   );

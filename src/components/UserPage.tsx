@@ -1,10 +1,11 @@
 // IMPORT LIBRARY //
-import React, { useState , Component, useEffect } from 'react';
+import React, { useState , Component, useEffect, Suspense } from 'react';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 import BlogService from "../services/BlogsService"
 import {Blog} from "../interfaces/blog"
 import ListGroup from 'react-bootstrap/ListGroup';
+import ImageComponent from './Display';
 
 import {
     Link, Redirect,
@@ -33,6 +34,8 @@ import ProfilePic from '../photo/profilepic.png';
 const UserPage = (props:any) => {
     const [userInformation, setUserInformation] = useState<User_Sch[]>([]);
     const [blogs,setBlogs] = useState<Blog[]>([])
+    const [UrlLink, setUrl]=useState<string>("");
+    const [afterSave, setafterSave] = useState<boolean>(false);
     const userId = props.match.params.userId
     const fetchBlogs=()=>{
         //may use userid from location
@@ -76,15 +79,29 @@ const UserPage = (props:any) => {
         }
     }
 
+    const handleRedirect = (blog_id : any) => {
+        setUrl(blog_id);
+    }
+
     useEffect(() => {
         fetchProfile();
         fetchBlogs()
     },[])
 
+    useEffect(() => {
+        if (UrlLink !== ""){
+          console.log(UrlLink);
+          setafterSave(!afterSave);
+        }
+      },[UrlLink]);
+
     return (
         <div>
             <div className="main-div">
-                <Image className="profile-page-pic blog-fl" src={ProfilePic} roundedCircle />
+            <Suspense fallback={<div>Loading... </div>}>
+                {userInformation.map(a=>
+                <ImageComponent userid={a.pic_dir}/>)}
+            </Suspense>
                 {userInformation.map(userInformation => (
                     <div className="profile-info blog-fl">
                         <h4>Name : {userInformation.name}</h4>
@@ -121,7 +138,9 @@ const UserPage = (props:any) => {
                                 </Link>  
                                 {isCanEdit(item.user_id) &&
                                     <div>
-                                        <Button className="blog-fl" variant="outline-danger">EDIT</Button>
+                                        <Link to={`/editReview/${item.id}`}>
+                                        <Button className="blog-fl" variant="outline-danger" onClick={e=>handleRedirect(item.id)}>EDIT</Button>
+                                        </Link>
                                         <Button className="blog-fl" variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
                                     </div>
                                 }

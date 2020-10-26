@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import React, { useState, useEffect, useMemo } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Blog,Review } from '../interfaces/blog';
+import { Blog,Review,create_Blog } from '../interfaces/blog';
 import { Course } from '../interfaces/course';
 
 // IMPORT COMPONENT //
@@ -51,11 +51,14 @@ const CreateRwBlog=(props : any)=> {
   const [roomScore, setRoomScore] = useState(0);
   const [overallScore, setOverallScore] = useState(0);
   const [editorValue, setEditorValue] = useState("");
+  // Etc
+  const blogId = window.location.pathname.split("/")[2];
+  
 
   useEffect(() => {
     //alert("component rendered")
-    if(props.blogtype == "edit"){
-      BlogsService.fetchReviewOfBlog(props.blogid)
+    if(blogId){
+      BlogsService.fetchReviewOfBlog(blogId)
       .then(reviewArray => {
         let review_info = reviewArray[0];
         setTeachScore(review_info.teaching);
@@ -63,7 +66,7 @@ const CreateRwBlog=(props : any)=> {
         setRoomScore(review_info.classroom);
         setOverallScore(review_info.overall);
         setEditorValue(review_info.content);  // Done
-        BlogsService.fetchBlogSpecific(props.blogid)
+        BlogsService.fetchBlogSpecific(blogId)
         .then(blogArray => {
           let blog_info = blogArray[0];
           setBlogName(blog_info.blog_name); // Done
@@ -81,7 +84,7 @@ const CreateRwBlog=(props : any)=> {
 
   // CreateNewBlog function
   const handleNewBlogSave = () => {
-    const newBlog: Blog = {
+    const newBlog: create_Blog = {
       course_id: courseCode,
       user_id: "5f82fd5504eb8600aa617b6b",
       type: "review",

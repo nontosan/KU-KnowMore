@@ -1,4 +1,5 @@
 import { User_Sch } from '../interfaces/user';
+import { useImage } from 'react-image';
 
 
 async function fetchProfileSpecific(userid:string): Promise<User_Sch[]> {
@@ -22,6 +23,16 @@ async function CreateProfile(newProfile: User_Sch): Promise<User_Sch|null> {
     }
 }
 
+async function EditPro(editProfile: User_Sch,userid:string): Promise<User_Sch|null> {
+    await fetch(`http://188.166.178.33:3000/users/${userid}`,{
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(editProfile)
+    });
+    return editProfile;
+}
+
+
 export default {
-    fetchProfileSpecific, CreateProfile
+    fetchProfileSpecific, CreateProfile, EditPro
 };
