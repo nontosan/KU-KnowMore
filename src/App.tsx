@@ -80,6 +80,7 @@ const App = () => {
     const logout = () => {
         LoginService.UserLogout();
         setUsername(null);
+        setUsername(null);
         setLog(true);
         alert('ออกจากระบบแล้ว')
     };
@@ -94,7 +95,7 @@ const App = () => {
                 })
         }
     }
-
+    //console.log(userId);
     useEffect(() => {
         if(userId !== null) {
             fetchProfile();
@@ -190,15 +191,49 @@ const App = () => {
                                 <Showklinmain />
                             </ListGroup>
                         </div>
-                        <div className="hot-kl">
+                        <div className="hot-kl" style={{ marginBottom : "50px" }}>
                             <Card.Header>REVIEW BLOG</Card.Header>
                             <ListGroup variant="flush">
                                 <Showrwinmain />
                             </ListGroup>
-                            
                         </div>
                     </Route>
                 </Switch>
+                <div>
+                    <div className="three-column-footer-contact-form-container">
+                        <footer className="three-column-footer-contact-form" data-equalizer data-equalize-by-row="true">
+                            <div className="footer-left" data-equalizer-watch>
+                                <div className="baseline">
+                                    <div className="contact-details">
+                                        <h6>Contact details</h6>
+                                        <p><i className="fa fa-phone fa-lg" aria-hidden="true"></i> 01234 567890</p>
+                                        <p><a href="#"><i className="fa fa-envelope-o" aria-hidden="true"></i> Contact us</a></p>
+                                        <p><i className="fa fa-map-marker fa-lg" aria-hidden="true"></i> Street, City, County, Country</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="footer-right" data-equalizer-watch>
+                                <div className="baseline">
+                                    <div className="social">
+                                        <i className="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+                                        <i className="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+                                        <i className="fa fa-google-plus-square fa-2x" aria-hidden="true"></i>
+                                        <i className="fa fa-linkedin-square fa-2x" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="footer-right" data-equalizer-watch>
+                                <h6>Opening times</h6>
+                                <p>Mon - Fri 9:00am - 5:00pm</p>
+                                <p>Sat 9:00am - 8:00pm</p>
+                                <p>Sun 9:00am - 4:00pm</p>
+                                <div className="baseline">
+                                    <img className="thumbnail footer-img" src="https://i.pinimg.com/474x/e4/fe/d9/e4fed988ab8592a40598812d8daedab2.jpg"/>
+                                </div>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
             </div>
         </Router>
     );

@@ -38,7 +38,7 @@ const KnowledgeBlog = () => {
     const fetchBlogs = async() => {
         const x =await BlogsService.fetchKnowledgeBlogs()
             .then(blogs => {
-                console.log(blogs);
+                //console.log(blogs);
                 setBlogs(blogs);
                 //console.log(blogs);
             });
@@ -80,19 +80,24 @@ const KnowledgeBlog = () => {
 
     return (
         <div>
-            <div className="hot-kl">
+            <div className="hot-kl" style={{ marginBottom : "50px" }}>
                 <Card.Header className="card-header">KNOWLEDGE BLOG</Card.Header>
                 {blogs.map(blog => (
-                    <div className="show-blog">
-                        <Link to={`/read${blog.type}/${blog.id}`}>
+                    <div>
+                        <Link className="show-all-blog" to={`/read${blog.type}/${blog.id}`}>
                             <div className="blog-fl black-font">
-                                Blog Name : {blog.blog_name} &nbsp;&nbsp;&nbsp;&nbsp; Viewer :{blog.viewers} &nbsp;&nbsp;&nbsp;&nbsp; Last Edit :{blog.last_edit}  
-                            </div> 
+                                {blog.blog_name}
+                            </div>
+                            <div className="blog-fl black-font" style={{ textAlign : "center" }}>
+                                {blog.viewers} View
+                            </div>
+                            <div className="blog-fl black-font" style={{ textAlign : "center" }}>
+                                Last Edit : {blog.last_edit}
+                            </div>
                             <UserAuthor
                                 userid = {blog.user_id}
                             />
                         </Link>
-                        <br />
                     </div>
                 ))}
             </div>

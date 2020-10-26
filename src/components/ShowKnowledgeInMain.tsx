@@ -47,12 +47,10 @@ const Showklinmain = () => {
         <div>
             {blogs.map(blog => ( 
                 <ListGroup.Item className="blogcontainer" >
-                    <NavLink to={`/read${blog.type}/${blog.id}`}>
-                        <button className="blogclick" onClick={readknowledge}>
-                            <div className="element">{blog.blog_name}</div>
-                            <div className="element">  viewer {blog.viewers}</div>
-                            <div className="element">  last edit {blog.last_edit}</div>
-                        </button>  
+                    <NavLink className="blogclick" to={`/read${blog.type}/${blog.id}`}>
+                        <div className="element">{blog.blog_name}</div>
+                        <div className="element">  viewer {blog.viewers}</div>
+                        <div className="element">  last edit {blog.last_edit}</div>
                     </NavLink>
                 </ListGroup.Item>
             ))}
