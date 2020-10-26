@@ -1,4 +1,4 @@
-import { Blog, Review } from '../interfaces/blog';
+import { Blog, Review ,create_Blog } from '../interfaces/blog';
 
 async function fetchBlogs(): Promise<Blog[]> {
     const res = await fetch(`http://188.166.178.33:3000/blogs`);
@@ -6,7 +6,7 @@ async function fetchBlogs(): Promise<Blog[]> {
     return blogs;  
 }
 
-async function createBlog(newBlog: Blog): Promise<Blog|null> {
+async function createBlog(newBlog: create_Blog): Promise<Blog|null> {
     const res = await fetch(`http://188.166.178.33:3000/blogs`,{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -49,7 +49,7 @@ async function fetchReviewSpecific(reviewid:string): Promise<Review|null> {
 
 async function fetchBlogSpecific(blogid:string): Promise<Blog[]> {
     const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}`);
-    console.log(blogid)
+    //console.log(blogid)
     const blogInfo = await res.json();
     return blogInfo;  
 }

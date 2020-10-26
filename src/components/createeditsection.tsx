@@ -12,22 +12,25 @@ import {
   BrowserRouter as Router,
   Link,
 } from 'react-router-dom';
-
+import Select from 'react-select';
+import {Formik,Form,Field,ErrorMessage} from "formik"
 // END OF IMPORT LIBRARY //
 
 // IMPORT COMPONENT //
 import EditBlogContent from '../gadget/editblogcontent';
+import ReportModal from "../modals/ChangBlogInfo"
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
 import  loadeditsection from "../services/loadeditsection";
 import BlogsService from "../services/BlogsService"
 import SectionService from "../services/SectionService";
+import CourseService from "../services/CourseService"
 // END OF IMPORT SERVICE //
 
 // IMPORT INTERFACE //
 import { Section_Edit } from '../interfaces/SectionEdit';
-
+import { Course, Course_real } from '../interfaces/course';
 // END OF IMPORT INTERFACE//
 
 // IMPORT CSS //
@@ -37,7 +40,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 // IMPORT PHOTO //
 // END OF IMPORT PHOTO //
-
+import Dropdowntest from "../gadget/create_blog"
 //------------------------------------------------------------------//
 
 type editsection={
@@ -50,75 +53,97 @@ const CreateEditSection = (props:any) => {
   const [sectionsInformation, setSectionsInformation] = useState<Section[]>([]);
   const [sections,setsections] = useState<Section_Edit[]>([])
   const [blogsInfomation,setBlogsInfomation] = useState<Blog[]>([])
-  const blogId = props.match.params.blogId
+  const blogId =window.location.pathname.split("/")[2]
   const history = useHistory()
-
+  ///////////////////////////////copy/////////////////////////////////////
+  const resultLimit = 10
+    let i = 0;
+    let k = 0;
+    let check = 0;
+    const [allCourse,setAllCourse] = useState<any[]>([]);
+    const codeoption:any[]=[]
+    const Teacheroption:any[]=[]
+    const [codeOptions,setCodeOptions] = useState<any[]>([]);
+    const [teacherOptions,setTeacherOptions] = useState<any[]>([]);
+    const [course,setCourse] = useState<Course_real[]>([])
+    const code:any[]=[]
+    const [selectCode,setSelectCode] =useState<string>('');
+    const [selectNameTh, setSelectNameTh] = useState<string>('');
+    const [selectNameEn, setSelectNameEn] = useState<string>('');
+    const [selectTeacher, setSelectTeacher] = useState<string>('');
+    const [selectCourseId, setSelectCourseId] = useState<string>('');
+    const [visible,setVisible] = useState<boolean>(false)
+  ///////////////////////////////end copy//////////////////////////////////
   //fetch blog from database
   const fetchBlogs = () => {
     BlogsService.fetchBlogSpecific(blogId)
-      .then(blogInfo => {
+      .then(async(blogInfo) => {
+        //console.log(blogInfo)
         setBlogsInfomation(blogInfo);
-        console.log(blogInfo);
-      });
+        setSelectCourseId(blogInfo[0].course_id)
+        fetchCourse(blogInfo[0].course_id)
+        //finding course_i
+      })
   }
-
+  const fetchCourse =(x:string)=>{
+    CourseService.fetchCourse().then(res=>{
+        setCourse(res)
+        setAllCourse(res);
+        res.forEach((value,index)=>{
+            codeoption.push({ value: value.Code, label: value.Code })
+            //console.log(x)
+            if(value.id===x){
+              console.log("found")
+              setSelectCode(value.Code)
+              setSelectNameTh(value.NameTh)
+              setSelectNameEn(value.NameEn)
+              setSelectTeacher(value.Teacher)
+            }
+        })
+        setVisible(true);
+    })
+    setCodeOptions(codeoption);
+}
+  
   const fetchsection = () => {
     SectionService.fetchSections(blogId)
       .then(Arraysections => {
         setSectionsInformation(Arraysections);
       });
-  }
-
-  //delete section  
-  const handledeletesection=(sectionId:any)=>{
-    SectionService.deleteSection(sectionId).then()
-  }
-
-
-  //edit section => create route with section data from backend
-  const handleeditsection=()=>{
-    console.log("create route to create section")
-  }
-
-  //refreh
+  }    
   useEffect(()=>{
-    fetchBlogs();
-    fetchsection();
+      fetchBlogs();
+      fetchsection();
+    
   },[])
-
   return (
     <div>
-      <div className="hot-kl">
-        {blogsInfomation.map(blogInfomation=>(
-        <div>
-          <h3>Blog Name : {blogInfomation.blog_name}</h3>
-          <h3>Course ID : {blogInfomation.course_id}</h3>
-        </div>
-        ))}
-      </div>
+          <div className="bg_color">
+            {visible &&
+              <div className="Blog_Info">
+              <div className="Blog_frame1">
+                  <div className="Blog_name">ชื่อบล็อค </div>
+                  <div className="Blog_name2">{blogsInfomation[0].blog_name}</div>
+                  <div className="Blog_name">รหัสวิชา </div>
+                  <div className="Blog_name2">{selectCode}</div>
+                  <div className="Blog_name">ชื่อวิชา </div>
+                  <div className="Blog_name2">{selectNameEn}  ({selectNameTh})</div>
+                  <div className="Blog_name">ชื่อวิชา </div>
+                  <div className="Blog_name2">{selectTeacher}</div>
+                </div>
+                <ReportModal fetchBlogs={fetchBlogs} />
+            </div>
+            }
 
-      <div className="hot-kl">
-        {sectionsInformation.map(item=>(
-          <div>
-            <ListGroup variant="flush" className="show-blog">
-              <Link to={`/readSection/${item.id}`}>
-                <ListGroup.Item><strong>{item.section_name}</strong> {item.blog_id} {item.id}</ListGroup.Item>
+          </div>     
+            <div className="div-addsection">
+              <Link to={`/writeSection/${blogId}`}>
+                <Button variant="outline-secondary" className="button-addsection">
+                  <Image className="addsection" src={AddSection} roundedCircle />
+                </Button>
               </Link>
-              <Button className="cancel-button" variant="outline-secondary">Edit</Button>
-              <Button className="submit-button" variant="outline-secondary" onClick={e=>handledeletesection(item.id)}>Delete</Button>
-            </ListGroup>
-          </div>
-        ))}
+        </div>
       </div>
-      
-      <div className="div-addsection">
-        <Link to={`/writeSection/${blogId}`}>
-          <Button variant="outline-secondary" className="button-addsection">
-            <Image className="addsection" src={AddSection} roundedCircle />
-          </Button>
-        </Link>
-      </div>
-    </div>
   );
 };
 

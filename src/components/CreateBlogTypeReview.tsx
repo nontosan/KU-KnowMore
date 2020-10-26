@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import React, { useState, useEffect, useMemo } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Blog,Review } from '../interfaces/blog';
+import { Blog,Review,create_Blog } from '../interfaces/blog';
 import { Course } from '../interfaces/course';
 
 // IMPORT COMPONENT //
@@ -81,7 +81,7 @@ const CreateRwBlog=(props : any)=> {
 
   // CreateNewBlog function
   const handleNewBlogSave = () => {
-    const newBlog: Blog = {
+    const newBlog: create_Blog = {
       course_id: courseCode,
       user_id: "5f82fd5504eb8600aa617b6b",
       type: "review",
