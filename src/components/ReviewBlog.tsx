@@ -7,6 +7,11 @@ import {
   } from 'react-router-dom';
 // END OF IMPORT LIBRARY //
 
+// IMPORT COMPONENT //
+import DeleteModal from '../modals/DeleteModal';
+import UserAuthor from './UserAuthor';
+// END OF IMPORT COMPONENT //
+
 // IMPORT SERVICE //
 import BlogsService from '../services/BlogsService';
 // END OF IMPORT SERVICE //
@@ -40,12 +45,23 @@ const ReviewBlog = () => {
     },[]);
     return (
         <div>
-            <div className="hot-kl">
-                <Card.Header>REVIEW BLOG</Card.Header>
-                {blogs.map(blog => ( 
+            <div className="hot-kl" style={{ marginBottom : "50px" }}>
+                <Card.Header className="card-header">REVIEW BLOG</Card.Header>
+                {blogs.map(blog => (
                     <div>
-                        <Link to={`/read${blog.type}/${blog.id}`}>
-                            {blog.id} {blog.course_id} {blog.user_id} {blog.type} {blog.viewers} {blog.blog_name} {blog.last_edit}       
+                        <Link className="show-all-blog" to={`/read${blog.type}/${blog.id}`}>
+                            <div className="blog-fl black-font">
+                                {blog.blog_name}
+                            </div>
+                            <div className="blog-fl black-font" style={{ textAlign : "center" }}>
+                                {blog.viewers} View
+                            </div>
+                            <div className="blog-fl black-font" style={{ textAlign : "center" }}>
+                                Last Edit : {blog.last_edit}
+                            </div>
+                            <UserAuthor
+                                userid = {blog.user_id}
+                            />
                         </Link>
                     </div>
                 ))}

@@ -18,6 +18,7 @@ import {useHistory} from "react-router"
 // IMPORT SERVICE //
 import BlogsService from "../services/BlogsService";
 import SectionService from "../services/SectionService";
+import LoginService from '../services/LoginService';
 // END OF IMPORT SERVICE //
 
 // IMPORT INTERFACE //
@@ -42,15 +43,16 @@ import Alert from '../photo/alert.png';
 const ReadBlogKnowledge = (props:any) => {
   const [sectionsInformation, setSectionsInformation] = useState<Section[]>([]);
   const [blogsInformation,setBlogsInformation] = useState<Blog[]>([]);
+  const [author, setAuthor] = useState<string>('');
   const history = useHistory()
   //console.log(props.match.params)
   const blogId = props.match.params.blogId
-  
   //fetch blog from database
   const fetchBlogs = () => {
     BlogsService.fetchBlogSpecific(blogId)
       .then(blogInfo => {
         setBlogsInformation(blogInfo);
+        setAuthor(blogInfo[0].user_id);
         //console.log(blogInfo);
       });
   }
@@ -71,17 +73,21 @@ const ReadBlogKnowledge = (props:any) => {
   return (
     <div>
       <div className="hot-kl">
-        <Card.Header>KNOWLEDGE ISUS</Card.Header>
-      </div>
-      <div className="hot-kl">
         {blogsInformation.map(blogInformation=>(
           <Card.Header>
             Blog Name : {blogInformation.blog_name} <br />
             Course ID : {blogInformation.course_id}
           </Card.Header>
         ))}
+        {author==localStorage.userId &&
+          <div>
+            <Button className="blog-fl" variant="outline-danger">EDIT</Button>
+            <Button className="blog-fl" variant="outline-warning">DELETE</Button>
+          </div>
+        }
       </div>
       <div className="hot-kl">
+        <Card.Header>SECTION</Card.Header>
         {sectionsInformation.map(item=>(
           <div>
             <Link className="show-blog" to={`/readSection/${item.id}`}>

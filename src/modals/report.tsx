@@ -123,7 +123,7 @@ const ReportModal=()=>{
     return (
     <div>
       <Button onClick={() => setModalShow(true)}>
-        <Image className="likebar-pic" src={Alert}/>
+        <Image style={{ display: "inline" }} className="likebar-pic" src={Alert}/>
       </Button>
 
       <MyVerticallyCenteredModal

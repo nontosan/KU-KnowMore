@@ -6,11 +6,16 @@ import BlogService from "../services/BlogsService"
 import {Blog} from "../interfaces/blog"
 import ListGroup from 'react-bootstrap/ListGroup';
 import ImageComponent from './Display';
-
+import Card from 'react-bootstrap/Card';
 import {
     Link, Redirect,
   } from 'react-router-dom';
 // END OF IMPORT LIBRARY //
+
+// IMPORT COMPONENT //
+import DeleteModal from '../modals/DeleteModal';
+import UserAuthor from './UserAuthor';
+// END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
 import ProfileService from '../services/ProfileService';
@@ -116,6 +121,29 @@ const UserPage = (props:any) => {
                 <Link className="blog-fr" to={`/editProfile/${userId}`}>
                     <Button className="blog-fr" variant="danger">EDIT USER INFORMATION</Button>
                 </Link>
+            </div>
+            <div className="hot-kl" style={{ marginBottom : "50px" }}>
+                <Card.Header className="card-header">MY BLOG</Card.Header>
+                {blogs.map(blog => {
+                    if(blog.user_id==userId){
+                        return (
+                            <div>
+                                <Link className="show-all-blog" to={`/read${blog.type}/${blog.id}`}>
+                                    <div className="blog-fl black-font">
+                                        {blog.blog_name}
+                                    </div>
+                                    <div className="blog-fl black-font" style={{ textAlign : "center" }}>
+                                        {blog.viewers} View
+                                    </div>
+                                    <div className="blog-fl black-font" style={{ textAlign : "center" }}>
+                                        Last Edit : {blog.last_edit}
+                                    </div>
+                                    <UserAuthor
+                                        userid = {blog.user_id}
+                                    />
+                                </Link>
+                            </div>
+                )}})}
             </div>
             {
                 blogs.map((item:Blog)=>{

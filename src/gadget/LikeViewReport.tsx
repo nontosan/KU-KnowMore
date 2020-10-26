@@ -48,9 +48,9 @@ const LikeViewReport=(props:any)=> {
             <div className="hot-kl">
                 <Card.Header>
                     {like ? <button onClick={clicklike}><Image className="likebar-pic" src={afterLike} /></button> : <button onClick={clicklike}><Image className="likebar-pic" src={beforeLike} /></button> }
-                    <div>{liker.length}</div>
-                    <Image className="likebar-pic" src={Viewer} />{bloginfo.map(x=>(<div>{x.viewers}</div>))}
-                    <ReportModal />
+                    <div style={{ display: "inline" }}>{liker.length}</div>
+                    <Image style={{ display: "inline" }} className="likebar-pic" src={Viewer} />{bloginfo.map(x=>(<div style={{ display: "inline" }}>{x.viewers}</div>))}
+                    <ReportModal/>
                 </Card.Header>
             </div>
         </div>
