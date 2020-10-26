@@ -48,8 +48,8 @@
 }
 
 .profile-page-pic{
-    height: 200px;
-    width: 200px;
+    height: 70px;
+    width: 70px;
 }
 
 .profile-info{
@@ -59,4 +59,39 @@
 .show-blog{
     color: rgb(153, 153, 153);
     border-bottom: rgba(0,0,0,.125) solid 1px;
+}
+/* for Navbar_admin */
+.bgNavbar{
+    background: rgb(32,124,27);
+    background: linear-gradient(90deg, rgba(32,124,27,1) 0%, rgba(56,148,70,1) 27%, rgba(123,196,109,1) 100%);
+}
+
+.picture-padding{
+    margin-right: 30px;
+}
+
+.size-KU-knowmore{
+    font-size: 40px;
+}
+
+.size-sign{
+    font-size: 20px;
+}
+/* for list report */
+.size-text-report{
+    font-size: 20px;
+    text-align: center;
+}
+
+/* for button X */
+.button_x{
+    width: 48px;
+    height: 40px;
+    text-align: center;
+    background: rgb(255,103,103);
+    background: radial-gradient(circle, rgba(255,103,103,1) 0%, rgba(189,0,38,1) 100%);
+}
+
+.Center-text{
+    text-align: left;
 }

@@ -4,10 +4,10 @@ import ProfilePic from '../Photo/profilepic.png';
 import '../style/section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, ListGroup, Navbar } from 'react-bootstrap';
-import FetchReport_review from '../components/FetchReport-review';
 import { Link } from 'react-router-dom';
+import FetchReport_comment from '../components/FetchReport-comment';
 
-const ProfileAdmin = () => {
+const ProfileAdmin_comment1 = () => {
     return (
         <div>
             <Navbar className="navbar navbar-light bgNavbar"> 
@@ -27,7 +27,6 @@ const ProfileAdmin = () => {
                     </Navbar.Text>
                 </Navbar.Collapse>
             </Navbar>
-            
             <ListGroup.Item>
                 <p> Report : </p>
                 <Link to= {`/review`}>
@@ -40,8 +39,10 @@ const ProfileAdmin = () => {
                     <Button>Comment</Button>
                 </Link>
             </ListGroup.Item>
+            <FetchReport_comment />
+            
         </div>
     );
 }
 
-export default ProfileAdmin;
+export default ProfileAdmin_comment1

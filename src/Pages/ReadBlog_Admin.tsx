@@ -1,34 +1,18 @@
 import React, { useState,useEffect, useImperativeHandle } from 'react'
-import { Redirect } from 'react-router-dom';
 import { Section_Edit } from '../interfaces/section_edit';
-import  loadeditsection from "../services/loadeditsection";
-import Button from 'react-bootstrap/Button';
-import Image from 'react-bootstrap/Image';
 import { Blog }from '../interfaces/blog'
-import AddSection from '../photo/addsection.png';
 import Card from 'react-bootstrap/Card';
 import BlogsService from "../services/BlogsService"
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-} from 'react-router-dom';
-
-
-
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 type editsection={
   section:Section_Edit
 }
-type blogidformpagebefore={
-  blog_id:string
-}
-const ReadBlogReview = (props:any) => {
+
+const ReadBlog_Admin = (props:any) => {
   const [sections,setsections] = useState<Section_Edit[]>([])
-  const [blogsInfomation,setBlogsInfomation] = useState<Blog[]>([])
+  const [blogsInfo,setBlogsInfomation] = useState<Blog[]>([])
   
   console.log(props.match.params)
   const blogId = props.match.params.blogId
@@ -42,11 +26,6 @@ const ReadBlogReview = (props:any) => {
       });
   }
 
-  //function fetch section form database
-  const fetchsection=()=>{
-
-  }
-
   //delete section  
   const handledeletesection=()=>{
     fetch("api_path for delete section",{
@@ -56,12 +35,11 @@ const ReadBlogReview = (props:any) => {
     }).then(res=>res.json())
   }
 
-
   //edit section => create route with section data from backend
   const handleeditsection=()=>{
     console.log("create route to create section")
   }
-  const DeleteBest = () => {
+  const DeleteBlog = () => {
     BlogsService.deleteBlog(blogId)
     .then(blogs => {
         console.log(blogs)
@@ -74,36 +52,38 @@ const ReadBlogReview = (props:any) => {
     fetchBlogs();
   },[])
 
+  const blogtype = blogsInfo.map(a=>a.type)
+
   return (
     <div>
       <div className="hot-kl">
-        <Card.Header>REVIEW ISUS</Card.Header>
+        <Card.Header>
+          {(blogtype[0]==='review') ? 'Review Blog' : 'Knowledge Blog'} &nbsp;
+          <button onClick = {e => DeleteBlog()}>
+            DELETE
+          </button> 
+        </Card.Header>
       </div>
       <div className="hot-kl">
-        {blogsInfomation.map(blogInfomation=>(
+        {blogsInfo.map(blog=>(
           <Card.Header>
-            Blog Name : {blogInfomation.blog_name} <br />
-            Course ID : {blogInfomation.course_id}
+            Blog Name : {blog.blog_name} <br />
+            Course ID : {blog.course_id}
           </Card.Header>
         ))}
       </div>
       <div className="hot-kl">
-        {sections.map(item=>(
-          <div>
-            <div>{sections}13123123213</div>
-          </div>
-        ))}
-      </div>
-      <div className="hot-kl">
         <Card.Header>
-            <button onClick = {e => DeleteBest()}> DELETE</button>
+            <div>
+              Content
+            </div>
         </Card.Header>
       </div>
       <div  className="hot-kl">
         <Card.Header>COMMENT</Card.Header>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ReadBlogReview
+export default ReadBlog_Admin
