@@ -128,7 +128,7 @@ const App = () => {
                     <Route path="/login">
                         <LoginPage loginCallback={handleUserLogin}/>
                     </Route>
-                    <Route path="/editProfile" name="userId" component={EditProfile}></Route>
+                    <Route path="/editProfile/:userId" name="userId" component={EditProfile}></Route>
                     <Route path="/searchknowledgeblog">
                         <KnowledgeBlog />
                     </Route>

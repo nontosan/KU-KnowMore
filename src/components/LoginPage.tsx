@@ -22,10 +22,10 @@ const LoginPage=(props:LoginFormProps)=> {
     return (
         <div>
             <Formik
-                initialValues={{IdAccount:'john', Password:'test'}}
+                initialValues={{IdAccount:'aaaaaaaa', Password:'test'}}
                 onSubmit={(values,actions)=>{
                     const userLogin : Login = {
-                        username: 'john',
+                        username: 'aaaaaaaa',
                         password: 'test',
                     }
                     LoginService.UserLogin(userLogin)

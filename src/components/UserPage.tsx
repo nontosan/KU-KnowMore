@@ -1,10 +1,11 @@
 // IMPORT LIBRARY //
-import React, { useState , Component, useEffect } from 'react';
+import React, { useState , Component, useEffect, Suspense } from 'react';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 import BlogService from "../services/BlogsService"
 import {Blog} from "../interfaces/blog"
 import ListGroup from 'react-bootstrap/ListGroup';
+import ImageComponent from './Display';
 
 import {
     Link, Redirect,
@@ -84,7 +85,10 @@ const UserPage = (props:any) => {
     return (
         <div>
             <div className="main-div">
-                <Image className="profile-page-pic blog-fl" src={ProfilePic} roundedCircle />
+            <Suspense fallback={<div>Loading... </div>}>
+                {userInformation.map(a=>
+                <ImageComponent userid={a.pic_dir}/>)}
+            </Suspense>
                 {userInformation.map(userInformation => (
                     <div className="profile-info blog-fl">
                         <h4>Name : {userInformation.name}</h4>
