@@ -37,6 +37,7 @@ async function createReview(newReview: Review, blogid:string): Promise<Review|nu
 async function fetchReviewOfBlog(blogid:string): Promise<Review[]> {
     const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}/reviews`);
     const reviewInfo = await res.json();
+    alert(reviewInfo);
     return reviewInfo;  
 }
 

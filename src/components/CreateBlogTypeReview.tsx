@@ -53,11 +53,12 @@ const CreateRwBlog=(props : any)=> {
   const [editorValue, setEditorValue] = useState("");
   // Etc
   const blogId = window.location.pathname.split("/")[2];
+  
 
   useEffect(() => {
     //alert("component rendered")
     if(blogId){
-      BlogsService.fetchReviewOfBlog(props.blogid)
+      BlogsService.fetchReviewOfBlog(blogId)
       .then(reviewArray => {
         let review_info = reviewArray[0];
         setTeachScore(review_info.teaching);
@@ -65,7 +66,7 @@ const CreateRwBlog=(props : any)=> {
         setRoomScore(review_info.classroom);
         setOverallScore(review_info.overall);
         setEditorValue(review_info.content);  // Done
-        BlogsService.fetchBlogSpecific(props.blogid)
+        BlogsService.fetchBlogSpecific(blogId)
         .then(blogArray => {
           let blog_info = blogArray[0];
           setBlogName(blog_info.blog_name); // Done

@@ -138,12 +138,9 @@ const UserPage = (props:any) => {
                                 </Link>  
                                 {isCanEdit(item.user_id) &&
                                     <div>
+                                        <Link to={`/editReview/${item.id}`}>
                                         <Button className="blog-fl" variant="outline-danger" onClick={e=>handleRedirect(item.id)}>EDIT</Button>
-                                        {afterSave &&
-                                        <div>
-                                            <Redirect to={`editReview/${UrlLink}`} />
-                                        </div>
-                                        }
+                                        </Link>
                                         <Button className="blog-fl" variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
                                     </div>
                                 }
