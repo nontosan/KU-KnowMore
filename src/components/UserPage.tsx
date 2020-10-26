@@ -97,11 +97,14 @@ const UserPage = (props:any) => {
 
     return (
         <div>
-            <div className="main-div">
-            <Suspense fallback={<div>Loading... </div>}>
-                {userInformation.map(a=>
-                <ImageComponent userid={a.pic_dir}/>)}
-            </Suspense>
+            <div className="userpage-top-div">
+                <Suspense  fallback={<div>Loading... </div>}>
+                    {userInformation.map(a=>
+                        <div className="profile-page-pic blog-fl">
+                            <ImageComponent className="profile-in-userpage" userid={a.pic_dir}/>
+                        </div>
+                    )}
+                </Suspense>
                 {userInformation.map(userInformation => (
                     <div className="profile-info blog-fl">
                         <h4>Name : {userInformation.name}</h4>
@@ -116,38 +119,40 @@ const UserPage = (props:any) => {
             </div>
             {
                 blogs.map((item:Blog)=>{
-                    return checktype(item.type)?
-                        <ListGroup variant="flush" className="show-blog">
-                            <div>
-                                <Link className="blog-fl" to={`/readknowledge/${item.id}`}>
-                                    <ListGroup.Item><strong>{item.blog_name} {item.user_id}</strong></ListGroup.Item>
-                                </Link>
-                                {isCanEdit(item.user_id) &&
-                                    <div>
-                                        <Button className="blog-fl" variant="outline-danger">EDIT</Button>
-                                        <Button className="blog-fl" variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
-                                    </div>
-                                }
-                            </div>
-                        </ListGroup>
-                    :
-                        <ListGroup variant="flush" className="show-blog">
-                            <div>
-                                <Link className="blog-fl" to={`/readSection/${item.id}`}>
-                                    <ListGroup.Item><strong>{item.blog_name} {item.user_id}</strong></ListGroup.Item>
-                                </Link>  
-                                {isCanEdit(item.user_id) &&
-                                    <div>
-                                        <Link to={`/editReview/${item.id}`}>
-                                        <Button className="blog-fl" variant="outline-danger" onClick={e=>handleRedirect(item.id)}>EDIT</Button>
-                                        </Link>
-                                        <Button className="blog-fl" variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
-                                    </div>
-                                }
-                            </div>
-                            
-                        </ListGroup>
-                        
+                    if(item.user_id==userId){
+                        return checktype(item.type)?
+                            <ListGroup variant="flush" className="show-blog">
+                                <div>
+                                    <Link className="blog-fl" to={`/readknowledge/${item.id}`}>
+                                        <ListGroup.Item><strong>{item.blog_name} {item.user_id}</strong></ListGroup.Item>
+                                    </Link>
+                                    {isCanEdit(item.user_id) &&
+                                        <div>
+                                            <Button className="blog-fl" variant="outline-danger">EDIT</Button>
+                                            <Button className="blog-fl" variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
+                                        </div>
+                                    }
+                                </div>
+                            </ListGroup>
+                    
+                        :
+                            <ListGroup variant="flush" className="show-blog">
+                                <div>
+                                    <Link className="blog-fl" to={`/readSection/${item.id}`}>
+                                        <ListGroup.Item><strong>{item.blog_name} {item.user_id}</strong></ListGroup.Item>
+                                    </Link>  
+                                    {isCanEdit(item.user_id) &&
+                                        <div>
+                                            <Link to={`/editReview/${item.id}`}>
+                                            <Button className="blog-fl" variant="outline-danger" onClick={e=>handleRedirect(item.id)}>EDIT</Button>
+                                            </Link>
+                                            <Button className="blog-fl" variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
+                                        </div>
+                                    }
+                                </div>
+                                
+                            </ListGroup>
+                    }      
                 })
             }
         </div>

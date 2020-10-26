@@ -81,12 +81,12 @@ const KnowledgeBlog = () => {
     return (
         <div>
             <div className="hot-kl">
-                <Card.Header>KNOWLEDGE BLOG</Card.Header>
+                <Card.Header className="card-header">KNOWLEDGE BLOG</Card.Header>
                 {blogs.map(blog => (
-                    <div>
+                    <div className="show-blog">
                         <Link to={`/read${blog.type}/${blog.id}`}>
-                            <div className="blog-fl">
-                                &nbsp;&nbsp;&nbsp;&nbsp;Blog Name : {blog.blog_name} &nbsp;&nbsp;&nbsp;&nbsp; Viewer :{blog.viewers} &nbsp;&nbsp;&nbsp;&nbsp; Last Edit :{blog.last_edit}  
+                            <div className="blog-fl black-font">
+                                Blog Name : {blog.blog_name} &nbsp;&nbsp;&nbsp;&nbsp; Viewer :{blog.viewers} &nbsp;&nbsp;&nbsp;&nbsp; Last Edit :{blog.last_edit}  
                             </div> 
                             <UserAuthor
                                 userid = {blog.user_id}

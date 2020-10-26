@@ -1,4 +1,4 @@
-import React, { useEffect , useState} from 'react';
+import React, { useEffect , useState, Suspense } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
@@ -23,9 +23,15 @@ import ReadBlogReview from './components/ReadBlogReview';
 import ReadSection from './components/Section/ReadSection';
 import EditSection from './components/Section/EditSection';
 import LoginPage from './components/LoginPage';
+import ImageComponent from './components/Display';
+
 import LoginService from './services/LoginService';
+import ProfileService from './services/ProfileService';
 
 import Dropdowntest from './gadget/create_blog';
+
+
+import { User_Sch } from './interfaces/user';
 
 import {
     BrowserRouter as Router,
@@ -48,10 +54,13 @@ import NavDropdown from 'react-bootstrap/esm/NavDropdown';
 import CreateBlogReview from './components/Review_component/CreateReviewContent';
 
 const App = () => {
+    const [userInformation, setUserInformation] = useState<User_Sch[]>([]);
     const [username, setUsername] = useState<string|null>(null);
+    const [userId, setUserId] = useState<string|null>(null);
     const [log, setLog] = useState<boolean>(true);
     useEffect(() => {
         setUsername(LoginService.getUsername());
+        setUserId(LoginService.getUserId());
         //console.log("HELLOMAIN");
         //console.log(localStorage.accessToken);
         if (localStorage.accessToken !== undefined){
@@ -62,6 +71,7 @@ const App = () => {
 
     const handleUserLogin = () => {
         setUsername(LoginService.getUsername());
+        setUserId(LoginService.getUserId());
         setLog(false);
         alert('ยินดีต้อนรับสู่ KU-KNOWMORE')
     }
@@ -74,10 +84,27 @@ const App = () => {
         alert('ออกจากระบบแล้ว')
     };
     //console.log(localStorage.accessToken)
+
+    const fetchProfile = () => {
+        if(userId !== null){
+            ProfileService.fetchProfileSpecific(userId)
+                .then(userInfo => {
+                    setUserInformation(userInfo);
+                    console.log(userInfo);
+                })
+        }
+    }
+
+    useEffect(() => {
+        if(userId !== null) {
+            fetchProfile();
+        }
+    },[userId])
+
     return (
         <Router>
             <div>
-                <Navbar bg="light" variant="light">
+                <Navbar bg="dark" variant="dark">
                     <Navbar.Brand href="/">KU KNOWMORE</Navbar.Brand>
                     <Nav className="mr-auto">
                         <Nav.Link href="/searchknowledgeblog">KNOWLEDGE BLOG</Nav.Link>
@@ -92,14 +119,21 @@ const App = () => {
                             <NavDropdown.Item href="/createklblog">Create Knowledge</NavDropdown.Item>
                             <NavDropdown.Item href="/createrwblog">Create Review</NavDropdown.Item>
                         </NavDropdown>
-                        <Link to="/userpage/5f82fd5504eb8600aa617b6b">
-                            <Image className="profile-pic" src={ProfilePic} roundedCircle />
+                        <Link to={`/userpage/${userId}`}>
+                            <Suspense fallback={<div>Loading... </div>}>
+                                {userInformation.map(a=>
+                                <ImageComponent className="profile-pic" userid={a.pic_dir}/>)}
+                            </Suspense>
                         </Link>
                     </Form>
                     { username && (
-                        <div>
-                            &nbsp;&nbsp;&nbsp;
-                            {username}
+                        <div className="white-font">
+                            <Nav className="mr-auto">
+                                <Nav.Link href={`/userpage/${userId}`}>
+                                    &nbsp;&nbsp;&nbsp;
+                                    {username}
+                                </Nav.Link>
+                            </Nav>
                         </div>
                     )}
                     <Nav>
