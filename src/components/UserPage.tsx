@@ -123,7 +123,7 @@ const UserPage = (props:any) => {
                         return checktype(item.type)?
                             <ListGroup variant="flush" className="show-blog">
                                 <div>
-                                    <Link className="blog-fl" to={`/readknowledge/${item.id}`}>
+                                    <Link className="blog-fl" to={`/read${item.type}/${item.id}`}>
                                         <ListGroup.Item><strong>{item.blog_name} {item.user_id}</strong></ListGroup.Item>
                                     </Link>
                                     {isCanEdit(item.user_id) &&
@@ -134,11 +134,10 @@ const UserPage = (props:any) => {
                                     }
                                 </div>
                             </ListGroup>
-                    
                         :
                             <ListGroup variant="flush" className="show-blog">
                                 <div>
-                                    <Link className="blog-fl" to={`/readSection/${item.id}`}>
+                                    <Link className="blog-fl" to={`/read${item.type}/${item.id}`}>
                                         <ListGroup.Item><strong>{item.blog_name} {item.user_id}</strong></ListGroup.Item>
                                     </Link>  
                                     {isCanEdit(item.user_id) &&
