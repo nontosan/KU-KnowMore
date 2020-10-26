@@ -126,7 +126,14 @@ const Dropdowntest=()=> {
       },[UrlLink]);
     return (
         <div className="hot-kl">
-            <Formik
+            {localStorage.accessToken==undefined &&
+                <div>
+                    <Redirect to="/login" />
+                </div>
+            }
+            {localStorage.accessToken!=undefined &&
+                <div>
+                    <Formik
             initialValues={{nameblog:""}}
             onSubmit={(values,actions)=>{
                 console.log("hello")
@@ -149,7 +156,7 @@ const Dropdowntest=()=> {
                 }
                 actions.setSubmitting(false)
             }}
-        >
+            >
             {({isSubmitting})=>(
                 <Form>
                     <div>BlogName</div><Field type="input" name="nameblog"/>
@@ -184,11 +191,12 @@ const Dropdowntest=()=> {
                                 />
                         </div>
                     }
+                    <br />
                     <div className="Cancel">
-                        <Button variant="danger" onClick={e=>history.goBack()}> Cancel </Button>
+                        <Button style={{ float: "right" }} variant="danger" onClick={e=>history.goBack()}> Cancel </Button>
                     </div>
                     <div className="Submit">
-                        <button disabled={isSubmitting}> Submit </button>
+                        <button style={{ float: "right" }} className="btn btn-success submit-button" disabled={isSubmitting}> Submit </button>
                         {afterSave &&
                             <div>
                                 <Redirect to={`myKnowledge/${UrlLink}`} />
@@ -197,7 +205,10 @@ const Dropdowntest=()=> {
                     </div>
                 </Form>
             )}
-        </Formik>
+            </Formik>
+                </div>
+            }
+            
         </div>  
     );
 }

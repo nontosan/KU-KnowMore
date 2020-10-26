@@ -3,8 +3,8 @@ import React, { useState,useEffect } from 'react'
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-import Comment_component from "./comment"
-import LikeViewReport from "../gadget/LikeViewReport"
+import Comment_component from "./comment";
+import LikeViewReport from "../gadget/LikeViewReport";
 import Button from 'react-bootstrap/Button';
 
 import {
@@ -19,6 +19,7 @@ import {useHistory} from "react-router"
 import BlogsService from "../services/BlogsService";
 import SectionService from "../services/SectionService";
 import LoginService from '../services/LoginService';
+import CourseService from '../services/CourseService';
 // END OF IMPORT SERVICE //
 
 // IMPORT INTERFACE //
@@ -75,16 +76,21 @@ const ReadBlogKnowledge = (props:any) => {
       <div className="hot-kl">
         {blogsInformation.map(blogInformation=>(
           <Card.Header>
-            Blog Name : {blogInformation.blog_name} <br />
+            <div>
+              Blog Name : {blogInformation.blog_name}
+              <div style={{ float: "right" }}>
+                {author==localStorage.userId &&
+                  <div>
+                    <Button style={{ marginRight: "5px" }} className="blog-fl" variant="danger">EDIT</Button>
+                    <Button className="blog-fl" variant="warning">DELETE</Button>
+                  </div>
+                }
+              </div>
+            </div>
             Course ID : {blogInformation.course_id}
           </Card.Header>
         ))}
-        {author==localStorage.userId &&
-          <div>
-            <Button className="blog-fl" variant="outline-danger">EDIT</Button>
-            <Button className="blog-fl" variant="outline-warning">DELETE</Button>
-          </div>
-        }
+        
       </div>
       <div className="hot-kl">
         <Card.Header>SECTION</Card.Header>

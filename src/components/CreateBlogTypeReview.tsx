@@ -72,6 +72,7 @@ const CreateRwBlog=(props : any)=> {
           setBlogName(blog_info.blog_name); // Done
           setCourseCode(blog_info.course_id); // Done
           CourseService.fetchCourseFilter(blog_info.course_id,props.teacher_name)
+          //CourseService.fetchCourseFilter(blog_info.course_id,props.teacher_name)
           .then(courseArray => {
             let course_info = courseArray[1];
             //setTeacherName(course_info.teacher_name);

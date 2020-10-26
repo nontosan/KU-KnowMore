@@ -2,6 +2,7 @@
 import React, { useState,useEffect, useImperativeHandle } from 'react'
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 // END OF IMPORT LIBRARY //
 
 // IMPORT SERVICE //
@@ -44,6 +45,7 @@ type blogidformpagebefore={
 const ReadBlogReview = (props:any) => {
   const [sections,setsections] = useState<Section_Edit[]>([])
   const [blogsInfomation,setBlogsInfomation] = useState<Blog[]>([])
+  const [author, setAuthor] = useState<string>('');
   const history=useHistory()
   const blogId = props.match.params.blogId
   
@@ -52,6 +54,7 @@ const ReadBlogReview = (props:any) => {
     BlogsService.fetchBlogSpecific(blogId)
       .then(blogInfo => {
         setBlogsInfomation(blogInfo);
+        setAuthor(blogInfo[0].user_id);
         console.log(blogInfo);
       });
   }
@@ -84,12 +87,19 @@ const ReadBlogReview = (props:any) => {
   return (
     <div>
       <div className="hot-kl">
-        <Card.Header>REVIEW ISUS</Card.Header>
-      </div>
-      <div className="hot-kl">
         {blogsInfomation.map(blogInfomation=>(
           <Card.Header>
-            Blog Name : {blogInfomation.blog_name} <br />
+            <div>
+              Blog Name : {blogInfomation.blog_name}
+              <div style={{ float: "right" }}>
+                {author==localStorage.userId &&
+                  <div>
+                    <Button style={{ marginRight: "5px" }} className="blog-fl" variant="danger">EDIT</Button>
+                    <Button className="blog-fl" variant="warning">DELETE</Button>
+                  </div>
+                }
+              </div>
+            </div>
             Course ID : {blogInfomation.course_id}
           </Card.Header>
         ))}
