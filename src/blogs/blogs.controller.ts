@@ -64,6 +64,11 @@ export class Blog_Controller {
     return this.Service.findBlogsID(blog_id);
   }
 
+  @Get('/:blog_id/viewing')
+  async increaseView(@Param('blog_id', ParseObjectIdPipe) blog_id: ObjectID): Promise<Blogs> {
+    return this.Service.incView(blog_id);
+  }
+
   @Get('/users/:user_id')
   async findUserBlogsID(@Param('user_id') user_id: string): Promise<Blogs[]> {
     return this.Service.findUserBlogsID(user_id);
