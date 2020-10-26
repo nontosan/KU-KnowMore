@@ -48,7 +48,7 @@ export class Section_Controller {
   }*/
 
   @Post('/:Section_id/attachments')
-  @UseInterceptors(FilesInterceptor('attachments', 25, { storage: diskStorage({ destination: './attachments', filename: editFileName }) }))
+  @UseInterceptors(FilesInterceptor('attachments', 25, { storage: diskStorage({ destination: './attachments_dir', filename: editFileName }) }))
   async createAttachment(@Param('Section_id') section_id: string, @UploadedFiles() attachments): Promise<Attachments[]> {
     return this.attachmentService.create(attachments, section_id);
   }
