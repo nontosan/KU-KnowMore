@@ -9,6 +9,7 @@ import { CreateAttachmentDto } from '../dto/create-attachment.dto';
 
 import Attachments  from './attachments.entity';
 import Sections from 'src/sections/sections.entity';
+import { async } from 'rxjs';
 
 @Injectable()
 export class Attachment_Service {
@@ -22,17 +23,22 @@ export class Attachment_Service {
     async find(atm_id: ObjectID): Promise<Attachments[]> {
         return this.attachmentsRepository.find({where:{_id: atm_id}});
     }
-    async create(atm, section_id) {
-        var atm_dto: CreateAttachmentDto = {
-            "filename": atm.filename,
-            "originalname": atm.originalname,
-            "path": atm.path,
-            "size": atm.size,
-            "type": atm.mimetype,
-            "section_id": section_id
+    async create(atm, section_id): Promise<Attachments[]> {
+        var res: Attachments[] = [];
+        for (const ele of atm) {
+            var atm_dto: CreateAttachmentDto = {
+                "filename": ele.filename,
+                "originalname": ele.originalname,
+                "path": ele.path,
+                "size": ele.size,
+                "type": ele.mimetype,
+                "section_id": section_id
+            };
+            res.push(await this.attachmentsRepository.save(atm_dto));
         }
-        return this.attachmentsRepository.save(atm_dto)
+        return res 
     }
+
     async delete(id: string): Promise<void> {
         await this.attachmentsRepository.delete(id);
     }

@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { MulterModule } from '@nestjs/platform-express';
 
 import { Section_Controller } from './sections.controller';
 import { Section_Service } from './sections.service';
@@ -10,6 +11,7 @@ import { Attachment_Module } from 'src/attachments/attachments.module';
 @Module({
     imports: [
         TypeOrmModule.forFeature([Sections,]),
+        MulterModule.register({ dest: './attachments' }),
         Attachment_Module
     ],
     controllers: [Section_Controller],
