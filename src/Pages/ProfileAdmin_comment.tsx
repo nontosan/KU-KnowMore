@@ -20,7 +20,7 @@ const ProfileAdmin_comment1 = () => {
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     <div>
-                        <Image className="profile-page-pic picture-padding" src={ProfilePic} roundedCircle />
+                        <Image className="picture-padding" src={ProfilePic} roundedCircle />
                     </div>
                     <Navbar.Text className="size-sign">
                         Signed in as: <a href="#login">Username</a>

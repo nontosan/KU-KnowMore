@@ -47,8 +47,8 @@ const ModalBlog = (props:any) => {
                     </a>
                 </div>
                 <div className="p-2">
-                    <Button className = "cancel-button button_x"  onClick = {e => DeleteBlog()} >
-                         X 
+                    <Button className = "button-x"  onClick = {e => DeleteBlog()} >
+                             <div className="size-x">X</div>
                     </Button>
                 </div>
             </div>

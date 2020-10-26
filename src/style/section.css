@@ -68,10 +68,12 @@
 
 .picture-padding{
     margin-right: 30px;
+    height: 40px;
+    width: 40px;
 }
 
 .size-KU-knowmore{
-    font-size: 40px;
+    font-size: 30px;
 }
 
 .size-sign{
@@ -79,19 +81,25 @@
 }
 /* for list report */
 .size-text-report{
-    font-size: 20px;
+    font-size: 18px;
     text-align: center;
 }
 
 /* for button X */
-.button_x{
-    width: 48px;
-    height: 40px;
+.button-x{
+    border: none;
+    color: white;
     text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
     background: rgb(255,103,103);
     background: radial-gradient(circle, rgba(255,103,103,1) 0%, rgba(189,0,38,1) 100%);
 }
-
+.size-x{
+    font-size: 11px;
+}
+/* */
 .Center-text{
     text-align: left;
 }
