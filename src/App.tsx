@@ -45,6 +45,7 @@ import './App.css';
 import './components/section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavDropdown from 'react-bootstrap/esm/NavDropdown';
+import CreateBlogReview from './components/Review_component/CreateReviewContent';
 
 const App = () => {
     const [username, setUsername] = useState<string|null>(null);
@@ -118,6 +119,7 @@ const App = () => {
                     <Route path="/myKnowledge/:blogId" name="blogId" component={CreateEditSection}></Route>
                     <Route path="/readKnowledge/:blogId" name="blogId" component={ReadBlogKnowledge}></Route>
                     <Route path="/readReview/:blogId" name="blogId" component={ReadBlogReview}></Route>
+                    <Route path="/editReview/:blogId" name="blogId" component={CreateRwBlog}></Route>
                     <Route path="/writeSection/:blogId" name="blogId" component={WriteSection}></Route>
                     <Route path="/readSection/:sectionId" name="sectionId" component={ReadSection}></Route>
                     <Route path="/editSection/:sectionId" name="sectionId" component={EditSection}></Route>

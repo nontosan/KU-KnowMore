@@ -51,10 +51,12 @@ const CreateRwBlog=(props : any)=> {
   const [roomScore, setRoomScore] = useState(0);
   const [overallScore, setOverallScore] = useState(0);
   const [editorValue, setEditorValue] = useState("");
+  // Etc
+  const blogId = window.location.pathname.split("/")[2];
 
   useEffect(() => {
     //alert("component rendered")
-    if(props.blogtype == "edit"){
+    if(blogId){
       BlogsService.fetchReviewOfBlog(props.blogid)
       .then(reviewArray => {
         let review_info = reviewArray[0];
