@@ -53,10 +53,10 @@ const Dropdowntest=()=> {
 //    }
     const handleChangeCode = (selectedOption:any) => {
         code.push({ selectedOption })
-        //console.log((code[0].selectedOption).value);
+        console.log((code[0].selectedOption).value);
         setSelectCode((code[0].selectedOption).value);
     }
-
+    console.log(selectTeacher);
     const handleChangeTeacher = (selectedOption:any) => {
         setSelectCourseId(selectedOption.value);
         setSelectTeacher(selectedOption.label);
@@ -93,6 +93,7 @@ const Dropdowntest=()=> {
                     if(check == 0){
                         setSelectNameTh(item.NameTh)
                         setSelectNameEn(item.NameEn)
+                        setSelectTeacher('');
                         check = 1;
                     }
                     Teacheroption.push({ value: item.id, label: item.Teacher })
@@ -114,8 +115,6 @@ const Dropdowntest=()=> {
         <div className="hot-kl">
             {visible &&
                 <div>
-                    <div>mee data</div>
-                    {codeoption[0]}
                     <div>code</div>
                         <Select 
                             options = {codeOptions} 
@@ -127,12 +126,12 @@ const Dropdowntest=()=> {
                     <div>NameTh</div>
                         <Select 
                             isDisabled
-                            placeholder={selectNameTh}
+                            placeholder = {selectNameTh}
                         />
                     <div>NameEn</div>
                         <Select 
                             isDisabled
-                            placeholder={selectNameEn}
+                            placeholder = {selectNameEn}
                         />
 
                     <div>Teacher</div>
@@ -140,6 +139,7 @@ const Dropdowntest=()=> {
                             options = {teacherOptions} 
                             onChange={handleChangeTeacher}
                             isSearchable
+                            placeholder = {selectTeacher}
                         />
                 </div>
             }

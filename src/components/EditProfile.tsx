@@ -20,8 +20,9 @@ import { User_Sch} from "../interfaces/user";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './editprofile.css';
 import {useHistory} from "react-router"
-function EditProfile () {
-
+function EditProfile (props:any) {
+const userId = props.match.params.userId
+console.log(userId);
 const [usrname,setusername] = useState("");
 const [descriptions,setdescriptions] = useState ("");
 const [nme,setname] = useState("");

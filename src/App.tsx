@@ -122,13 +122,13 @@ const App = () => {
                     <Route path="/readSection/:sectionId" name="sectionId" component={ReadSection}></Route>
                     <Route path="/editSection/:sectionId" name="sectionId" component={EditSection}></Route>
                     <Route path="/userpage/:userId" name="userId" component={UserPage}></Route>
+                    <Route path="/editProfile/:userId" name="userId" component={EditProfile}></Route>
                     <Route path="/dropdowntest">
                         <Dropdowntest />
                     </Route>
                     <Route path="/login">
                         <LoginPage loginCallback={handleUserLogin}/>
                     </Route>
-                    <Route path="/editProfile" name="userId" component={EditProfile}></Route>
                     <Route path="/searchknowledgeblog">
                         <KnowledgeBlog />
                     </Route>
