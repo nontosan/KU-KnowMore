@@ -19,6 +19,7 @@ import { Section } from '../../interfaces';
 // IMPORT CSS //
 import '../section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ReactQuill from 'react-quill';
 // END OF IMPORT CSS //
 
 //------------------------------------------------------------------//
@@ -29,6 +30,7 @@ const EditSection = (props:any) => {
     const [stateCheck, setstateCheck] = useState<boolean>(false);
     const [stateContentCheck, setStateContentCheck] = useState<boolean>(false);
     const [content, setContent] = useState<ContentState>();
+    const [editorValue, setEditorValue] = useState("");
     //const [draftstate, setdraftState] = useState(EditorState.createWithContent(content!));
 
     const sectionId = (props.match.params.sectionId);
@@ -83,8 +85,12 @@ const EditSection = (props:any) => {
             </InputGroup>
             {afterFetch &&
                 <div className="div-sectionname">
-                    HELLOTESTEST
-                    <DraftEditor cont={content}/>
+                    <ReactQuill 
+                        placeholder={"เขียนรีวิวลงที่นี้"}
+                        theme="snow" 
+                        value={editorValue} 
+                        onChange={setEditorValue}
+                    />
                 </div>
             }
             

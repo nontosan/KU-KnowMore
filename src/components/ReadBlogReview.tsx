@@ -45,6 +45,14 @@ type editsection={
 type blogidformpagebefore={
   blog_id:string
 }
+
+function htmlToElement(html : any) {
+    var template = document.createElement('template');
+    html = html.trim(); // Never return a text node of whitespace as the result
+    template.innerHTML = html;
+    return template.content.firstChild;
+}
+
 const ReadBlogReview = (props:any) => {
     const [sections,setsections] = useState<Section_Edit[]>([])
     const [blogsInfomation,setBlogsInfomation] = useState<Blog[]>([])
@@ -69,6 +77,8 @@ const ReadBlogReview = (props:any) => {
     const [workScore, setWorkScore] = useState(0);
     const [roomScore, setRoomScore] = useState(0);
     const [overallScore, setOverallScore] = useState(0)
+
+    // Fetch ค่า blog header 
     const fetchCourse =(x:string)=>{
       CourseService.fetchCourse().then(res=>{
           setAllCourse(res);
@@ -84,6 +94,7 @@ const ReadBlogReview = (props:any) => {
           })
       })
   }
+
   //fetch blog from database
   const fetchBlogs = () => {
     BlogsService.fetchBlogSpecific(blogId)
@@ -91,25 +102,27 @@ const ReadBlogReview = (props:any) => {
         setBlogsInfomation(blogInfo);
         setAuthor(blogInfo[0].user_id);
         fetchCourse(blogInfo[0].course_id)
+        fetchReview();
         //console.log(blogInfo);
       });
   }
 
-
-  //delete section  
-  const handledeletesection=()=>{
-    fetch("api_path for delete section",{
-      method:"Post",
-      headers:{'Content-Type':'appllication/json'},
-      body:JSON.stringify(sections)
-    }).then(res=>res.json())
-  }
-
-
-  //edit section => create route with section data from backend
-  const handleeditsection=()=>{
-    console.log("create route to create section")
-  }
+  // Fetch Review
+  const fetchReview = () => {
+    BlogsService.fetchReviewOfBlog(blogId)
+        .then(reviewArray => {
+          let review_info = reviewArray[0];
+          if(review_info){
+            setTeachScore(review_info.teaching);
+            setWorkScore(review_info.hw);
+            setRoomScore(review_info.classroom);
+            setOverallScore(review_info.overall);
+            setEditorValue(review_info.content);
+          }else{
+            alert("error review not found");
+          }
+    })  // Done
+  };
 
   //refreh
   useEffect(()=>{
@@ -132,7 +145,9 @@ const ReadBlogReview = (props:any) => {
                 </div>
             </div>
       ))}
-      <div>------------------------------load draft data display here----------------------------</div>
+      <div className="editor_text" >
+        <div dangerouslySetInnerHTML={{ __html: editorValue }} />
+      </div>
             <div className ="div-scrollbar">
                 <Container>
                     <Row>
