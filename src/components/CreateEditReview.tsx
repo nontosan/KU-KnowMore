@@ -105,12 +105,14 @@ const CreateEditSection = (props:any) => {
     BlogsService.createReview(newReview,blogid) 
       .then(savedNewReview => {
         if (savedNewReview !== null) {
-          alert("Save Review Success");
+          alert("บันทึก blog สำเร็จ");
         } else{
-          //alert("Save Error");
+          alert("บันทึก blog ล้มเหลว");
         }
       });
   }
+
+  // Fetch Id ของ course 
   const fetchCourse =(x:string)=>{
     CourseService.fetchCourse().then(res=>{
         setCourse(res)

@@ -57,7 +57,7 @@ const EditReview = (props:any) => {
   const [sectionsInformation, setSectionsInformation] = useState<Section[]>([]);
   const [sections,setsections] = useState<Section_Edit[]>([])
   const [blogsInfomation,setBlogsInfomation] = useState<Blog[]>([])
-  const blogId =window.location.pathname.split("/")[2]
+  const blogId =window.location.pathname.split("/")[2] // ดึงค่า BlogId จาก Url 
   const history = useHistory()
   ///////////////////////////////copy/////////////////////////////////////
   const resultLimit = 10
@@ -83,17 +83,37 @@ const EditReview = (props:any) => {
   const [workScore, setWorkScore] = useState(0);
   const [roomScore, setRoomScore] = useState(0);
   const [overallScore, setOverallScore] = useState(0)
+
+
   //fetch blog from database
   const fetchBlogs = () => {
     BlogsService.fetchBlogSpecific(blogId)
       .then(async(blogInfo) => {
         //console.log(blogInfo)
         setBlogsInfomation(blogInfo);
-        setSelectCourseId(blogInfo[0].course_id)
-        fetchCourse(blogInfo[0].course_id)
+        setSelectCourseId(blogInfo[0].course_id);
+        fetchCourse(blogInfo[0].course_id);
         //finding course_i
       })
   }
+
+  const fetchReview = () => {
+    BlogsService.fetchReviewOfBlog(blogId)
+        .then(reviewArray => {
+          let review_info = reviewArray[0];
+          if(review_info){
+            setTeachScore(review_info.teaching);
+            setWorkScore(review_info.hw);
+            setRoomScore(review_info.classroom);
+            setOverallScore(review_info.overall);
+            setEditorValue(review_info.content);
+          }else{
+            alert("error review not found");
+          }
+          })  // Done
+  };
+
+
   const handleNewReviewSave = (blogid : string) => {
     const newReview: Review = {
       blog_id: blogid,
@@ -132,16 +152,9 @@ const EditReview = (props:any) => {
     setCodeOptions(codeoption);
 }
   
-  const fetchsection = () => {
-    SectionService.fetchSections(blogId)
-      .then(Arraysections => {
-        setSectionsInformation(Arraysections);
-      });
-  }    
   useEffect(()=>{
       fetchBlogs();
-      fetchsection();
-    
+      fetchReview();
   },[])
   return (
     <div>
