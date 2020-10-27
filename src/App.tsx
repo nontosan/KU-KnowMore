@@ -25,6 +25,7 @@ import EditSection from './components/Section/EditSection';
 import LoginPage from './components/LoginPage';
 import ImageComponent from './components/Display';
 
+
 import LoginService from './services/LoginService';
 import ProfileService from './services/ProfileService';
 
@@ -42,6 +43,7 @@ import {
 
 import WriteSection from "./components/Section/WriteSection";
 import CreateEditSection from "./components/createeditsection";
+import CreateEditReview from "./components/CreateEditReview"
 import UserPage from "./components/UserPage";
 import KnowledgeBlog from './components/KnowledgeBlog';
 import ReviewBlog from './components/ReviewBlog';
@@ -152,6 +154,7 @@ const App = () => {
                 </Navbar>
                 <Switch>
                     <Route path="/myKnowledge/:blogId" name="blogId" component={CreateEditSection}></Route>
+                    <Route path="/myReview/:blogId" name="blogId" component={CreateEditReview}></Route>
                     <Route path="/readKnowledge/:blogId" name="blogId" component={ReadBlogKnowledge}></Route>
                     <Route path="/readReview/:blogId" name="blogId" component={ReadBlogReview}></Route>
                     <Route path="/editReview/:blogId" name="blogId" component={CreateRwBlog}></Route>
@@ -176,7 +179,7 @@ const App = () => {
                         <CreateKlBlog />
                     </Route>
                     <Route path="/createrwblog">
-                        <CreateRwBlog blogtype="edit" blogid="5f92bdd4b285fb001b031d06" teacher_name="ทวีเดช ศิริธนาพิพัฒน์"/>
+                        <CreateRwBlog/>
                     </Route>
                     <Route path="/filter/:search" name="search">
                         <SearchFilter />
