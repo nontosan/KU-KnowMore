@@ -16,6 +16,12 @@ export class Course_Controller {
   async findAllCourses(): Promise<Courses[]> {
     return this.Service.findAllCourses();
   }
+
+  @Get('/:course_id')
+  async findCoursesID(@Param('course_id', ParseObjectIdPipe) course_id: ObjectID): Promise<Courses[]> {
+    return this.Service.findCourseID(course_id);
+  }
+  
   @Get('search')
   async Search(@Query() query): Promise<Courses[]> {
     const keys = Object.keys(query);
