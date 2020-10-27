@@ -104,7 +104,7 @@ const App = () => {
 
     return (
         <Router>
-            <div>
+            <div className="background-page">
                 <Navbar bg="dark" variant="dark">
                     <Navbar.Brand href="/">KU KNOWMORE</Navbar.Brand>
                     <Nav className="mr-auto">
@@ -120,33 +120,35 @@ const App = () => {
                             <NavDropdown.Item href="/createklblog">Create Knowledge</NavDropdown.Item>
                             <NavDropdown.Item href="/createrwblog">Create Review</NavDropdown.Item>
                         </NavDropdown>
-                        <Link to={`/userpage/${userId}`}>
-                            <Suspense fallback={<div>Loading... </div>}>
-                                {userInformation.map(a=>
-                                <ImageComponent className="profile-pic" userid={a.pic_dir}/>)}
-                            </Suspense>
-                        </Link>
                     </Form>
                     { username && (
                         <div className="white-font">
-                            <Nav className="mr-auto">
-                                <Nav.Link href={`/userpage/${userId}`}>
-                                    &nbsp;&nbsp;&nbsp;
-                                    {username}
-                                </Nav.Link>
-                            </Nav>
+                            <Form inline>
+                                <Link to={`/userpage/${userId}`} style={{ float : "left" }}>
+                                <Suspense fallback={<div>Loading... </div>}>
+                                    {userInformation.map(a=>
+                                        <ImageComponent className="profile-pic" userid={a.pic_dir}/>)}
+                                </Suspense>
+                                </Link>
+                                <Nav className="mr-auto">
+                                    <Nav.Link href={`/userpage/${userId}`}>
+                                        &nbsp;&nbsp;&nbsp;
+                                        {username}
+                                    </Nav.Link>
+                                </Nav>
+                            </Form>
                         </div>
                     )}
                     <Nav>
                         {log && (
-                            <div>
-                                <Nav.Link href="/login">LOGIN</Nav.Link>
-                            </div>
+                            <Form inline>
+                                <Nav.Link href="/login" style={{ color:"white" }}>LOGIN</Nav.Link>
+                            </Form>
                         )}
                         {!log && (
-                            <div>
-                                &nbsp;&nbsp;&nbsp;<Button onClick={logout}>LOGOUT</Button>
-                            </div>
+                            <Form inline>
+                                &nbsp;&nbsp;&nbsp;<button onClick={logout} className="logout-button">LOGOUT</button>
+                            </Form>
                         )}
                     </Nav>
                 </Navbar>

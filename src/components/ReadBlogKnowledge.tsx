@@ -37,6 +37,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Like from '../photo/like.png';
 import Viewer from '../photo/viewer.png';
 import Alert from '../photo/alert.png';
+import minus from '../photo/minus_PNG39.png';
+import GearEdit from '../photo/gear-edit6.png';
 // END OF IMPORT PHOTO //
 
 //------------------------------------------------------------------//
@@ -81,8 +83,8 @@ const ReadBlogKnowledge = (props:any) => {
               <div style={{ float: "right" }}>
                 {author==localStorage.userId &&
                   <div>
-                    <Button style={{ marginRight: "5px" }} className="blog-fl" variant="danger">EDIT</Button>
-                    <Button className="blog-fl" variant="warning">DELETE</Button>
+                    <Image className="gear-setting-pic blog-fl" src={GearEdit}></Image>
+                    <Image className="delete-setting-pic blog-fl" src={minus}></Image>
                   </div>
                 }
               </div>
