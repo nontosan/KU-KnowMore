@@ -23,7 +23,7 @@ const options = [
     { value: 'orchestra' ,label: 'Orchestra' } 
   ];
 
-const Dropdowntest=()=> {
+const DropdownCreateKnowledge=()=> {
     const resultLimit = 10
     let i = 0;
     let k = 0;
@@ -136,11 +136,11 @@ const Dropdowntest=()=> {
                     <Formik
             initialValues={{nameblog:""}}
             onSubmit={(values,actions)=>{
-                console.log("hello")
+                //console.log("hello")
                 if(values.nameblog!=="" && selectCode!=="" && selectTeacher!==""){
                     const newBlog={
                         user_id: "5f82fd5504eb8600aa617b6b",
-                        type: blogtype,
+                        type: "knowledge",
                         blog_name: values.nameblog,
                         course_id: selectCourseId
                     }
@@ -162,7 +162,6 @@ const Dropdowntest=()=> {
                     <div>BlogName</div><Field type="input" name="nameblog"/>
                     {visible &&
                         <div>
-                            <div>mee data</div>
                             {codeoption[0]}
                             <div>code</div>
                                 <Select 
@@ -214,4 +213,4 @@ const Dropdowntest=()=> {
 }
       
 
-export default Dropdowntest;
+export default DropdownCreateKnowledge;

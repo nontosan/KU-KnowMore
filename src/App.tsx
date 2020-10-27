@@ -25,6 +25,7 @@ import EditSection from './components/Section/EditSection';
 import LoginPage from './components/LoginPage';
 import ImageComponent from './components/Display';
 
+
 import LoginService from './services/LoginService';
 import ProfileService from './services/ProfileService';
 
@@ -42,6 +43,7 @@ import {
 
 import WriteSection from "./components/Section/WriteSection";
 import CreateEditSection from "./components/createeditsection";
+import CreateEditReview from "./components/CreateEditReview"
 import UserPage from "./components/UserPage";
 import KnowledgeBlog from './components/KnowledgeBlog';
 import ReviewBlog from './components/ReviewBlog';
@@ -52,6 +54,7 @@ import './components/section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavDropdown from 'react-bootstrap/esm/NavDropdown';
 import CreateBlogReview from './components/Review_component/CreateReviewContent';
+import EditReview from './components/EditReview';
 
 const App = () => {
     const [userInformation, setUserInformation] = useState<User_Sch[]>([]);
@@ -154,9 +157,10 @@ const App = () => {
                 </Navbar>
                 <Switch>
                     <Route path="/myKnowledge/:blogId" name="blogId" component={CreateEditSection}></Route>
+                    <Route path="/myReview/:blogId" name="blogId" component={CreateEditReview}></Route>
                     <Route path="/readKnowledge/:blogId" name="blogId" component={ReadBlogKnowledge}></Route>
                     <Route path="/readReview/:blogId" name="blogId" component={ReadBlogReview}></Route>
-                    <Route path="/editReview/:blogId" name="blogId" component={CreateRwBlog}></Route>
+                    <Route path="/editReview/:blogId" name="blogId" component={EditReview}></Route>
                     <Route path="/writeSection/:blogId" name="blogId" component={WriteSection}></Route>
                     <Route path="/readSection/:sectionId" name="sectionId" component={ReadSection}></Route>
                     <Route path="/editSection/:sectionId" name="sectionId" component={EditSection}></Route>
@@ -178,7 +182,7 @@ const App = () => {
                         <CreateKlBlog />
                     </Route>
                     <Route path="/createrwblog">
-                        <CreateRwBlog blogtype="edit" blogid="5f92bdd4b285fb001b031d06" teacher_name="ทวีเดช ศิริธนาพิพัฒน์"/>
+                        <CreateRwBlog/>
                     </Route>
                     <Route path="/filter/:search" name="search">
                         <SearchFilter />
