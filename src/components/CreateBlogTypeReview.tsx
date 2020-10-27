@@ -53,26 +53,29 @@ const CreateRwBlog=(props : any)=> {
   const [editorValue, setEditorValue] = useState("");
   // Etc
   const blogId = window.location.pathname.split("/")[2];
+  const [reviewID, setReviewID] = useState("");
   
 
+  // เมื่อ Component render จะ fetch ค่าจาก Backend ถ้าหากมี blog_id กำกับใน Url
   useEffect(() => {
-    //alert("component rendered")
     if(blogId){
       BlogsService.fetchReviewOfBlog(blogId)
       .then(reviewArray => {
         let review_info = reviewArray[0];
-        setTeachScore(review_info.teaching);
-        setWorkScore(review_info.hw);
-        setRoomScore(review_info.classroom);
-        setOverallScore(review_info.overall);
-        setEditorValue(review_info.content);  // Done
+        if(review_info.id){
+          setReviewID(review_info.id);
+        }
+        setTeachScore(review_info.teaching); // ชุดนี้ยัง set ลงปุ่มไม่ได้ ถ้าเซ็ตได้แล้วลบ comment ออก
+        setWorkScore(review_info.hw); // ชุดนี้ยัง set ลงปุ่มไม่ได้ ถ้าเซ็ตได้แล้วลบ comment ออก
+        setRoomScore(review_info.classroom); // ชุดนี้ยัง set ลงปุ่มไม่ได้ ถ้าเซ็ตได้แล้วลบ comment ออก
+        setOverallScore(review_info.overall); // ชุดนี้ยัง set ลงปุ่มไม่ได้ ถ้าเซ็ตได้แล้วลบ comment ออก
+        setEditorValue(review_info.content);  
         BlogsService.fetchBlogSpecific(blogId)
         .then(blogArray => {
           let blog_info = blogArray[0];
-          setBlogName(blog_info.blog_name); // Done
-          setCourseCode(blog_info.course_id); // Done
+          setBlogName(blog_info.blog_name); 
+          setCourseCode(blog_info.course_id); 
           CourseService.fetchCourseFilter(blog_info.course_id,props.teacher_name)
-          //CourseService.fetchCourseFilter(blog_info.course_id,props.teacher_name)
           .then(courseArray => {
             let course_info = courseArray[1];
             //setTeacherName(course_info.teacher_name);
@@ -83,7 +86,61 @@ const CreateRwBlog=(props : any)=> {
     }
   },[])
 
-  // CreateNewBlog function
+  // function ที่เรียกจากการกด Submit โดย function จะเลือกว่าเป็นการ Create หรือ Edit
+  const handleSave = () =>{
+    if(blogId){
+      handleEditBlogSave();
+    }else{
+      handleNewBlogSave();
+    }
+  }
+
+  // ส่งค่า Blog ที่ Edit แล้วไป Post ที่ Backend ----------------------------
+  const handleEditBlogSave = () => {
+    const editBlog: Blog = {
+      id: blogId,
+      course_id: courseCode,
+      user_id: "5f82fd5504eb8600aa617b6b",
+      type: "review",
+      blog_name: blogName,
+    };
+    BlogsService.createBlog(editBlog) 
+      .then(savedNewBlog => {
+        if (savedNewBlog !== null) {
+          alert("Save Blog Success");
+          if(savedNewBlog.id){
+            handleEditReviewSave(savedNewBlog.id);
+          }
+        } else{
+          alert("บันทึก Blog ไม่สำเร็จ");
+        }
+      });
+  };
+
+  const handleEditReviewSave = (blogid : string) => {
+    const newReview: Review = {
+      id: reviewID,
+      blog_id: blogid,
+      teaching: teachScore,
+      hw: workScore,
+      classroom: roomScore,
+      overall: overallScore,
+      content: editorValue,
+    };
+    BlogsService.createReview(newReview,blogid) 
+      .then(savedNewReview => {
+        if (savedNewReview !== null) {
+          alert("บันทึก Blog สำเร็จ");
+        } else{
+          alert("บันทึก Blog ไม่สำเร็จ");
+        }
+      });
+  };
+
+  // ---------------------------------------------------------------------------
+
+
+  //ส่งค่า Blog ที่ Edit แล้วไป Post ที่ Backend ---------------------------------------
   const handleNewBlogSave = () => {
     const newBlog: create_Blog = {
       course_id: courseCode,
@@ -96,11 +153,10 @@ const CreateRwBlog=(props : any)=> {
         if (savedNewBlog !== null) {
           alert("Save Blog Success");
           if(savedNewBlog.id){
-            //alert(savedNewBlog.id);
             handleNewReviewSave(savedNewBlog.id);
           }
         } else{
-          //alert("Save Error");
+          alert("บันทึก Blog ไม่สำเร็จ");
         }
       });
   };
@@ -117,12 +173,15 @@ const CreateRwBlog=(props : any)=> {
     BlogsService.createReview(newReview,blogid) 
       .then(savedNewReview => {
         if (savedNewReview !== null) {
-          alert("Save Review Success");
+          alert("บันทึก Blog สำเร็จ");
         } else{
-          //alert("Save Error");
+          alert("บันทึก Blog ไม่สำเร็จ");
         }
       });
   }
+  // ---------------------------------------------------------------------------
+
+
 
   return (
     <div className="bg_color">
@@ -161,7 +220,7 @@ const CreateRwBlog=(props : any)=> {
         </Link>
         <Link to="/">
           <div className="Submit">
-            <Button className="submit-button" variant="success" onClick={handleNewBlogSave}>Submit</Button>
+            <Button className="submit-button" variant="success" onClick={handleSave}>Submit</Button>
           </div>
         </Link>
       </div>
