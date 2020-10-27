@@ -45,6 +45,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // IMPORT PHOTO //
 // END OF IMPORT PHOTO //
 import Dropdowntest from "../gadget/create_blog"
+import ReviewServices from '../services/ReviewServices';
 //------------------------------------------------------------------//
 
 type editsection={
@@ -78,6 +79,7 @@ const EditReview = (props:any) => {
     const [selectCourseId, setSelectCourseId] = useState<string>('');
     const [visible,setVisible] = useState<boolean>(false)
   ///////////////////////////////end copy//////////////////////////////////
+  const [reviewId, setReviewId] = useState("");
   const [editorValue, setEditorValue] = useState("");
   const [teachScore, setTeachScore] = useState(0);
   const [workScore, setWorkScore] = useState(0);
@@ -101,6 +103,9 @@ const EditReview = (props:any) => {
     BlogsService.fetchReviewOfBlog(blogId)
         .then(reviewArray => {
           let review_info = reviewArray[0];
+          if(review_info.id){
+            setReviewId(review_info.id);
+          }
           if(review_info){
             setTeachScore(review_info.teaching);
             setWorkScore(review_info.hw);
@@ -114,8 +119,8 @@ const EditReview = (props:any) => {
   };
 
 
-  const handleNewReviewSave = (blogid : string) => {
-    const newReview: Review = {
+  const handleEditReviewSave = (blogid : string) => {
+    const editReview: Review = {
       blog_id: blogid,
       teaching: teachScore,
       hw: workScore,
@@ -123,12 +128,12 @@ const EditReview = (props:any) => {
       overall: overallScore,
       content: editorValue,
     };
-    BlogsService.createReview(newReview,blogid) 
-      .then(savedNewReview => {
-        if (savedNewReview !== null) {
-          alert("Save Review Success");
+    ReviewServices.editReview(editReview,reviewId)
+      .then(editNewReview => {
+        if (editNewReview !== null) {
+          alert("แก้ไข Review สำเร็จ");
         } else{
-          //alert("Save Error");
+          alert("แก้ไข Review ไม่สำเร็จ");
         }
       });
   }
@@ -243,6 +248,18 @@ const EditReview = (props:any) => {
                     </Row>
                 </Container>
             </div>
+            <div className="Confirm"> 
+              <Link to="/">
+                <div className="Cancel">
+                  <Button className="cancel-button" variant="danger">Cancel</Button>
+                </div>
+              </Link>
+              <Link to="/">
+                <div className="Submit">
+                  <Button className="submit-button" variant="success" onClick={e => handleEditReviewSave(blogId)}>Submit</Button>
+                </div>
+          </Link>
+        </div>
         </div>
       </div>
   

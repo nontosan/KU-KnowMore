@@ -132,17 +132,9 @@ const CreateEditSection = (props:any) => {
     })
     setCodeOptions(codeoption);
 }
-  
-  const fetchsection = () => {
-    SectionService.fetchSections(blogId)
-      .then(Arraysections => {
-        setSectionsInformation(Arraysections);
-      });
-  }    
+    
   useEffect(()=>{
       fetchBlogs();
-      fetchsection();
-    
   },[])
   return (
     <div>

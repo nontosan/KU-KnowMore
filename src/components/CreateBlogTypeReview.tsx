@@ -133,7 +133,7 @@ const CreateKlBlog=()=> {
                 //console.log("hello")
                 if(values.nameblog!=="" && selectCode!=="" && selectTeacher!==""){
                     const newBlog={
-                        user_id: "5f82fd5504eb8600aa617b6b",
+                        user_id: "5f82fd2e04eb8600aa617b66",
                         type: "review",
                         blog_name: values.nameblog,
                         course_id: selectCourseId
