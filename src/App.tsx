@@ -203,6 +203,7 @@ const App = () => {
                     </Route>
                 </Switch>
                 <div>
+                    <br /><br />
                     <div className="three-column-footer-contact-form-container">
                         <footer className="three-column-footer-contact-form" data-equalizer data-equalize-by-row="true">
                             <div className="footer-left" data-equalizer-watch>
