@@ -156,11 +156,16 @@ const UserPage = (props:any) => {
                                     </Link>
                                     {isCanEdit(item.user_id) &&
                                         <div>
-                                            <Button className="blog-fl" variant="outline-danger">EDIT</Button>
+                                            <Link to={`/myKnowledge/${item.id}`}>
+                                                <Button className="blog-fl" variant="outline-danger">EDIT</Button>
+                                            </Link>
                                             <Button className="blog-fl" variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
                                         </div>
                                     }
                                 </div>
+                                {
+                                    item.type==="knowledge"?<div>knowledge</div>:<div></div>
+                                }
                             </ListGroup>
                         :
                             <ListGroup variant="flush" className="show-blog">
@@ -177,7 +182,9 @@ const UserPage = (props:any) => {
                                         </div>
                                     }
                                 </div>
-                                
+                                {
+                                    item.type==="Review"?<div>Review</div>:<div></div>
+                                }
                             </ListGroup>
                     }      
                 })
