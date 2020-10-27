@@ -11,6 +11,7 @@ async function UserLogin(userLogin: Login): Promise<any|null> {
     console.log(Token)
     if (Token.access_token) {
         localStorage.setItem("accessToken", Token.access_token);
+        localStorage.setItem("userId", Token.username);
         return Token;
     } else{
         return null;
@@ -38,6 +39,15 @@ function getUsername(): string|null {
     }
 }
 
+function getUserId(): string|null {
+    if ( isUserLoggedIn() ) {
+        console.log(localStorage.userId);
+        return localStorage.userId
+    } else {
+        return null
+    }
+}
+
 export default {
-    UserLogin, isUserLoggedIn, getUsername, UserLogout,
+    UserLogin, isUserLoggedIn, getUsername, UserLogout, getUserId,
 };

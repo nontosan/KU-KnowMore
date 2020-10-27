@@ -85,9 +85,21 @@
 
 .blog-fl{
     float: left;
-
 }
 
 .blog-fr{
     float: right;
+}
+
+.profile-in-userpage{
+    float: left;
+    height: 100%;
+    width: 100%;
+}
+
+.userpage-top-div{
+    margin-top: 50px;
+    margin-left: 100px;
+    margin-right: 100px;
+    min-height: 250px;
 }

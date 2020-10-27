@@ -47,8 +47,8 @@ const UserAuthor = (props:any) => {
     return (
         <div className="author-user">
             {userInformation.map(userInformation => (
-                <div >
-                    Author : {userInformation.name} &nbsp;&nbsp;&nbsp;&nbsp;
+                <div className="blog-fr black-font">
+                    Author : {userInformation.name} 
                 </div>
             ))}
         </div>

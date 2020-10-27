@@ -34,6 +34,8 @@ import ProfilePic from '../photo/profilepic.png';
 const UserPage = (props:any) => {
     const [userInformation, setUserInformation] = useState<User_Sch[]>([]);
     const [blogs,setBlogs] = useState<Blog[]>([])
+    const [UrlLink, setUrl]=useState<string>("");
+    const [afterSave, setafterSave] = useState<boolean>(false);
     const userId = props.match.params.userId
     const fetchBlogs=()=>{
         //may use userid from location
@@ -77,17 +79,38 @@ const UserPage = (props:any) => {
         }
     }
 
+    const handleRedirect = (blog_id : any) => {
+        setUrl(blog_id);
+    }
+
     useEffect(() => {
         fetchProfile();
         fetchBlogs()
     },[])
 
+    useEffect(() => {
+        if (UrlLink !== ""){
+          console.log(UrlLink);
+          setafterSave(!afterSave);
+        }
+      },[UrlLink]);
+
     return (
         <div>
+<<<<<<< HEAD
             <div className="main-div">
                 <Suspense fallback={<div>Loading... </div>}>
                     {userInformation.map(a=>
                     <ImageComponent userid={a.pic_dir}/>)}
+=======
+            <div className="userpage-top-div">
+                <Suspense  fallback={<div>Loading... </div>}>
+                    {userInformation.map(a=>
+                        <div className="profile-page-pic blog-fl">
+                            <ImageComponent className="profile-in-userpage" userid={a.pic_dir}/>
+                        </div>
+                    )}
+>>>>>>> 6781785d7bb1f28a71bafd4d11024f148ca942b2
                 </Suspense>
                 {userInformation.map(userInformation => (
                     <div className="profile-info blog-fl">
@@ -103,6 +126,7 @@ const UserPage = (props:any) => {
             </div>
             {
                 blogs.map((item:Blog)=>{
+<<<<<<< HEAD
                     return checktype(item.type)?
                         <ListGroup variant="flush" className="show-blog">
                             <div >
@@ -133,6 +157,42 @@ const UserPage = (props:any) => {
                             
                         </ListGroup>
                         
+=======
+                    if(item.user_id==userId){
+                        return checktype(item.type)?
+                            <ListGroup variant="flush" className="show-blog">
+                                <div>
+                                    <Link className="blog-fl" to={`/readknowledge/${item.id}`}>
+                                        <ListGroup.Item><strong>{item.blog_name} {item.user_id}</strong></ListGroup.Item>
+                                    </Link>
+                                    {isCanEdit(item.user_id) &&
+                                        <div>
+                                            <Button className="blog-fl" variant="outline-danger">EDIT</Button>
+                                            <Button className="blog-fl" variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
+                                        </div>
+                                    }
+                                </div>
+                            </ListGroup>
+                    
+                        :
+                            <ListGroup variant="flush" className="show-blog">
+                                <div>
+                                    <Link className="blog-fl" to={`/readSection/${item.id}`}>
+                                        <ListGroup.Item><strong>{item.blog_name} {item.user_id}</strong></ListGroup.Item>
+                                    </Link>  
+                                    {isCanEdit(item.user_id) &&
+                                        <div>
+                                            <Link to={`/editReview/${item.id}`}>
+                                            <Button className="blog-fl" variant="outline-danger" onClick={e=>handleRedirect(item.id)}>EDIT</Button>
+                                            </Link>
+                                            <Button className="blog-fl" variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
+                                        </div>
+                                    }
+                                </div>
+                                
+                            </ListGroup>
+                    }      
+>>>>>>> 6781785d7bb1f28a71bafd4d11024f148ca942b2
                 })
             }
         </div>
