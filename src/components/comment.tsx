@@ -4,19 +4,21 @@ import { useParams } from "react-router-dom";
 // END OF IMPORT LIBRARY //
 
 // IMPORT COMPONENT //
-import UserAuthor from "./UserAuthor";
+import UserCommentAuthor from "./UserCommentAuthor";
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
 import loadcomment from "../services/loadcomment";
 import CommentService from "../services/CommentService";
 import loaduser from "../services/loaduser";
+import LoginService from '../services/LoginService';
 // END OF IMPORT SERVICE //
 
 // IMPORT INTERFACE //
 import {Comment_Sch} from "../interfaces/comment";
 import { User_Sch } from "../interfaces/user";
 // END OF IMPORT INTERFACE//
+
 
 //------------------------------------------------------------------//
 
@@ -58,6 +60,7 @@ const Comment_component=(props:any)=>{
     const fetchCommentblog=()=>{
         CommentService.fetchComment(props.blogId)
             .then(comments => {
+                console.log(comments);
                 setcomment(comments)
             });
 //        comments.forEach((comment)=>{
@@ -100,18 +103,24 @@ const Comment_component=(props:any)=>{
     return (
         <div>
             {comments.map(item=>(
-                <div>
-                    <UserAuthor 
-                        userid = {item.user_id}
-                    />
-                    <div>
-                        {item.content} &nbsp;&nbsp;&nbsp;&nbsp;{item.date_time} &nbsp;&nbsp;&nbsp;&nbsp;
-                        {deleteVisible &&
-                            <button onClick={handledelete}>delete</button>
-                        }
-                        &nbsp;&nbsp;&nbsp;&nbsp;<button onClick={handlereport}>report</button> 
+                <div className="show-all-blog">
+                    <div className="blog-fl black-font">
+                        {item.content}    
                     </div>
-                    
+                    <div className="blog-fl black-font">
+                        {item.date_time}
+                    </div>
+                    <div>
+                    </div>
+                    <div>
+                        {deleteVisible &&
+                            <button className="blog-fl black-font" onClick={handledelete}>delete</button>
+                        }
+                        <button onClick={handlereport} className="btn btn-danger">report</button> 
+                        <UserCommentAuthor 
+                            userid = {item.user_id}
+                        />
+                    </div>
                 </div>
             ))}
             <Formik
@@ -126,13 +135,16 @@ const Comment_component=(props:any)=>{
             onSubmit={(values,actions)=>{
                 const cont:any={
                         blog_id:blogId,
-                        user_id:"5f82fd4604eb8600aa617b69",
+                        user_id:"5f82fd2e04eb8600aa617b66",
                         content:values.CommentContent,
                     }
                 if(values.CommentContent!==""){
                     //console.log(cont)
-                    const res = CommentService.createComment(cont)
-                    //console.log(res)
+                    CommentService.createComment(cont)
+                        .then(res=>{
+                            console.log('eiei')
+                            fetchCommentblog()
+                        })
                 }
                 else{
                     actions.setSubmitting(true)
@@ -144,7 +156,7 @@ const Comment_component=(props:any)=>{
             {({isSubmitting})=>(
                 <Form autoComplete="off">
                     <div className="Blog_frame1">
-                        <Field type="input" name="CommentContent"/>
+                        <Field type="input" name="CommentContent" placeholder="type something..."/>
                         <ErrorMessage name="errorMess" component="div"/>
                     </div>
                     <button disabled={isSubmitting}> send </button>

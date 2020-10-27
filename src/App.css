@@ -1,7 +1,21 @@
+.background-page{
+  background-image: url("https://images.clipartlogo.com/files/istock/previews/8403/84036115-soft-white-argyle-pattern-wallpaper-website-or-cover-background.jpg");
+}
+
 .profile-pic {
-  height: 33px;
-  width: 33px;
-  margin-left: 20px;
+  height: 28.6px;
+  width: 28.6px;
+}
+
+.gear-setting-pic{
+  height: 28px;
+  width: 28px;
+}
+
+.delete-setting-pic{
+  height: 32px;
+  width: 32px;
+  margin-left: 15px;
 }
 
 .search-pic {
@@ -40,15 +54,18 @@
   padding: .75rem 1.25rem;
   width: 100%;
   display:grid;
-  grid-template-columns: 3fr 1fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr 1fr 2fr;
   border-bottom: rgba(0,0,0,.125) solid 1px;
+  background-color: #fff;
+  color: black;
+  transform: 0.2;
 }
 
 .show-all-blog:hover{
-  background-color: rgb(209, 209, 209);
+  background-color: #343a40;
   padding: .75rem 1.25rem;
   width: 100%;
-  color: gray;
+  color: white;
 }
 
 .card-header{
@@ -63,6 +80,13 @@
 
 .black-font{
   color:black;
+}
+
+.logout-button{
+  background-color: #343a40;
+  color: #ffffff;
+  border: 0px;
+  padding: 8px;
 }
 
 

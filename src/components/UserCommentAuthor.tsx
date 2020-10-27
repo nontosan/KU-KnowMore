@@ -1,5 +1,5 @@
 // IMPORT LIBRARY //
-import React, { useEffect , useState , Component , Suspense} from 'react';
+import React, { useEffect , useState , Component, Suspense  } from 'react';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
@@ -31,7 +31,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 //------------------------------------------------------------------//
 
-const UserAuthor = (props:any) => {
+const UserCommentAuthor = (props:any) => {
     const [userInformation, setUserInformation] = useState<User_Sch[]>([]);
     //console.log(props.userid);
     const fetchUser = () => {
@@ -62,4 +62,4 @@ const UserAuthor = (props:any) => {
 
 }
 
-export default UserAuthor;
+export default UserCommentAuthor;

@@ -15,7 +15,7 @@ async function createComment(comment:any): Promise<Comment_Sch> {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(comment),
     });
-    const comments=await res.json()
+    const comments = await res.json()
     return comments
 }
 
