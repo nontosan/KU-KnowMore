@@ -48,7 +48,7 @@ const UserAuthor = (props:any) => {
     return (
         <div className="author-user">
             {userInformation.map(userInformation => (
-                <div className="blog-fr black-font">
+                <div>
                     <Suspense fallback={<div>Loading... </div>}>
                         <ImageComponent className="profile-pic" userid={userInformation.pic_dir}/>
                     </Suspense>
@@ -56,8 +56,6 @@ const UserAuthor = (props:any) => {
                 </div>
             ))}
         </div>
-
-
     )
 
 }

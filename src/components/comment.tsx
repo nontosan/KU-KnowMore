@@ -103,23 +103,23 @@ const Comment_component=(props:any)=>{
     return (
         <div>
             {comments.map(item=>(
-                <div className="show-all-blog">
+                <div className="show-all-comment">
+                    <div className="blog-fl black-font">
+                        <UserCommentAuthor 
+                            userid = {item.user_id}
+                        />
+                    </div>
                     <div className="blog-fl black-font">
                         {item.content}    
                     </div>
                     <div className="blog-fl black-font">
                         {item.date_time}
                     </div>
-                    <div>
-                    </div>
-                    <div>
-                        {deleteVisible &&
-                            <button className="blog-fl black-font" onClick={handledelete}>delete</button>
-                        }
-                        <button onClick={handlereport} className="btn btn-danger">report</button> 
-                        <UserCommentAuthor 
-                            userid = {item.user_id}
-                        />
+                    <div className="blog-fr">
+                        <button onClick={handlereport} className="blog-fr btn btn-danger">report</button>
+                        {item.user_id==localStorage.userId &&
+                            <button className="blog-fr black-font" onClick={handledelete}>delete</button>
+                        } 
                     </div>
                 </div>
             ))}

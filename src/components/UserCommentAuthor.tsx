@@ -46,9 +46,9 @@ const UserCommentAuthor = (props:any) => {
         fetchUser();
     },[])
     return (
-        <div className="author-user">
+        <div className="blog-fl">
             {userInformation.map(userInformation => (
-                <div className="blog-fr black-font">
+                <div className="blog-fl black-font">
                     <Suspense fallback={<div>Loading... </div>}>
                         <ImageComponent className="profile-pic" userid={userInformation.pic_dir}/>
                     </Suspense>

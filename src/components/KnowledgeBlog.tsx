@@ -85,18 +85,21 @@ const KnowledgeBlog = () => {
                 {blogs.map(blog => (
                     <div>
                         <Link className="show-all-blog" to={`/read${blog.type}/${blog.id}`}>
-                            <div className="blog-fl black-font">
+                            <div className="blog-fl">
                                 {blog.blog_name}
                             </div>
-                            <div className="blog-fl black-font" style={{ textAlign : "center" }}>
+                            <div className="blog-fl" style={{ textAlign : "center" }}>
                                 {blog.viewers} View
                             </div>
-                            <div className="blog-fl black-font" style={{ textAlign : "center" }}>
+                            <div className="blog-fl" style={{ textAlign : "center" }}>
                                 Last Edit : {blog.last_edit}
                             </div>
-                            <UserAuthor
-                                userid = {blog.user_id}
-                            />
+                            <div className="blog-fl" style={{ textAlign : "center" }}>
+                                <UserAuthor
+                                    userid = {blog.user_id}
+                                />
+                            </div>
+                            
                         </Link>
                     </div>
                 ))}

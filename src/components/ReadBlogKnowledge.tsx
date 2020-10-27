@@ -25,6 +25,7 @@ import CourseService from '../services/CourseService';
 // IMPORT INTERFACE //
 import { Blog }from '../interfaces/blog';
 import { Section } from '../interfaces';
+import { Course,Course_real } from '../interfaces/course'
 // END OF IMPORT INTERFACE//
 
 // IMPORT CSS //
@@ -46,6 +47,7 @@ import GearEdit from '../photo/gear-edit6.png';
 const ReadBlogKnowledge = (props:any) => {
   const [sectionsInformation, setSectionsInformation] = useState<Section[]>([]);
   const [blogsInformation,setBlogsInformation] = useState<Blog[]>([]);
+  const [courseInformation, setCourseInformation] = useState<Course_real[]>([]);
   const [author, setAuthor] = useState<string>('');
   const history = useHistory()
   //console.log(props.match.params)
@@ -54,6 +56,11 @@ const ReadBlogKnowledge = (props:any) => {
   const fetchBlogs = () => {
     BlogsService.fetchBlogSpecific(blogId)
       .then(blogInfo => {
+        CourseService.fetchCourseWithId(blogInfo[0].course_id)
+          .then(courseInfo => {
+            setCourseInformation(courseInfo);
+            console.log(courseInfo);
+          })
         setBlogsInformation(blogInfo);
         setAuthor(blogInfo[0].user_id);
         //console.log(blogInfo);
@@ -79,7 +86,7 @@ const ReadBlogKnowledge = (props:any) => {
         {blogsInformation.map(blogInformation=>(
           <Card.Header>
             <div>
-              Blog Name : {blogInformation.blog_name}
+              <strong>Blog Name</strong> : {blogInformation.blog_name}
               <div style={{ float: "right" }}>
                 {author==localStorage.userId &&
                   <div>
@@ -89,7 +96,22 @@ const ReadBlogKnowledge = (props:any) => {
                 }
               </div>
             </div>
-            Course ID : {blogInformation.course_id}
+            {courseInformation.map(item=>(
+              <div>
+                <div>
+                  <strong>Code</strong> : {item.Code}
+                </div>
+                <div>
+                  <strong>Subject</strong> : {item.NameEn}
+                </div>
+                <div>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {item.NameTh}
+                </div>
+                <div>
+                  <strong>Teacher</strong> : {item.Teacher}
+                </div>
+              </div>
+            ))}
           </Card.Header>
         ))}
         

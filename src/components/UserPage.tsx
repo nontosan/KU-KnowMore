@@ -138,9 +138,11 @@ const UserPage = (props:any) => {
                                     <div className="blog-fl" style={{ textAlign : "center" }}>
                                         Last Edit : {blog.last_edit}
                                     </div>
-                                    <UserAuthor
-                                        userid = {blog.user_id}
-                                    />
+                                    <div className="blog-fl" style={{ textAlign : "center" }}>
+                                        <UserAuthor
+                                            userid = {blog.user_id}
+                                        />
+                                    </div>
                                 </Link>
                             </div>
                 )}})}
