@@ -85,10 +85,10 @@ const UserPage = (props:any) => {
     return (
         <div>
             <div className="main-div">
-            <Suspense fallback={<div>Loading... </div>}>
-                {userInformation.map(a=>
-                <ImageComponent userid={a.pic_dir}/>)}
-            </Suspense>
+                <Suspense fallback={<div>Loading... </div>}>
+                    {userInformation.map(a=>
+                    <ImageComponent userid={a.pic_dir}/>)}
+                </Suspense>
                 {userInformation.map(userInformation => (
                     <div className="profile-info blog-fl">
                         <h4>Name : {userInformation.name}</h4>
@@ -105,7 +105,7 @@ const UserPage = (props:any) => {
                 blogs.map((item:Blog)=>{
                     return checktype(item.type)?
                         <ListGroup variant="flush" className="show-blog">
-                            <div>
+                            <div >
                                 <Link className="blog-fl" to={`/readknowledge/${item.id}`}>
                                     <ListGroup.Item><strong>{item.blog_name} {item.user_id}</strong></ListGroup.Item>
                                 </Link>
@@ -120,7 +120,7 @@ const UserPage = (props:any) => {
                     :
                         <ListGroup variant="flush" className="show-blog">
                             <div>
-                                <Link className="blog-fl" to={`/readSection/${item.id}`}>
+                                <Link className="blog-fl" to={`/readreview/${item.id}`}>
                                     <ListGroup.Item><strong>{item.blog_name} {item.user_id}</strong></ListGroup.Item>
                                 </Link>  
                                 {isCanEdit(item.user_id) &&

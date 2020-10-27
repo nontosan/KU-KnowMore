@@ -101,7 +101,6 @@ function EditBlogModal(props:any) {
           setTeacherOptions(Teacheroption);
       }
   },[selectCode])
-
   useEffect(()=>{
       if(selectCourseId!==undefined){
           console.log(selectCourseId);
