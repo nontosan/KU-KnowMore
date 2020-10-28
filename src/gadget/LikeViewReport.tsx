@@ -13,6 +13,7 @@ import Alert from '../photo/alert.png';
 import {Like} from "../interfaces/Like"
 import {Blog} from "../interfaces/blog"
 import ReportModal from "../modals/report"
+import {LikeOutlined,LikeTwoTone,EyeOutlined} from '@ant-design/icons';
 const LikeViewReport=(props:any)=> {
     const [like,setLike] = useState<boolean>(false)
     const [liker ,setliker] = useState<Like[]>([]) 
@@ -46,10 +47,12 @@ const LikeViewReport=(props:any)=> {
     return (
         <div>
             <div className="hot-kl">
-                <Card.Header>
-                    {like ? <button onClick={clicklike}><Image className="likebar-pic" src={afterLike} /></button> : <button onClick={clicklike}><Image className="likebar-pic" src={beforeLike} /></button> }
-                    <div style={{ display: "inline" }}>{liker.length}</div>
-                    <Image style={{ display: "inline" }} className="likebar-pic" src={Viewer} />{bloginfo.map(x=>(<div style={{ display: "inline" }}>{x.viewers}</div>))}
+                <Card.Header className="likeviewreportContainer">
+                    <div>
+                        {like ? <button className="likebutton" onClick={clicklike}><LikeOutlined /></button> : <button className="likebutton" onClick={clicklike}><LikeTwoTone /></button> }
+                        <div style={{ display: "inline" }}>{liker.length}</div>
+                    </div>
+                    <EyeOutlined />{bloginfo.map(x=>(<div style={{ display: "inline" }}>{x.viewers}</div>))}
                     <ReportModal/>
                 </Card.Header>
             </div>
