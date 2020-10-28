@@ -2,6 +2,7 @@
 import React,{useState,useEffect,useCallback} from "react";
 import { useParams } from "react-router-dom";
 import Image from 'react-bootstrap/Image';
+
 // END OF IMPORT LIBRARY //
 
 // IMPORT COMPONENT //
@@ -26,6 +27,7 @@ import 'antd/dist/antd.css';
 import { Comment, Tooltip, Avatar } from 'antd';
 import moment from 'moment';
 import { DislikeOutlined, LikeOutlined, DislikeFilled, LikeFilled } from '@ant-design/icons';
+import "./comment.css"
 //------------------------------------------------------------------//
 
 import {Formik,Form,Field,ErrorMessage} from "formik";
@@ -145,8 +147,8 @@ const Comment_component=(props:any)=>{
             >
             {({isSubmitting})=>(
                 <Form autoComplete="off">
-                    <div className="Blog_frame1">
-                        <Field type="input" name="CommentContent" placeholder="type something..."/>
+                    <div className="Blog_frame1 content_container">
+                        <Field type="input" className="input" name="CommentContent" placeholder="type something..."/>
                         <ErrorMessage name="errorMess" component="div"/>
                     </div>
                     <button disabled={isSubmitting}> send </button>

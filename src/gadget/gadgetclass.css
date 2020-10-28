@@ -3,7 +3,7 @@
     padding-left: 10px;
 }
 .likebutton{
-    background-color: none;
+    background: none;
     padding:0em;
     padding-bottom: 1em;
     margin: 0;
@@ -11,6 +11,6 @@
     text-align: center;
 }
 .likeviewreportContainer{
-    display: grid;
-    grid-template-rows: 3fr;
+    display: flex;
+    flex-wrap: nowrap
 }

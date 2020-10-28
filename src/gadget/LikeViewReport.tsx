@@ -14,6 +14,7 @@ import {Like} from "../interfaces/Like"
 import {Blog} from "../interfaces/blog"
 import ReportModal from "../modals/report"
 import {LikeOutlined,LikeTwoTone,EyeOutlined} from '@ant-design/icons';
+import "./gadgetclass.css"
 const LikeViewReport=(props:any)=> {
     const [like,setLike] = useState<boolean>(false)
     const [liker ,setliker] = useState<Like[]>([]) 
@@ -48,11 +49,13 @@ const LikeViewReport=(props:any)=> {
         <div>
             <div className="hot-kl">
                 <Card.Header className="likeviewreportContainer">
-                    <div>
+                    <div >
                         {like ? <button className="likebutton" onClick={clicklike}><LikeOutlined /></button> : <button className="likebutton" onClick={clicklike}><LikeTwoTone /></button> }
                         <div style={{ display: "inline" }}>{liker.length}</div>
                     </div>
-                    <EyeOutlined />{bloginfo.map(x=>(<div style={{ display: "inline" }}>{x.viewers}</div>))}
+                    <div>
+                        <EyeOutlined />{bloginfo.map(x=>(<div style={{ display: "inline" }}>{x.viewers}</div>))}
+                    </div>
                     <ReportModal/>
                 </Card.Header>
             </div>

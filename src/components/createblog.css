@@ -1,0 +1,41 @@
+.container_real{
+    border:none
+}
+.blog_container{
+    border-radius: 0 0 0 0;
+    border: 1px;
+    border-color: #D2D2D2;
+    border-style: solid;
+    padding:3em
+}
+
+.Col{
+    margin-bottom: 1em;
+}
+
+.input_blogname{
+    width:100%;
+}
+.create_kl{
+    background-color: #90E328;
+    color: white;
+    font-weight: bold;
+    border-radius: 100% 100% 0 0;
+    text-align: center;
+    size:8em;
+    padding:2em
+
+
+}
+
+.create_rw{
+    background-color:#5DD4EB;
+    color: white;
+    font-weight: bold;
+    border-radius: 100% 100% 0 0;
+    text-align: center;
+    size:8em;
+    padding:2em
+
+
+}

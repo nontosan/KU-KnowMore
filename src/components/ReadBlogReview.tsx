@@ -29,6 +29,8 @@ import './section.css';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Container, Row } from 'react-bootstrap';
+import 'antd/dist/antd.css';
+import { Progress } from 'antd';
 // END OF IMPORT CSS //
 
 // IMPORT PHOTO //
@@ -131,21 +133,23 @@ const ReadBlogReview = (props:any) => {
 
   return (
     <div>
-      {blogsInfomation.map(blogInformation=>(
-          <div className="Blog_Info">
-              <div className="Blog_frame1">
-                  <div className="Blog_name">ชื่อบล็อค </div>
-                  <div className="Blog_name2">{blogInformation.blog_name}</div>
-                  <div className="Blog_name">รหัสวิชา </div>
-                  <div className="Blog_name2">{selectCode}</div>
-                  <div className="Blog_name">ชื่อวิชา </div>
-                  <div className="Blog_name2">{selectNameEn}  ({selectNameTh})</div>
-                  <div className="Blog_name">ชื่อวิชา </div>
-                  <div className="Blog_name2">{selectTeacher}</div>
-                </div>
-            </div>
-      ))}
-      <div className="editor_text" >
+      <div className ="div-scrollbar">
+        {blogsInfomation.map(blogInformation=>(
+            <div className="Blog_Info">
+                <div className="Blog_frame1">
+                    <div className="Blog_name">ชื่อบล็อค </div>
+                    <div className="Blog_name2">{blogInformation.blog_name}</div>
+                    <div className="Blog_name">รหัสวิชา </div>
+                    <div className="Blog_name2">{selectCode}</div>
+                    <div className="Blog_name">ชื่อวิชา </div>
+                    <div className="Blog_name2">{selectNameEn}  ({selectNameTh})</div>
+                    <div className="Blog_name">ชื่อวิชา </div>
+                    <div className="Blog_name2">{selectTeacher}</div>
+                  </div>
+              </div>
+        ))}
+      </div>
+      <div className="div-scrollbar editor_text" >
         <div dangerouslySetInnerHTML={{ __html: editorValue }} />
       </div>
             <div className ="div-scrollbar">
@@ -155,7 +159,10 @@ const ReadBlogReview = (props:any) => {
                             <label className="label">สอนได้เข้าใจ</label>
                         </Col>
                         <Col>
-                            {teachScore}
+                            <Progress percent={teachScore*20} showInfo={false}/>
+                        </Col>
+                        <Col>
+                            ({teachScore}/5)
                         </Col>
                     </Row>
                 </Container>
@@ -167,7 +174,10 @@ const ReadBlogReview = (props:any) => {
                             <label className="label">จำนวนงาน</label>
                         </Col>
                         <Col>
-                            {workScore}
+                            <Progress percent={workScore*20} showInfo={false}/>
+                        </Col>
+                        <Col>
+                            ({workScore}/5)
                         </Col>
                     </Row>
                 </Container>
@@ -179,7 +189,10 @@ const ReadBlogReview = (props:any) => {
                             <label className="label">ความสำคัญในการเข้าเรียน</label>
                         </Col>
                         <Col >
-                            {roomScore}
+                            <Progress percent={roomScore*20} showInfo={false}/>
+                        </Col>
+                        <Col>
+                            ({roomScore}/5)
                         </Col>
                     </Row>
                 </Container>
@@ -191,7 +204,10 @@ const ReadBlogReview = (props:any) => {
                             <label className="label">ภาพรวม</label>
                         </Col>
                         <Col>
-                            {overallScore}
+                            <Progress percent={overallScore*20} showInfo={false}/>
+                        </Col>
+                        <Col>
+                            ({overallScore}/5)
                         </Col>
                     </Row>
                 </Container>

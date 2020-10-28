@@ -168,7 +168,14 @@ const UserPage = (props:any) => {
                                             <Link to={`/myKnowledge/${item.id}`}>
                                                 <Button className="blog-fl" variant="outline-danger">EDIT</Button>
                                             </Link>
-                                            <Button className="blog-fl" variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
+                                            <Popconfirm
+                                                title="Are you sure delete this blog?"
+                                                onConfirm={e=>handledelete(item.id)}
+                                                onCancel={e=>{console.log("cancle")}}
+                                                okText="Yes"
+                                                cancelText="No"
+                                            ><Button className="blog-fl" variant="outline-warning">DELETE</Button>
+                                            </Popconfirm>
                                         </div>
                                     }
                                 </div>
