@@ -45,6 +45,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // IMPORT PHOTO //
 // END OF IMPORT PHOTO //
 import Dropdowntest from "../gadget/create_blog"
+import ReviewServices from '../services/ReviewServices';
 //------------------------------------------------------------------//
 
 type editsection={
@@ -57,7 +58,7 @@ const EditReview = (props:any) => {
   const [sectionsInformation, setSectionsInformation] = useState<Section[]>([]);
   const [sections,setsections] = useState<Section_Edit[]>([])
   const [blogsInfomation,setBlogsInfomation] = useState<Blog[]>([])
-  const blogId =window.location.pathname.split("/")[2]
+  const blogId =window.location.pathname.split("/")[2] // ดึงค่า BlogId จาก Url 
   const history = useHistory()
   ///////////////////////////////copy/////////////////////////////////////
   const resultLimit = 10
@@ -78,24 +79,48 @@ const EditReview = (props:any) => {
     const [selectCourseId, setSelectCourseId] = useState<string>('');
     const [visible,setVisible] = useState<boolean>(false)
   ///////////////////////////////end copy//////////////////////////////////
+  const [reviewId, setReviewId] = useState("");
   const [editorValue, setEditorValue] = useState("");
   const [teachScore, setTeachScore] = useState(0);
   const [workScore, setWorkScore] = useState(0);
   const [roomScore, setRoomScore] = useState(0);
   const [overallScore, setOverallScore] = useState(0)
+
+
   //fetch blog from database
   const fetchBlogs = () => {
     BlogsService.fetchBlogSpecific(blogId)
       .then(async(blogInfo) => {
         //console.log(blogInfo)
         setBlogsInfomation(blogInfo);
-        setSelectCourseId(blogInfo[0].course_id)
-        fetchCourse(blogInfo[0].course_id)
+        setSelectCourseId(blogInfo[0].course_id);
+        fetchCourse(blogInfo[0].course_id);
         //finding course_i
       })
   }
-  const handleNewReviewSave = (blogid : string) => {
-    const newReview: Review = {
+
+  const fetchReview = () => {
+    BlogsService.fetchReviewOfBlog(blogId)
+        .then(reviewArray => {
+          let review_info = reviewArray[0];
+          if(review_info.id){
+            setReviewId(review_info.id);
+          }
+          if(review_info){
+            setTeachScore(review_info.teaching);
+            setWorkScore(review_info.hw);
+            setRoomScore(review_info.classroom);
+            setOverallScore(review_info.overall);
+            setEditorValue(review_info.content);
+          }else{
+            alert("error review not found");
+          }
+    })  // Done
+  };
+
+
+  const handleEditReviewSave = (blogid : string) => {
+    const editReview: Review = {
       blog_id: blogid,
       teaching: teachScore,
       hw: workScore,
@@ -103,12 +128,12 @@ const EditReview = (props:any) => {
       overall: overallScore,
       content: editorValue,
     };
-    BlogsService.createReview(newReview,blogid) 
-      .then(savedNewReview => {
-        if (savedNewReview !== null) {
-          alert("Save Review Success");
+    ReviewServices.editReview(editReview,reviewId)
+      .then(editNewReview => {
+        if (editNewReview !== null) {
+          alert("แก้ไข Review สำเร็จ");
         } else{
-          //alert("Save Error");
+          alert("แก้ไข Review ไม่สำเร็จ");
         }
       });
   }
@@ -132,16 +157,9 @@ const EditReview = (props:any) => {
     setCodeOptions(codeoption);
 }
   
-  const fetchsection = () => {
-    SectionService.fetchSections(blogId)
-      .then(Arraysections => {
-        setSectionsInformation(Arraysections);
-      });
-  }    
   useEffect(()=>{
       fetchBlogs();
-      fetchsection();
-    
+      fetchReview();
   },[])
   return (
     <div>
@@ -230,6 +248,18 @@ const EditReview = (props:any) => {
                     </Row>
                 </Container>
             </div>
+            <div className="Confirm"> 
+              <Link to="/">
+                <div className="Cancel">
+                  <Button className="cancel-button" variant="danger">Cancel</Button>
+                </div>
+              </Link>
+              <Link to="/">
+                <div className="Submit">
+                  <Button className="submit-button" variant="success" onClick={e => handleEditReviewSave(blogId)}>Submit</Button>
+                </div>
+          </Link>
+        </div>
         </div>
       </div>
   

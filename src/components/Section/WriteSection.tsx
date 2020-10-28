@@ -21,10 +21,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { convertToObject } from 'typescript';
 import { reverse } from 'dns';
 import {useHistory, Redirect} from "react-router"
+import ReactQuill from 'react-quill';
 
 const WriteSection = (props:any) => {
     const [newSectionName, setNewSectionName] = useState<string>('');
-    const [draftstate, setdraftState] = useState(EditorState.createEmpty());
+    const [editorValue, setEditorValue] = useState("");
 
     const blogId = (props.match.params.blogId)
     const history = useHistory()
@@ -35,7 +36,7 @@ const WriteSection = (props:any) => {
     const handleSectionSave = () => {
         const writeSection = {
             section_name: newSectionName,
-            content: rawContentState,
+            content: editorValue,
             blog_id: blogId,
         };
 
@@ -48,7 +49,6 @@ const WriteSection = (props:any) => {
     };
 
     console.log(history.go)
-    const rawContentState = convertToRaw(draftstate.getCurrentContent());
     return (
         <div>
             <InputGroup size="lg" className="div-sectionname">
@@ -58,13 +58,11 @@ const WriteSection = (props:any) => {
                 <FormControl aria-label="Large" aria-describedby="inputGroup-sizing-sm" value={newSectionName} onChange={handleNewSectionNameChange}/>
             </InputGroup>
             <div className="div-sectionname">
-                <Draft 
-                    onEditorStateChange={
-                        (draftstate) => {
-                            setdraftState(draftstate);
-                            //console.log(draftstate.getCurrentContent());
-                        }
-                    }
+                <ReactQuill 
+                    placeholder={"เขียนรีวิวลงที่นี้"}
+                    theme="snow" 
+                    value={editorValue} 
+                    onChange={setEditorValue}
                 />
             </div>
             <div className="div-sectionname">
