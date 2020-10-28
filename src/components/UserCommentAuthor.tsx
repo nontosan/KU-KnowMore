@@ -52,7 +52,7 @@ const UserCommentAuthor = (props:any) => {
                     <Suspense fallback={<div>Loading... </div>}>
                         <ImageComponent className="profile-pic" userid={userInformation.pic_dir}/>
                     </Suspense>
-                    &nbsp;&nbsp;&nbsp;{userInformation.name} 
+                    &nbsp;&nbsp;&nbsp;<strong>{userInformation.name}</strong>
                 </div>
             ))}
         </div>

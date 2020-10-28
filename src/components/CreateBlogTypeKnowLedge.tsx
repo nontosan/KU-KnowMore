@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 import Select from 'react-select';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useHistory} from "react-router"
+import Modal from 'react-bootstrap/Modal';
 
 
 import '../components/createblog_component/input.css';
@@ -128,83 +129,102 @@ const DropdownCreateKnowledge=()=> {
         <div className="hot-kl">
             {localStorage.accessToken==undefined &&
                 <div>
-                    <Redirect to="/login" />
+                    <Modal 
+                        size="lg"
+                        aria-labelledby="contained-modal-title-vcenter"
+                        centered
+                        show="true"
+                    >
+                        <Modal.Body>
+                            Please Login First...
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <div className="Cancel">
+                                <Button className="cancel-button" variant="danger" onClick={e=>history.goBack()}>Cancel</Button>
+                            </div>
+                            <div className="Submit">
+                                <Link to="/login">
+                                    <Button className="submit-button" variant="success">Submit</Button>
+                                </Link>
+                            </div>
+                        </Modal.Footer>
+                    </Modal>
                 </div>
             }
             {localStorage.accessToken!=undefined &&
                 <div>
                     <Formik
-            initialValues={{nameblog:""}}
-            onSubmit={(values,actions)=>{
-                //console.log("hello")
-                if(values.nameblog!=="" && selectCode!=="" && selectTeacher!==""){
-                    const newBlog={
-                        user_id: "5f82fd5504eb8600aa617b6b",
-                        type: "knowledge",
-                        blog_name: values.nameblog,
-                        course_id: selectCourseId
-                    }
-                    BlogsService.createBlog(newBlog).then(res=>{
-                        if(res!==null){
-                            setUrl(res.id)
+                        initialValues={{nameblog:""}}
+                        onSubmit={(values,actions)=>{
+                        //console.log("hello")
+                        if(values.nameblog!=="" && selectCode!=="" && selectTeacher!==""){
+                            const newBlog={
+                                user_id: "5f82fd5504eb8600aa617b6b",
+                                type: "knowledge",
+                                blog_name: values.nameblog,
+                                course_id: selectCourseId
+                            }
+                            BlogsService.createBlog(newBlog).then(res=>{
+                                if(res!==null){
+                                    setUrl(res.id)
+                                }
+                                console.log(res)
+                            })
                         }
-                        console.log(res)
-                    })
-                }
-                else{
-                    alert("Please complete the form")
-                }
-                actions.setSubmitting(false)
-            }}
-            >
-            {({isSubmitting})=>(
-                <Form>
-                    <div>BlogName</div><Field type="input" name="nameblog"/>
-                    {visible &&
-                        <div>
-                            {codeoption[0]}
-                            <div>code</div>
-                                <Select 
-                                    options = {codeOptions} 
-                                    onChange={handleChangeCode}
-                                    isSearchable
-                                    filterOption={({label}, query) => label.indexOf(query.toLowerCase()) >= 0 && i++ < resultLimit}
-                                    onInputChange={() => { i = 0 }}
-                                />
-                            <div>NameTh</div>
-                                <Select 
-                                    isDisabled
-                                    placeholder={selectNameTh}
-                                />
-                            <div>NameEn</div>
-                                <Select 
-                                    isDisabled
-                                    placeholder={selectNameEn}
-                                />
+                        else{
+                            alert("Please complete the form")
+                        }
+                        actions.setSubmitting(false)
+                        }}
+                    >
+                        {({isSubmitting})=>(
+                            <Form>
+                                <div>BlogName</div><Field type="input" name="nameblog"/>
+                                {visible &&
+                                    <div>
+                                        {codeoption[0]}
+                                        <div>code</div>
+                                            <Select 
+                                                options = {codeOptions} 
+                                                onChange={handleChangeCode}
+                                                isSearchable
+                                                filterOption={({label}, query) => label.indexOf(query.toLowerCase()) >= 0 && i++ < resultLimit}
+                                                onInputChange={() => { i = 0 }}
+                                            />
+                                        <div>NameTh</div>
+                                            <Select 
+                                                isDisabled
+                                                placeholder={selectNameTh}
+                                            />
+                                        <div>NameEn</div>
+                                            <Select 
+                                                isDisabled
+                                                placeholder={selectNameEn}
+                                            />
 
-                            <div>Teacher</div>
-                                <Select 
-                                    options = {teacherOptions} 
-                                    onChange={handleChangeTeacher}
-                                    isSearchable
-                                />
-                        </div>
-                    }
-                    <br />
-                    <div className="Cancel">
-                        <Button style={{ float: "right" }} variant="danger" onClick={e=>history.goBack()}> Cancel </Button>
-                    </div>
-                    <div className="Submit">
-                        <button style={{ float: "right" }} className="btn btn-success submit-button" disabled={isSubmitting}> Submit </button>
-                        {afterSave &&
-                            <div>
-                                <Redirect to={`myKnowledge/${UrlLink}`} />
-                            </div>
-                        }
-                    </div>
-                </Form>
-            )}
-            </Formik>
+                                        <div>Teacher</div>
+                                            <Select 
+                                                options = {teacherOptions} 
+                                                onChange={handleChangeTeacher}
+                                                isSearchable
+                                            />
+                                    </div>
+                                }
+                                <br />
+                                <div className="Cancel">
+                                    <Button style={{ float: "right" }} variant="danger" onClick={e=>history.goBack()}> Cancel </Button>
+                                </div>
+                                <div className="Submit">
+                                    <button style={{ float: "right" }} className="btn btn-success submit-button" disabled={isSubmitting}> Submit </button>
+                                    {afterSave &&
+                                        <div>
+                                            <Redirect to={`myKnowledge/${UrlLink}`} />
+                                        </div>
+                                    }
+                                </div>
+                            </Form>
+                        )}
+                    </Formik>
                 </div>
             }
             

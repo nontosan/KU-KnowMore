@@ -13,6 +13,7 @@ import SearchPic from './photo/Magnify.png';
 
 import Filtermodel from './modals/filter';
 
+import Home from './components/Home';
 import Showklinmain from "./components/ShowKnowledgeInMain";
 import Showrwinmain from "./components/ShowReviewInMain";
 import CreateKlBlog from "./components/CreateBlogTypeKnowLedge";
@@ -113,7 +114,9 @@ const App = () => {
                     <Nav className="mr-auto">
                         <Nav.Link href="/searchknowledgeblog">KNOWLEDGE BLOG</Nav.Link>
                         <Nav.Link href="/searchreviewblog">REVIEW BLOG</Nav.Link>
-                        <Nav.Link href="/dropdowntest">dropdowntest</Nav.Link>
+                        {false && /* true for debug */
+                            <Nav.Link href="/dropdowntest">dropdowntest</Nav.Link>
+                        }
                     </Nav>
                     <Form inline >
                         <Link to="/">
@@ -188,21 +191,7 @@ const App = () => {
                         <SearchFilter />
                     </Route>
                     <Route path="/">
-                        <div className="main-div-main">
-                            <Filtermodel />
-                        </div>
-                        <div className="hot-kl">
-                            <Card.Header>KNOWLEDGE BLOG</Card.Header>
-                            <ListGroup variant="flush">
-                                <Showklinmain />
-                            </ListGroup>
-                        </div>
-                        <div className="hot-kl" style={{ marginBottom : "50px" }}>
-                            <Card.Header>REVIEW BLOG</Card.Header>
-                            <ListGroup variant="flush">
-                                <Showrwinmain />
-                            </ListGroup>
-                        </div>
+                        <Home />
                     </Route>
                 </Switch>
                 <div>
