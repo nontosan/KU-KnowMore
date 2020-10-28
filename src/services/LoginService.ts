@@ -11,9 +11,11 @@ async function UserLogin(userLogin: Login): Promise<any|null> {
     console.log(Token)
     if (Token.access_token) {
         localStorage.setItem("accessToken", Token.access_token);
-        localStorage.setItem("userId", Token.username);
+        localStorage.setItem("userId", Token.userid);
+        console.log("hello");
         return Token;
     } else{
+        console.log("wrong username or password");
         return null;
     }
 }
@@ -34,7 +36,7 @@ function getUsername(): string|null {
         const decode:any = jwt_decode(localStorage.accessToken);
         //console.log(decode);
         //console.log(decode.username);
-        return decode.username
+        return localStorage.userId
     } else {
         return null;
     }

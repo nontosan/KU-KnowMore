@@ -9,7 +9,8 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Card from 'react-bootstrap/Card';
 
 import ProfilePic from './photo/profilepic.png';
-import SearchPic from './photo/Magnify.png';
+import SearchPic from './photo/mgg2.png';
+import HomeIcon from './photo/homeicon.png';
 
 import Filtermodel from './modals/filter';
 
@@ -92,6 +93,7 @@ const App = () => {
 
     const fetchProfile = () => {
         if(userId !== null){
+            console.log(userId);
             ProfileService.fetchProfileSpecific(userId)
                 .then(userInfo => {
                     setUserInformation(userInfo);
@@ -110,6 +112,9 @@ const App = () => {
         <Router>
             <div className="background-page">
                 <Navbar bg="dark" variant="dark">
+                    <Link to="/">
+                        <Image className="home-pic" src={HomeIcon}></Image>
+                    </Link>
                     <Navbar.Brand href="/">KU KNOWMORE</Navbar.Brand>
                     <Nav className="mr-auto">
                         <Nav.Link href="/searchknowledgeblog">KNOWLEDGE BLOG</Nav.Link>
@@ -131,15 +136,22 @@ const App = () => {
                         <div className="white-font">
                             <Form inline>
                                 <Link to={`/userpage/${userId}`} style={{ float : "left" }}>
+                                {true &&
                                 <Suspense fallback={<div>Loading... </div>}>
                                     {userInformation.map(a=>
                                         <ImageComponent className="profile-pic" userid={a.pic_dir}/>)}
                                 </Suspense>
+                                }
+                                
                                 </Link>
                                 <Nav className="mr-auto">
                                     <Nav.Link href={`/userpage/${userId}`}>
                                         &nbsp;&nbsp;&nbsp;
-                                        {username}
+                                        {userInformation.map(a=>
+                                            <div className="blog-fl">
+                                                {a.name}
+                                            </div>
+                                        )}
                                     </Nav.Link>
                                 </Nav>
                             </Form>
