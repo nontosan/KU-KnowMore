@@ -1,3 +1,4 @@
 /node_modules/*
 /profile_pic/*
-/attachments/*
+/attachments_dir/*
+docker.sh

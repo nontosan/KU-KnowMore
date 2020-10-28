@@ -2,7 +2,10 @@
 /dist
 /node_modules
 /profile_pic
-/attachments
+/attachments_dir
+
+# util
+docker.sh
 
 # course
 /src/courses/final section.json
