@@ -1,3 +1,4 @@
+
 .background-page{
   background-image: url("https://images.clipartlogo.com/files/istock/previews/8403/84036115-soft-white-argyle-pattern-wallpaper-website-or-cover-background.jpg");
 }
@@ -62,9 +63,9 @@
   display:grid;
   grid-template-columns: 3fr 1fr 1fr 2fr;
   border-bottom: rgba(0,0,0,.125) solid 1px;
-  background-color: #fff;
+  background-color: rgb(229, 226, 226);
   color: black;
-  transform: 0.2;
+  transition: 0.4s;
 }
 
 .show-all-blog:hover{
@@ -114,6 +115,22 @@
   padding: 8px;
 }
 
+.fontthai{
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+#dropdown-nav{
+  color:white!important;
+  text-decoration: none!important;
+  background-color: transparent!important;
+  transition: 0.3s!important;
+}
+
+#dropdown-nav:hover{
+  color:rgb(2, 212, 55)!important;
+  text-decoration: none!important;
+  background-color: transparent!important;
+}
 
 /* -------------------------------------------footer css------------------------------------------------------*/
 

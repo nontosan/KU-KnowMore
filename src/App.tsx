@@ -110,7 +110,7 @@ const App = () => {
 
     return (
         <Router>
-            <div className="background-page">
+            <div className="background-page fontthai">
                 <Navbar bg="dark" variant="dark">
                     <Link to="/">
                         <Image className="home-pic" src={HomeIcon}></Image>
@@ -127,7 +127,7 @@ const App = () => {
                         <Link to="/">
                             <Image className="search-pic" src={SearchPic}></Image>
                         </Link>
-                        <NavDropdown title="Create Your Blog" id="collasible-nav-dropdown" >
+                        <NavDropdown title="Create Your Blog" id="dropdown-nav" >
                             <NavDropdown.Item href="/createklblog">Create Knowledge</NavDropdown.Item>
                             <NavDropdown.Item href="/createrwblog">Create Review</NavDropdown.Item>
                         </NavDropdown>
@@ -144,9 +144,9 @@ const App = () => {
                                 }
                                 
                                 </Link>
+                                &nbsp;&nbsp;
                                 <Nav className="mr-auto">
                                     <Nav.Link href={`/userpage/${userId}`}>
-                                        &nbsp;&nbsp;&nbsp;
                                         {userInformation.map(a=>
                                             <div className="blog-fl">
                                                 {a.name}

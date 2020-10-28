@@ -1,6 +1,7 @@
 // IMPORT LIBRARY //
 import React,{useState,useEffect,useCallback} from "react";
 import { useParams } from "react-router-dom";
+import Image from 'react-bootstrap/Image';
 // END OF IMPORT LIBRARY //
 
 // IMPORT COMPONENT //
@@ -19,6 +20,7 @@ import {Comment_Sch} from "../interfaces/comment";
 import { User_Sch } from "../interfaces/user";
 // END OF IMPORT INTERFACE//
 
+import ReportButton from '../photo/redalert.png';
 
 //------------------------------------------------------------------//
 
@@ -116,7 +118,7 @@ const Comment_component=(props:any)=>{
                         {item.date_time}
                     </div>
                     <div className="blog-fr">
-                        <button onClick={handlereport} className="blog-fr btn btn-danger">report</button>
+                        <Image className="profile-pic blog-fr" src={ReportButton} onClick={handlereport}></Image>
                         {item.user_id==localStorage.userId &&
                             <button className="blog-fr black-font" onClick={handledelete}>delete</button>
                         } 
