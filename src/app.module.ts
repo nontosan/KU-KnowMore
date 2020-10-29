@@ -32,8 +32,9 @@ import { AuthModule } from './auth/auth.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mongodb',
-      host: '188.166.178.33',
-      port: 27017,
+      // host: '188.166.178.33',
+      host: 'mongo.ku-knowmore.xyz',
+      //port: 27017,
       username: 'admin-backend',
       password: 'Rahat_Khao_Da_Ta_Bet',
       database: 'KU-KnowMore',
