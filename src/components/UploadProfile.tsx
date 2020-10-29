@@ -30,7 +30,8 @@ class Upload extends React.Component<any,any> {
             url: `http://188.166.178.33:3000/users/${this.props.userID}/profile_pic`, //Sample API 
             method: "POST",
             headers:{
-                authorization: 'test'
+                authorization: 'test',
+                'Content-Type': 'multipart/form-data'
             },
             data: profile_pic
         });
