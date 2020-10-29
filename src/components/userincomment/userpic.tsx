@@ -9,18 +9,18 @@ import {
 // END OF IMPORT LIBRARY //
 
 // IMPORT COMPONENT //
-import DeleteModal from '../modals/DeleteModal';
-import ImageComponent from '../components/Display';
+import DeleteModal from '../../modals/DeleteModal';
+import ImageComponent from '../../components/Display';
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
-import BlogsService from '../services/BlogsService';
-import ProfileService from '../services/ProfileService';
+import BlogsService from '../../services/BlogsService';
+import ProfileService from '../../services/ProfileService';
 // END OF IMPORT SERVICE //
 
 // IMPORT INTERFACE //
-import { Blog } from '../interfaces/blog';
-import { User_Sch } from '../interfaces/user';
+import { Blog } from '../../interfaces/blog';
+import { User_Sch } from '../../interfaces/user';
 // END OF IMPORT INTERFACE//
 
 // IMPORT CSS //
@@ -31,7 +31,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 //------------------------------------------------------------------//
 
-const UserCommentAuthor = (props:any) => {
+const UserCommentPic = (props:any) => {
     const [userInformation, setUserInformation] = useState<User_Sch[]>([]);
     //console.log(props.userid);
     const fetchUser = () => {
@@ -46,20 +46,9 @@ const UserCommentAuthor = (props:any) => {
         fetchUser();
     },[])
     return (
-        <div className="blog-fl">
-            {userInformation.map(userInformation => (
-                <div className="blog-fl black-font">
-                    <Suspense fallback={<div>Loading... </div>}>
-                        <ImageComponent className="profile-pic" userid={userInformation.pic_dir}/>
-                    </Suspense>
-                    &nbsp;&nbsp;&nbsp;<strong>{userInformation.name}</strong>
-                </div>
-            ))}
-        </div>
-
-
+        userInformation[0].pic_dir
     )
 
 }
 
-export default UserCommentAuthor;
+export default UserCommentPic;

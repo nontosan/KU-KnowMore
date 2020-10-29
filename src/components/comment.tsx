@@ -1,17 +1,20 @@
 // IMPORT LIBRARY //
 import React,{useState,useEffect,useCallback} from "react";
 import { useParams } from "react-router-dom";
+import Image from 'react-bootstrap/Image';
+
 // END OF IMPORT LIBRARY //
 
 // IMPORT COMPONENT //
 import UserCommentAuthor from "./UserCommentAuthor";
+import UserCommentName from "./userincomment/username"
+import UserCommentPic from "./userincomment/userpic"
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
 import loadcomment from "../services/loadcomment";
 import CommentService from "../services/CommentService";
-import loaduser from "../services/loaduser";
-import LoginService from '../services/LoginService';
+
 // END OF IMPORT SERVICE //
 
 // IMPORT INTERFACE //
@@ -19,7 +22,12 @@ import {Comment_Sch} from "../interfaces/comment";
 import { User_Sch } from "../interfaces/user";
 // END OF IMPORT INTERFACE//
 
-
+import ReportButton from '../photo/redalert.png';
+import 'antd/dist/antd.css';
+import { Comment, Tooltip, Avatar } from 'antd';
+import moment from 'moment';
+import { DislikeOutlined, LikeOutlined, DislikeFilled, LikeFilled } from '@ant-design/icons';
+import "./comment.css"
 //------------------------------------------------------------------//
 
 import {Formik,Form,Field,ErrorMessage} from "formik";
@@ -63,24 +71,8 @@ const Comment_component=(props:any)=>{
                 console.log(comments);
                 setcomment(comments)
             });
-//        comments.forEach((comment)=>{
-//            loaduser.fetchUser(comment).then(user=>setuser(user))
-//            const cmt_blog:comment_blog={
-//                    comment_id:comment.blog_id,
-//                    blog_id:comment.blog_id,
-//                    user_id:comment.user_id,
-//                    content:comment.content,
-//                    date_time:comment.date_time,
-//                    profile_description:user?.profile_description,
-//                    pic_name:user?.pic_name,
-//                    username:user?.username,
-//                    pic_dir:user?.pic_dir
-//           }
-//            /*setcmt_blog(cmt_blogs)*/
-//            cmt_blogs.push(cmt_blog)
-//            
-//        })
     }
+    
 
     const handledelete=()=>{
         console.log("handledelete comment")
@@ -94,7 +86,7 @@ const Comment_component=(props:any)=>{
 
     useEffect(()=>{
         fetchCommentblog()
-        console.log("HELLOEIEIZACOMMENT");
+        //console.log("HELLOEIEIZACOMMENT");
         //check is token id is userid then set deleteVisible ??[!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!]
     },[])
 
@@ -103,23 +95,23 @@ const Comment_component=(props:any)=>{
     return (
         <div>
             {comments.map(item=>(
-                <div className="show-all-blog">
+                <div className="show-all-comment">
+                    <div className="blog-fl black-font">
+                        <UserCommentAuthor 
+                            userid = {item.user_id}
+                        />
+                    </div>
                     <div className="blog-fl black-font">
                         {item.content}    
                     </div>
                     <div className="blog-fl black-font">
                         {item.date_time}
                     </div>
-                    <div>
-                    </div>
-                    <div>
-                        {deleteVisible &&
-                            <button className="blog-fl black-font" onClick={handledelete}>delete</button>
-                        }
-                        <button onClick={handlereport} className="btn btn-danger">report</button> 
-                        <UserCommentAuthor 
-                            userid = {item.user_id}
-                        />
+                    <div className="blog-fr">
+                        <Image className="profile-pic blog-fr" src={ReportButton} onClick={handlereport}></Image>
+                        {item.user_id==localStorage.userId &&
+                            <button className="blog-fr black-font" onClick={handledelete}>delete</button>
+                        } 
                     </div>
                 </div>
             ))}
@@ -155,8 +147,8 @@ const Comment_component=(props:any)=>{
             >
             {({isSubmitting})=>(
                 <Form autoComplete="off">
-                    <div className="Blog_frame1">
-                        <Field type="input" name="CommentContent" placeholder="type something..."/>
+                    <div className="Blog_frame1 content_container">
+                        <Field type="input" className="input" name="CommentContent" placeholder="type something..."/>
                         <ErrorMessage name="errorMess" component="div"/>
                     </div>
                     <button disabled={isSubmitting}> send </button>

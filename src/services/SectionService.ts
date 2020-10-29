@@ -1,7 +1,7 @@
 import { Section  } from '../interfaces'
 import { Attachments } from '../interfaces/blog'
 
-async function createSection(blogid:string,writeSection: Section): Promise<Section|null> {
+async function createSection(blogid:string,writeSection: any): Promise<Section|null> {
     const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}/sections`,{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},

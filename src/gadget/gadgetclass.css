@@ -1,0 +1,16 @@
+.profile {
+    text-align: left;
+    padding-left: 10px;
+}
+.likebutton{
+    background: none;
+    padding:0em;
+    padding-bottom: 1em;
+    margin: 0;
+    border: none;
+    text-align: center;
+}
+.likeviewreportContainer{
+    display: flex;
+    flex-wrap: nowrap
+}

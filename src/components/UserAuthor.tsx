@@ -48,16 +48,14 @@ const UserAuthor = (props:any) => {
     return (
         <div className="author-user">
             {userInformation.map(userInformation => (
-                <div className="blog-fr black-font">
+                <div>
                     <Suspense fallback={<div>Loading... </div>}>
                         <ImageComponent className="profile-pic" userid={userInformation.pic_dir}/>
                     </Suspense>
-                    &nbsp;&nbsp;&nbsp;{userInformation.name} 
+                    &nbsp;&nbsp;&nbsp;<strong>{userInformation.name}</strong>
                 </div>
             ))}
         </div>
-
-
     )
 
 }

@@ -27,7 +27,9 @@ import { User_Sch } from '../interfaces/user';
 
 // IMPORT CSS //
 import './section.css';
+import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Popconfirm, message } from 'antd';
 // END OF IMPORT CSS //
 
 // IMPORT PHOTO //
@@ -52,7 +54,11 @@ const UserPage = (props:any) => {
     const handledelete=(blogId:any)=>{
         BlogService.deleteBlog(blogId).then(res=>{
             if(res!==null){
-                alert("already delete")
+                const key = 'updatable';
+                message.loading({ content: 'Loading...', key });
+                setTimeout(() => {
+                    message.success({ content: 'Already delete blog', key, duration: 2 });
+                }, 1000);
             }
             else{
                 alert("delete error??")
@@ -108,6 +114,7 @@ const UserPage = (props:any) => {
                         <div className="profile-page-pic blog-fl">
                             <ImageComponent className="profile-in-userpage" userid={a.pic_dir}/>
                         </div>
+
                     )}
                 </Suspense>
                 {userInformation.map(userInformation => (
@@ -138,9 +145,11 @@ const UserPage = (props:any) => {
                                     <div className="blog-fl" style={{ textAlign : "center" }}>
                                         Last Edit : {blog.last_edit}
                                     </div>
-                                    <UserAuthor
-                                        userid = {blog.user_id}
-                                    />
+                                    <div className="blog-fl" style={{ textAlign : "center" }}>
+                                        <UserAuthor
+                                            userid = {blog.user_id}
+                                        />
+                                    </div>
                                 </Link>
                             </div>
                 )}})}
@@ -156,11 +165,23 @@ const UserPage = (props:any) => {
                                     </Link>
                                     {isCanEdit(item.user_id) &&
                                         <div>
-                                            <Button className="blog-fl" variant="outline-danger">EDIT</Button>
-                                            <Button className="blog-fl" variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
+                                            <Link to={`/myKnowledge/${item.id}`}>
+                                                <Button className="blog-fl" variant="outline-danger">EDIT</Button>
+                                            </Link>
+                                            <Popconfirm
+                                                title="Are you sure delete this blog?"
+                                                onConfirm={e=>handledelete(item.id)}
+                                                onCancel={e=>{console.log("cancle")}}
+                                                okText="Yes"
+                                                cancelText="No"
+                                            ><Button className="blog-fl" variant="outline-warning">DELETE</Button>
+                                            </Popconfirm>
                                         </div>
                                     }
                                 </div>
+                                {
+                                    item.type==="knowledge"?<div>knowledge</div>:<div></div>
+                                }
                             </ListGroup>
                         :
                             <ListGroup variant="flush" className="show-blog">
@@ -173,11 +194,21 @@ const UserPage = (props:any) => {
                                             <Link to={`/editReview/${item.id}`}>
                                             <Button className="blog-fl" variant="outline-danger" onClick={e=>handleRedirect(item.id)}>EDIT</Button>
                                             </Link>
-                                            <Button className="blog-fl" variant="outline-warning" onClick={e=>handledelete(item.id)}>DELETE</Button>
+                                            <Popconfirm
+                                                title="Are you sure delete this blog?"
+                                                onConfirm={r=>handledelete(item.id)}
+                                                onCancel={e=>{console.log("cancle")}}
+                                                okText="Yes"
+                                                cancelText="No"
+                                            >
+                                                <Button className="blog-fl" variant="outline-warning" >DELETE</Button>
+                                            </Popconfirm>
                                         </div>
                                     }
                                 </div>
-                                
+                                {
+                                    item.type==="Review"?<div>Review</div>:<div></div>
+                                }
                             </ListGroup>
                     }      
                 })

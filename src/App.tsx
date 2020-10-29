@@ -9,10 +9,12 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Card from 'react-bootstrap/Card';
 
 import ProfilePic from './photo/profilepic.png';
-import SearchPic from './photo/Magnify.png';
+import SearchPic from './photo/mgg2.png';
+import HomeIcon from './photo/homeicon.png';
 
 import Filtermodel from './modals/filter';
 
+import Home from './components/Home';
 import Showklinmain from "./components/ShowKnowledgeInMain";
 import Showrwinmain from "./components/ShowReviewInMain";
 import CreateKlBlog from "./components/CreateBlogTypeKnowLedge";
@@ -24,6 +26,7 @@ import ReadSection from './components/Section/ReadSection';
 import EditSection from './components/Section/EditSection';
 import LoginPage from './components/LoginPage';
 import ImageComponent from './components/Display';
+
 
 import LoginService from './services/LoginService';
 import ProfileService from './services/ProfileService';
@@ -42,6 +45,7 @@ import {
 
 import WriteSection from "./components/Section/WriteSection";
 import CreateEditSection from "./components/createeditsection";
+import CreateEditReview from "./components/CreateEditReview"
 import UserPage from "./components/UserPage";
 import KnowledgeBlog from './components/KnowledgeBlog';
 import ReviewBlog from './components/ReviewBlog';
@@ -52,6 +56,7 @@ import './components/section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavDropdown from 'react-bootstrap/esm/NavDropdown';
 import CreateBlogReview from './components/Review_component/CreateReviewContent';
+import EditReview from './components/EditReview';
 
 const App = () => {
     const [userInformation, setUserInformation] = useState<User_Sch[]>([]);
@@ -68,7 +73,7 @@ const App = () => {
             setLog(false);
         }
     },[])
-
+    console.log(userInformation)
     const handleUserLogin = () => {
         setUsername(LoginService.getUsername());
         setUserId(LoginService.getUserId());
@@ -88,6 +93,7 @@ const App = () => {
 
     const fetchProfile = () => {
         if(userId !== null){
+            console.log(userId);
             ProfileService.fetchProfileSpecific(userId)
                 .then(userInfo => {
                     setUserInformation(userInfo);
@@ -104,19 +110,24 @@ const App = () => {
 
     return (
         <Router>
-            <div className="background-page">
+            <div className="background-page fontthai">
                 <Navbar bg="dark" variant="dark">
+                    <Link to="/">
+                        <Image className="home-pic" src={HomeIcon}></Image>
+                    </Link>
                     <Navbar.Brand href="/">KU KNOWMORE</Navbar.Brand>
                     <Nav className="mr-auto">
                         <Nav.Link href="/searchknowledgeblog">KNOWLEDGE BLOG</Nav.Link>
                         <Nav.Link href="/searchreviewblog">REVIEW BLOG</Nav.Link>
-                        <Nav.Link href="/dropdowntest">dropdowntest</Nav.Link>
+                        {false && /* true for debug */
+                            <Nav.Link href="/dropdowntest">dropdowntest</Nav.Link>
+                        }
                     </Nav>
                     <Form inline >
                         <Link to="/">
                             <Image className="search-pic" src={SearchPic}></Image>
                         </Link>
-                        <NavDropdown title="Create Your Blog" id="collasible-nav-dropdown" >
+                        <NavDropdown title="Create Your Blog" id="dropdown-nav" >
                             <NavDropdown.Item href="/createklblog">Create Knowledge</NavDropdown.Item>
                             <NavDropdown.Item href="/createrwblog">Create Review</NavDropdown.Item>
                         </NavDropdown>
@@ -125,17 +136,26 @@ const App = () => {
                         <div className="white-font">
                             <Form inline>
                                 <Link to={`/userpage/${userId}`} style={{ float : "left" }}>
+                                {true &&
                                 <Suspense fallback={<div>Loading... </div>}>
                                     {userInformation.map(a=>
                                         <ImageComponent className="profile-pic" userid={a.pic_dir}/>)}
                                 </Suspense>
+                                }
+                                
                                 </Link>
+                                &nbsp;&nbsp;
+                                {true &&
                                 <Nav className="mr-auto">
                                     <Nav.Link href={`/userpage/${userId}`}>
-                                        &nbsp;&nbsp;&nbsp;
-                                        {username}
+                                        {userInformation.map(a=>
+                                            <div className="blog-fl">
+                                                {a.name}
+                                            </div>
+                                        )}
                                     </Nav.Link>
                                 </Nav>
+                                }
                             </Form>
                         </div>
                     )}
@@ -154,9 +174,10 @@ const App = () => {
                 </Navbar>
                 <Switch>
                     <Route path="/myKnowledge/:blogId" name="blogId" component={CreateEditSection}></Route>
+                    <Route path="/myReview/:blogId" name="blogId" component={CreateEditReview}></Route>
                     <Route path="/readKnowledge/:blogId" name="blogId" component={ReadBlogKnowledge}></Route>
                     <Route path="/readReview/:blogId" name="blogId" component={ReadBlogReview}></Route>
-                    <Route path="/editReview/:blogId" name="blogId" component={CreateRwBlog}></Route>
+                    <Route path="/editReview/:blogId" name="blogId" component={EditReview}></Route>
                     <Route path="/writeSection/:blogId" name="blogId" component={WriteSection}></Route>
                     <Route path="/readSection/:sectionId" name="sectionId" component={ReadSection}></Route>
                     <Route path="/editSection/:sectionId" name="sectionId" component={EditSection}></Route>
@@ -178,27 +199,13 @@ const App = () => {
                         <CreateKlBlog />
                     </Route>
                     <Route path="/createrwblog">
-                        <CreateRwBlog blogtype="edit" blogid="5f92bdd4b285fb001b031d06" teacher_name="ทวีเดช ศิริธนาพิพัฒน์"/>
+                        <CreateRwBlog/>
                     </Route>
                     <Route path="/filter/:search" name="search">
                         <SearchFilter />
                     </Route>
                     <Route path="/">
-                        <div className="main-div-main">
-                            <Filtermodel />
-                        </div>
-                        <div className="hot-kl">
-                            <Card.Header>KNOWLEDGE BLOG</Card.Header>
-                            <ListGroup variant="flush">
-                                <Showklinmain />
-                            </ListGroup>
-                        </div>
-                        <div className="hot-kl" style={{ marginBottom : "50px" }}>
-                            <Card.Header>REVIEW BLOG</Card.Header>
-                            <ListGroup variant="flush">
-                                <Showrwinmain />
-                            </ListGroup>
-                        </div>
+                        <Home />
                     </Route>
                 </Switch>
                 <div>

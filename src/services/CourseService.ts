@@ -12,5 +12,13 @@ async function fetchCourse(): Promise<Course_real[]> {
     return courseInfo;  
 }
 
-export default { fetchCourseFilter , fetchCourse };
+async function fetchCourseWithId(courseId:string): Promise<Course_real[]> {
+    const res = await fetch(`http://188.166.178.33:3000/courses/${courseId}`);
+    const courseInfo = await res.json();
+    return courseInfo;
+}
+
+export default { 
+    fetchCourseFilter , fetchCourse , fetchCourseWithId
+};
 
