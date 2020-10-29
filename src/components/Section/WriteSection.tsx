@@ -9,6 +9,7 @@ import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , d
 
 // IMPORT COMPONENT //
 import Photo from '../upload';
+import UploadFile from '../UploadFile';
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
@@ -69,6 +70,9 @@ const WriteSection = (props:any) => {
             </div>
             <div className="div-sectionname">
                 <Photo />
+            </div>
+            <div className="uploadtest">
+                <UploadFile />
             </div>
             <div className="div-sectionname">
                 <Button className="cancel-button" variant="outline-secondary" onClick={e=>history.goBack()}>Cancel</Button>

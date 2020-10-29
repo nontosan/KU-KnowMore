@@ -2,6 +2,7 @@
 import React , { useState , useEffect , Suspense} from "react";
 import Button from 'react-bootstrap/Button';
 import Upload from './UploadProfile';
+import UploadFile from './UploadFile';
 import DownloadFile from './DownloadFile';
 import ImageComponent from './Display';
 import { Col, Container, Row } from 'react-bootstrap';
@@ -43,8 +44,6 @@ function EditProfile (props:any) {
   const history=useHistory();
   
   const buttonstate = () => {
-    //const userId = props.match.params.userId
-    //console.log(userId)
     const editedProfile :User_Sch = {
       name:nme,
       profile_description:descriptions,
@@ -106,6 +105,10 @@ function EditProfile (props:any) {
           )}
         </Suspense>
         </div>
+        -----------------------------------------------
+        <UploadFile />
+        -----------------------------------------------
+        <DownloadFile />
         </div>
     </div>
   );
