@@ -4,7 +4,7 @@ import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 
-class Upload extends React.Component<any,any> {
+class UploadFile extends React.Component<any,any> {
     
     state = {
         file: ""
@@ -22,18 +22,17 @@ class Upload extends React.Component<any,any> {
     handleUpload(e:any){
         //console.log(this.state , "THE STATE ---- $$$$");
         const file = this.state.file
-        const profile_pic = new FormData()
-        profile_pic.append('profile_pic',file)
+        const attachments = new FormData()
+        attachments.append('attachments',file)
         //formdata.append('name','test')
 
         axios({
-            url: `http://188.166.178.33:3000/users/${this.props.userID}/profile_pic`, //Sample API 
+            url: `http://188.166.178.33:3000/sections/5f872295f75b8a001bea596d/attachments`, //Sample API 
             method: "POST",
             headers:{
-                authorization: 'test',
-                'Content-Type': 'multipart/form-data'
+                authorization: 'test'
             },
-            data: profile_pic
+            data: attachments
         });
         alert("Upload Complete");
     }
@@ -41,19 +40,19 @@ class Upload extends React.Component<any,any> {
     render() {
         return (
             <div className="Up">
-                <h1>Upload Pic</h1>
+                <h1>Upload File</h1>
                 <form>
                     <div className="">
                         <label>Select File </label>
-                        <input type="file" multiple name="profile_pic" 
+                        <input type="file" multiple name="attachments" 
                         onChange={(e)=>this.handleFile(e)} />
                     </div>
                     <br />
-                    <Button variant="primary"  onClick={(e)=>this.handleUpload(e)}>Upload</Button>
+                    <Button variant="primary"  onClick={(e)=>this.handleUpload(e)}>UploadFile</Button>
                 </form>
             </div>
         );
     }
 }
 
-export default Upload;
+export default UploadFile;

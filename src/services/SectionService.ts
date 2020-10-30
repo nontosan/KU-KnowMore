@@ -1,4 +1,5 @@
-import { Section } from '../interfaces'
+import { Section  } from '../interfaces'
+import { Attachments } from '../interfaces/blog'
 
 async function createSection(blogid:string,writeSection: any): Promise<Section|null> {
     const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}/sections`,{
@@ -34,6 +35,15 @@ async function deleteSection(sectionId:string): Promise<string> {
     return sections;  
 }
 
+async function fetchSectionFiles(secid:string): Promise<Attachments[]> {
+    const res = await fetch(`http://188.166.178.33:3000/sections/${secid}/attachments`,{
+        method: 'GET',
+    });
+    //console.log(secid)
+    const files = await res.json();
+    return files;
+}
+
 export default {
-    createSection, fetchSections, fetchSectionsSpecific,deleteSection
+    createSection, fetchSections, fetchSectionsSpecific,deleteSection,fetchSectionFiles
 };

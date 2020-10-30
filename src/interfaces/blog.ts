@@ -29,3 +29,12 @@ export interface Review{
     overall:number;
     content:any;
 }
+
+export interface Attachments{
+    originalname?: string;
+    type?: string;
+    filename?: string;
+    path?: string;
+    size?: number;
+    section_id?: string;
+}

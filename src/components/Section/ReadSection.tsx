@@ -2,7 +2,11 @@
 import React, { useState , useEffect , Component } from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { draftToHtml } from 'react-wysiwyg-typescript';
+import axios from 'axios';
 // END OF IMPORT LIBRARY //
+
+// IMPORT COMPONENT //
+import DisplayFile from '../DisplayFile';
 
 // IMPORT SERVICE //
 import SectionService from '../../services/SectionService';
@@ -10,11 +14,13 @@ import SectionService from '../../services/SectionService';
 
 // IMPORT INTERFACE //
 import { Section } from '../../interfaces';
+import { Attachments } from '../../interfaces/blog';
 // END OF IMPORT INTERFACE//
 
 // IMPORT CSS //
 import '../section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
 
 import { convertToRaw, EditorState } from 'draft-js';
 import { type } from 'os';
@@ -30,10 +36,11 @@ const ReadSection = (props:any) => {
     const [displayHTML, setDisplayHTML] = useState<any>();
     const sectionId = (props.match.params.sectionId);
     const [stateCheck, setstateCheck] = useState<boolean>(false);
+    const [attachmentsInformation, setattachmentsInformation] = useState<Attachments[]>([]);
     const blogId = window.location.pathname.split("/")[2]
     const location=useLocation();
     const history=useHistory()
-    //console.log(blogId)
+    console.log(sectionId)
 
     const fetchSection = () => {
         SectionService.fetchSectionsSpecific(sectionId)
@@ -76,9 +83,9 @@ const ReadSection = (props:any) => {
                 <div className="div-sectionname" dangerouslySetInnerHTML={{__html: displayHTML}} />
             }
             <button onClick={e=>history.goBack()}>back</button>
-            
+            File :
+            <DisplayFile secid = {sectionId}/>
         </div>
     );
 }
-
 export default ReadSection;

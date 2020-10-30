@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import {Link} from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
@@ -52,14 +52,14 @@ class DownloadFile extends React.Component {
     
     downloadFile = () => { //Not complete yet
         axios({
-            url: 'http://localhost:3000/sections/5f872295f75b8a001bea596d/attachments/',
+            url: 'http://188.166.178.33:3000/attachments_dir/pdf-test_4710c.pdf',
             method: 'GET',
             responseType: 'blob', // important
           }).then((response) => {
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
             link.href = url;
-            link.setAttribute('download', 'test_fetch file.json'); //change type file here 
+            link.setAttribute('download', 'test_fetch file.pdf'); //change type file here 
             document.body.appendChild(link);
             link.click();
           });
@@ -76,7 +76,8 @@ class DownloadFile extends React.Component {
                 <h3>Download This Below Image(Original Size)</h3>
                 <a href='#' onClick={this.downloadDataTest}>Download this Image</a>
                 <h3>Download Attachments from Sections</h3>
-                <a href='#' onClick={this.downloadFile}>Download Attachments</a>
+                <Button variant="secondary" onClick={this.downloadFile}>Download<br/></Button>
+                <a href="http://188.166.178.33:3000/attachments_dir/test_41013.pdf">Open File in New Tab</a>
             </div>
         )
     }

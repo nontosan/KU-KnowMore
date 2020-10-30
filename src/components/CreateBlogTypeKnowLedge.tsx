@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 
 
 import '../components/createblog_component/input.css';
+import "./createblog.css"
 import Button from 'react-bootstrap/Button';
 import CourseService from "../services/CourseService"
 import {
@@ -16,6 +17,7 @@ import { Course, Course_real } from '../interfaces/course';
 import '../App.css';
 import BlogsService from '../services/BlogsService';
 import {Blog,create_Blog} from "../interfaces/blog"
+import { Col, Container, Row } from 'react-bootstrap';
 //------------------------------------------------------------------//
 const options = [
     { value: '0123', label: 'Blues' },
@@ -126,9 +128,9 @@ const DropdownCreateKnowledge=()=> {
         }
       },[UrlLink]);
     return (
-        <div className="hot-kl">
+        <div className="hot-kl container_real">
             {localStorage.accessToken==undefined &&
-                <div>
+                <div className="blog_container">
                     <Modal 
                         size="lg"
                         aria-labelledby="contained-modal-title-vcenter"
@@ -152,7 +154,7 @@ const DropdownCreateKnowledge=()=> {
                 </div>
             }
             {localStorage.accessToken!=undefined &&
-                <div>
+                <div className="container_real">
                     <Formik
                         initialValues={{nameblog:""}}
                         onSubmit={(values,actions)=>{
@@ -178,12 +180,26 @@ const DropdownCreateKnowledge=()=> {
                         }}
                     >
                         {({isSubmitting})=>(
-                            <Form>
-                                <div>BlogName</div><Field type="input" name="nameblog"/>
+                            <div className="container_real">
+                            <div className="create_kl">Create knowledge</div>
+                            <Form className="blog_container">
+                                <Row className="Col">
+                                    <Col sm={2}>
+                                    <div>BlogName</div>
+                                    </Col>
+                                    <Col>
+                                    <Field className="input_blogname" type="input" name="nameblog"/>
+                                    </Col>
+                                </Row>
+                                
                                 {visible &&
                                     <div>
                                         {codeoption[0]}
-                                        <div>code</div>
+                                        <Row className="Col">
+                                            <Col sm={2}>
+                                                <div>code</div>
+                                            </Col>
+                                            <Col>
                                             <Select 
                                                 options = {codeOptions} 
                                                 onChange={handleChangeCode}
@@ -191,23 +207,42 @@ const DropdownCreateKnowledge=()=> {
                                                 filterOption={({label}, query) => label.indexOf(query.toLowerCase()) >= 0 && i++ < resultLimit}
                                                 onInputChange={() => { i = 0 }}
                                             />
-                                        <div>NameTh</div>
+                                            </Col>
+                                        </Row>
+                                        <Row className="Col">
+                                            <Col sm={2}>
+                                                <div>NameTh</div>
+                                            </Col>
+                                            <Col>
                                             <Select 
                                                 isDisabled
                                                 placeholder={selectNameTh}
                                             />
-                                        <div>NameEn</div>
+                                            </Col>
+                                        </Row>
+                                        <Row className="Col">
+                                            <Col sm={2}>
+                                                <div>NameEn</div>
+                                            </Col>
+                                            <Col>
                                             <Select 
                                                 isDisabled
                                                 placeholder={selectNameEn}
                                             />
-
-                                        <div>Teacher</div>
+                                            </Col>
+                                        </Row>
+                                        <Row >
+                                            <Col sm={2}>
+                                                <div>Teacher</div>
+                                            </Col>
+                                            <Col>
                                             <Select 
                                                 options = {teacherOptions} 
                                                 onChange={handleChangeTeacher}
                                                 isSearchable
                                             />
+                                            </Col>
+                                        </Row>
                                     </div>
                                 }
                                 <br />
@@ -222,7 +257,9 @@ const DropdownCreateKnowledge=()=> {
                                         </div>
                                     }
                                 </div>
+                                
                             </Form>
+                            </div>
                         )}
                     </Formik>
                 </div>

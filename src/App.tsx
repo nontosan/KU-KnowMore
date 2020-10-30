@@ -73,7 +73,7 @@ const App = () => {
             setLog(false);
         }
     },[])
-
+    console.log(userInformation)
     const handleUserLogin = () => {
         setUsername(LoginService.getUsername());
         setUserId(LoginService.getUserId());
@@ -149,6 +149,7 @@ const App = () => {
                                 }
                                 </Link>
                                 &nbsp;&nbsp;
+                                {true &&
                                 <Nav className="mr-auto">
                                     <Nav.Link href={`/userpage/${userId}`}>
                                         {userInformation.map(a=>
@@ -158,6 +159,7 @@ const App = () => {
                                         )}
                                     </Nav.Link>
                                 </Nav>
+                                }
                             </Form>
                         </div>
                     )}

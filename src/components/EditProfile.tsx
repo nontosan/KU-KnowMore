@@ -2,9 +2,11 @@
 import React , { useState , useEffect , Suspense} from "react";
 import Button from 'react-bootstrap/Button';
 import Upload from './UploadProfile';
+import UploadFile from './UploadFile';
 import DownloadFile from './DownloadFile';
 import ImageComponent from './Display';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row ,Form} from 'react-bootstrap';
+
 // END OF IMPORT LIBRARY //
 
 // IMPORT SERVICE //
@@ -13,12 +15,16 @@ import ProfileService from '../services/ProfileService';
 
 // IMPORT INTERFACE //
 import { User_Sch} from "../interfaces/user";
+import { Spin } from 'antd';
 // END OF IMPORT INTERFACE//
 
 // IMPORT CSS //
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './editprofile.css';
 import {useHistory} from "react-router"
+import 'antd/dist/antd.css';
+import { message,AutoComplete } from 'antd';
+import Modal from 'react-bootstrap/Form';
 
 function EditProfile (props:any) {
   const userId = props.match.params.userId
@@ -45,6 +51,7 @@ function EditProfile (props:any) {
   const buttonstate = () => {
     //const userId = props.match.params.userId
     //console.log(userId)
+    const key = 'updatable';
     const editedProfile :User_Sch = {
       name:nme,
       profile_description:descriptions,
@@ -66,8 +73,12 @@ function EditProfile (props:any) {
       console.log(editedProfile);
       ProfileService.EditPro(editedProfile,userId)
         .then(savedEditedProfile => {
-          console.log(savedEditedProfile)
+          //console.log(savedEditedProfile)
+          setTimeout(() => {
+            message.success({ content: 'Loaded!', key, duration: 2 });
+          }, 1);
         });
+      history.goBack()
   }; 
 
   return (
@@ -75,37 +86,41 @@ function EditProfile (props:any) {
       <div className="profile">
         <div className = "Name">
           {userInformation.map(UserInfo=>
-          <input className="input" placeholder={UserInfo.name} type="text" value={nme}
-          onChange={e => setname(e.target.value)}></input>
+          <Form.Control type="text" placeholder={UserInfo.name} value={nme}
+          onChange={e => setname(e.target.value)}/>
             )}
         </div>
         <div className = "Username">
           {userInformation.map(UserInfo=>
-          <input className="input" placeholder={UserInfo.username} type="text" value={usrname}
-          onChange={e => setusername(e.target.value)}></input>
+          <Form.Control type="text" placeholder={UserInfo.username} value={usrname}
+          onChange={e => setusername(e.target.value)}/>
             )}
         </div>
         <div className = "Des">
           Profile Descriptions: <br/>
-          <textarea className="text" name="paragraph_text" value={descriptions}
-          onChange={e => setdescriptions(e.target.value)}>
-          </textarea>
+          <Form.Control as="textarea" rows={3}  name="paragraph_text" value={descriptions}
+          onChange={e => setdescriptions(e.target.value)}/>
         </div>
         <div className="button">
         <Button variant="success" onClick = {buttonstate}>Submit</Button>
-        <Button variant="danger"> Cancel </Button>
+        <Button variant="danger" onClick={e=>history.goBack()}> Cancel </Button>
         </div>
+
         ---------------
         <Upload userID={userId}/>
         ---------------
         This is my Profile_Pic
         <div className="Pro_pic">
-        <Suspense fallback={<div>Loading... </div>}>
+        <Suspense fallback={<div><Spin /></div>}>
           {userInformation.map(a=>
-          <ImageComponent userid={a.pic_dir}/>
+              <ImageComponent userid={a.pic_dir}/>
           )}
         </Suspense>
         </div>
+        -----------------------------------------------
+        <UploadFile />
+        -----------------------------------------------
+        <DownloadFile />
         </div>
     </div>
   );
