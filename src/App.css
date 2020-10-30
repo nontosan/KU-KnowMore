@@ -108,6 +108,15 @@
   color:black;
 }
 
+.login-button{
+  color: #ffffff!important;
+  transition: 0.3s!important;
+}
+
+.login-button:hover{
+  color:rgb(2, 212, 55)!important;
+}
+
 .logout-button{
   background-color: #343a40;
   color: #ffffff;

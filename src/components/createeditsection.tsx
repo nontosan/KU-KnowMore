@@ -142,7 +142,7 @@ const CreateEditSection = (props:any) => {
                   <Image className="addsection" src={AddSection} roundedCircle />
                 </Button>
               </Link>
-        </div>
+            </div>
       </div>
   );
 };

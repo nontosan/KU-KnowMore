@@ -21,13 +21,13 @@ const Home = () => {
                 <Filtermodel />
             </div>
             <div className="hot-kl">
-                <Card.Header>KNOWLEDGE BLOG</Card.Header>
+                <Card.Header className="card-header">KNOWLEDGE BLOG</Card.Header>
                 <ListGroup variant="flush">
                     <Showklinmain />
                 </ListGroup>
             </div>
             <div className="hot-kl" style={{ marginBottom : "50px" }}>
-                <Card.Header>REVIEW BLOG</Card.Header>
+                <Card.Header className="card-header">REVIEW BLOG</Card.Header>
                     <ListGroup variant="flush">
                         <Showrwinmain />
                     </ListGroup>

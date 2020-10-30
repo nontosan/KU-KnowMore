@@ -16,6 +16,7 @@ import {
 import {useHistory} from "react-router"
 
 import ImageComponent from './Display';
+import AddSection from '../photo/addsection.png';
 // IMPORT SERVICE //
 import BlogsService from "../services/BlogsService";
 import SectionService from "../services/SectionService";
@@ -145,7 +146,7 @@ const ReadBlogKnowledge = (props:any) => {
               <Link to={`/userpage/${item.id}`} style={{ float : "left" }}>
                 <Suspense  fallback={<div>Loading... </div>}>
                   <div className="blog-fl">
-                    <ImageComponent className="profile-in-userpage" userid={item.pic_dir}/>
+                    <ImageComponent userid={item.pic_dir}/>
                   </div>
                 </Suspense>
               </Link>
@@ -204,6 +205,14 @@ const ReadBlogKnowledge = (props:any) => {
             <Button variant="outline-warning">EDIT</Button>
           </div>
         ))}
+        {author==localStorage.userId &&
+          <Link to={`/writeSection/${blogId}`}>
+            <Button variant="outline-secondary" className="button-addsection">
+              <Image className="addsection" src={AddSection} roundedCircle />
+            </Button>
+          </Link>
+        }
+        
       </div>
       <LikeViewReport x={blogsInformation}/>
       <div  className="hot-kl">
