@@ -1,47 +1,33 @@
-import React from 'react';
-import Image from 'react-bootstrap/Image';
-import ProfilePic from '../Photo/profilepic.png';
-import '../style/section.css';
+import React, { useState , Component } from 'react'
+import '../style/section.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, ListGroup, Navbar } from 'react-bootstrap';
-import FetchReport_review from '../components/FetchReport-review';
-import { Link } from 'react-router-dom';
+import FetchReport from '../components/FetchReport'
+import Tabs from 'react-bootstrap/Tabs'
+import { Tab } from 'react-bootstrap';
 
 const ProfileAdmin = () => {
-    return (
-        <div>
-            <Navbar className="navbar navbar-light bgNavbar"> 
-                <Navbar.Brand href="/">
-                    <div className="size-KU-knowmore">
-                        KU-Knowmore
-                    </div>
-                    
-                </Navbar.Brand>
-                <Navbar.Toggle />
-                <Navbar.Collapse className="justify-content-end">
-                    <div>
-                        <Image className="profile-page-pic picture-padding" src={ProfilePic} roundedCircle />
-                    </div>
-                    <Navbar.Text className="size-sign">
-                        Signed in as: <a href="#login">Username</a>
-                    </Navbar.Text>
-                </Navbar.Collapse>
-            </Navbar>
-            
-            <ListGroup.Item>
-                <p> Report : </p>
-                <Link to= {`/review`}>
-                    <Button>Review</Button>
-                </Link>
-                <Link to= {`/knowledge`}>
-                    <Button>Knowledge</Button>
-                </Link>
-                <Link to= {`/comment`}>
-                    <Button>Comment</Button>
-                </Link>
-            </ListGroup.Item>
-        </div>
-    );
+       
+  const SelectContent = () => {
+      return(
+         <Tabs defaultActiveKey="Profile" id="uncontrolled-tab-example">
+            <Tab eventKey="review" title="Review">
+              <FetchReport content = "review"/>
+            </Tab>
+            <Tab eventKey="knowledge" title="Knowledge">
+              <FetchReport content = "knowledge"/>
+            </Tab>
+            <Tab eventKey="comment" title="Comment">
+              <FetchReport content = "comment"/>
+            </Tab>
+          </Tabs>
+      )
+  }
+  
+  return (
+      <div>
+          {SelectContent()}
+      </div>
+  );
 }
 
 export default ProfileAdmin;

@@ -5,6 +5,9 @@ import Card from 'react-bootstrap/Card';
 import BlogsService from "../services/BlogsService"
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import DelBlog_Modal from '../components/modal/DelBlog_Modal'
+import Show_Review from '../components/showcontent/Show_Review';
+import Show_Knowledge from '../components/showcontent/Show_Knowledge';
 
 type editsection={
   section:Section_Edit
@@ -13,6 +16,7 @@ type editsection={
 const ReadBlog_Admin = (props:any) => {
   const [sections,setsections] = useState<Section_Edit[]>([])
   const [blogsInfo,setBlogsInfomation] = useState<Blog[]>([])
+ 
   
   console.log(props.match.params)
   const blogId = props.match.params.blogId
@@ -35,18 +39,6 @@ const ReadBlog_Admin = (props:any) => {
     }).then(res=>res.json())
   }
 
-  //edit section => create route with section data from backend
-  const handleeditsection=()=>{
-    console.log("create route to create section")
-  }
-  const DeleteBlog = () => {
-    BlogsService.deleteBlog(blogId)
-    .then(blogs => {
-        console.log(blogs)
-        console.log("done")
-    })
-  }
-
   //refreh
   useEffect(()=>{
     fetchBlogs();
@@ -58,10 +50,8 @@ const ReadBlog_Admin = (props:any) => {
     <div>
       <div className="hot-kl">
         <Card.Header>
-          {(blogtype[0]==='review') ? 'Review Blog' : 'Knowledge Blog'} &nbsp;
-          <button onClick = {e => DeleteBlog()}>
-            DELETE
-          </button> 
+          {(blogtype[0]==='review') ? 'Review Blog': 'Knowledge Blog'} &nbsp;
+          <DelBlog_Modal/>
         </Card.Header>
       </div>
       <div className="hot-kl">
@@ -74,9 +64,7 @@ const ReadBlog_Admin = (props:any) => {
       </div>
       <div className="hot-kl">
         <Card.Header>
-            <div>
-              Content
-            </div>
+        {(blogtype[0]==='review') ? <Show_Review/> : <Show_Knowledge/>} 
         </Card.Header>
       </div>
       <div  className="hot-kl">
@@ -86,4 +74,4 @@ const ReadBlog_Admin = (props:any) => {
   )
 }
 
-export default ReadBlog_Admin
+export default ReadBlog_Admin;

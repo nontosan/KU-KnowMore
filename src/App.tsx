@@ -16,19 +16,20 @@ import {
     Link,
 } 
 from 'react-router-dom';
+import ProfileAdmin from "./Pages/ProfileAdmin";
 import './App.css';
 import './style/section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import FetchReport from './components/FetchReport';
 import Routing from './routes/index';
+import {BrowserRouter} from 'react-router-dom'
 
 const App = () =>
 {
-  
-  return(
-  <div>  
-    <Routing/>
-  </div>
-  
+  return (
+    <div>  
+      <Routing/>
+    </div>
   )
 }
 

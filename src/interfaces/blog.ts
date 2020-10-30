@@ -4,8 +4,6 @@ export interface Blog{
     type: string;
     blog_name: string;
     course_id: string;
-    //subject_name
-    //teacher_name
     last_edit?: Date;
     viewers?: number;
 }
