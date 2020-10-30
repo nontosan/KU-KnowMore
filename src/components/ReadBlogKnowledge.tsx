@@ -1,5 +1,5 @@
 // IMPORT LIBRARY //
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect, Suspense  } from 'react'
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -15,11 +15,13 @@ import {
 } from 'react-router-dom';
 import {useHistory} from "react-router"
 
+import ImageComponent from './Display';
 // IMPORT SERVICE //
 import BlogsService from "../services/BlogsService";
 import SectionService from "../services/SectionService";
 import LoginService from '../services/LoginService';
 import CourseService from '../services/CourseService';
+import ProfileService from '../services/ProfileService';
 // END OF IMPORT SERVICE //
 
 // IMPORT INTERFACE //
@@ -27,6 +29,7 @@ import { Blog }from '../interfaces/blog';
 import {Section_Edit} from "../interfaces/SectionEdit"
 import { Section } from '../interfaces';
 import { Course,Course_real } from '../interfaces/course'
+import { User_Sch } from '../interfaces/user';
 // END OF IMPORT INTERFACE//
 
 // IMPORT CSS //
@@ -49,6 +52,7 @@ import GearEdit from '../photo/gear-edit6.png';
 const ReadBlogKnowledge = (props:any) => {
   const [sectionsInformation, setSectionsInformation] = useState<Section[]>([]);
   const [blogsInformation,setBlogsInformation] = useState<Blog[]>([]);
+  const [userInformation, setUserInformation] = useState<User_Sch[]>([]);
   const [courseInformation, setCourseInformation] = useState<Course_real[]>([]);
   const [author, setAuthor] = useState<string>('');
   const history = useHistory()
@@ -113,14 +117,46 @@ const ReadBlogKnowledge = (props:any) => {
       });
   }
 
+  const fetchProfile = () => {
+    ProfileService.fetchProfileSpecific(author)
+      .then(userInfo => {
+        setUserInformation(userInfo);
+      })
+  }
+
   //refreh
   useEffect(()=>{
     fetchBlogs();
     fetchsection();
   },[])
 
+  useEffect(()=>{
+    if(author!=undefined){
+      fetchProfile();
+    }
+  },[author])
+  console.log(userInformation);
   return (
     <div>
+      <div className="hot-kl">
+        {userInformation.map(item => (
+          <Card.Header>
+            <div>
+              <Link to={`/userpage/${item.id}`} style={{ float : "left" }}>
+                <Suspense  fallback={<div>Loading... </div>}>
+                  <div className="blog-fl">
+                    <ImageComponent className="profile-in-userpage" userid={item.pic_dir}/>
+                  </div>
+                </Suspense>
+              </Link>
+              <Link to={`/userpage/${item.id}`} style={{ color : "white" }}>
+                {item.name}
+              </Link>
+            </div>
+          </Card.Header>
+        ))}
+
+      </div>
       <div className="hot-kl">
         {blogsInformation.map(blogInformation=>(
           <Card.Header>

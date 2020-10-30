@@ -113,6 +113,11 @@
   color: #ffffff;
   border: 0px;
   padding: 8px;
+  transition: 0.3s!important;
+}
+
+.logout-button:hover{
+  color: #ff0000;
 }
 
 .fontthai{

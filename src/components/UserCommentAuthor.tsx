@@ -49,10 +49,14 @@ const UserCommentAuthor = (props:any) => {
         <div className="blog-fl">
             {userInformation.map(userInformation => (
                 <div className="blog-fl black-font">
-                    <Suspense fallback={<div>Loading... </div>}>
-                        <ImageComponent className="profile-pic" userid={userInformation.pic_dir}/>
-                    </Suspense>
-                    &nbsp;&nbsp;&nbsp;<strong>{userInformation.name}</strong>
+                    <Link to={`/userpage/${userInformation.id}`} style={{ float : "left" }} className="blog-fl">
+                        <Suspense fallback={<div>Loading... </div>}>
+                            <ImageComponent className="profile-pic" userid={userInformation.pic_dir}/>
+                        </Suspense>
+                    </Link>
+                    <Link to={`/userpage/${userInformation.id}`} style={{ color : "black" }} className="blog-fl">
+                        <strong className="blog-fl">{userInformation.name}</strong>
+                    </Link>
                 </div>
             ))}
         </div>

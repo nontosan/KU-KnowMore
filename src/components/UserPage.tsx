@@ -5,7 +5,7 @@ import Image from 'react-bootstrap/Image';
 import BlogService from "../services/BlogsService"
 import {Blog} from "../interfaces/blog"
 import ListGroup from 'react-bootstrap/ListGroup';
-import ImageComponent from './Display';
+import ImageComponent from './DisplayOnProfilePage';
 import Card from 'react-bootstrap/Card';
 import {
     Link, Redirect,
@@ -112,7 +112,7 @@ const UserPage = (props:any) => {
                 <Suspense  fallback={<div>Loading... </div>}>
                     {userInformation.map(a=>
                         <div className="profile-page-pic blog-fl">
-                            <ImageComponent className="profile-in-userpage" userid={a.pic_dir}/>
+                            <ImageComponent className="profile-in-userpage" size={200} userid={a.pic_dir}/>
                         </div>
 
                     )}
