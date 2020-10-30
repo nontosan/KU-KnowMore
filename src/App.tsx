@@ -127,6 +127,11 @@ const App = () => {
                         <Link to="/">
                             <Image className="search-pic" src={SearchPic}></Image>
                         </Link>
+                        {false &&
+                        <NavDropdown className="dropdown-eiei" title="Create Your Blog" id="dropdown-nav" >
+                            <NavDropdown.Item href="/createklblog">Create Knowledge</NavDropdown.Item>
+                            <NavDropdown.Item href="/createrwblog">Create Review</NavDropdown.Item>
+                        </NavDropdown>}
                         <NavDropdown title="Create Your Blog" id="dropdown-nav" >
                             <NavDropdown.Item href="/createklblog">Create Knowledge</NavDropdown.Item>
                             <NavDropdown.Item href="/createrwblog">Create Review</NavDropdown.Item>
@@ -142,13 +147,12 @@ const App = () => {
                                         <ImageComponent className="profile-pic" userid={a.pic_dir}/>)}
                                 </Suspense>
                                 }
-                                
                                 </Link>
                                 &nbsp;&nbsp;
                                 <Nav className="mr-auto">
                                     <Nav.Link href={`/userpage/${userId}`}>
                                         {userInformation.map(a=>
-                                            <div className="blog-fl">
+                                            <div className="blog-fl" style={{ color : "white" }}>
                                                 {a.name}
                                             </div>
                                         )}

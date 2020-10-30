@@ -2,6 +2,7 @@
 import React,{useState,useEffect,useCallback} from "react";
 import { useParams } from "react-router-dom";
 import Image from 'react-bootstrap/Image';
+import NavDropdown from 'react-bootstrap/esm/NavDropdown';
 // END OF IMPORT LIBRARY //
 
 // IMPORT COMPONENT //
@@ -20,7 +21,7 @@ import {Comment_Sch} from "../interfaces/comment";
 import { User_Sch } from "../interfaces/user";
 // END OF IMPORT INTERFACE//
 
-import ReportButton from '../photo/redalert.png';
+import ReportButton from '../photo/more (1).png';
 
 //------------------------------------------------------------------//
 
@@ -89,7 +90,7 @@ const Comment_component=(props:any)=>{
     }
 
     const handlereport=()=>{
-        console.log("handle report")
+        console.log("handlereport comment")
         //popup form
         //https://www.youtube.com/watch?v=l2Kp2SzUdlg&ab_channel=Weibenfalk[!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!]
     }
@@ -118,7 +119,14 @@ const Comment_component=(props:any)=>{
                         {item.date_time}
                     </div>
                     <div className="blog-fr">
-                        <Image className="profile-pic blog-fr" src={ReportButton} onClick={handlereport}></Image>
+                        <NavDropdown className="dropdown-eiei blog-fr" title={
+                            <div className="border-more-pic">
+                                <Image className="more-pic blog-fr" src={ReportButton}></Image>
+                            </div>
+                        } id="dropdown-nav" >
+                            <NavDropdown.Item onClick={handledelete} className="more-option">Delete</NavDropdown.Item>
+                            <NavDropdown.Item onClick={handlereport} className="more-option">Report</NavDropdown.Item>
+                        </NavDropdown>
                         {item.user_id==localStorage.userId &&
                             <button className="blog-fr black-font" onClick={handledelete}>delete</button>
                         } 

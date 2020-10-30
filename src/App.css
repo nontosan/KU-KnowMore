@@ -132,6 +132,34 @@
   background-color: transparent!important;
 }
 
+.dropdown-eiei .dropdown-toggle::after{
+  display: none;
+}
+
+.more-pic{
+  height: 20px;
+  width: 20px;
+}
+
+.border-more-pic{
+  height: 20px;
+  width: 20px;
+}
+
+.more-option:hover{
+  background-color: #6c7179;
+  color: white;
+}
+
+.navbar-brand{
+  color:white!important;
+  transition: 0.3s!important;
+}
+
+.navbar-brand:hover{
+  color:rgb(2, 212, 55)!important;
+}
+
 /* -------------------------------------------footer css------------------------------------------------------*/
 
 .three-column-footer-contact-form-container {
