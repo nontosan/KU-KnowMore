@@ -85,6 +85,8 @@
 
 .blog-fl{
     float: left;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .blog-fr{
