@@ -252,7 +252,7 @@ const CreateKlBlog=()=> {
                                     <button style={{ float: "right" }} className="btn btn-success submit-button" disabled={isSubmitting}> Submit </button>
                                     {afterSave &&
                                         <div>
-                                            <Redirect to={`myKnowledge/${UrlLink}`} />
+                                            <Redirect to={`myReview/${UrlLink}`} />
                                         </div>
                                     }
                                 </div>
