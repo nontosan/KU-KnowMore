@@ -28,11 +28,11 @@ export class Like_Service {
         var userLikeCheck = await this.Like_Repository.find({where: { user_id: likedto.user_id, blog_id: likedto.blog_id }});
         if (userLikeCheck[0] == undefined) {
             this.Like_Repository.save(likedto);
-            return 'Like'
+            return { "Status": "Like" }
         }
         else {
             this.Like_Repository.remove(userLikeCheck[0]);
-            return 'Unlike'
+            return { "Status": "Unlike" }
         }
     }
 }
