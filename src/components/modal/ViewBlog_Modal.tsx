@@ -30,7 +30,8 @@ const ViewBlog_Modal = (props:any) => {
     //ชื่อบล็อก
     const blogname = blog.map(name => (name.blog_name))
 
-    const reason = props.rblog.report_reason.split(',')
+    let reason = props.rblog.report_reason.split(',')
+    const newreason = reason.slice(0, reason.length - 1);
 
     return(
         <div className="mr-auto p-2 size-text-report">
@@ -52,7 +53,7 @@ const ViewBlog_Modal = (props:any) => {
                 <Modal.Body> 
                     <ListGroup.Item>
                     <div>
-                        {reason.map((r:any)=>(
+                        {newreason.map((r:any)=>(
                         <ListGroup.Item>
                             reason: {r}
                         </ListGroup.Item>))}

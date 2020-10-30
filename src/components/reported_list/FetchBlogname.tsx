@@ -31,9 +31,9 @@ const FetchBlogname = (props:any) => {
     return (
         <div>
             <ListGroup.Item className="blogcontainer" >
-                <div className="d-flex " > 
-                    <div>
-                    {(props.rblog.content_type!='comment') 
+                <div className="d-flex" > 
+                    <div className ="mr-auto p-2">
+                    {(props.rblog.content_type!='comment')
                         ? <ViewBlog_Modal rblog = {props.rblog}/>
                         : <ViewComment_Modal rblog = {props.rblog}/>
                     }
@@ -41,7 +41,7 @@ const FetchBlogname = (props:any) => {
                     <div className="p-2 size-text-report">
                         Reported by: {props.rblog.user_id}&nbsp;
                     </div>
-                    <div className="p-2">
+                    <div className="p-2 cancel-button">
                         <DelReport_Modal rblog = {props.rblog}/> 
                     </div>
                 </div>
