@@ -40,6 +40,7 @@ const ReadSection = (props:any) => {
     const blogId = window.location.pathname.split("/")[2]
     const location=useLocation();
     const history=useHistory()
+    const [sectionName, setSectionName] = useState<string>("");
     console.log(sectionId)
 
     const fetchSection = () => {
@@ -56,6 +57,7 @@ const ReadSection = (props:any) => {
         );
         //console.log(markup);
         setDisplayHTML(markup);
+        setSectionName(sectionsInformation[0].section_name);
     }
     
     useEffect(() => {
@@ -77,6 +79,7 @@ const ReadSection = (props:any) => {
             <InputGroup size="lg" className="div-sectionname">
                 <InputGroup.Prepend >
                     <InputGroup.Text id="inputGroup-sizing-lg">Section Name</InputGroup.Text>
+                    <InputGroup.Text id="inputGroup-sizing-lg">{sectionName}</InputGroup.Text>
                 </InputGroup.Prepend>
             </InputGroup>
             {afterFetch &&

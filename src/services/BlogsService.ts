@@ -1,4 +1,5 @@
-import { Blog, Review ,create_Blog } from '../interfaces/blog';
+import { Blog, Review ,create_Blog,} from '../interfaces/blog';
+import { Section } from '../interfaces/Section';
 
 async function fetchBlogs(): Promise<Blog[]> {
     const res = await fetch(`http://188.166.178.33:3000/blogs`);
@@ -80,6 +81,12 @@ async function deleteBlog(blogid:string): Promise<string> {
     });
     const blogs = await res.json();
     return blogs;  
+}
+
+async function fetchSectionOfBlog(blogid:string): Promise<Section[]> {
+    const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}/sections`);
+    const sections = await res.json();
+    return sections;  
 }
 
 
