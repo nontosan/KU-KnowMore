@@ -20,13 +20,7 @@ const Portal=()=> {
     */
     return (
         <div className="">
-            portal
-
-            <div>fuck</div>
-
-
-
-            hello
+            
         </div>  
     );
 }
