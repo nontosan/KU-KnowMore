@@ -6,6 +6,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 
 // IMPORT COMPONENT //
 import DraftEditor from './DraftEditor';
+import UploadMulFile from '../UploadMulFile';
+import DisplayFile from '../DisplayFile';
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
@@ -93,7 +95,12 @@ const EditSection = (props:any) => {
                     />
                 </div>
             }
-            
+            <div className='Upload'>
+                <UploadMulFile />
+            </div>
+            <div className='Edit'>
+                <DisplayFile />
+            </div>
         </div>
     );
 }
