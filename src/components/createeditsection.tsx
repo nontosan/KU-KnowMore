@@ -73,6 +73,7 @@ const CreateEditSection = (props:any) => {
     const [selectTeacher, setSelectTeacher] = useState<string>('');
     const [selectCourseId, setSelectCourseId] = useState<string>('');
     const [visible,setVisible] = useState<boolean>(false)
+    const path = window.location.pathname
   ///////////////////////////////end copy//////////////////////////////////
   //fetch blog from database
   const fetchBlogs = () => {

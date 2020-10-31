@@ -36,8 +36,10 @@ const LikeViewReport=(props:any)=> {
         const data:any={
             //sending userid of token
             user_id:"5f82fd5504eb8600aa617b6b",
+            //blog_id:blogId
         }
         LikeServive.createLike(blogId,data).then(res=>{
+            console.log(res)
             setLike(res)
         })
     }
