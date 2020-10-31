@@ -48,7 +48,7 @@ const Showklinmain = () => {
         <div>
             {blogs.map(blog => (
                     <div>
-                        <Link className="show-all-blog" to={`/read${blog.type}/${blog.id}`}>
+                        <Link className="show-all-blog" to={`/${blog.type}/${blog.id}`}>
                             <div className="blog-fl">
                                 {blog.blog_name}
                             </div>
@@ -71,7 +71,7 @@ const Showklinmain = () => {
                 <div>
                     {blogs.map(blog => ( 
                 <ListGroup.Item className="blogcontainer" >
-                    <NavLink className="blogclick" to={`/read${blog.type}/${blog.id}`}>
+                    <NavLink className="blogclick" to={`/${blog.type}/${blog.id}`}>
                         <div className="element">{blog.blog_name}</div>
                         <div className="element">  viewer {blog.viewers}</div>
                         <div className="element">  last edit {blog.last_edit}</div>

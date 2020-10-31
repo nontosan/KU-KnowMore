@@ -27,7 +27,7 @@ const ModalFilter = (props:any) => {
                 <h4>Centered Modal</h4>
                 <div>
                     <div>Choose Blog type </div>
-                    <Choosefilter type={props.type} handle={props.handle_type} />
+                    <Choosefilter handle={props.handle_type} />
                     <Order checked={props.checked} setChecked={props.setChecked} radioValue={props.radioValue} setRadioValue={props.setRadioValue}/>
                     <Subjectname subname={props.subname} setsubname={props.setsubname}/>
                     <Subjectid subid={props.subjectid} setsubid={props.setsubid}/>

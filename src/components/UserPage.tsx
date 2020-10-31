@@ -138,7 +138,7 @@ const UserPage = (props:any) => {
                     if(blog.user_id==userId){
                         return (
                             <div>
-                                <Link className="show-all-blog" to={`/read${blog.type}/${blog.id}`}>
+                                <Link className="show-all-blog" to={`/${blog.type}/${blog.id}`}>
                                     <div className="blog-fl">
                                         {blog.blog_name}
                                     </div>
@@ -157,7 +157,7 @@ const UserPage = (props:any) => {
                             </div>
                 )}})}
             </div>
-            {false &&
+            {true &&
                 blogs.map((item:Blog)=>{
                     if(item.user_id==userId){
                         return checktype(item.type)?

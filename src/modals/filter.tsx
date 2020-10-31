@@ -48,14 +48,17 @@ const Filtermodal = () => {
     var istype=""
     
     if(type.length==2 || type.length==0){
+      console.log(type)
       istype="3"
       querystring+="type="+istype
     }
     else if(type[0]==2){
+      console.log(type)
       istype="2"
       querystring+="type="+istype
     }
     else if(type[0]==1){
+      console.log(type)
       istype="1"
       querystring+="type="+istype
     }

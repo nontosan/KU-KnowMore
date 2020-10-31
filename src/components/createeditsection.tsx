@@ -18,7 +18,7 @@ import {Formik,Form,Field,ErrorMessage} from "formik"
 
 // IMPORT COMPONENT //
 import EditBlogContent from '../gadget/editblogcontent';
-import ReportModal from "../modals/ChangBlogInfo"
+import ChangeBlogInfoModal from "../modals/ChangBlogInfo"
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
@@ -73,6 +73,7 @@ const CreateEditSection = (props:any) => {
     const [selectTeacher, setSelectTeacher] = useState<string>('');
     const [selectCourseId, setSelectCourseId] = useState<string>('');
     const [visible,setVisible] = useState<boolean>(false)
+    const path = window.location.pathname
   ///////////////////////////////end copy//////////////////////////////////
   //fetch blog from database
   const fetchBlogs = () => {
@@ -131,7 +132,7 @@ const CreateEditSection = (props:any) => {
                   <div className="Blog_name">ชื่อวิชา </div>
                   <div className="Blog_name2">{selectTeacher}</div>
                 </div>
-                <ReportModal fetchBlogs={fetchBlogs} />
+                <ChangeBlogInfoModal fetchBlogs={fetchBlogs} />
             </div>
             }
 

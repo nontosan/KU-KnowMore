@@ -217,7 +217,9 @@ const ReadBlogReview = (props:any) => {
       <LikeViewReport x={blogsInfomation}/>
       <div  className="hot-kl">
         <Card.Header>COMMENT</Card.Header>
-        <Comment_component />
+        <Comment_component 
+          blogId = {blogId}
+        />
       </div>
       <button onClick={e=>history.goBack()}>back</button>
     </div>

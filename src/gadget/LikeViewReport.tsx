@@ -4,7 +4,7 @@ import '../components/createblog_component/input.css';
 import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Image from 'react-bootstrap/Image';
-import LikeServive from "../services/LikeServive"
+import LikeServive from "../services/LikeService"
 import BlogService from "../services/BlogsService"
 import beforeLike from '../photo/like.png';
 import afterLike from "../photo/like.jpg"
@@ -15,6 +15,8 @@ import {Blog} from "../interfaces/blog"
 import ReportModal from "../modals/report"
 import {LikeOutlined,LikeTwoTone,EyeOutlined} from '@ant-design/icons';
 import "./gadgetclass.css"
+
+
 const LikeViewReport=(props:any)=> {
     const [like,setLike] = useState<boolean>(false)
     const [liker ,setliker] = useState<Like[]>([]) 
@@ -32,13 +34,16 @@ const LikeViewReport=(props:any)=> {
     }
     const clicklike=async()=>{
         const data:any={
-            blog_id:blogId,
             //sending userid of token
             user_id:"5f82fd5504eb8600aa617b6b",
+            //blog_id:blogId
         }
-        const likestate = await LikeServive.createLike(blogId,data)
-        setLike(likestate)
+        LikeServive.createLike(blogId,data).then(res=>{
+            console.log(res)
+            setLike(res)
+        })
     }
+  
     useEffect(() => {
         fetchBlog()
         fetchLiker()

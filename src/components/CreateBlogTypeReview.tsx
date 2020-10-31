@@ -18,13 +18,10 @@ import {Blog,create_Blog} from "../interfaces/blog"
 import { Col, Container, Row } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 //------------------------------------------------------------------//
-const options = [
-    { value: '0123', label: 'Blues' },
-    { value: 'rock', label: 'Rock' },
-    { value: 'jazz', label: 'Jazz' },
-    { value: 'orchestra' ,label: 'Orchestra' } 
-  ];
-
+import 'antd/dist/antd.css';
+import {  notification,message } from 'antd';
+  
+const key = 'updatable';
 const CreateKlBlog=()=> {
     const resultLimit = 10
     let i = 0;
@@ -113,7 +110,43 @@ const CreateKlBlog=()=> {
             setTeacherOptions(Teacheroption);
         }
     },[selectCode])
-
+    const openMessage = () => {
+        message.loading({ content: 'Loading...', key });
+        setTimeout(() => {
+          message.success({ content: 'Already create blog', key, duration: 2 });
+        }, 500);
+      };
+    const close = () => {
+        console.log(
+          'Notification was closed. Either the close button was clicked or duration time elapsed.',
+        );
+      };
+    const openNotification = () => {
+        const key = `open${Date.now()}`;
+        const btn = (
+          <Button type="primary"  onClick={() => {
+            notification.close(key)
+            window.location.replace("http://localhost:3000/");
+          }}>
+            Confirm
+          </Button>
+        );
+        notification.open({
+          message: 'Notification Cancel create blog',
+          description:
+            'Would you like to discard your blog',
+          btn,
+          key,
+          onClose: close,
+        });
+      };
+    const openNotificationNot = () => {
+        notification.info({
+          message: `Notification `,
+          description:
+            'Please complete form before submitting',
+        });
+    };
     useEffect(()=>{
         if(selectCourseId!==undefined){
             console.log(selectCourseId);
@@ -171,9 +204,10 @@ const CreateKlBlog=()=> {
                                 }
                                 console.log(res)
                             })
+                            openMessage()
                         }
                         else{
-                            alert("Please complete the form")
+                            openNotificationNot()
                         }
                         actions.setSubmitting(false)
                         }}
@@ -246,7 +280,7 @@ const CreateKlBlog=()=> {
                                 }
                                 <br />
                                 <div className="Cancel">
-                                    <Button style={{ float: "right" }} variant="danger" onClick={e=>history.goBack()}> Cancel </Button>
+                                    <Button style={{ float: "right" }} variant="danger" onClick={e=>openNotification()}> Cancel </Button>
                                 </div>
                                 <div className="Submit">
                                     <button style={{ float: "right" }} className="btn btn-success submit-button" disabled={isSubmitting}> Submit </button>
