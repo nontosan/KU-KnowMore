@@ -253,7 +253,7 @@ const DropdownCreateKnowledge=()=> {
                                     <button style={{ float: "right" }} className="btn btn-success submit-button" disabled={isSubmitting}> Submit </button>
                                     {afterSave &&
                                         <div>
-                                            <Redirect to={`readknowledge/${UrlLink}`} />
+                                            <Redirect to={`knowledge/${UrlLink}`} />
                                         </div>
                                     }
                                 </div>

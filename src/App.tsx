@@ -178,8 +178,8 @@ const App = () => {
                 <Switch>
                     <Route path="/myKnowledge/:blogId" name="blogId" component={CreateEditSection}></Route>
                     <Route path="/myReview/:blogId" name="blogId" component={CreateEditReview}></Route>
-                    <Route path="/readKnowledge/:blogId" name="blogId" component={ReadBlogKnowledge}></Route>
-                    <Route path="/readReview/:blogId" name="blogId" component={ReadBlogReview}></Route>
+                    <Route path="/knowledge/:blogId" name="blogId" component={ReadBlogKnowledge}></Route>
+                    <Route path="/review/:blogId" name="blogId" component={ReadBlogReview}></Route>
                     <Route path="/editReview/:blogId" name="blogId" component={EditReview}></Route>
                     <Route path="/writeSection/:blogId" name="blogId" component={WriteSection}></Route>
                     <Route path="/readSection/:sectionId" name="sectionId" component={ReadSection}></Route>
