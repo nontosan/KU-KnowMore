@@ -157,7 +157,7 @@ const UserPage = (props:any) => {
                             </div>
                 )}})}
             </div>
-            {false &&
+            {true &&
                 blogs.map((item:Blog)=>{
                     if(item.user_id==userId){
                         return checktype(item.type)?
