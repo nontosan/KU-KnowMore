@@ -206,6 +206,9 @@ const ReadBlogKnowledge = (props:any) => {
                       {author==localStorage.userId &&
                         <div style={{ float: "right" }}>
                           <Image className="gear-setting-pic blog-fl" src={GearEdit}></Image>
+                          <Link to={`/editSection/${item.id}`}>
+                            <Button>Clickme</Button>
+                          </Link>
                           <Image className="delete-setting-pic blog-fl" src={minus}></Image>
                         </div>
                       }
