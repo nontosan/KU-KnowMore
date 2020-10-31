@@ -31,6 +31,7 @@ export interface Review{
 }
 
 export interface Attachments{
+    _id?: string;
     originalname?: string;
     type?: string;
     filename?: string;

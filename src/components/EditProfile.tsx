@@ -6,6 +6,7 @@ import UploadFile from './UploadFile';
 import DownloadFile from './DownloadFile';
 import ImageComponent from './Display';
 import UploadMulFile from './UploadMulFile';
+import Demo from './UploadTest';
 import { Col, Container, Row ,Form} from 'react-bootstrap';
 
 // END OF IMPORT LIBRARY //
@@ -124,6 +125,8 @@ function EditProfile (props:any) {
         <DownloadFile />
         -----------------------------------------------
         <UploadMulFile />
+        -----------------------------------------------
+        <Demo/>
         </div>
     </div>
   );
