@@ -6,7 +6,7 @@ import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 
-function DisplayFile (props:any) {//This function is for ReadSection
+function DisplayFileandDel (props:any) { //This function is for EditSection
 
     const fetchAttachments = () => {
 
@@ -22,16 +22,26 @@ function DisplayFile (props:any) {//This function is for ReadSection
         fetchAttachments();
     },[])
 
+    const deletestate = (att_id:any) => {
+        SectionService.deleteattachments(att_id)
+        alert("Delete Complete")
+        fetchAttachments();
+        }
+
     const [attachmentsInformation, setattachmentsInformation] = useState<Attachments[]>([]);
+
 
     return (
         <div className = "Display">
             {attachmentsInformation.map(file=>
-            <a href={`http://188.166.178.33:3000/${file.path}`}> {file.originalname} {file._id} <br/></a>
+            <a href={`http://188.166.178.33:3000/${file.path}`}> {file.originalname} <br/></a>
+                )}
+            {attachmentsInformation.map(file=>
+                <Button onClick={e => deletestate(file._id)}>{file.filename}</Button>
                 )}
             
         </div>
     );
 };
 
-export default DisplayFile;
+export default DisplayFileandDel;

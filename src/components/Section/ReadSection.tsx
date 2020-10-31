@@ -7,6 +7,7 @@ import axios from 'axios';
 
 // IMPORT COMPONENT //
 import DisplayFile from '../DisplayFile';
+import DisplayFileandDel from '../DisandDel';
 
 // IMPORT SERVICE //
 import SectionService from '../../services/SectionService';
@@ -87,7 +88,8 @@ const ReadSection = (props:any) => {
             }
             <button onClick={e=>history.goBack()}>back</button>
             File :
-            <DisplayFile secid = {sectionId}/>
+            
+            <DisplayFileandDel secid = {sectionId}/>
         </div>
     );
 }
