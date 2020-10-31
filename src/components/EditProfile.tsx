@@ -24,9 +24,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './editprofile.css';
 import {useHistory} from "react-router"
 import 'antd/dist/antd.css';
-import { message,AutoComplete } from 'antd';
 import Modal from 'react-bootstrap/Form';
 
+import 'antd/dist/antd.css';
+import { notification,message,AutoComplete } from 'antd';
+  
+const key = 'updatable';
 function EditProfile (props:any) {
   const userId = props.match.params.userId
   //console.log(userId)
@@ -48,7 +51,7 @@ function EditProfile (props:any) {
   const [descriptions,setdescriptions] = useState ("");
   const [nme,setname] = useState("");
   const history=useHistory();
-  
+  const user_id = window.location.pathname.split("/")[2]
   const buttonstate = () => {
     //const userId = props.match.params.userId
     //console.log(userId)
@@ -81,6 +84,36 @@ function EditProfile (props:any) {
         });
       history.goBack()
   }; 
+  const openMessage = () => {
+    message.loading({ content: 'Loading...', key });
+    setTimeout(() => {
+      message.success({ content: 'Already edit profile', key, duration: 2 });
+    }, 500);
+  };
+  const close = () => {
+      console.log(
+        'Notification was closed. Either the close button was clicked or duration time elapsed.',
+      );
+    };
+  const openNotification = () => {
+      const key = `open${Date.now()}`;
+      const btn = (
+        <Button type="primary"  onClick={() => {
+          notification.close(key)
+          window.location.replace(`http://localhost:3000/userpage/${user_id}`);
+        }}>
+          Confirm
+        </Button>
+      );
+      notification.open({
+        message: 'Notification Cancel Edit profile',
+        description:
+          'Would you like to discard editing your blog',
+        btn,
+        key,
+        onClose: close,
+      });
+    };
 
   return (
     <div className ="EditProfile">
@@ -103,8 +136,11 @@ function EditProfile (props:any) {
           onChange={e => setdescriptions(e.target.value)}/>
         </div>
         <div className="button">
-        <Button variant="success" onClick = {buttonstate}>Submit</Button>
-        <Button variant="danger" onClick={e=>history.goBack()}> Cancel </Button>
+        <Button variant="success" onClick = {e=>{
+          buttonstate()
+          openMessage()
+          }}>Submit</Button>
+        <Button variant="danger" onClick={e=>openNotification()}> Cancel </Button>
         </div>
 
         ---------------

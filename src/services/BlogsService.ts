@@ -90,8 +90,23 @@ async function fetchSectionOfBlog(blogid:string): Promise<Section[]> {
 }
 
 
+async function editBlog(newcoursecode: create_Blog, blogId:string): Promise<Blog|null> {
+    console.log(newcoursecode)
+    const res = await fetch(`http://188.166.178.33:3000/blogs/${blogId}`,{
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(newcoursecode),
+    });
+    console.log(res)
+    const newblog: Blog = await res.json();
+    if (newblog !== undefined) {
+        return newblog;
+    } else{
+        return null;
+    }
+}
 
 export default {
     fetchBlogs,createBlog,fetchBlogSpecific,fetchBlogfilter,fetchKnowledgeBlogs,fetchReviewBlogs,
-    deleteBlog,createReview,fetchReviewSpecific,fetchReviewOfBlog
+    deleteBlog,createReview,fetchReviewSpecific,fetchReviewOfBlog,editBlog
 };

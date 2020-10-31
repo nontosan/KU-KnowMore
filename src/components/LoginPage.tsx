@@ -70,7 +70,7 @@ const LoginPage=(props:LoginFormProps)=> {
                 )}
             </Formik>
             
-            <button >
+            <button onClick={e=>console.log(document.cookie)}>
                 <a href="https://sso-dev.ku.ac.th/idp/apps/authz?response_type=code&scope=user_info&client_id=38d38f02785c632dc6df02461443b84a936&redirect_uri=http://localhost:3000/portal">redirect to login page</a>
             </button>
         </div>
