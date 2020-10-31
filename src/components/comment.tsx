@@ -121,7 +121,8 @@ const Comment_component=(props:any)=>{
                     </div>
                 </div>
             ))}
-            <Formik
+            {localStorage.accessToken!==undefined &&
+<Formik
             initialValues={{CommentContent:"",errorMess:""}}
             validate={(value)=>{
                 const errors:any={};
@@ -154,13 +155,15 @@ const Comment_component=(props:any)=>{
             {({isSubmitting})=>(
                 <Form autoComplete="off">
                     <div className="Blog_frame1 content_container">
-                        <Field type="input" className="input" name="CommentContent" placeholder="type something..."/>
+                        <Field type="input" name="CommentContent" placeholder="type something..."/>
                         <ErrorMessage name="errorMess" component="div"/>
                     </div>
                     <button disabled={isSubmitting}> send </button>
                 </Form>
             )}
         </Formik>
+            }
+            
         </div>
     )
 }
