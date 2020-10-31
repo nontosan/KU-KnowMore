@@ -4,7 +4,7 @@ import '../components/createblog_component/input.css';
 import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Image from 'react-bootstrap/Image';
-import LikeServive from "../services/LikeServive"
+import LikeServive from "../services/LikeService"
 import BlogService from "../services/BlogsService"
 import beforeLike from '../photo/like.png';
 import afterLike from "../photo/like.jpg"
@@ -32,7 +32,6 @@ const LikeViewReport=(props:any)=> {
     }
     const clicklike=async()=>{
         const data:any={
-            blog_id:blogId,
             //sending userid of token
             user_id:"5f82fd5504eb8600aa617b6b",
         }

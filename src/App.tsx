@@ -26,7 +26,7 @@ import ReadSection from './components/Section/ReadSection';
 import EditSection from './components/Section/EditSection';
 import LoginPage from './components/LoginPage';
 import ImageComponent from './components/Display';
-
+import Portal from "./components/Portal"
 
 import LoginService from './services/LoginService';
 import ProfileService from './services/ProfileService';
@@ -178,16 +178,17 @@ const App = () => {
                 <Switch>
                     <Route path="/myKnowledge/:blogId" name="blogId" component={CreateEditSection}></Route>
                     <Route path="/myReview/:blogId" name="blogId" component={CreateEditReview}></Route>
-                    <Route path="/readKnowledge/:blogId" name="blogId" component={ReadBlogKnowledge}></Route>
-                    <Route path="/readReview/:blogId" name="blogId" component={ReadBlogReview}></Route>
+                    <Route path="/knowledge/:blogId" name="blogId" component={ReadBlogKnowledge}></Route>
+                    <Route path="/review/:blogId" name="blogId" component={ReadBlogReview}></Route>
                     <Route path="/editReview/:blogId" name="blogId" component={EditReview}></Route>
                     <Route path="/writeSection/:blogId" name="blogId" component={WriteSection}></Route>
                     <Route path="/readSection/:sectionId" name="sectionId" component={ReadSection}></Route>
                     <Route path="/editSection/:sectionId" name="sectionId" component={EditSection}></Route>
                     <Route path="/userpage/:userId" name="userId" component={UserPage}></Route>
                     <Route path="/editProfile/:userId" name="userId" component={EditProfile}></Route>
-                    <Route path="/dropdowntest">
-                        <Dropdowntest />
+                    <Route path="/dropdowntest"><Dropdowntest /></Route>
+                    <Route path="/portal/:code" name="code" >
+                        <Portal />
                     </Route>
                     <Route path="/login">
                         <LoginPage loginCallback={handleUserLogin}/>

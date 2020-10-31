@@ -154,8 +154,10 @@ const Comment_component=(props:any)=>{
             {({isSubmitting})=>(
                 <Form autoComplete="off">
                     <div className="Blog_frame1 content_container">
-                        <Field type="input" className="input" name="CommentContent" placeholder="type something..."/>
-                        <ErrorMessage name="errorMess" component="div"/>
+                        <div className="cont">
+                            <Field type="input" className="input" name="CommentContent" placeholder="type something..."/>
+                            <ErrorMessage name="errorMess" component="div"/>
+                        </div>
                     </div>
                     <button disabled={isSubmitting}> send </button>
                 </Form>
