@@ -9,7 +9,8 @@ import Subjectname from "../gadget/filter_gadget/Subjectname";
 import Subjectid from "../gadget/filter_gadget/Subjectid";
 import Teacher from "../gadget/filter_gadget/teacher"
 import Image from 'react-bootstrap/Image';
-import ReportService from "../services/ReportService"
+import 'antd/dist/antd.css';
+import { message } from 'antd';
 import {
   Link, Redirect
 } from 'react-router-dom'
@@ -18,6 +19,10 @@ import Select from 'react-select';
 import Alert from '../photo/alert.png';
 import {Course_real} from "../interfaces/course"
 import CourseService from "../services/CourseService"
+import {Blog,create_Blog} from "../interfaces/blog"
+import BlogsService from "../services/BlogsService"
+
+const key = 'updatable';
 function EditBlogModal(props:any) {
   const resultLimit = 10
   let i = 0;
@@ -40,13 +45,10 @@ function EditBlogModal(props:any) {
   const [Teacher,setTeacher] =useState({})
   const [visible,setVisible] = useState<boolean>(false)
   const [available,setAvailable] = useState<boolean>(false)
-//    const resetvalue=()=>{
-//        const codeoption=[{}]
-//        const NameThoption=[{}]
-//        const NameEnoption=[{}]
-//        const Teacheroption=[{}]
-//            
-//    }
+  //data for updating
+  const [bloginfo,setbloginfo] = useState<Blog[]>([])
+
+  const blogId = window.location.pathname.split("/")[2]
   const handleChangeCode = (selectedOption:any) => {
       code.push({ selectedOption })
       //console.log((code[0].selectedOption).value);
@@ -69,12 +71,41 @@ function EditBlogModal(props:any) {
       setCodeOptions(codeoption);
       setAvailable(true);
   }
+  const openMessage = () => {
+    message.loading({ content: 'Loading...', key });
+    setTimeout(() => {
+      message.success({ content: 'already edit blog ', key, duration: 2 });
+    }, 200);
+  };
   const handleeditblog=()=>{
     console.log("editblog")
-  }
+    if(selectCourseId!==""){
+      const editblog:create_Blog={
+        user_id: bloginfo[0].user_id,
+        type: bloginfo[0].type,
+        blog_name: bloginfo[0].blog_name,
+        course_id: selectCourseId,
+      }
+      BlogsService.editBlog(editblog,blogId).then(e=>{
+        console.log(e)
+      })
+      openMessage()
+    }
+    else{
 
+    }
+    //props.fetchBlogs()
+    props.onHide()
+  }
+  const fetchBloginfo=()=>{
+    BlogsService.fetchBlogSpecific(blogId).then(res=>{
+      setbloginfo(res)
+      //console.log(res)
+    })
+  }
   useEffect(()=>{
       fetchCourse()
+      fetchBloginfo()
   },[])
 
   useEffect(()=>{
@@ -116,7 +147,7 @@ function EditBlogModal(props:any) {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Report
+            Edit Blog
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -165,7 +196,7 @@ function EditBlogModal(props:any) {
     );
   }
 
-const ReportModal=(props:any)=>{
+const ChangeBlogInfoModal=(props:any)=>{
     const [modalShow, setModalShow] = useState<boolean>(false);
     return (
     <div>
@@ -177,10 +208,14 @@ const ReportModal=(props:any)=>{
 
       <EditBlogModal
         show={modalShow}
-        onHide={() => setModalShow(false)}
+        onHide={() => {
+          setModalShow(false)
+          props.fetchBlogs()
+          console.log("edit???")
+        }}
       /> 
     </div>
   );
 }
 
-export default ReportModal
+export default ChangeBlogInfoModal

@@ -15,6 +15,8 @@ import {Blog} from "../interfaces/blog"
 import ReportModal from "../modals/report"
 import {LikeOutlined,LikeTwoTone,EyeOutlined} from '@ant-design/icons';
 import "./gadgetclass.css"
+
+
 const LikeViewReport=(props:any)=> {
     const [like,setLike] = useState<boolean>(false)
     const [liker ,setliker] = useState<Like[]>([]) 
@@ -35,9 +37,11 @@ const LikeViewReport=(props:any)=> {
             //sending userid of token
             user_id:"5f82fd5504eb8600aa617b6b",
         }
-        const likestate = await LikeServive.createLike(blogId,data)
-        setLike(likestate)
+        LikeServive.createLike(blogId,data).then(res=>{
+            setLike(res)
+        })
     }
+  
     useEffect(() => {
         fetchBlog()
         fetchLiker()

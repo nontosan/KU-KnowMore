@@ -40,18 +40,20 @@ const EditSection = (props:any) => {
                 setstateCheck(true);
             })
     }
+    /*
     const initdraft = () => {
-        const editor_state : string = sectionsInformation[0].content;
+        const editor_state : String = sectionsInformation[0].content;
         setStateContentCheck(true);
     }
-    
+    */
     useEffect(() => {
         fetchSection();
     },[])
 
     useEffect(() => {
         if (stateCheck !== false){
-            initdraft();
+            //initdraft();
+            console.log(false)
         }
     },[stateCheck])
 
