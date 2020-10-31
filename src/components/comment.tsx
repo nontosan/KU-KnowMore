@@ -108,16 +108,19 @@ const Comment_component=(props:any)=>{
                         {item.date_time}
                     </div>
                     <div className="blog-fr">
-                        {item.user_id==localStorage.userId &&
+                        
                             <NavDropdown className="dropdown-eiei blog-fr" title={
                                 <div className="border-more-pic">
                                     <Image className="more-pic blog-fr" src={ReportButton}></Image>
                                 </div>
                                 } id="dropdown-nav" >
-                                <NavDropdown.Item onClick={handledelete} className="more-option">Delete</NavDropdown.Item>
-                                <NavDropdown.Item onClick={handlereport} className="more-option">Report</NavDropdown.Item>
+                                {item.user_id==localStorage.userId &&
+                                    <NavDropdown.Item onClick={handledelete} className="more-option">Delete</NavDropdown.Item>
+                                }
+                                {item.user_id!==localStorage.userId &&
+                                    <NavDropdown.Item onClick={handlereport} className="more-option">Report</NavDropdown.Item>
+                                }
                             </NavDropdown>
-                        }
                     </div>
                 </div>
             ))}
