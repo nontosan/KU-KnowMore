@@ -1,88 +1,93 @@
 // IMPORT LIBRARY //
-import React, { useState , useEffect , Component } from 'react';
+import React, { useState , Component, HtmlHTMLAttributes, useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
+import { convertToRaw, EditorState } from 'draft-js';
 import InputGroup from 'react-bootstrap/InputGroup';
+import FormControl from 'react-bootstrap/FormControl';
+import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , draftStateToHTML} from 'react-wysiwyg-typescript';
 // END OF IMPORT LIBRARY //
 
 // IMPORT COMPONENT //
-import UploadMulFile from '../UploadMulFile';
-import DisplayFile from '../DisplayFile';
+import Photo from '../upload';
+import UploadFile from '../UploadFile';
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
 import SectionService from '../../services/SectionService';
 // END OF IMPORT SERVICE //
 
-// IMPORT INTERFACE //
-import { Section } from '../../interfaces';
-// END OF IMPORT INTERFACE//
-
 // IMPORT CSS //
 import '../section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { convertToObject } from 'typescript';
+import { reverse } from 'dns';
+import {useHistory, Redirect} from "react-router"
 import ReactQuill from 'react-quill';
-// END OF IMPORT CSS //
-
-//------------------------------------------------------------------//
 
 const EditSection = (props:any) => {
-    const [sectionsInformation, setSectionsInformation] = useState<Section[]>([]);
-    const [afterFetch, setafterFetch] = useState<boolean>(false);
-    const [stateCheck, setstateCheck] = useState<boolean>(false);
-    const [stateContentCheck, setStateContentCheck] = useState<boolean>(false);
+    const [newSectionName, setNewSectionName] = useState<string>('');
     const [editorValue, setEditorValue] = useState("");
 
+    const blogId = (props.match.params.blogId)
     const sectionId = (props.match.params.sectionId);
+    const history = useHistory()
+    const handleNewSectionNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewSectionName(e.target.value);
+    };
     
+    const handleSectionSave = () => {
+        const writeSection = {
+            section_name: newSectionName,
+            content: editorValue,
+            blog_id: blogId,
+        };
+
+        SectionService.createSection(blogId, writeSection)
+            .then(savedWriteSection => {
+                console.log("save success")
+                history.goBack()
+            });
+            //console.log(history)
+            
+    };
+
     const fetchSection = () => {
         SectionService.fetchSectionsSpecific(sectionId)
             .then(sectioninfo => {
-                setSectionsInformation(sectioninfo);
-                setstateCheck(true);
+                alert("can't set value to editor : ");
             })
     }
-    const initdraft = () => {
-        const editor_state : string = sectionsInformation[0].content;
-        setStateContentCheck(true);
-    }
-    
+
     useEffect(() => {
         fetchSection();
     },[])
 
-    useEffect(() => {
-        if (stateCheck !== false){
-            initdraft();
-        }
-    },[stateCheck])
-
-    useEffect(() => {
-        if(stateContentCheck !== false){
-            setafterFetch(!afterFetch);
-        }
-    },[stateContentCheck])
-
+    console.log(history.go)
     return (
         <div>
             <InputGroup size="lg" className="div-sectionname">
                 <InputGroup.Prepend >
                     <InputGroup.Text id="inputGroup-sizing-lg">Section Name</InputGroup.Text>
                 </InputGroup.Prepend>
+                <FormControl aria-label="Large" aria-describedby="inputGroup-sizing-sm" value={newSectionName} onChange={handleNewSectionNameChange}/>
             </InputGroup>
-            {afterFetch &&
-                <div className="div-sectionname">
-                    <ReactQuill 
-                        placeholder={"เขียนรีวิวลงที่นี้"}
-                        theme="snow" 
-                        value={editorValue} 
-                        onChange={setEditorValue}
-                    />
-                </div>
-            }
-            <div className='Upload'>
-                <UploadMulFile />
+            <div className="div-sectionname">
+                <ReactQuill 
+                    placeholder={"เขียนรีวิวลงที่นี้"}
+                    theme="snow" 
+                    value={editorValue} 
+                    onChange={setEditorValue}
+                />
             </div>
-            <div className='Edit'>
-                <DisplayFile />
+            <div className="div-sectionname">
+                <Photo />
+            </div>
+            <div className="uploadtest">
+                <UploadFile />
+            </div>
+            <div className="div-sectionname">
+                <Button className="cancel-button" variant="outline-secondary" onClick={e=>history.goBack()}>Cancel</Button>
+                <Button className="submit-button" variant="outline-secondary" onClick={handleSectionSave}>Submit</Button>
             </div>
         </div>
     );
