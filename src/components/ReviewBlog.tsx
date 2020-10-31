@@ -49,7 +49,7 @@ const ReviewBlog = () => {
                 <Card.Header className="card-header">REVIEW BLOG</Card.Header>
                 {blogs.map(blog => (
                     <div>
-                        <Link className="show-all-blog" to={`/read${blog.type}/${blog.id}`}>
+                        <Link className="show-all-blog" to={`/${blog.type}/${blog.id}`}>
                             <div className="blog-fl">
                                 {blog.blog_name}
                             </div>
