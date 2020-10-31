@@ -8,16 +8,13 @@ const DelBlog_Modal = (props:any) => {
     const handleShow = () => setShow(true);
     
     const DeleteBlog = () => {
-        BlogsService.deleteReport(props.rblog.id)
+        BlogsService.deleteBlog(props.blogID)
         .then(blogs => {
             console.log(blogs)
             console.log("done")
         })
     } 
 
-    const DeleteReport_byblogid = () => {
-
-    }
 
     return (
         <div>    
@@ -45,7 +42,7 @@ const DelBlog_Modal = (props:any) => {
                     <Button variant="secondary" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button onClick={e=>DeleteBlog()}>
+                    <Button onClick={DeleteBlog}>
                         Confirm
                     </Button>
                 </Modal.Footer>

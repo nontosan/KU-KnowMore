@@ -2,7 +2,7 @@ import React, { useState,useEffect, useImperativeHandle } from 'react'
 import { Section_Edit } from '../interfaces/section_edit';
 import { Blog }from '../interfaces/blog'
 import Card from 'react-bootstrap/Card';
-import BlogsService from "../services/BlogsService"
+import BlogsService from "../services/BlogsService";
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DelBlog_Modal from '../components/modal/DelBlog_Modal'
@@ -18,12 +18,12 @@ const ReadBlog_Admin = (props:any) => {
   const [blogsInfo,setBlogsInfomation] = useState<Blog[]>([])
  
   
-  console.log(props.match.params)
-  const blogId = props.match.params.blogId
   
+  const blogID = props.match.params.blogId
+  console.log(props.match.params)
   //fetch blog from database
   const fetchBlogs = () => {
-    BlogsService.fetchBlogSpecific(blogId)
+    BlogsService.fetchBlogSpecific(blogID)
       .then(blogInfo => {
         setBlogsInfomation(blogInfo);
         console.log(blogInfo);
@@ -43,15 +43,15 @@ const ReadBlog_Admin = (props:any) => {
   useEffect(()=>{
     fetchBlogs();
   },[])
-
-  const blogtype = blogsInfo.map(a=>a.type)
+  
+  const blogtype = blogsInfo.map(a=>a.type);
 
   return (
     <div>
       <div className="hot-kl">
         <Card.Header>
           {(blogtype[0]==='review') ? 'Review Blog': 'Knowledge Blog'} &nbsp;
-          <DelBlog_Modal/>
+          <DelBlog_Modal blogID={blogID}/>
         </Card.Header>
       </div>
       <div className="hot-kl">

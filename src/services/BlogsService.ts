@@ -1,4 +1,5 @@
-import { Blog, Review } from '../interfaces/blog';
+import { Blog, Review ,create_Blog,} from '../interfaces/blog';
+import { Section } from '../interfaces/Section';
 
 async function fetchBlogs(): Promise<Blog[]> {
     const res = await fetch(`http://188.166.178.33:3000/blogs`);
@@ -6,7 +7,7 @@ async function fetchBlogs(): Promise<Blog[]> {
     return blogs;  
 }
 
-async function createBlog(newBlog: Blog): Promise<Blog|null> {
+async function createBlog(newBlog: create_Blog): Promise<Blog|null> {
     const res = await fetch(`http://188.166.178.33:3000/blogs`,{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -34,8 +35,22 @@ async function createReview(newReview: Review, blogid:string): Promise<Review|nu
     }
 }
 
+async function fetchReviewOfBlog(blogid:string): Promise<Review[]> {
+    const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}/reviews`);
+    const reviewInfo = await res.json();
+    return reviewInfo;  
+}
+
+async function fetchReviewSpecific(reviewid:string): Promise<Review|null> {
+    const res = await fetch(`http://188.166.178.33:3000/reviews/${reviewid}`);
+    const reviewInfo = await res.json();
+    return reviewInfo;  
+}
+
+
 async function fetchBlogSpecific(blogid:string): Promise<Blog[]> {
     const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}`);
+    //console.log(blogid)
     const blogInfo = await res.json();
     return blogInfo;  
 }
@@ -68,6 +83,29 @@ async function deleteBlog(blogid:string): Promise<string> {
     return blogs;  
 }
 
+async function fetchSectionOfBlog(blogid:string): Promise<Section[]> {
+    const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}/sections`);
+    const sections = await res.json();
+    return sections;  
+}
+
+
+async function editBlog(newcoursecode: create_Blog, blogId:string): Promise<Blog|null> {
+    console.log(newcoursecode)
+    const res = await fetch(`http://188.166.178.33:3000/blogs/${blogId}`,{
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(newcoursecode),
+    });
+    console.log(res)
+    const newblog: Blog = await res.json();
+    if (newblog !== undefined) {
+        return newblog;
+    } else{
+        return null;
+    }
+}
+
 async function deleteReport(blogid:string): Promise<string> {
     const res = await fetch(`http://188.166.178.33:3000/reports/${blogid}`,{
         method: 'DELETE',
@@ -76,8 +114,7 @@ async function deleteReport(blogid:string): Promise<string> {
     return blogs;  
 }
 
-
 export default {
     fetchBlogs,createBlog,fetchBlogSpecific,fetchBlogfilter,fetchKnowledgeBlogs,fetchReviewBlogs,
-    deleteBlog,createReview,deleteReport
+    deleteBlog,createReview,fetchReviewSpecific,fetchReviewOfBlog,editBlog,deleteReport
 };
