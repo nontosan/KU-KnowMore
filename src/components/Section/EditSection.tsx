@@ -54,7 +54,13 @@ const EditSection = (props:any) => {
     const fetchSection = () => {
         SectionService.fetchSectionsSpecific(sectionId)
             .then(sectioninfo => {
-                alert("can't set value to editor : ");
+                const draftstate = sectioninfo[0].content;
+                const markup = draftToHtml(
+                    draftstate, 
+                );
+                setEditorValue(markup);
+                const section_name = sectioninfo[0].section_name;
+                setNewSectionName(section_name);
             })
     }
     useEffect(() => {
