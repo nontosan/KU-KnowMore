@@ -50,7 +50,27 @@ function getUserId(): string|null {
         return null
     }
 }
-
+async function portal(code:string): Promise<string>{
+    //may be edit path
+    const res = await fetch(`http://188.166.178.33:3000/auth/login`,{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(code),
+    });
+    const Token = await res.json();
+    console.log(Token)
+    if (Token.access_token) {
+        localStorage.setItem("accessToken", Token.access_token);
+        localStorage.setItem("userId", Token.userid);
+        console.log("hello");
+        //return path to main path
+        return "https://ku-knowmore.xyz/";
+    } else{
+        //return path to login path
+        console.log("wrong username or password");
+        return "https://ku-knowmore.xyz/login";
+    }
+}
 export default {
-    UserLogin, isUserLoggedIn, getUsername, UserLogout, getUserId,
+    UserLogin, isUserLoggedIn, getUsername, UserLogout, getUserId,portal
 };
