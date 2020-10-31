@@ -5,6 +5,7 @@ import { ObjectID } from 'mongodb';
 
 import Users from './users.entity';
 import {CreateUserDto} from '../dto/create-users.dto';
+import { CreateSuperUserDto } from 'src/dto/create-superuser.dto';
 
 export type User = any;
 
@@ -39,6 +40,33 @@ export class User_Service {
 
     async findUserFromUserID(user_id: ObjectID): Promise<Users[]> {
         return this.User_Repository.find({ where: { _id: user_id }});
+    }
+
+    async findUserIDFromUID(user_id: string): Promise<Users> {
+        var res: Users[] = await this.User_Repository.find({ where: {uid: user_id}});
+        return res[0];
+    }
+
+    async createNewUser(user) {
+        var createUser: CreateSuperUserDto = {
+            cn: user.cn,
+            uid: user.uid,
+            sn: user.sn,
+            campus: user.campus,
+            first_name: user['first-name'],
+            last_name: user['last-name'],
+            thainame: user.thainame,
+            thaiprename: user.thaiprename,
+            givenname: user.givenname,
+            faculty: user.faculty,
+            faculty_id: user['faculty-id'],
+            type_person: user['type-person'],
+            profile_description: '',
+            pic_name: '',
+            username: '',
+            pic_dir: ''       
+        }
+        return this.User_Repository.save(createUser);
     }
 
     async findAllUsers() : Promise<Users[]> {  
