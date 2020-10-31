@@ -26,7 +26,7 @@ import ReadSection from './components/Section/ReadSection';
 import EditSection from './components/Section/EditSection';
 import LoginPage from './components/LoginPage';
 import ImageComponent from './components/Display';
-
+import Portal from "./components/Portal"
 
 import LoginService from './services/LoginService';
 import ProfileService from './services/ProfileService';
@@ -186,8 +186,9 @@ const App = () => {
                     <Route path="/editSection/:sectionId" name="sectionId" component={EditSection}></Route>
                     <Route path="/userpage/:userId" name="userId" component={UserPage}></Route>
                     <Route path="/editProfile/:userId" name="userId" component={EditProfile}></Route>
-                    <Route path="/dropdowntest">
-                        <Dropdowntest />
+                    <Route path="/dropdowntest"><Dropdowntest /></Route>
+                    <Route path="/portal/:code" name="code" >
+                        <Portal />
                     </Route>
                     <Route path="/login">
                         <LoginPage loginCallback={handleUserLogin}/>
