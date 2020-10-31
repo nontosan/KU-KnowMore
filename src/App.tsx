@@ -64,7 +64,7 @@ const App = () => {
     const [userId, setUserId] = useState<string|null>(null);
     const [log, setLog] = useState<boolean>(true);
     useEffect(() => {
-        setUsername(LoginService.getUsername());
+        //setUsername(LoginService.getUsername());
         setUserId(LoginService.getUserId());
         //console.log("HELLOMAIN");
         //console.log(localStorage.accessToken);
@@ -142,6 +142,7 @@ const App = () => {
                     {userInformation && (
                         <div className="white-font">
                             <Form inline>
+                                {true &&
                                 <a href={`/userpage/${userId}`}>
                                     <Suspense fallback={<div>Loading... </div>}>
                                         {userInformation.map(a=>
@@ -149,6 +150,7 @@ const App = () => {
                                         }
                                     </Suspense>
                                 </a>
+                                }
                                 &nbsp;&nbsp;
                                 {true &&
                                 <Nav className="mr-auto">
@@ -177,6 +179,12 @@ const App = () => {
                         )}
                     </Nav>
                 </Navbar>
+                {false &&
+                    <div>
+                        <img src="//www.tvsod.com/images/banners/ohogame-728x90-20-2.gif" alt="banner" width="100%"></img>
+                        <img src="//www.tvsod.com/images/banners/77up-728x90-08.gif" alt="banner" width="100%"></img>
+                    </div>
+                }
                 <Switch>
                     <Route path="/myKnowledge/:blogId" name="blogId" component={CreateEditSection}></Route>
                     <Route path="/myReview/:blogId" name="blogId" component={CreateEditReview}></Route>

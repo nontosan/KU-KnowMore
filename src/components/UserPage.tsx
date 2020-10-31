@@ -106,7 +106,7 @@ const UserPage = (props:any) => {
           setafterSave(!afterSave);
         }
       },[UrlLink]);
-
+    console.log(blogs);
     return (
         <div>
             <div className="userpage-top-div">
