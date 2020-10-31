@@ -37,14 +37,19 @@ const EditSection = (props:any) => {
     
     const handleSectionSave = () => {
         const writeSection = {
+            id: sectionId,
             section_name: newSectionName,
             content: editorValue,
             blog_id: blogId,
         };
 
-        SectionService.createSection(blogId, writeSection)
-            .then(savedWriteSection => {
-                console.log("save success")
+        SectionService.editSection(sectionId, writeSection)
+            .then(savedEditSection => {
+                if(savedEditSection){
+                    alert("บันทึก Section สำเร็จ");
+                }else{
+                    alert("บันทึก Section สำเร็จ");
+                }
                 history.goBack()
             });
             //console.log(history)
