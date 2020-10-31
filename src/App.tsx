@@ -166,7 +166,7 @@ const App = () => {
                     <Nav>
                         {log && (
                             <Form inline>
-                                <Nav.Link href="/login" style={{ color:"white" }}>LOGIN</Nav.Link>
+                                <Nav.Link chref="/login" style={{ color:"white" }}>LOGIN</Nav.Link>
                             </Form>
                         )}
                         {!log && (
