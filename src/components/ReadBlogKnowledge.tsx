@@ -46,12 +46,14 @@ import Viewer from '../photo/viewer.png';
 import Alert from '../photo/alert.png';
 import minus from '../photo/minus_PNG39.png';
 import GearEdit from '../photo/gear-edit6.png';
+import GearEditBlack from '../photo/settings-8-xxl.png';
 // END OF IMPORT PHOTO //
 
 //------------------------------------------------------------------//
 
 const ReadBlogKnowledge = (props:any) => {
   const [sectionsInformation, setSectionsInformation] = useState<Section[]>([]);
+  const [isHaveSections, setIsHaveSections] = useState<boolean>(true);
   const [blogsInformation,setBlogsInformation] = useState<Blog[]>([]);
   const [userInformation, setUserInformation] = useState<User_Sch[]>([]);
   const [courseInformation, setCourseInformation] = useState<Course_real[]>([]);
@@ -115,6 +117,10 @@ const ReadBlogKnowledge = (props:any) => {
   const fetchsection = () => {
     SectionService.fetchSections(blogId)
       .then(Arraysections => {
+        console.log(Arraysections)
+        if(Arraysections.length == 0){
+          setIsHaveSections(false);
+        }
         setSectionsInformation(Arraysections);
       });
   }
@@ -137,7 +143,7 @@ const ReadBlogKnowledge = (props:any) => {
       fetchProfile();
     }
   },[author])
-  console.log(userInformation);
+  //console.log(userInformation);
   return (
     <div>
       <div className="hot-kl">
@@ -195,6 +201,11 @@ const ReadBlogKnowledge = (props:any) => {
       </div>
       <div className="hot-kl">
         <Card.Header>SECTION</Card.Header>
+        {!isHaveSections &&
+          <div>
+            NO CONTENT YET
+          </div>
+        }
         {sectionsInformation.map(item=>{
           count++;
           {
@@ -205,7 +216,7 @@ const ReadBlogKnowledge = (props:any) => {
                     <div style={{ float: "right" }}>
                       {author==localStorage.userId &&
                         <div style={{ float: "right" }}>
-                          <Image className="gear-setting-pic blog-fl" src={GearEdit}></Image>
+                          <Image className="gear-setting-pic blog-fl" src={GearEditBlack}></Image>
                           <Image className="delete-setting-pic blog-fl" src={minus}></Image>
                         </div>
                       }

@@ -6,11 +6,14 @@ import {
   Link, Redirect,
 } from 'react-router-dom';
 import { resolve } from 'dns';
+import { getTokenSourceMapRange } from 'typescript';
 
 
+type LoginFormProps = {
+    loginCallback?: () => void,
+};
 
-
-const Portal=()=> {
+const Portal=(props:LoginFormProps)=> {
     //functional get code then sending code to backend
     /*
     const code= window.location.search.split("=")[1]
@@ -18,9 +21,39 @@ const Portal=()=> {
         //window.location.replace(res)
     })
     */
+    const [loginErrorMessage, setLoginErrorMessage] = useState('');
+
+    const history = useHistory();
+
+    const code = window.location.search.split("=")[1]
+
+    const getToken = () => {
+        const Code = {
+            code: code,
+        };
+        console.log(Code);
+        LoginService.portal(Code)
+            .then(Token => {
+                console.log(Token);
+                if (!Token) {
+                    setLoginErrorMessage('Wrong username of password');
+                } else {
+                    setLoginErrorMessage('HELLO BRO');
+                    if (props.loginCallback){
+                        props.loginCallback();
+                    }
+                    history.push('/');
+                }
+            })
+    }
+
+
+    useEffect(()=>{
+        getToken();
+    },[])
     return (
         <div className="">
-            
+            {code}
         </div>  
     );
 }

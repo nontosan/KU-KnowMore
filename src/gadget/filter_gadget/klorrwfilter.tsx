@@ -8,7 +8,7 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 function Choosefilter(props:any) {
 
     return (
-      <ToggleButtonGroup type="checkbox" value={props.type} onChange={props.handle}> 
+      <ToggleButtonGroup type="checkbox" onChange={props.handle}> 
         <ToggleButton value={1}>ความรู้</ToggleButton>
         <ToggleButton value={2}>รีวืว</ToggleButton>
       </ToggleButtonGroup>

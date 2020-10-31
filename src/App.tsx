@@ -75,16 +75,18 @@ const App = () => {
     },[])
     console.log(userInformation)
     const handleUserLogin = () => {
-        setUsername(LoginService.getUsername());
+        console.log("EIEIZAZA55+")
+        //setUsername(LoginService.getUsername());
         setUserId(LoginService.getUserId());
         setLog(false);
+        console.log(LoginService.getUserId())
         alert('ยินดีต้อนรับสู่ KU-KNOWMORE')
     }
 
     //console.log(username);
     const logout = () => {
         LoginService.UserLogout();
-        setUsername(null);
+        setUserInformation([]);
         setUsername(null);
         setLog(true);
         alert('ออกจากระบบแล้ว')
@@ -137,7 +139,7 @@ const App = () => {
                             <NavDropdown.Item href="/createrwblog">Create Review</NavDropdown.Item>
                         </NavDropdown>
                     </Form>
-                    { username && (
+                    {userInformation && (
                         <div className="white-font">
                             <Form inline>
                                 <a href={`/userpage/${userId}`}>
@@ -187,8 +189,8 @@ const App = () => {
                     <Route path="/userpage/:userId" name="userId" component={UserPage}></Route>
                     <Route path="/editProfile/:userId" name="userId" component={EditProfile}></Route>
                     <Route path="/dropdowntest"><Dropdowntest /></Route>
-                    <Route path="/portal/:code" name="code" >
-                        <Portal />
+                    <Route path="/portal" name="code">
+                        <Portal loginCallback={handleUserLogin}/>
                     </Route>
                     <Route path="/login">
                         <LoginPage loginCallback={handleUserLogin}/>
