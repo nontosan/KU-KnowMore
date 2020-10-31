@@ -65,6 +65,7 @@ const ReadBlogKnowledge = (props:any) => {
   const resultLimit = 10
     let i = 0;
     let k = 0;
+    let count = 0;
     let check = 0;
     const [allCourse,setAllCourse] = useState<any[]>([]);
     const code:any[]=[]
@@ -194,17 +195,37 @@ const ReadBlogKnowledge = (props:any) => {
       </div>
       <div className="hot-kl">
         <Card.Header>SECTION</Card.Header>
-        {sectionsInformation.map(item=>(
-          <div>
-            <Link className="show-blog" to={`/readSection/${item.id}`}>
-              <ListGroup variant="flush">
-                <ListGroup.Item><strong>{item.section_name}</strong> {item.blog_id} {item.id}</ListGroup.Item>
-              </ListGroup>
-            </Link>
-            <Button variant="outline-danger">DELETE</Button>
-            <Button variant="outline-warning">EDIT</Button>
-          </div>
-        ))}
+        {sectionsInformation.map(item=>{
+          count++;
+          {
+            return(
+              <div>
+                <Link className="show-all-section" to={`/readSection/${item.id}`}>
+                    <strong>Chapter {count} : {item.section_name}</strong> 
+                    <div style={{ float: "right" }}>
+                      {author==localStorage.userId &&
+                        <div style={{ float: "right" }}>
+                          <Image className="gear-setting-pic blog-fl" src={GearEdit}></Image>
+                          <Image className="delete-setting-pic blog-fl" src={minus}></Image>
+                        </div>
+                      }
+                    </div>
+                    {false &&
+                      <div>
+                        {item.blog_id} {item.id}
+                      </div>
+                      }
+                </Link>
+                {false &&
+                  <div>
+                    <Button variant="outline-danger">DELETE</Button>
+                    <Button variant="outline-warning">EDIT</Button>
+                  </div>
+                }
+              </div>
+            )
+          }
+        })}
         {author==localStorage.userId &&
           <Link to={`/writeSection/${blogId}`}>
             <Button variant="outline-secondary" className="button-addsection">

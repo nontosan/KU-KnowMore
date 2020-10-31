@@ -50,7 +50,7 @@ class UploadMulFile extends React.Component<any,any> {
                         onChange={(e)=>this.handleFile(e)} />
                     </div>
                     <br />
-                    <Button variant="primary"  onClick={(e)=>this.handleUpload(e)}>UploadFile Mul</Button>
+                    <Button variant="primary" size="sm"  onClick={(e)=>this.handleUpload(e)}>UploadFile Mul</Button>
                 </form>
             </div>
         );
