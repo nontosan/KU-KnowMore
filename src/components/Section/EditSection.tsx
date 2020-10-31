@@ -1,11 +1,9 @@
 // IMPORT LIBRARY //
 import React, { useState , useEffect , Component } from 'react';
-import { ContentState, convertFromRaw, convertToRaw, EditorState } from 'draft-js';
 import InputGroup from 'react-bootstrap/InputGroup';
 // END OF IMPORT LIBRARY //
 
 // IMPORT COMPONENT //
-import DraftEditor from './DraftEditor';
 import UploadMulFile from '../UploadMulFile';
 import DisplayFile from '../DisplayFile';
 // END OF IMPORT COMPONENT //
@@ -31,9 +29,7 @@ const EditSection = (props:any) => {
     const [afterFetch, setafterFetch] = useState<boolean>(false);
     const [stateCheck, setstateCheck] = useState<boolean>(false);
     const [stateContentCheck, setStateContentCheck] = useState<boolean>(false);
-    const [content, setContent] = useState<ContentState>();
     const [editorValue, setEditorValue] = useState("");
-    //const [draftstate, setdraftState] = useState(EditorState.createWithContent(content!));
 
     const sectionId = (props.match.params.sectionId);
     
@@ -45,9 +41,7 @@ const EditSection = (props:any) => {
             })
     }
     const initdraft = () => {
-        const qdraftstate = sectionsInformation[0].content;
-        const ddd = convertFromRaw(qdraftstate);
-        setContent(ddd);
+        const editor_state : string = sectionsInformation[0].content;
         setStateContentCheck(true);
     }
     
@@ -67,17 +61,6 @@ const EditSection = (props:any) => {
         }
     },[stateContentCheck])
 
-    //console.log(JSON.stringify(content));
-    //useEffect(() => {
-    //    if (draftstate !== EmptyState){
-    //        //console.log(JSON.stringify(draftstate));
-    //    }
-    //},[draftstate])
-    //useEffect( () => {
-    //    initdraft();
-    //    setafterFetch(!afterFetch);
-    //},[sectionsInformation])
-//
     return (
         <div>
             <InputGroup size="lg" className="div-sectionname">
