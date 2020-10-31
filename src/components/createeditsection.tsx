@@ -137,12 +137,12 @@ const CreateEditSection = (props:any) => {
 
           </div>     
             <div className="div-addsection">
-              <Link to={`/writeSection/${blogId}`}>
+              <a href={`/writeSection/${blogId}`}>
                 <Button variant="outline-secondary" className="button-addsection">
                   <Image className="addsection" src={AddSection} roundedCircle />
                 </Button>
-              </Link>
-        </div>
+              </a>
+            </div>
       </div>
   );
 };

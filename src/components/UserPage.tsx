@@ -48,7 +48,7 @@ const UserPage = (props:any) => {
         //may use userid from location
         BlogService.fetchBlogfilter(`?userid=${userId}`).then(res=>{
             setBlogs(res)
-            console.log(res)
+            //console.log(res)
         })
     }
     const handledelete=(blogId:any)=>{
@@ -72,6 +72,7 @@ const UserPage = (props:any) => {
                 console.log(userInfo);
             })
     }
+
     const checktype=(item:string)=>{
         if(item==="knowledge"){
             return true
@@ -96,7 +97,7 @@ const UserPage = (props:any) => {
 
     useEffect(() => {
         fetchProfile();
-        fetchBlogs()
+        fetchBlogs();
     },[])
 
     useEffect(() => {
@@ -125,9 +126,11 @@ const UserPage = (props:any) => {
                         <h4>Activity : </h4>
                     </div>
                 ))}
+                {userId == localStorage.userId &&
                 <Link className="blog-fr" to={`/editProfile/${userId}`}>
                     <Button className="blog-fr" variant="danger">EDIT USER INFORMATION</Button>
                 </Link>
+                }
             </div>
             <div className="hot-kl" style={{ marginBottom : "50px" }}>
                 <Card.Header className="card-header">MY BLOG</Card.Header>
@@ -154,7 +157,7 @@ const UserPage = (props:any) => {
                             </div>
                 )}})}
             </div>
-            {
+            {false &&
                 blogs.map((item:Blog)=>{
                     if(item.user_id==userId){
                         return checktype(item.type)?

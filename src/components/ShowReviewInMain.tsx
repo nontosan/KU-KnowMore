@@ -9,6 +9,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 // END OF IMPORT LIBRARY //
 
 // IMPORT COMPONENT //
+import UserAuthor from './UserAuthor';
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
@@ -45,7 +46,30 @@ const Showrwinmain = () => {
 
     return (
         <div>
-            {blogs.map(blog => ( 
+            {blogs.map(blog => (
+                    <div>
+                        <Link className="show-all-blog" to={`/read${blog.type}/${blog.id}`}>
+                            <div className="blog-fl">
+                                {blog.blog_name}
+                            </div>
+                            <div className="blog-fl" style={{ textAlign : "center" }}>
+                                {blog.viewers} View
+                            </div>
+                            <div className="blog-fl" style={{ textAlign : "center" }}>
+                                Last Edit : {blog.last_edit}
+                            </div>
+                            <div className="blog-fl" style={{ textAlign : "center" }}>
+                                <UserAuthor
+                                    userid = {blog.user_id}
+                                />
+                            </div>
+                            
+                        </Link>
+                    </div>
+                ))}
+            {false &&
+                <div>
+                    {blogs.map(blog => ( 
                 <ListGroup.Item className="blogcontainer" >
                     <NavLink to={`/read${blog.type}/${blog.id}`}>
                         <button className="blogclick" onClick={readknowledge}>
@@ -56,6 +80,9 @@ const Showrwinmain = () => {
                     </NavLink>
                 </ListGroup.Item>
             ))}
+                </div>
+            }
+            
         </div>
     )
 };

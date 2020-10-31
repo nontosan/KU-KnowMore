@@ -44,9 +44,10 @@ const WriteSection = (props:any) => {
         SectionService.createSection(blogId, writeSection)
             .then(savedWriteSection => {
                 console.log("save success")
+                history.goBack()
             });
             //console.log(history)
-            history.goBack()
+            
     };
 
     console.log(history.go)

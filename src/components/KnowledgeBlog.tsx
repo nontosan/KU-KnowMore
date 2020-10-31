@@ -99,7 +99,6 @@ const KnowledgeBlog = () => {
                                     userid = {blog.user_id}
                                 />
                             </div>
-                            
                         </Link>
                     </div>
                 ))}

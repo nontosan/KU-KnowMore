@@ -140,14 +140,13 @@ const App = () => {
                     { username && (
                         <div className="white-font">
                             <Form inline>
-                                <Link to={`/userpage/${userId}`} style={{ float : "left" }}>
-                                {true &&
-                                <Suspense fallback={<div>Loading... </div>}>
-                                    {userInformation.map(a=>
-                                        <ImageComponent className="profile-pic" userid={a.pic_dir}/>)}
-                                </Suspense>
-                                }
-                                </Link>
+                                <a href={`/userpage/${userId}`}>
+                                    <Suspense fallback={<div>Loading... </div>}>
+                                        {userInformation.map(a=>
+                                            <ImageComponent className="profile-pic" userid={a.pic_dir}/>)
+                                        }
+                                    </Suspense>
+                                </a>
                                 &nbsp;&nbsp;
                                 {true &&
                                 <Nav className="mr-auto">
@@ -166,7 +165,7 @@ const App = () => {
                     <Nav>
                         {log && (
                             <Form inline>
-                                <Nav.Link href="/login" style={{ color:"white" }}>LOGIN</Nav.Link>
+                                <Nav.Link href="/login" className="login-button">LOGIN</Nav.Link>
                             </Form>
                         )}
                         {!log && (
