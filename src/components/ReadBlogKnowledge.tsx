@@ -40,6 +40,7 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Container, Row } from 'react-bootstrap';
 import './readknowledge.css';
+import './file.css';
 // END OF IMPORT CSS //
 
 // IMPORT PHOTO //
@@ -82,6 +83,7 @@ const ReadBlogKnowledge = (props:any) => {
   //fetch blog from database
 
   //CONST FOR DELETE MODAL//
+  
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [BlogDelete, setBlogDelete] = useState<Blog>();
   const [statusDelete, setStatusDelete] = useState<boolean>(false);
@@ -252,11 +254,7 @@ const closeModal = () => {
       </div>
       <div className="hot-kl">
         <Card.Header>SECTION</Card.Header>
-        {!isHaveSections &&
-          <div className="show-nochapter">
-            <strong>No Chapter Yet</strong> 
-          </div>
-        }
+  
         {sectionsInformation.map(item=>{
           count++;
           {
@@ -306,7 +304,9 @@ const closeModal = () => {
           blogId = {blogId}
         />
       </div>
-      <button onClick={e=>{history.goBack()}}>back</button>
+      <div className="knowledge_button">
+        <Button variant="secondary" onClick={e=>{history.goBack()}}>back</Button>
+      </div>
     </div>
   );
 };

@@ -157,8 +157,8 @@ const CreateEditSection = (props:any) => {
     const btn = (
       <a href={"http://localhost:3000/"}>
           <Button type="primary"  onClick={() =>{
+             BlogsService.deleteBlog(blogId)
              notification.close(key)
-             //BlogsService.deleteBlog(blogId)
           }}>
             Confirm
           </Button>

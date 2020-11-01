@@ -70,8 +70,8 @@ const WriteSection = (props:any) => {
                 />
             </div>
             <div className="div-sectionname">
-                <Button className="cancel-button" variant="outline-secondary" onClick={e=>history.goBack()}>Cancel</Button>
-                <Button className="submit-button" variant="outline-secondary" onClick={handleSectionSave}>Submit</Button>
+                <Button className="cancel-button" variant="outline-danger" onClick={e=>history.goBack()}>Cancel</Button>
+                <Button className="submit-button" variant="outline-success" onClick={handleSectionSave}>Submit</Button>
             </div>
         </div>
     );

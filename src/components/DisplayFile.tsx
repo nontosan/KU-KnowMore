@@ -6,6 +6,7 @@ import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import './section.css';
+import './file.css';
 
 function DisplayFile (props:any) {//This function is for ReadSection
     const [checkNull, setCheckNull] = useState<boolean>(false);
