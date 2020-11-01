@@ -45,7 +45,6 @@ function MyVerticallyCenteredModal(props:any) {
             Report
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
             <Formik
                 initialValues={{
                     etc:""
@@ -94,6 +93,7 @@ function MyVerticallyCenteredModal(props:any) {
             >
                 {({isSubmitting,values})=>(
                     <Form>
+                      <Modal.Body>
                         <div className="Blog_frame1">
                             {annoy?<Button variant="danger" onClick={e=>setannoy(!annoy)} >โพสก่อกวน</Button>:<Button variant="secondary" onClick={e=>setannoy(!annoy)}>โพสก่อกวน</Button>}
                             {repeat?<Button variant="danger" onClick={e=>setrepeat(!repeat)}>โพสซ้ำ</Button>:<Button variant="secondary" onClick={e=>setrepeat(!repeat)}>โพสซ้ำ</Button>}
@@ -102,18 +102,18 @@ function MyVerticallyCenteredModal(props:any) {
                             {wrongcontent?<Button variant="danger" onClick={e=>setwrongcontent(!wrongcontent)}>โพสไม่ตรงวิชา</Button>:<Button variant="secondary" onClick={e=>setwrongcontent(!wrongcontent)}>โพสไม่ตรงวิชา</Button>}
                             {overthrow?<Button variant="danger" onClick={e=>setoverthrow(!overthrow)}>โพสล้มล้านสถาบัน</Button>:<Button variant="secondary" onClick={e=>setoverthrow(!wrongcontent)}>โพสล้มล้านสถาบัน</Button>}
                             <Field type="input" name="etc"/>
-                            <button disabled={isSubmitting}> submit </button>
                         </div>
+                        </Modal.Body>
+                        <Modal.Footer>
+                        <Button disabled={isSubmitting}> submit </Button>
+                        <Button onClick={e=>{
+                              props.onHide()
+                              clearstate()
+                          }}>Close</Button>
+                        </Modal.Footer>
                     </Form>
                     )}
             </Formik>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={e=>{
-              props.onHide()
-              clearstate()
-          }}>Close</Button>
-        </Modal.Footer>
       </Modal>
     );
   }

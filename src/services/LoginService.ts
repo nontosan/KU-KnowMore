@@ -52,7 +52,7 @@ function getUserId(): string|null {
 }
 async function portal(code:string): Promise<string>{
     //may be edit path
-    //console.log(JSON.stringify(code))
+    console.log(JSON.stringify(code))
     const res = await fetch(`http://188.166.178.33:3000/token`,{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},

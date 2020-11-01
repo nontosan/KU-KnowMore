@@ -10,7 +10,7 @@ import Subjectid from "../gadget/filter_gadget/Subjectid";
 import Teacher from "../gadget/filter_gadget/teacher"
 import Image from 'react-bootstrap/Image';
 import 'antd/dist/antd.css';
-import { message } from 'antd';
+import { notification,message } from 'antd';
 import {
   Link, Redirect
 } from 'react-router-dom'
@@ -47,7 +47,7 @@ function EditBlogModal(props:any) {
   const [available,setAvailable] = useState<boolean>(false)
   //data for updating
   const [bloginfo,setbloginfo] = useState<Blog[]>([])
-
+  const patkh =window.location.pathname
   const blogId = window.location.pathname.split("/")[2]
   const handleChangeCode = (selectedOption:any) => {
       code.push({ selectedOption })
@@ -90,12 +90,12 @@ function EditBlogModal(props:any) {
         console.log(e)
       })
       openMessage()
+      props.onHide()
     }
     else{
-
+      openNotificationNot()
     }
     //props.fetchBlogs()
-    props.onHide()
   }
   const fetchBloginfo=()=>{
     BlogsService.fetchBlogSpecific(blogId).then(res=>{
@@ -103,6 +103,13 @@ function EditBlogModal(props:any) {
       //console.log(res)
     })
   }
+  const openNotificationNot = () => {
+    notification.info({
+      message: `Notification `,
+      description:
+        'Please complete form for editing blog content',
+    });
+  };
   useEffect(()=>{
       fetchCourse()
       fetchBloginfo()
@@ -210,7 +217,7 @@ const ChangeBlogInfoModal=(props:any)=>{
         show={modalShow}
         onHide={() => {
           setModalShow(false)
-          props.fetchBlogs()
+          window.location.replace(window.location.href)
           console.log("edit???")
         }}
       /> 
