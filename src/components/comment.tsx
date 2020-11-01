@@ -168,7 +168,6 @@ const Comment_component=(props:any)=>{
                             <ErrorMessage name="errorMess" component="div"/>
                         </div>
                     </div>
-                    
                 </Form>
             )}
         </Formik>
