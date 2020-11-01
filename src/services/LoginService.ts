@@ -2,7 +2,7 @@ import { Login } from "../interfaces/Login";
 import jwt_decode from "jwt-decode";
 
 async function UserLogin(userLogin: Login): Promise<any|null> {
-    const res = await fetch(`http://188.166.178.33:3000/auth/login`,{
+    const res = await fetch(`https://backend.ku-knowmore.xyz/auth/login`,{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(userLogin),

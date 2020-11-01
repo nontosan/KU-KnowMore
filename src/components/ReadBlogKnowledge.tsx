@@ -48,7 +48,7 @@ import minus from '../photo/minus_PNG39.png';
 import GearEdit from '../photo/gear-edit6.png';
 import GearEditBlack from '../photo/settings-8-xxl.png';
 // END OF IMPORT PHOTO //
-import ChangeBlogInfoModal from "../modals/ChangBlogInfo"
+
 //------------------------------------------------------------------//
 
 const ReadBlogKnowledge = (props:any) => {
@@ -76,7 +76,6 @@ const ReadBlogKnowledge = (props:any) => {
     const [selectNameEn, setSelectNameEn] = useState<string>('');
     const [selectTeacher, setSelectTeacher] = useState<string>('');
     const [selectCourseId, setSelectCourseId] = useState<string>('');
-    const [visible,setvisible] = useState<boolean>(false)
   ///////////////////////////////end copy//////////////////////////////////
   //fetch blog from database
   
@@ -103,18 +102,16 @@ const ReadBlogKnowledge = (props:any) => {
   const fetchBlogs = () => {
     BlogsService.fetchBlogSpecific(blogId)
       .then(blogInfo => {
-        console.log(blogInfo)
         CourseService.fetchCourseWithId(blogInfo[0].course_id)
           .then(courseInfo => {
             setCourseInformation(courseInfo);
             console.log(courseInfo);
           })
-        //setBlogsInformation(blogInfo);
+        setBlogsInformation(blogInfo);
         setAuthor(blogInfo[0].user_id);
         fetchCourse(blogInfo[0].course_id)
         //console.log(blogInfo);
       });
-    setvisible(true)
   }
 
   const fetchsection = () => {
@@ -151,8 +148,6 @@ const ReadBlogKnowledge = (props:any) => {
   return (
     <div>
       <div className="hot-kl">
-        {visible &&
-        <div>
         {userInformation.map(item => (
           <Card.Header>
             <div>
@@ -170,8 +165,6 @@ const ReadBlogKnowledge = (props:any) => {
             </div>
           </Card.Header>
         ))}
-        </div>
-      }
 
       </div>
       <div className="hot-kl">
@@ -182,10 +175,8 @@ const ReadBlogKnowledge = (props:any) => {
               <div style={{ float: "right" }}>
                 {author==localStorage.userId &&
                   <div>
-                    <ChangeBlogInfoModal/>
-                    <Button>
-                      <Image className="delete-setting-pic blog-fl" src={minus}></Image>
-                    </Button>
+                    <Image className="gear-setting-pic blog-fl" src={GearEdit}></Image>
+                    <Image className="delete-setting-pic blog-fl" src={minus}></Image>
                   </div>
                 }
               </div>

@@ -34,7 +34,7 @@ function DisplayFileandDel (props:any) { //This function is for EditSection
     return (
         <div className = "Display">
             {attachmentsInformation.map(file=>
-            <a href={`http://188.166.178.33:3000/${file.path}`}> {file.originalname} <br/></a>
+            <a href={`https://backend.ku-knowmore.xyz/${file.path}`}> {file.originalname} <br/></a>
                 )}
             {attachmentsInformation.map(file=>
                 <Button onClick={e => deletestate(file._id)}>{file.filename}</Button>

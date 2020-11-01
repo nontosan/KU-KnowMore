@@ -27,7 +27,7 @@ class UploadFile extends React.Component<any,any> {
         //formdata.append('name','test')
 
         axios({
-            url: `http://188.166.178.33:3000/sections/5f872295f75b8a001bea596d/attachments`, //Sample API 
+            url: `https://backend.ku-knowmore.xyz/sections/5f872295f75b8a001bea596d/attachments`, //Sample API 
             method: "POST",
             headers:{
                 authorization: 'test'

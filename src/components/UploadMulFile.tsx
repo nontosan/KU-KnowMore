@@ -29,7 +29,7 @@ class UploadMulFile extends React.Component<any,any> {
         }
 
         axios({
-            url: `http://188.166.178.33:3000/sections/5f872295f75b8a001bea596d/attachments`, //Sample API 
+            url: `https://backend.ku-knowmore.xyz/sections/5f872295f75b8a001bea596d/attachments`, //Sample API 
             method: "POST",
             headers:{
               "Content-Type": "multipart/form-data",
