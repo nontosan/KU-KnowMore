@@ -17,7 +17,7 @@ const FetchBlogname = (props:any) => {
 
 
     async function fetchData(){
-        const res =  await fetch(`http://188.166.178.33:3000/blogs/${props.rblog.content_id}`)
+        const res =  await fetch(`https://backend.ku-knowmore.xyz/blogs/${props.rblog.content_id}`)
         res
             .json()
             .then(res => setBlog(res))

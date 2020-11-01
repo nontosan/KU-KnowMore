@@ -12,7 +12,7 @@ const FetchReport = (props:any) => {
     const [reportedBlog,setReport] = useState<Reports_data[]>([])
 
     async function fetchReport(){
-        const res =  await fetch("http://188.166.178.33:3000/reports/")
+        const res =  await fetch("https://backend.ku-knowmore.xyz/reports/")
         res
             .json()
             .then(res => setReport(res))

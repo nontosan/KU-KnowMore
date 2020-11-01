@@ -55,11 +55,12 @@
 .profile-info{
     padding-left: 100px;
 }
-
+/*
 .show-blog{
     color: rgb(153, 153, 153);
     border-bottom: rgba(0,0,0,.125) solid 1px;
 }
+*/
 /* for Navbar_admin */
 .bgNavbar{
     background: rgb(32,124,27);
@@ -103,3 +104,73 @@
 .Center-text{
     text-align: left;
 }
+
+
+
+.show-blog{
+    color: rgb(153, 153, 153);
+    border-bottom: rgba(0,0,0,.125) solid 1px;
+    width: 80%;
+}
+
+.link-no-border{
+    border: 0px;
+}
+
+.bg-black{
+    background-color: black;
+}
+
+.likebar-pic{
+    height: 33px;
+    width: 33px;
+}
+
+.delete-button{
+    float: left;
+}
+
+.author-user{
+    float: right;
+}
+
+.blog-fl{
+    float: left;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.blog-fr{
+    float: right;
+}
+
+.profile-in-userpage{
+    float: left;
+    height: 100%;
+    width: 100%;
+}
+
+.userpage-top-div{
+    margin-top: 50px;
+    margin-left: 100px;
+    margin-right: 100px;
+    min-height: 250px;
+}
+
+.show-all-section{
+    padding: .75rem 1.25rem;
+    width: 100%;
+    display:grid;
+    grid-template-columns: 5fr 2fr;
+    border-bottom: rgba(0,0,0,.125) solid 1px;
+    background-color: rgb(229, 226, 226);
+    color: black;
+    transition: 0.4s;
+  }
+  
+  .show-all-section:hover{
+    background-color: #6c7179;
+    padding: .75rem 1.25rem;
+    width: 100%;
+    color: white;
+  }

@@ -7,7 +7,7 @@ import { Image , Avatar} from 'antd';
 function ImageComponent (props:any) {
   //console.log(props.className);
   const {src} = useImage({
-      srcList: `http://188.166.178.33:3000/${props.userid}`, //this is my edit
+      srcList: `https://backend.ku-knowmore.xyz/${props.userid}`, //this is my edit
     })
    
     return <Avatar size={props.size} className={`${props.className} ant-image blog-fl`} src={src}/>

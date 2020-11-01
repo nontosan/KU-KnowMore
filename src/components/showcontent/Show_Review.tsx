@@ -19,6 +19,7 @@ import {Comment_Sch} from "../../interfaces/comment";
 
 // IMPORT CSS //
 import '../../style/section.css';
+import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Container, Row } from 'react-bootstrap';
 import 'antd/dist/antd.css';

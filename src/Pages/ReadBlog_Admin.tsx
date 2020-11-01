@@ -54,6 +54,7 @@ const ReadBlog_Admin = (props:any) => {
           <DelBlog_Modal blogID={blogID}/>
         </Card.Header>
       </div>
+      {/** 
       <div className="hot-kl">
         {blogsInfo.map(blog=>(
           <Card.Header>
@@ -62,14 +63,17 @@ const ReadBlog_Admin = (props:any) => {
           </Card.Header>
         ))}
       </div>
+        */}
       <div className="hot-kl">
         <Card.Header>
         {(blogtype[0]==='review') ? <Show_Review/> : <Show_Knowledge/>} 
         </Card.Header>
       </div>
+    {/** 
       <div  className="hot-kl">
         <Card.Header>COMMENT</Card.Header>
       </div>
+    */}
     </div>
   )
 }

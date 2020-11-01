@@ -14,7 +14,7 @@ const ViewComment_Modal = (props:any) => {
     const [commentData,setComment] = useState<Comment_Sch[]>([])
 
     async function fetchData(){
-        const res =  await fetch(`http://188.166.178.33:3000/comments/${props.rblog.content_id}`)
+        const res =  await fetch(`https://backend.ku-knowmore.xyz/comments/${props.rblog.content_id}`)
         res
             .json()
             .then(res => setComment(res))
