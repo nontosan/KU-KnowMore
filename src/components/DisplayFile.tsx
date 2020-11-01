@@ -27,7 +27,7 @@ function DisplayFile (props:any) {//This function is for ReadSection
     return (
         <div className = "Display">
             {attachmentsInformation.map(file=>
-            <a href={`http://188.166.178.33:3000/${file.path}`}> {file.originalname} {file._id} <br/></a>
+            <a href={`http://188.166.178.33:3000/${file.path}`}> {file.originalname} <br/></a>
                 )}
             
         </div>

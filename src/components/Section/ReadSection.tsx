@@ -89,7 +89,7 @@ const ReadSection = (props:any) => {
             <button onClick={e=>history.goBack()}>back</button>
             File :
             
-            <DisplayFileandDel secid = {sectionId}/>
+            <DisplayFile secid = {sectionId}/>
         </div>
     );
 }

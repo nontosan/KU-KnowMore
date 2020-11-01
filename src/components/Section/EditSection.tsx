@@ -10,6 +10,8 @@ import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , d
 // IMPORT COMPONENT //
 import Photo from '../upload';
 import UploadFile from '../UploadFile';
+import Demo from '../UploadTest';
+import DisplayFileandDel from '../DisandDel';
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
@@ -89,11 +91,12 @@ const EditSection = (props:any) => {
                     onChange={setEditorValue}
                 />
             </div>
-            <div className="div-sectionname">
-                <Photo />
-            </div>
             <div className="uploadtest">
-                <UploadFile />
+                <Demo secid = {sectionId}/>
+            </div>
+            <div className="display">
+            File :
+            <DisplayFileandDel secid = {sectionId}/>
             </div>
             <div className="div-sectionname">
                 <Button className="cancel-button" variant="outline-secondary" onClick={e=>history.goBack()}>Cancel</Button>
