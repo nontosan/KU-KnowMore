@@ -3,18 +3,27 @@
     display: flex;
   }
   .input {
-    width: 1000%;
-    background-color: #4CAF50;
-    color: white;
+    background-color:  #6c7179;
+    color: rgb(255, 255, 255)!important;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    float: right;
+  }
+
+  .input::placeholder {
+    color: rgb(255, 255, 255);
   }
   
+  .send-button{
+    border: 0px;
+    margin: 16px 8px;
+    float: right;
+  }
 
   .content_container{
       display:grid;
-      grid-column: 7fr 2fr;
+      grid-template-columns: 7fr 2fr;
   }
