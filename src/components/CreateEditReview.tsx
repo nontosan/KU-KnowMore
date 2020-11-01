@@ -39,11 +39,21 @@ import { Course, Course_real } from '../interfaces/course';
 // IMPORT CSS //
 import './section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'antd/dist/antd.css';
+import { notification, Divider, Space } from 'antd';
+import {
+  RadiusUpleftOutlined,
+  RadiusUprightOutlined,
+  RadiusBottomleftOutlined,
+  RadiusBottomrightOutlined,
+} from '@ant-design/icons';
+
 // END OF IMPORT CSS //
 
 // IMPORT PHOTO //
 // END OF IMPORT PHOTO //
 import Dropdowntest from "../gadget/create_blog"
+import ReviewServices from '../services/ReviewServices';
 //------------------------------------------------------------------//
 
 type editsection={
@@ -94,24 +104,28 @@ const CreateEditSection = (props:any) => {
       })
   }
   const handleNewReviewSave = (blogid : string) => {
-    const newReview: Review = {
-      blog_id: blogid,
-      teaching: teachScore,
-      hw: workScore,
-      classroom: roomScore,
-      overall: overallScore,
-      content: editorValue,
-    };
-    BlogsService.createReview(newReview,blogid) 
-      .then(savedNewReview => {
-        if (savedNewReview !== null) {
-          alert("บันทึก blog สำเร็จ");
-        } else{
-          alert("บันทึก blog ล้มเหลว");
-        }
-      });
+    if(teachScore!==0 && workScore!==0 && roomScore!==0 && overallScore!==0){
+      const newReview: Review = {
+        blog_id: blogid,
+        teaching: teachScore,
+        hw: workScore,
+        classroom: roomScore,
+        overall: overallScore,
+        content: editorValue,
+      };
+      BlogsService.createReview(newReview,blogid) 
+        .then(savedNewReview => {
+          if (savedNewReview !== null) {
+            alert("บันทึก blog สำเร็จ");
+          } else{
+            alert("บันทึก blog ล้มเหลว");
+          }
+        }); 
+      //window.location.replace("http://localhost:3000/")
+    }else{
+      openNotificationnot()
+    }
   }
-
   // Fetch Id ของ course 
   const fetchCourse =(x:string)=>{
     CourseService.fetchCourse().then(res=>{
@@ -131,8 +145,41 @@ const CreateEditSection = (props:any) => {
         setVisible(true);
     })
     setCodeOptions(codeoption);
-}
-    
+  }
+  const close = () => {
+    console.log(
+      'Notification was closed. Either the close button was clicked or duration time elapsed.',
+    );
+  };
+  //get /blogs/blogid/viewing
+  const openNotification = () => {
+    const key = `open${Date.now()}`;
+    const btn = (
+      <a href={"http://localhost:3000/"}>
+          <Button type="primary"  onClick={() =>{
+             notification.close(key)
+             //BlogsService.deleteBlog(blogId)
+          }}>
+            Confirm
+          </Button>
+      </a>
+    );
+    notification.open({
+      message: 'Notification',
+      description:
+        'Would you like to discard this blog',
+      btn,
+      key,
+      onClose: close,
+    });
+  };
+  const openNotificationnot = ()=> {
+    notification.info({
+      message: `Notification Can't Save`,
+      description:
+        'Please complete assign value in form',
+    });
+  };
   useEffect(()=>{
       fetchBlogs();
   },[])
@@ -173,16 +220,12 @@ const CreateEditSection = (props:any) => {
         </div>
       </div>
         <div className="Confirm"> 
-          <Link to="/">
             <div className="Cancel">
-              <Button className="cancel-button" variant="danger">Cancel</Button>
+              <Button className="cancel-button" variant="danger" onClick={e=>openNotification()}>Cancel</Button>
             </div>
-          </Link>
-          <Link to="/">
             <div className="Submit">
               <Button className="submit-button" variant="success" onClick={e=>handleNewReviewSave(blogId)}>Submit</Button>
             </div>
-          </Link>
         </div>
           </div>     
             

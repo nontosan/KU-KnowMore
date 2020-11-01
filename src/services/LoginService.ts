@@ -25,6 +25,7 @@ function UserLogout(): void {
         //localStorage.removeItem("accessTokeneiei");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("userId");
+        localStorage.removeItem("userStatus")
     }
 }
 
@@ -54,7 +55,7 @@ function getUserId(): string|null {
 async function portal(Code:any): Promise<any|null>{
     //may be edit path
     //console.log(JSON.stringify(code))
-    const res = await fetch(`https://backend.ku-knowmore.xyz/auth/token`,{
+    const res = await fetch(`http://188.166.178.33:3000/auth/token`,{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(Code),
@@ -66,6 +67,7 @@ async function portal(Code:any): Promise<any|null>{
         console.log(Token.user_id);
         localStorage.setItem("accessToken", Token.access_token);
         localStorage.setItem("userId", Token.user_id);
+        localStorage.setItem("userStatus", Token.user_status)
         return Token;
     } else{
         return null;
