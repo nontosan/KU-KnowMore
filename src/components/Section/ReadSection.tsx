@@ -23,6 +23,7 @@ import { Attachments } from '../../interfaces/blog';
 import '../section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
+import '../file.css';
 
 import { convertToRaw, EditorState } from 'draft-js';
 import { type } from 'os';
@@ -157,10 +158,13 @@ const ReadSection = (props:any) => {
             {afterFetch &&
                 <div className="div-sectionname" dangerouslySetInnerHTML={{__html: displayHTML}} />
             }
-            <button onClick={e=>history.goBack()}>back</button>
-            File :
-            
-            <DisplayFile secid = {sectionId}/>
+            <div className="display_read">
+                <h4>Attachments:</h4>
+                <DisplayFile secid = {sectionId}/>
+            </div>
+            <div className="read_button">
+                <Button variant="secondary" onClick={e=>history.goBack()}>back</Button>
+            </div>
         </div>
     );
 }

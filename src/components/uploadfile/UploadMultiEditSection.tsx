@@ -5,7 +5,7 @@ import { Upload, Button, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
-class UploadMultiCreateSection extends React.Component<any,any> {
+class UploadMultiEditSection extends React.Component<any,any> {
   constructor(props:any) {
     super(props);
   }
@@ -86,4 +86,4 @@ class UploadMultiCreateSection extends React.Component<any,any> {
   }
 }
 
-export default UploadMultiCreateSection;
+export default UploadMultiEditSection;

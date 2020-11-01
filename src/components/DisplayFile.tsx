@@ -5,6 +5,7 @@ import axios from 'axios'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
+import './file.css';
 
 function DisplayFile (props:any) {//This function is for ReadSection
 

@@ -33,12 +33,14 @@ function DisplayFileandDel (props:any) { //This function is for EditSection
 
     return (
         <div className = "Display">
-            {attachmentsInformation.map(file=>
-            <a href={`https://backend.ku-knowmore.xyz/${file.path}`}> {file.originalname} <br/></a>
-                )}
-            {attachmentsInformation.map(file=>
-                <Button onClick={e => deletestate(file._id)}>{file.filename}</Button>
-                )}
+            {attachmentsInformation.map(file=>(
+                <>
+                    <a href={`https://backend.ku-knowmore.xyz/${file.path}`}> {file.originalname}</a>
+                    <Button variant="danger" size="sm"  onClick={e => deletestate(file._id)}>{file.filename}</Button><br/>
+                </>
+            ))}
+            
+        
             
         </div>
     );

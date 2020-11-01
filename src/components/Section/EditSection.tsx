@@ -28,6 +28,7 @@ import {useHistory, Redirect} from "react-router"
 import ReactQuill from 'react-quill';
 import 'antd/dist/antd.css';
 import { notification,message } from 'antd';
+import '../file.css';
 
 const key = 'updatable';
 
@@ -130,7 +131,7 @@ const EditSection = (props:any) => {
                 <UploadMultiEditSection secid = {sectionId}/>
             </div>
             <div className="display">
-            File :
+                <h4>File: </h4>
             <DisplayFileandDel secid = {sectionId} fetchsection={fetchSection}/>
             </div>
             <div className="div-sectionname">
