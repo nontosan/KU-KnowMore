@@ -183,10 +183,14 @@ const App = () => {
                         )}
                     </Nav>
                 </Navbar>
-                {false &&
+                {true &&
                     <div>
-                        <img src="//www.tvsod.com/images/banners/ohogame-728x90-20-2.gif" alt="banner" width="100%"></img>
-                        <img src="//www.tvsod.com/images/banners/77up-728x90-08.gif" alt="banner" width="100%"></img>
+                        <a href={"https://77up.app/"}>
+                            <img src="//www.tvsod.com/images/banners/ohogame-728x90-20-2.gif" alt="banner" width="100%"></img>
+                        </a>
+                        <a href={"https://s-bobet.com/"}>
+                            <img src="//www.tvsod.com/images/banners/77up-728x90-08.gif" alt="banner" width="100%"></img>
+                        </a>
                     </div>
                 }
                 <Switch>

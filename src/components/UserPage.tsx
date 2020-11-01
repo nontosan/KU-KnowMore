@@ -30,6 +30,7 @@ import './section.css';
 import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Popconfirm, message } from 'antd';
+import  "./userpage.css"
 // END OF IMPORT CSS //
 
 // IMPORT PHOTO //
@@ -138,26 +139,50 @@ const UserPage = (props:any) => {
                     if(blog.user_id==userId){
                         return (
                             <div>
-                                <Link className="show-all-blog" to={`/${blog.type}/${blog.id}`}>
-                                    <div className="blog-fl">
-                                        {blog.blog_name}
+                                {blog.type === "knowledge" ?
+                                    <div >
+                                        <Link className="show-all-blog knowledge" to={`/${blog.type}/${blog.id}`}>
+                                            <div className="blog-fl">
+                                                {blog.blog_name}
+                                            </div>
+                                            <div className="blog-fl" style={{ textAlign : "center" }}>
+                                                {blog.viewers} View
+                                            </div>
+                                            <div className="blog-fl" style={{ textAlign : "center" }}>
+                                                Last Edit : {blog.last_edit}
+                                            </div>
+                                            <div className="blog-fl" style={{ textAlign : "center" }}>
+                                                <UserAuthor
+                                                    userid = {blog.user_id}
+                                                />
+                                            </div>
+                                        </Link>
                                     </div>
-                                    <div className="blog-fl" style={{ textAlign : "center" }}>
-                                        {blog.viewers} View
+                                    :
+                                    <div>
+                                        <Link className="show-all-blog review" to={`/${blog.type}/${blog.id}`}>
+                                            <div className="blog-fl">
+                                                {blog.blog_name}
+                                            </div>
+                                            <div className="blog-fl" style={{ textAlign : "center" }}>
+                                                {blog.viewers} View
+                                            </div>
+                                            <div className="blog-fl" style={{ textAlign : "center" }}>
+                                                Last Edit : {blog.last_edit}
+                                            </div>
+                                            <div className="blog-fl" style={{ textAlign : "center" }}>
+                                                <UserAuthor
+                                                    userid = {blog.user_id}
+                                                />
+                                            </div>
+                                        </Link>
                                     </div>
-                                    <div className="blog-fl" style={{ textAlign : "center" }}>
-                                        Last Edit : {blog.last_edit}
-                                    </div>
-                                    <div className="blog-fl" style={{ textAlign : "center" }}>
-                                        <UserAuthor
-                                            userid = {blog.user_id}
-                                        />
-                                    </div>
-                                </Link>
+
+                                }
                             </div>
                 )}})}
             </div>
-            {true &&
+            {false &&
                 blogs.map((item:Blog)=>{
                     if(item.user_id==userId){
                         return checktype(item.type)?

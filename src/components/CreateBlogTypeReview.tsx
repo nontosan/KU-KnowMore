@@ -193,7 +193,7 @@ const CreateKlBlog=()=> {
                         //console.log("hello")
                         if(values.nameblog!=="" && selectCode!=="" && selectTeacher!==""){
                             const newBlog={
-                                user_id: "5f82fd5504eb8600aa617b6b",
+                                user_id: localStorage.userId,
                                 type: "knowledge",
                                 blog_name: values.nameblog,
                                 course_id: selectCourseId
