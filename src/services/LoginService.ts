@@ -22,7 +22,7 @@ async function UserLogin(userLogin: Login): Promise<any|null> {
 
 function UserLogout(): void {
     if (isUserLoggedIn ()) {
-        localStorage.removeItem("accessTokeneiei");
+        //localStorage.removeItem("accessTokeneiei");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("userId");
     }

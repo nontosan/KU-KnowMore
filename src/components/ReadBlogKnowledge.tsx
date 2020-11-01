@@ -142,7 +142,8 @@ const ReadBlogKnowledge = (props:any) => {
   },[])
 
   useEffect(()=>{
-    if(author!=undefined){
+    if(author!==''){
+      console.log(author);
       fetchProfile();
     }
   },[author])
@@ -162,6 +163,7 @@ const ReadBlogKnowledge = (props:any) => {
                   </div>
                 </Suspense>
               </Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;
               <Link to={`/userpage/${item.id}`} style={{ color : "white" }}>
                 {item.name}
               </Link>
@@ -211,8 +213,8 @@ const ReadBlogKnowledge = (props:any) => {
       <div className="hot-kl">
         <Card.Header>SECTION</Card.Header>
         {!isHaveSections &&
-          <div>
-            NO CONTENT YET
+          <div className="show-nochapter">
+            <strong>No Chapter Yet</strong> 
           </div>
         }
         {sectionsInformation.map(item=>{
