@@ -274,8 +274,10 @@ export class Blog_Service {
     // --------------------------------------------------------------------------------
     // ========================             DELETE           ==========================
     // --------------------------------------------------------------------------------
-
-    async deleteBlog(blog_id: string) {
+    async deleteblog(blog_id: string){
+        return this.Blog_Repository.delete(blog_id)
+    }
+    async deleteblogwithreport(blog_id: string) {
         this.ReportService.deletereportbyblog(blog_id);
         return this.Blog_Repository.delete(blog_id);
         

@@ -179,7 +179,12 @@ export class Blog_Controller {
   // --------------------------------------------------------------------------------
   // @UseGuards(JwtAuthGuard)
   @Delete('/:blog_id')
-  async deleteBlog(@Param('blog_id') blog_id: string) {
-    return this.Service.deleteBlog(blog_id);
+  async deleteblog(@Param('blog_id') blog_id: string){
+    return this.Service.deleteblog(blog_id);
+  }
+  
+  @Delete('/:blog_id/withreport')
+  async deleteBlogwithReport(@Param('blog_id') blog_id: string) {
+    return this.Service.deleteblogwithreport(blog_id);
   }
 }
