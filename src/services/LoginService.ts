@@ -22,8 +22,10 @@ async function UserLogin(userLogin: Login): Promise<any|null> {
 
 function UserLogout(): void {
     if (isUserLoggedIn ()) {
+        //localStorage.removeItem("accessTokeneiei");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("userId");
+        localStorage.removeItem("userStatus")
     }
 }
 
@@ -33,8 +35,8 @@ function isUserLoggedIn() {
 
 function getUsername(): string|null {
     if ( isUserLoggedIn() ) {
-        const decode:any = jwt_decode(localStorage.accessToken);
-        console.log(decode);
+        //const decode:any = jwt_decode(localStorage.accessToken);
+        //console.log(decode);
         //console.log(decode.username);
         return localStorage.userId
     } else {
@@ -50,28 +52,38 @@ function getUserId(): string|null {
         return null
     }
 }
-async function portal(code:string): Promise<string>{
+async function portal(Code:any): Promise<any|null>{
     //may be edit path
     //console.log(JSON.stringify(code))
-    const res = await fetch(`https://backend.ku-knowmore.xyz/token`,{
+    const res = await fetch(`http://188.166.178.33:3000/auth/token`,{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(code),
+        body: JSON.stringify(Code),
     });
     const Token = await res.json();
-    console.log(Token)
+    console.log(Token);
     if (Token.access_token) {
+        console.log(Token.access_token);
+        console.log(Token.user_id);
         localStorage.setItem("accessToken", Token.access_token);
-        localStorage.setItem("userId", Token.userid);
-        console.log("hello");
-        //return path to main path
-        return "https://ku-knowmore.xyz/";
+        localStorage.setItem("userId", Token.user_id);
+        localStorage.setItem("userStatus", Token.user_status)
+        return Token;
     } else{
-        //return path to login path
-        console.log("wrong username or password");
-        return "https://ku-knowmore.xyz/login";
+        return null;
     }
+    //if (Token.access_token) {
+    //    localStorage.setItem("accessToken", Token.access_token);
+    //    localStorage.setItem("userId", Token.userid);
+    //    console.log("hello");
+        //return path to main path
+    //    return "https://backend.ku-knowmore.xyz/";
+    //} else{
+        //return path to login path
+    //    console.log("wrong username or password");
+    //    return "https://backend.ku-knowmore.xyz/login";
+    //}
 }
 export default {
-    UserLogin, isUserLoggedIn, getUsername, UserLogout, getUserId,portal
+    UserLogin,isUserLoggedIn, getUsername, UserLogout, getUserId,portal
 };

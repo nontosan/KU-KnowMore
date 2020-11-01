@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
@@ -20,15 +20,48 @@ import ProfileAdmin from "./Pages/ProfileAdmin";
 import './App.css';
 import './style/section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import FetchReport from './components/FetchReport';
-import Routing from './routes/index';
-import {BrowserRouter} from 'react-router-dom'
+import NavBar from './components/Navbar';
+import ReadBlog_Admin from './Pages/ReadBlog_Admin';
+import Portal from './components/Portal';
+import LoginService from './services/LoginService';
+import { User_Sch } from './interfaces/user';
+import LoginPage from './components/LoginPage';
 
 const App = () =>
 {
+  const [userInformation, setUserInformation] = useState<User_Sch[]>([]);
+  const [username, setUsername] = useState<string|null>(null);
+  const [userId, setUserId] = useState<string|null>(null);
+  const [log, setLog] = useState<boolean>(true);
+  const handleUserLogin = () => {
+    setUsername(LoginService.getUsername());
+    setUserId(LoginService.getUserId());
+    setLog(false);
+    alert('ยินดีต้อนรับสู่ KU-KNOWMORE')
+}
   return (
     <div>  
-      <Routing/>
+      <Router>
+      
+      <Switch>
+        <Route exact path="/">
+          
+          <ProfileAdmin/>
+        </Route>
+
+        <Route path="/read:type/:blogId" name="blogId" component={ReadBlog_Admin} />
+  
+        <Route path="/portal" name="code">
+          <Portal loginCallback={handleUserLogin}/>
+        </Route>
+        
+        <Route path="/login">
+          
+          <LoginPage loginCallback={handleUserLogin}/>
+        </Route>
+
+      </Switch>
+  </Router>
     </div>
   )
 }

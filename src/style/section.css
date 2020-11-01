@@ -105,6 +105,10 @@
     text-align: left;
 }
 
+/* color */
+.color-green{
+    background: green;
+}
 
 
 .show-blog{

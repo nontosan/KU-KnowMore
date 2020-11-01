@@ -48,7 +48,7 @@ async function fetchReviewSpecific(reviewid:string): Promise<Review|null> {
 }
 
 
-async function fetchBlogSpecific(blogid:string): Promise<Blog[]> {
+async function fetchBlogSpecific(blogid:String): Promise<Blog[]> {
     const res = await fetch(`https://backend.ku-knowmore.xyz/blogs/${blogid}`);
     //console.log(blogid)
     const blogInfo = await res.json();

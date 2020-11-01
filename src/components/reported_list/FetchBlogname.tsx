@@ -6,7 +6,7 @@ import { Blog } from '../../interfaces/blog';
 import ViewBlog_Modal from '../modal/ViewBlog_Modal';
 import DelReport_Modal from '../modal/DelReport_Modal';
 import ViewComment_Modal from '../modal/ViewComment_Modal';
-
+import '../../style/section.css';
 const FetchBlogname = (props:any) => {
     
     const [hasError,setErrors] = useState<boolean>(false)
@@ -14,7 +14,7 @@ const FetchBlogname = (props:any) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    
 
     async function fetchData(){
         const res =  await fetch(`https://backend.ku-knowmore.xyz/blogs/${props.rblog.content_id}`)
@@ -30,17 +30,21 @@ const FetchBlogname = (props:any) => {
 
     return (
         <div>
+            
             <ListGroup.Item className="blogcontainer" >
-                <div className="d-flex" > 
+                
+                <div className="d-flex color-green" >
                     <div className ="mr-auto p-2">
                     {(props.rblog.content_type!='comment')
                         ? <ViewBlog_Modal rblog = {props.rblog}/>
                         : <ViewComment_Modal rblog = {props.rblog}/>
                     }
                     </div>
+                
                     <div className="p-2 size-text-report">
                         Reported by: {props.rblog.user_id}&nbsp;
                     </div>
+
                     <div className="p-2 cancel-button">
                         <DelReport_Modal rblog = {props.rblog}/> 
                     </div>

@@ -143,7 +143,7 @@ const Show_Review = (props:any) => {
               </div>
         ))}
       </div>
-      <div className="div-scrollbar editor_text" >
+      <div className="div-scrollbar editor_text color-green" >
         <div dangerouslySetInnerHTML={{ __html: editorValue }} />
       </div>
             <div className ="div-scrollbar">

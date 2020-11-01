@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Modal } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 import BlogsService from '../../services/BlogsService'
 
 const DelBlog_Modal = (props:any) => {
@@ -42,9 +43,15 @@ const DelBlog_Modal = (props:any) => {
                     <Button variant="secondary" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button onClick={DeleteBlog}>
+                    <Link to= {`/`}>
+                    <Button onClick={() => {
+                        DeleteBlog();
+                        handleClose();
+                        }}>
                         Confirm
                     </Button>
+                        </Link>
+                    
                 </Modal.Footer>
             </Modal>
         </div>

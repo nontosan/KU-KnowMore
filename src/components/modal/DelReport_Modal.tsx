@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import { Button, Card, Modal } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 import BlogsService from '../../services/BlogsService';
-
+import '../../style/section.css';
 const DelReport_Modal = (props:any) => {
     
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    
+    const handlerefresh = (e: any) => {
+        window.location.reload(false);
+    }
     const DeleteReport = () => {
         BlogsService.deleteReport(props.rblog.id)
         .then(blogs => {
@@ -47,9 +50,14 @@ const DelReport_Modal = (props:any) => {
                     <Button variant="secondary" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button variant="danger" onClick={DeleteReport}>
-                        Confirm
-                    </Button>
+                    
+                        <Button variant="danger" onClick={(e) => {
+                            DeleteReport();
+                            handlerefresh(e);
+                            }}>
+                            Confirm
+                        </Button>
+                    
                 </Modal.Footer>
             </Modal>
         </div>

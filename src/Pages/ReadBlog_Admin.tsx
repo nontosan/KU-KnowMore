@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import DelBlog_Modal from '../components/modal/DelBlog_Modal'
 import Show_Review from '../components/showcontent/Show_Review';
 import Show_Knowledge from '../components/showcontent/Show_Knowledge';
+import NavBar from '../components/Navbar';
 
 type editsection={
   section:Section_Edit
@@ -48,6 +49,7 @@ const ReadBlog_Admin = (props:any) => {
 
   return (
     <div>
+      <NavBar />
       <div className="hot-kl">
         <Card.Header>
           {(blogtype[0]==='review') ? 'Review Blog': 'Knowledge Blog'} &nbsp;
