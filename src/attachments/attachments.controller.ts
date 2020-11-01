@@ -1,6 +1,7 @@
-import { Body, Controller, Get,Delete, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
+import { UseGuards, Body, Controller, Get,Delete, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
 import { ObjectID } from 'mongodb';
 import { ParseObjectIdPipe } from '../common/pipes';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 import Attachments from './attachments.entity';
 
@@ -20,6 +21,8 @@ export class Attachment_Controller {
     return this.Service.find(atm_id);
   }
 
+  
+  // @UseGuards(JwtAuthGuard)
   @Delete('/:id')
   async delete(@Param('id') id: string): Promise<void> {
     return this.Service.delete(id);

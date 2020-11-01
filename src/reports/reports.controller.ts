@@ -1,6 +1,7 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Delete } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Delete, UseGuards} from '@nestjs/common';
 import { ObjectID } from 'mongodb';
 import { ParseObjectIdPipe } from '../common/pipes';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 import Reports from './reports.entity';
 
@@ -20,6 +21,7 @@ export class Report_Controller {
     return this.Service.findReportsID(Report_id);
   }
 
+  // @UseGuards(JwtAuthGuard)
   @Delete('/:Report_id')
   async deleteComment(@Param('Report_id', ParseObjectIdPipe) Report_id: ObjectID) {
     return this.Service.delete(Report_id);

@@ -4,11 +4,13 @@ import { LocalAuthGuard } from './auth/local-auth.guard';
 import { AuthService } from './auth/auth.service';
 import { AxiosRequestConfig } from '../node_modules/axios';
 import { User_Service } from './users/users.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Controller()
 export class AppController {
   constructor(
     private readonly appService: AppService,
+    private jwtService: JwtService,
     private authService: AuthService,
     private readonly http: HttpService,
     private userService: User_Service
@@ -51,8 +53,9 @@ export class AppController {
     var res;
     if ( response.data.error ) res = response.data;
     else {
+      const payload = {token: response.data.access_token, user_id: u_id.id};
       res = {
-        "access_token": response.data.access_token,
+        "access_token": this.jwtService.sign(payload),
         "expires_in": response.data.expires_in,
         "token_type": response.data.token_type,
         "scope": response.data.scope,

@@ -1,6 +1,7 @@
-import { Body, Controller, Get, HttpException, HttpStatus,Delete, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus,Delete, Param, Post, Put, UseGuards} from '@nestjs/common';
 import { ObjectID } from 'mongodb';
 import { ParseObjectIdPipe } from '../common/pipes';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 import { CreateReviewsDto } from 'src/dto/create-review.dto';
 import Reviews from './reviews.entity';
@@ -20,17 +21,21 @@ export class Review_Controller {
   async findReviewsID(@Param('Review_id', ParseObjectIdPipe) Review_id: ObjectID): Promise<Reviews[]> {
     return this.Service.findReviewsID(Review_id);
   }
+  
+  // @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() createreview: CreateReviewsDto) {
     const newReview = this.Service.createReviews(createreview);
     return newReview;
   }
 
+  // @UseGuards(JwtAuthGuard)
   @Delete('/:id')
   deleteReviews(@Param('id') id: string): Promise<void> {
     return this.Service.remove(id);
   }
 
+  // @UseGuards(JwtAuthGuard)
   @Put('/:Review_id')
   async update(@Param('Review_id') Reviews_id: string, @Body() updateReview: Reviews) {
     return this.Service.update(Reviews_id, updateReview);

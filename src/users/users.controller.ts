@@ -1,8 +1,9 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Put, UploadedFile, UseInterceptors, UseGuards } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ObjectID } from 'mongodb';
 import { ParseObjectIdPipe } from '../common/pipes';
 import { diskStorage } from 'multer';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 import Users from './users.entity';
 
@@ -34,12 +35,14 @@ export class User_Controller {
   async findUsersID(@Param('user_id', ParseObjectIdPipe) user_id: ObjectID): Promise<Users[]> {
     return this.Service.findUsersID(user_id);
   }
-  
+
+  // @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() createuserDto: CreateUserDto): Promise<Users> {
     return this.Service.create(createuserDto);
   }
-  
+
+  // @UseGuards(JwtAuthGuard)
   @Post('/:user_id/profile_pic')
   @UseInterceptors(FileInterceptor('profile_pic', { storage: diskStorage({ destination: './profile_pic', filename: editFileName }) }))
   async uploadProfilePic(@Param('user_id', ParseObjectIdPipe) user_id: ObjectID, @UploadedFile() profile_pic): Promise<Users[]> {
@@ -49,7 +52,8 @@ export class User_Controller {
     };
     return this.Service.uploadUserProfilePic(user_id, uploadUserProfile);
   }
-  
+
+  // @UseGuards(JwtAuthGuard)
   @Put('/:user_id')
   async updateUsers(@Param('user_id') user_id: string, @Body() updateUser: Users) {
     return this.Service.updateUser(user_id, updateUser);

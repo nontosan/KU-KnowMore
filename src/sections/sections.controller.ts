@@ -1,8 +1,9 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Put, Delete, UploadedFiles, UseInterceptors} from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Put, Delete, UploadedFiles, UseInterceptors, UseGuards} from '@nestjs/common';
 import { ObjectID } from 'mongodb';
 import { ParseObjectIdPipe } from '../common/pipes';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 import Sections from './sections.entity';
 import Attachments from '../attachments/attachments.entity';
@@ -47,17 +48,20 @@ export class Section_Controller {
     return this.Service.createSections(createSection);
   }*/
 
+  // @UseGuards(JwtAuthGuard)
   @Post('/:Section_id/attachments')
   @UseInterceptors(FilesInterceptor('attachments', 25, { storage: diskStorage({ destination: './attachments_dir', filename: editFileName }) }))
   async createAttachment(@Param('Section_id') section_id: string, @UploadedFiles() attachments): Promise<Attachments[]> {
     return this.attachmentService.create(attachments, section_id);
   }
 
+  // @UseGuards(JwtAuthGuard)
   @Put('/:Section_id')
   async updateSection(@Param('Section_id') Section_id: string, @Body() updateSection: Sections) {
     return this.Service.update(Section_id, updateSection);
   }
 
+  // @UseGuards(JwtAuthGuard)
   @Delete('/:section_id')
   async deleteSection(@Param('section_id') section_id: string) {
     return this.Service.delete(section_id);

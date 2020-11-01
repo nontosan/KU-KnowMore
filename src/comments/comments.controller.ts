@@ -1,4 +1,5 @@
-import { Body, Controller, Get,Delete, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get,Delete, UseGuards, Param, Post } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 import { ObjectID } from 'mongodb';
 import { ParseObjectIdPipe } from '../common/pipes';
@@ -26,18 +27,22 @@ export class CommentsController {
     return this.commentService.find(comment_id);
   }
 
+  // @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() createCommentsDto: CreateCommentsDto) {
     createCommentsDto.date_time = this.commentService.getDate();
     const newComment = this.commentService.create(createCommentsDto);
     return newComment;
   }
+
+  // @UseGuards(JwtAuthGuard)
   @Delete('/:id')
   deleteGuide(@Param('id') id: string): Promise<void> {
     return this.commentService.remove(id);
-}
+  }
 
 
+  // @UseGuards(JwtAuthGuard)
   @Post('/:comment_id/reports')
   async createReport(@Param('comment_id', ParseObjectIdPipe) comment_id: ObjectID, @Body() createReport: CreateReportDto) {
     this.commentService.find(comment_id).then( res => {
