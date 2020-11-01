@@ -11,6 +11,7 @@ import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , d
 import Photo from '../upload';
 import UploadFile from '../UploadFile';
 import Demo from '../UploadTest';
+import UploadMultiEditSection from "../uploadfile/UploadMultiEditSection"
 import DisplayFileandDel from '../DisandDel';
 // END OF IMPORT COMPONENT //
 
@@ -126,11 +127,11 @@ const EditSection = (props:any) => {
                 />
             </div>
             <div className="uploadtest">
-                <Demo secid = {sectionId}/>
+                <UploadMultiEditSection secid = {sectionId}/>
             </div>
             <div className="display">
             File :
-            <DisplayFileandDel secid = {sectionId}/>
+            <DisplayFileandDel secid = {sectionId} fetchsection={fetchSection}/>
             </div>
             <div className="div-sectionname">
                 <Button className="cancel-button" variant="outline-secondary" onClick={e=>openNotification()}>Cancel</Button>
