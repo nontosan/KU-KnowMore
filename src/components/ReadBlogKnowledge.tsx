@@ -103,16 +103,18 @@ const ReadBlogKnowledge = (props:any) => {
   const fetchBlogs = () => {
     BlogsService.fetchBlogSpecific(blogId)
       .then(blogInfo => {
+        console.log(blogInfo)
         CourseService.fetchCourseWithId(blogInfo[0].course_id)
           .then(courseInfo => {
             setCourseInformation(courseInfo);
             console.log(courseInfo);
           })
-        setBlogsInformation(blogInfo);
+        //setBlogsInformation(blogInfo);
         setAuthor(blogInfo[0].user_id);
         fetchCourse(blogInfo[0].course_id)
         //console.log(blogInfo);
       });
+    setvisible(true)
   }
 
   const fetchsection = () => {
@@ -131,7 +133,6 @@ const ReadBlogKnowledge = (props:any) => {
       .then(userInfo => {
         setUserInformation(userInfo);
       })
-    setvisible(true)
   }
 
   //refreh
