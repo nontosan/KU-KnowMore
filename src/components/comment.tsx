@@ -79,11 +79,15 @@ const Comment_component=(props:any)=>{
     }
 
     const handlereport=()=>{
+        if(localStorage.accessToken==undefined){
+            alert('PLEASE LOGIN FIRST')
+        }
         console.log("handlereport comment")
         //popup form
         //https://www.youtube.com/watch?v=l2Kp2SzUdlg&ab_channel=Weibenfalk[!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!]
     }
 
+    
     useEffect(()=>{
         fetchCommentblog()
         //console.log("HELLOEIEIZACOMMENT");
@@ -157,13 +161,13 @@ const Comment_component=(props:any)=>{
             >
             {({isSubmitting})=>(
                 <Form autoComplete="off">
-                    <div className="Blog_frame1 content_container">
-                        <div className="cont">
+                    <div >
+                        <button disabled={isSubmitting} className="btn btn-success send-button"> send </button>
+                        <div style={{color:"white"}}>
                             <Field type="input" className="input" name="CommentContent" placeholder="type something..."/>
                             <ErrorMessage name="errorMess" component="div"/>
                         </div>
                     </div>
-                    <button disabled={isSubmitting}> send </button>
                 </Form>
             )}
         </Formik>

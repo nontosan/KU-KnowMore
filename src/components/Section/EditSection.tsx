@@ -25,6 +25,10 @@ import { convertToObject } from 'typescript';
 import { reverse } from 'dns';
 import {useHistory, Redirect} from "react-router"
 import ReactQuill from 'react-quill';
+import 'antd/dist/antd.css';
+import { notification,message } from 'antd';
+
+const key = 'updatable';
 
 const EditSection = (props:any) => {
     const [newSectionName, setNewSectionName] = useState<string>('');
@@ -36,7 +40,39 @@ const EditSection = (props:any) => {
     const handleNewSectionNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setNewSectionName(e.target.value);
     };
-    
+    /////////////////antd//////////////////////////
+    const openMessage = () => {
+        message.loading({ content: 'Loading...', key });
+        setTimeout(() => {
+          message.success({ content: 'already edit section', key, duration: 2 });
+        }, 200);
+      };
+
+    const openNotification = () => {
+        const key = `open${Date.now()}`;
+        const btn = (
+          <Button type="primary"  onClick={() => {
+            notification.close(key)
+            history.goBack()
+          }}>
+            Confirm
+          </Button>
+        );
+        notification.open({
+          message: 'Notification',
+          description:
+            'Would you like to discard edit section',
+          btn,
+          key,
+          onClose: close,
+        });
+    };
+    const close = () => {
+        console.log(
+          'Notification was closed. Either the close button was clicked or duration time elapsed.',
+        );
+      };
+    //////////////////antd end///////////////
     const handleSectionSave = () => {
         const writeSection = {
             id: sectionId,
@@ -48,14 +84,12 @@ const EditSection = (props:any) => {
         SectionService.editSection(sectionId, writeSection)
             .then(savedEditSection => {
                 if(savedEditSection){
-                    alert("บันทึก Section สำเร็จ");
+                    openMessage()
                 }else{
                     alert("บันทึก Section สำเร็จ");
                 }
                 history.goBack()
             });
-            //console.log(history)
-            
     };
 
     const fetchSection = () => {
@@ -99,7 +133,7 @@ const EditSection = (props:any) => {
             <DisplayFileandDel secid = {sectionId}/>
             </div>
             <div className="div-sectionname">
-                <Button className="cancel-button" variant="outline-secondary" onClick={e=>history.goBack()}>Cancel</Button>
+                <Button className="cancel-button" variant="outline-secondary" onClick={e=>openNotification()}>Cancel</Button>
                 <Button className="submit-button" variant="outline-secondary" onClick={handleSectionSave}>Submit</Button>
             </div>
         </div>

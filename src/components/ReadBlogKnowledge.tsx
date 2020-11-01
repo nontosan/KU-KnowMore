@@ -15,6 +15,7 @@ import {
 } from 'react-router-dom';
 import {useHistory} from "react-router"
 
+import DeleteModal from '../modals/DeleteModal';
 import ImageComponent from './Display';
 import AddSection from '../photo/addsection.png';
 // IMPORT SERVICE //
@@ -38,6 +39,7 @@ import './section.css';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Container, Row } from 'react-bootstrap';
+import './readknowledge.css';
 // END OF IMPORT CSS //
 
 // IMPORT PHOTO //
@@ -48,7 +50,7 @@ import minus from '../photo/minus_PNG39.png';
 import GearEdit from '../photo/gear-edit6.png';
 import GearEditBlack from '../photo/settings-8-xxl.png';
 // END OF IMPORT PHOTO //
-
+import ChangeBlogInfoModal from "../modals/ChangBlogInfo"
 //------------------------------------------------------------------//
 
 const ReadBlogKnowledge = (props:any) => {
@@ -78,6 +80,12 @@ const ReadBlogKnowledge = (props:any) => {
     const [selectCourseId, setSelectCourseId] = useState<string>('');
   ///////////////////////////////end copy//////////////////////////////////
   //fetch blog from database
+
+  //CONST FOR DELETE MODAL//
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+  const [BlogDelete, setBlogDelete] = useState<Blog>();
+  const [statusDelete, setStatusDelete] = useState<boolean>(false);
+  //END OF CONST FOR DELETE MODAL//
   
   const fetchCourse =(x:string)=>{
     CourseService.fetchCourse().then(res=>{
@@ -132,6 +140,26 @@ const ReadBlogKnowledge = (props:any) => {
       })
   }
 
+  const handleDeleteBlog = (blog:Blog) => {
+    console.log('handle delete blog')
+    setShowDeleteModal(true);
+    setBlogDelete(blog);
+  }
+    
+  const submitDeleteBlog = () => {
+    setShowDeleteModal(false);
+    BlogsService.deleteBlog(BlogDelete?.id!)
+        .then(res => {
+            if (res) {
+                setStatusDelete(true);
+            }
+        })
+}
+
+const closeModal = () => {
+  setShowDeleteModal(false);
+}
+
   //refreh
   useEffect(()=>{
     fetchBlogs();
@@ -144,6 +172,13 @@ const ReadBlogKnowledge = (props:any) => {
       fetchProfile();
     }
   },[author])
+
+  useEffect(() => {
+    if (statusDelete==true) {
+      window.location.replace('/');
+      setStatusDelete(false);
+    }
+  },[statusDelete]);
   //console.log(userInformation);
   return (
     <div>
@@ -175,8 +210,20 @@ const ReadBlogKnowledge = (props:any) => {
               <div style={{ float: "right" }}>
                 {author==localStorage.userId &&
                   <div>
-                    <Image className="gear-setting-pic blog-fl" src={GearEdit}></Image>
-                    <Image className="delete-setting-pic blog-fl" src={minus}></Image>
+                    <ChangeBlogInfoModal/>
+                    <button className="blog-delete-button" onClick={() => handleDeleteBlog(blogInformation)}>
+                      <Image className="delete-setting-pic blog-fl" src={minus} ></Image>
+                    </button>
+                    {showDeleteModal && 
+                      <div>
+                        <DeleteModal 
+                          show = {showDeleteModal}
+                          nameBlog = {BlogDelete?.blog_name}
+                          deleteBlog = {submitDeleteBlog}
+                          cancel = {closeModal}
+                        />
+                      </div>
+                    }
                   </div>
                 }
               </div>
@@ -219,9 +266,10 @@ const ReadBlogKnowledge = (props:any) => {
                       {author==localStorage.userId &&
                         <div style={{ float: "right" }}>
                           <Image className="gear-setting-pic blog-fl" src={GearEditBlack}></Image>
+                          {false &&
                           <Link to={`/editSection/${item.id}`}>
                             <Button>Edit</Button>
-                          </Link>
+                          </Link>}
                           <Image className="delete-setting-pic blog-fl" src={minus}></Image>
                         </div>
                       }

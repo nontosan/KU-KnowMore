@@ -2,7 +2,7 @@ import { Section  } from '../interfaces'
 import { Attachments } from '../interfaces/blog'
 
 async function createSection(blogid:string,writeSection: any): Promise<Section|null> {
-    const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}/sections`,{
+    const res = await fetch(`https://backend.ku-knowmore.xyz/blogs/${blogid}/sections`,{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(writeSection),
@@ -17,7 +17,7 @@ async function createSection(blogid:string,writeSection: any): Promise<Section|n
 }
 
 async function editSection(sectionid:string,editSection: any): Promise<Section|null> {
-    const res = await fetch(`http://188.166.178.33:3000/sections/${sectionid}`,{
+    const res = await fetch(`https://backend.ku-knowmore.xyz/sections/${sectionid}`,{
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(editSection),
@@ -32,18 +32,18 @@ async function editSection(sectionid:string,editSection: any): Promise<Section|n
 }
 
 async function fetchSections(blogid:string): Promise<Section[]> {
-    const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}/sections`);
+    const res = await fetch(`https://backend.ku-knowmore.xyz/blogs/${blogid}/sections`);
     const Arraysections = await res.json();
     return Arraysections;  
 }
 
 async function fetchSectionsSpecific(sectionid:string): Promise<Section[]> {
-    const res = await fetch(`http://188.166.178.33:3000/sections/${sectionid}`);
+    const res = await fetch(`https://backend.ku-knowmore.xyz/sections/${sectionid}`);
     const sectioninfo = await res.json();
     return sectioninfo;
 }
 async function deleteSection(sectionId:string): Promise<string> {
-    const res = await fetch(`http://188.166.178.33:3000/sections/${sectionId}`,{
+    const res = await fetch(`https://backend.ku-knowmore.xyz/sections/${sectionId}`,{
         method: 'DELETE',
     });
     const sections = await res.json();
@@ -51,7 +51,7 @@ async function deleteSection(sectionId:string): Promise<string> {
 }
 
 async function fetchSectionFiles(secid:string): Promise<Attachments[]> {
-    const res = await fetch(`http://188.166.178.33:3000/sections/${secid}/attachments`,{
+    const res = await fetch(`https://backend.ku-knowmore.xyz/sections/${secid}/attachments`,{
         method: 'GET',
     });
     //console.log(secid)
@@ -60,7 +60,7 @@ async function fetchSectionFiles(secid:string): Promise<Attachments[]> {
 }
 
 async function deleteattachments(att_id:string) {
-    const res = await fetch(`http://188.166.178.33:3000/attachments/${att_id}`,{
+    const res = await fetch(`https://backend.ku-knowmore.xyz/attachments/${att_id}`,{
         method: 'DELETE',
     });    
 }

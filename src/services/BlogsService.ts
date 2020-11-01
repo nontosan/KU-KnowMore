@@ -2,13 +2,13 @@ import { Blog, Review ,create_Blog,} from '../interfaces/blog';
 import { Section } from '../interfaces/Section';
 
 async function fetchBlogs(): Promise<Blog[]> {
-    const res = await fetch(`http://188.166.178.33:3000/blogs`);
+    const res = await fetch(`https://backend.ku-knowmore.xyz/blogs`);
     const blogs = await res.json();
     return blogs;  
 }
 
 async function createBlog(newBlog: create_Blog): Promise<Blog|null> {
-    const res = await fetch(`http://188.166.178.33:3000/blogs`,{
+    const res = await fetch(`https://backend.ku-knowmore.xyz/blogs`,{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(newBlog),
@@ -22,7 +22,7 @@ async function createBlog(newBlog: create_Blog): Promise<Blog|null> {
 }
 
 async function createReview(newReview: Review, blogid:string): Promise<Review|null> {
-    const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}/reviews`,{
+    const res = await fetch(`https://backend.ku-knowmore.xyz/blogs/${blogid}/reviews`,{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(newReview),
@@ -36,27 +36,27 @@ async function createReview(newReview: Review, blogid:string): Promise<Review|nu
 }
 
 async function fetchReviewOfBlog(blogid:string): Promise<Review[]> {
-    const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}/reviews`);
+    const res = await fetch(`https://backend.ku-knowmore.xyz/blogs/${blogid}/reviews`);
     const reviewInfo = await res.json();
     return reviewInfo;  
 }
 
 async function fetchReviewSpecific(reviewid:string): Promise<Review|null> {
-    const res = await fetch(`http://188.166.178.33:3000/reviews/${reviewid}`);
+    const res = await fetch(`https://backend.ku-knowmore.xyz/reviews/${reviewid}`);
     const reviewInfo = await res.json();
     return reviewInfo;  
 }
 
 
 async function fetchBlogSpecific(blogid:string): Promise<Blog[]> {
-    const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}`);
+    const res = await fetch(`https://backend.ku-knowmore.xyz/blogs/${blogid}`);
     //console.log(blogid)
     const blogInfo = await res.json();
     return blogInfo;  
 }
 
 async function fetchBlogfilter(blogid:string): Promise<Blog[]> {
-    const api:string = `http://188.166.178.33:3000/blogs/search/`+blogid
+    const api:string = `https://backend.ku-knowmore.xyz/blogs/search/`+blogid
     console.log(api)
     const res = await fetch(api);
     const blog = await res.json();
@@ -64,19 +64,19 @@ async function fetchBlogfilter(blogid:string): Promise<Blog[]> {
 }
 
 async function fetchKnowledgeBlogs(): Promise<Blog[]> {
-    const res = await fetch(`http://188.166.178.33:3000/blogs/search/?type=1`);
+    const res = await fetch(`https://backend.ku-knowmore.xyz/blogs/search/?type=1`);
     const blogs = await res.json();
     return blogs;  
 }
 
 async function fetchReviewBlogs(): Promise<Blog[]> {
-    const res = await fetch(`http://188.166.178.33:3000/blogs/search/?type=2`);
+    const res = await fetch(`https://backend.ku-knowmore.xyz/blogs/search/?type=2`);
     const blogs = await res.json();
     return blogs;  
 }
 
 async function deleteBlog(blogid:string): Promise<string> {
-    const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}`,{
+    const res = await fetch(`https://backend.ku-knowmore.xyz/blogs/${blogid}`,{
         method: 'DELETE',
     });
     const blogs = await res.json();
@@ -84,7 +84,7 @@ async function deleteBlog(blogid:string): Promise<string> {
 }
 
 async function fetchSectionOfBlog(blogid:string): Promise<Section[]> {
-    const res = await fetch(`http://188.166.178.33:3000/blogs/${blogid}/sections`);
+    const res = await fetch(`https://backend.ku-knowmore.xyz/blogs/${blogid}/sections`);
     const sections = await res.json();
     return sections;  
 }
@@ -92,7 +92,7 @@ async function fetchSectionOfBlog(blogid:string): Promise<Section[]> {
 
 async function editBlog(newcoursecode: create_Blog, blogId:string): Promise<Blog|null> {
     console.log(newcoursecode)
-    const res = await fetch(`http://188.166.178.33:3000/blogs/${blogId}`,{
+    const res = await fetch(`https://backend.ku-knowmore.xyz/blogs/${blogId}`,{
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(newcoursecode),

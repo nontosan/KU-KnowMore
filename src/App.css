@@ -13,12 +13,6 @@
   width: 28px;
 }
 
-.delete-setting-pic{
-  height: 32px;
-  width: 32px;
-  margin-left: 15px;
-}
-
 .home-pic{
   height: 25px;
   width: 25px;
@@ -85,23 +79,6 @@
   color: white;
 }
 
-.show-all-section{
-  padding: .75rem 1.25rem;
-  width: 100%;
-  display:grid;
-  grid-template-columns: 5fr 2fr;
-  border-bottom: rgba(0,0,0,.125) solid 1px;
-  background-color: rgb(229, 226, 226);
-  color: black;
-  transition: 0.4s;
-}
-
-.show-all-section:hover{
-  background-color: #6c7179;
-  padding: .75rem 1.25rem;
-  width: 100%;
-  color: white;
-}
 
 .show-all-comment{
   padding: .75rem 1.25rem;

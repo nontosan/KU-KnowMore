@@ -14,7 +14,7 @@ import {
   Link, Redirect
 } from 'react-router-dom'
 import {Formik,Form,Field} from "formik"
-
+import './report.css';
 import Alert from '../photo/alert.png';
 function MyVerticallyCenteredModal(props:any) {
     const [annoy,setannoy] = useState<boolean>(false)
@@ -32,7 +32,6 @@ function MyVerticallyCenteredModal(props:any) {
         setwrongcontent(false)
         setoverthrow(false)
     }
-
     return (
       <Modal
         {...props}
@@ -50,6 +49,7 @@ function MyVerticallyCenteredModal(props:any) {
                     etc:""
                 }}
                 onSubmit={(values,actions)=>{
+                  console.log("HELLO REPORT")
                     if(annoy===false && repeat===false && implicate===false && obscenity===false && wrongcontent===false && overthrow===false ){
                         alert("please select report type")
                         actions.setSubmitting(false)
@@ -92,25 +92,27 @@ function MyVerticallyCenteredModal(props:any) {
                 }}
             >
                 {({isSubmitting,values})=>(
-                    <Form>
+                    <Form autoComplete="off">
                       <Modal.Body>
-                        <div className="Blog_frame1">
-                            {annoy?<Button variant="danger" onClick={e=>setannoy(!annoy)} >โพสก่อกวน</Button>:<Button variant="secondary" onClick={e=>setannoy(!annoy)}>โพสก่อกวน</Button>}
-                            {repeat?<Button variant="danger" onClick={e=>setrepeat(!repeat)}>โพสซ้ำ</Button>:<Button variant="secondary" onClick={e=>setrepeat(!repeat)}>โพสซ้ำ</Button>}
-                            {implicate?<Button variant="danger" onClick={e=>setimplicate(!implicate)}>โพสทำให้ผู้อื่นเสียหาย</Button>:<Button variant="secondary" onClick={e=>setimplicate(!implicate)}>โพสทำให้ผู้อื่นเสียหาย</Button>}
-                            {obscenity?<Button variant="danger" onClick={e=>setobscenity(!obscenity)}>โพสอนาจาร</Button>:<Button variant="secondary" onClick={e=>setobscenity(!obscenity)}>โพสอนาจาร</Button>}
-                            {wrongcontent?<Button variant="danger" onClick={e=>setwrongcontent(!wrongcontent)}>โพสไม่ตรงวิชา</Button>:<Button variant="secondary" onClick={e=>setwrongcontent(!wrongcontent)}>โพสไม่ตรงวิชา</Button>}
-                            {overthrow?<Button variant="danger" onClick={e=>setoverthrow(!overthrow)}>โพสล้มล้านสถาบัน</Button>:<Button variant="secondary" onClick={e=>setoverthrow(!wrongcontent)}>โพสล้มล้านสถาบัน</Button>}
-                            <Field type="input" name="etc"/>
+                        <div>
+                            {annoy?<Button variant="success" onClick={() => setannoy(!annoy)}>โพสก่อกวน</Button>:<Button variant="secondary" onClick={()=>setannoy(!annoy)}>โพสก่อกวน</Button>}
+                            {repeat?<Button variant="success" onClick={() => setrepeat(!repeat)}>โพสซ้ำ</Button>:<Button variant="secondary" onClick={()=>setrepeat(!repeat)}>โพสซ้ำ</Button>}
+                            {implicate?<Button variant="success" onClick={() => setimplicate(!implicate)}>โพสทำให้ผู้อื่นเสียหาย</Button>:<Button variant="secondary" onClick={()=>setimplicate(!implicate)}>โพสทำให้ผู้อื่นเสียหาย</Button>}
+                            {obscenity?<Button variant="success" onClick={() => setobscenity(!obscenity)}>โพสอนาจาร</Button>:<Button variant="secondary" onClick={()=>setobscenity(!obscenity)}>โพสอนาจาร</Button>}
+                            {wrongcontent?<Button variant="success" onClick={() => setwrongcontent(!wrongcontent)}>โพสไม่ตรงวิชา</Button>:<Button variant="secondary" onClick={()=>setwrongcontent(!wrongcontent)}>โพสไม่ตรงวิชา</Button>}
+                            {overthrow?<Button variant="success" onClick={() => setoverthrow(!overthrow)}>โพสล้มล้านสถาบัน</Button>:<Button variant="secondary" onClick={()=>setoverthrow(!wrongcontent)}>โพสล้มล้านสถาบัน</Button>}
                         </div>
-                        </Modal.Body>
-                        <Modal.Footer>
-                        <Button disabled={isSubmitting}> submit </Button>
+                        <div style={{height:"50px"}}>
+                          <Field className="input" type="input" name="etc"  placeholder="type something..."/>
+                        </div>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <button className="btn btn-success" disabled={isSubmitting}> submit </button>
                         <Button onClick={e=>{
                               props.onHide()
                               clearstate()
                           }}>Close</Button>
-                        </Modal.Footer>
+                      </Modal.Footer>
                     </Form>
                     )}
             </Formik>
@@ -122,10 +124,9 @@ const ReportModal=()=>{
     const [modalShow, setModalShow] = useState<boolean>(false);
     return (
     <div>
-      <Button onClick={() => setModalShow(true)}>
+      <button className="report-button" onClick={() => setModalShow(true)}>
         <Image style={{ display: "inline" }} className="likebar-pic" src={Alert}/>
-      </Button>
-
+      </button>
       <MyVerticallyCenteredModal
         show={modalShow}
         onHide={() => setModalShow(false)}

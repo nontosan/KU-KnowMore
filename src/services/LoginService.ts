@@ -2,7 +2,7 @@ import { Login } from "../interfaces/Login";
 import jwt_decode from "jwt-decode";
 
 async function UserLogin(userLogin: Login): Promise<any|null> {
-    const res = await fetch(`http://188.166.178.33:3000/auth/login`,{
+    const res = await fetch(`https://backend.ku-knowmore.xyz/auth/login`,{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(userLogin),
@@ -54,13 +54,13 @@ function getUserId(): string|null {
 async function portal(Code:any): Promise<any|null>{
     //may be edit path
     //console.log(JSON.stringify(code))
-    const res = await fetch(`https://backend2.ku-knowmore.xyz/auth/token`,{
+    const res = await fetch(`https://backend.ku-knowmore.xyz/auth/token`,{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(Code),
     });
     const Token = await res.json();
-    
+    console.log(Token);
     if (Token.access_token) {
         console.log(Token.access_token);
         console.log(Token.user_id);

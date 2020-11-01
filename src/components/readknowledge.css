@@ -1,0 +1,14 @@
+.blog-delete-button{
+    background-color: unset;
+    border: 0px;
+}
+
+.blog-delete-button:focus{
+    border: 0px;
+    outline: 0px;
+}
+
+.delete-setting-pic{
+    height: 32px;
+    width: 32px;
+}
