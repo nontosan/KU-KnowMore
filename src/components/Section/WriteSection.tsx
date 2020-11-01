@@ -5,14 +5,12 @@ import { convertToRaw, EditorState } from 'draft-js';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , draftStateToHTML} from 'react-wysiwyg-typescript';
-import axios from 'axios';
 // END OF IMPORT LIBRARY //
 
 // IMPORT COMPONENT //
 import Photo from '../upload';
-import UploadMulFile from '../UploadMulFile';
+import UploadFile from '../UploadFile';
 import Demo from '../UploadTest';
-import UploadMultiCreateSection from "../uploadfile/UploadMultiCreateSection"
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
@@ -27,12 +25,6 @@ import { reverse } from 'dns';
 import {useHistory, Redirect} from "react-router"
 import ReactQuill from 'react-quill';
 
-
-
-
-
-
-
 const WriteSection = (props:any) => {
     const [newSectionName, setNewSectionName] = useState<string>('');
     const [editorValue, setEditorValue] = useState("");
@@ -43,7 +35,6 @@ const WriteSection = (props:any) => {
         setNewSectionName(e.target.value);
     };
     
-
     const handleSectionSave = () => {
         const writeSection = {
             section_name: newSectionName,
@@ -54,14 +45,13 @@ const WriteSection = (props:any) => {
         SectionService.createSection(blogId, writeSection)
             .then(savedWriteSection => {
                 console.log("save success")
-                history.goBack()
+                console.log(savedWriteSection)
+                window.location.replace(`http://localhost:3000/editSection/${savedWriteSection?.id}`)
             });
             //console.log(history)
             
     };
-    ////-----uploadfile zone---------
-    
-    ////------------------------------
+
     console.log(history.go)
     return (
         <div>
@@ -78,9 +68,6 @@ const WriteSection = (props:any) => {
                     value={editorValue} 
                     onChange={setEditorValue}
                 />
-            </div>
-            <div className="uploadtest">
-                <UploadMultiCreateSection />
             </div>
             <div className="div-sectionname">
                 <Button className="cancel-button" variant="outline-secondary" onClick={e=>history.goBack()}>Cancel</Button>

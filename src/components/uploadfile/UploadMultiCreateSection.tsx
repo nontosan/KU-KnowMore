@@ -4,17 +4,41 @@ import 'antd/dist/antd.css';
 import { Upload, Button, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import SectionService from '../../services/SectionService';
 
 class UploadMultiCreateSection extends React.Component<any,any> {
   constructor(props:any) {
     super(props);
   }
+
+  
+
   state = { 
     fileList: [],
     uploading: false,
   };
 
+  handleSectionSave = () => {
+    console.log()
+    const writeSection = {
+        section_name: this.props.newSectionName,
+        content: this.props.editorValue,
+        blog_id: this.props.blogId,
+  };
+
+  SectionService.createSection(this.props.blogId, writeSection)
+    .then(savedWriteSection => {
+      console.log("save success")
+      
+    });
+  //console.log(history)      
+  };
   handleUpload = () => {
+
+    ///upload all file using ///
+    this.handleSectionSave()
+    ///before
     const { fileList } = this.state;
     const attachments = new FormData();
     fileList.forEach(file => {
@@ -54,7 +78,6 @@ class UploadMultiCreateSection extends React.Component<any,any> {
         data: attachments
     });
     console.log("hello")
-    window.location.replace("http://localhost:3000/")
     //alert("Upload Complete");
     this.setState({
         uploading: false,
@@ -83,21 +106,23 @@ class UploadMultiCreateSection extends React.Component<any,any> {
       },
       fileList,
     };
-    
+
     return (
       <>
         <Upload {...props}>
           <Button icon={<UploadOutlined />}>Select File</Button>
         </Upload>
-        <Button
-          type="primary"
-          onClick={this.handleUpload}
-          disabled={fileList.length === 0}
-          loading={uploading}
-          style={{ marginTop: 16 }}
-        >
-          {uploading ? 'Uploading' : 'Start Upload'}
-        </Button>
+        <a href={window.location.href.replace(/writeSection/gi,"editSection")}>
+          <Button
+            type="primary"
+            onClick={this.handleUpload}
+            disabled={fileList.length === 0}
+            loading={uploading}
+            style={{ marginTop: 16 }}
+          >
+            {uploading ? 'Uploading' : 'submit'}
+          </Button>
+        </a>
       </>
     );
   }
