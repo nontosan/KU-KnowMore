@@ -6,6 +6,7 @@ import { Blog_Controller } from './blogs.controller';
 import { Blog_Service } from './blogs.service';
 
 import Blogs from './blogs.entity';
+import Reports from '../reports/reports.entity';
 
 import { Course_Module } from '../courses/courses.module';
 import { Section_Module } from 'src/sections/sections.module';
@@ -16,7 +17,7 @@ import { Report_Module } from 'src/reports/reports.module';
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([Blogs]),
+        TypeOrmModule.forFeature([Blogs,Reports]),
         Course_Module,
         Section_Module,
         Review_Module,

@@ -26,4 +26,8 @@ export class Report_Service {
         let removeReport = await this.Report_Repository.find({where:{_id: report_id}})
         return this.Report_Repository.remove(removeReport[0])
     }
+    async deletereportbyblog(blog_id:string){
+        const repotkub=await this.Report_Repository.find({where:{content_id:blog_id}});
+        this.Report_Repository.remove(repotkub);
+    }
 }

@@ -4,16 +4,23 @@ import { Repository } from 'typeorm';
 import { ObjectID } from 'mongodb';
 
 import Blogs from './blogs.entity';
+import Reports from '../reports/reports.entity';
 import { CreateBlogDto } from '../dto/create-blog.dto';
 import { Course_Service } from '../courses/courses.service';
 import { Like_Service } from 'src/likes/likes.service';
+import { Report_Service } from '../reports/reports.service';
 
 @Injectable()
 export class Blog_Service {
     constructor(@InjectRepository(Blogs) 
                 private Blog_Repository: Repository<Blogs>,
                 private courseService: Course_Service,
-                private likeService: Like_Service) {}
+                private likeService: Like_Service,
+                
+                @InjectRepository(Reports)
+                private Report_Repository: Repository<Reports>,
+                private ReportService:Report_Service
+                ) {}
 
     // --------------------------------------------------------------------------------
     // ========================            Utility            =========================
@@ -269,6 +276,8 @@ export class Blog_Service {
     // --------------------------------------------------------------------------------
 
     async deleteBlog(blog_id: string) {
+        this.ReportService.deletereportbyblog(blog_id);
         return this.Blog_Repository.delete(blog_id);
+        
     }
 }
