@@ -37,7 +37,7 @@ export class CommentsController {
 
   // @UseGuards(JwtAuthGuard)
   @Delete('/:id')
-  deleteGuide(@Param('id') id: string): Promise<void> {
+  deleteGuide(@Param('id') id: string){
     return this.commentService.remove(id);
   }
 
