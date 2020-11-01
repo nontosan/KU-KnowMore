@@ -5,8 +5,10 @@ import axios from 'axios'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
+import './section.css';
 
 function DisplayFile (props:any) {//This function is for ReadSection
+    const [checkNull, setCheckNull] = useState<boolean>(false);
 
     const fetchAttachments = () => {
 
@@ -14,6 +16,9 @@ function DisplayFile (props:any) {//This function is for ReadSection
         SectionService.fetchSectionFiles(props.secid)
         .then(attachments => {
             setattachmentsInformation(attachments)
+            if(attachments.length==0){
+                setCheckNull(true);
+            }
             console.log(attachments)
           });
     }
@@ -25,7 +30,12 @@ function DisplayFile (props:any) {//This function is for ReadSection
     const [attachmentsInformation, setattachmentsInformation] = useState<Attachments[]>([]);
 
     return (
-        <div className = "Display">
+        <div className = "Display blog-fl">
+            {checkNull&&
+                <div>
+                    &nbsp;&nbsp;&nbsp;No file
+                </div>
+            }
             {attachmentsInformation.map(file=>
             <a href={`https://backend.ku-knowmore.xyz/${file.path}`}> {file.originalname} <br/></a>
                 )}

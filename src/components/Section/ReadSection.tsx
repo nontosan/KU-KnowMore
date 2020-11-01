@@ -155,12 +155,16 @@ const ReadSection = (props:any) => {
             </div>
             
             {afterFetch &&
-                <div className="div-sectionname" dangerouslySetInnerHTML={{__html: displayHTML}} />
+                <div className="div-section-content" dangerouslySetInnerHTML={{__html: displayHTML}} />
             }
-            <button onClick={e=>history.goBack()}>back</button>
-            File :
+            <div className="main-div">
+                <strong className="blog-fl">File &nbsp;&nbsp;:</strong>
+                <DisplayFile secid = {sectionId}/>
+            </div>
             
-            <DisplayFile secid = {sectionId}/>
+            
+            
+            <br /><button onClick={e=>history.goBack()}>back</button>
         </div>
     );
 }
