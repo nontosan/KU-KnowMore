@@ -135,8 +135,8 @@ const EditSection = (props:any) => {
             <DisplayFileandDel secid = {sectionId} fetchsection={fetchSection}/>
             </div>
             <div className="div-sectionname">
-                <Button className="cancel-button" variant="outline-secondary" onClick={e=>openNotification()}>Cancel</Button>
-                <Button className="submit-button" variant="outline-secondary" onClick={handleSectionSave}>Submit</Button>
+                <Button className="cancel-button" variant="outline-danger" onClick={e=>openNotification()}>Cancel</Button>
+                <Button className="submit-button" variant="outline-success" onClick={handleSectionSave}>Submit</Button>
             </div>
         </div>
     );

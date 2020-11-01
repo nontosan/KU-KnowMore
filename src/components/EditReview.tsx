@@ -42,6 +42,7 @@ import './readknowledge.css';
 import { Progress } from 'antd';
 import ReactQuill from 'react-quill';
 import Select from 'react-select';
+import "./file.css";
 // END OF IMPORT CSS //
 
 // IMPORT PHOTO //
@@ -437,7 +438,9 @@ const formatGroupLabel = (data:any) => (
               </div>
               
         </div>
-      <button onClick={e=>{history.goBack()}}>back</button>
+        <div className="editreview_button">
+          <Button variant="secondary" onClick={e=>{history.goBack()}}>back</Button>
+        </div>
     </div>
   );
 };

@@ -38,6 +38,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Container, Row } from 'react-bootstrap';
 import './readknowledge.css';
 import { Progress } from 'antd';
+import './file.css';
 // END OF IMPORT CSS //
 
 // IMPORT PHOTO //
@@ -330,7 +331,9 @@ const fetchReview = () => {
           blogId = {blogId}
         />
       </div>
-      <button onClick={e=>{history.goBack()}}>back</button>
+      <div className="review_button">
+        <Button variant="secondary" onClick={e=>{history.goBack()}}>back</Button>
+      </div>
     </div>
   );
 };

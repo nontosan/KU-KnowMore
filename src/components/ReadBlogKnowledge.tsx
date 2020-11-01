@@ -40,6 +40,7 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Container, Row } from 'react-bootstrap';
 import './readknowledge.css';
+import './file.css';
 // END OF IMPORT CSS //
 
 // IMPORT PHOTO //
@@ -303,7 +304,9 @@ const closeModal = () => {
           blogId = {blogId}
         />
       </div>
-      <button onClick={e=>{history.goBack()}}>back</button>
+      <div className="knowledge_button">
+        <Button variant="secondary" onClick={e=>{history.goBack()}}>back</Button>
+      </div>
     </div>
   );
 };
