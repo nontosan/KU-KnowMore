@@ -138,7 +138,7 @@ const Comment_component=(props:any)=>{
                         />
                     </div>
                     <div className="blog-fl black-font">
-                        {item.content}  {item.id}  
+                        {item.content}
                     </div>
                     <div className="blog-fl black-font">
                         {item.date_time}
