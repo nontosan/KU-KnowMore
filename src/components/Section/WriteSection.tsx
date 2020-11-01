@@ -45,7 +45,8 @@ const WriteSection = (props:any) => {
         SectionService.createSection(blogId, writeSection)
             .then(savedWriteSection => {
                 console.log("save success")
-                history.goBack()
+                console.log(savedWriteSection)
+                window.location.replace(`http://localhost:3000/editSection/${savedWriteSection?.id}`)
             });
             //console.log(history)
             
@@ -67,9 +68,6 @@ const WriteSection = (props:any) => {
                     value={editorValue} 
                     onChange={setEditorValue}
                 />
-            </div>
-            <div className="uploadtest">
-                <UploadFile />
             </div>
             <div className="div-sectionname">
                 <Button className="cancel-button" variant="outline-secondary" onClick={e=>history.goBack()}>Cancel</Button>
