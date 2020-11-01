@@ -218,7 +218,6 @@ const ChangeBlogInfoModal=(props:any)=>{
         show={modalShow}
         onHide={() => {
           setModalShow(false)
-          window.location.replace(window.location.href)
           console.log("edit???")
         }}
       /> 

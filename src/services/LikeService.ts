@@ -16,19 +16,17 @@ async function createLike(blogId:string,data:any): Promise<boolean> {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({"user_id":"5f82fd5504eb8600aa617b6b"}),
     });
-    const likes = await islike.json();
-    console.log(likes)
-    /*
-    if(islike==="like"){
+    const like = await islike.json();
+    console.log(like)
+    if(like.Status==="Like"){
       return true
     }
-    else if(islike==="unlike"){
+    else if(like.Status==="Unlike"){
       return false
     }
     else{
       console.log("cant like")
     }
-    */
   return true
 }
   /*
