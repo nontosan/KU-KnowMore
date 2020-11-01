@@ -143,11 +143,7 @@ function EditProfile (props:any) {
           }}>Submit</Button>
         <Button variant="danger" onClick={e=>openNotification()}> Cancel </Button>
         </div>
-
-        ---------------
         <Upload userID={userId}/>
-        ---------------
-        This is my Profile_Pic
         <div className="Pro_pic">
         <Suspense fallback={<div><Spin /></div>}>
           {userInformation.map(a=>
@@ -155,8 +151,6 @@ function EditProfile (props:any) {
           )}
         </Suspense>
         </div>
-        -----------------------------------------------
-        <Demo/>
         </div>
     </div>
   );
