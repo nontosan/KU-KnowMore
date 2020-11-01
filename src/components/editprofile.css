@@ -22,6 +22,7 @@
 
 .Pro_pic {
     padding-top: 10px;
+    
 }
 
 .input {
@@ -36,4 +37,22 @@
 .button{
     text-align: center;
     padding: 10px;
+}
+
+.header{
+    padding-top: 30px;
+    text-align: center;
+}
+
+.content{
+    display: block;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.pic_input{
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Optional */
 }

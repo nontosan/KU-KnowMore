@@ -140,7 +140,7 @@ function EditProfile (props:any) {
         <Button variant="success" onClick = {e=>{
           buttonstate()
           openMessage()
-          }}>Submit</Button>
+          }}>Submit</Button>{' '}
         <Button variant="danger" onClick={e=>openNotification()}> Cancel </Button>
         </div>
         <Upload userID={userId}/>
