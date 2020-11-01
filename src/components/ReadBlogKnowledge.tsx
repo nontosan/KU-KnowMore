@@ -48,7 +48,7 @@ import minus from '../photo/minus_PNG39.png';
 import GearEdit from '../photo/gear-edit6.png';
 import GearEditBlack from '../photo/settings-8-xxl.png';
 // END OF IMPORT PHOTO //
-
+import ChangeBlogInfoModal from "../modals/ChangBlogInfo"
 //------------------------------------------------------------------//
 
 const ReadBlogKnowledge = (props:any) => {
@@ -175,7 +175,7 @@ const ReadBlogKnowledge = (props:any) => {
               <div style={{ float: "right" }}>
                 {author==localStorage.userId &&
                   <div>
-                    <Image className="gear-setting-pic blog-fl" src={GearEdit}></Image>
+                    <ChangeBlogInfoModal/>
                     <Image className="delete-setting-pic blog-fl" src={minus}></Image>
                   </div>
                 }
