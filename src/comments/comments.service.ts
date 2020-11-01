@@ -41,8 +41,9 @@ export class CommentsService {
         createCommentsDto.date_time = this.getDate();
         return this.commentsRepository.save(createCommentsDto);
     }
-    async remove(id: string): Promise<void> {
-        await this.commentsRepository.delete(id);
+    async remove(id: string) {
+        return this.commentsRepository.delete(id);
+
       }
 
     /*async delete(comment_id: ObjectID) {
