@@ -103,7 +103,9 @@ const ReadBlogKnowledge = (props:any) => {
     })
 }
   
-
+  const deletesection=()=>{
+    console.log("deletesection")
+  }
   //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   //console.log(props.match.params)
   //fetch blog from database
@@ -265,12 +267,10 @@ const closeModal = () => {
                     <div style={{ float: "right" }}>
                       {author==localStorage.userId &&
                         <div style={{ float: "right" }}>
-                          <Image className="gear-setting-pic blog-fl" src={GearEditBlack}></Image>
                           {false &&
                           <Link to={`/editSection/${item.id}`}>
                             <Button>Edit</Button>
                           </Link>}
-                          <Image className="delete-setting-pic blog-fl" src={minus}></Image>
                         </div>
                       }
                     </div>

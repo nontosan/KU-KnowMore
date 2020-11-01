@@ -208,7 +208,7 @@ const ChangeBlogInfoModal=(props:any)=>{
     const [modalShow, setModalShow] = useState<boolean>(false);
     return (
     <div>
-      <Button onClick={() => 
+      <Button className="blog-delete-button" onClick={() => 
         setModalShow(true)
       }>
           <Image className="gear-setting-pic blog-fl" src={GearEdit}></Image>          
