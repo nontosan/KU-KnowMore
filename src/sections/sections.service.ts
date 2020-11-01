@@ -25,9 +25,10 @@ export class Section_Service {
         return this.Section_Repository.find({where: { blog_id: blog_id }});
     }
     async createSections(create: CreateSectionDto, attachmentArrays) {
-        var result = this.Section_Repository.save(create).then( res => {
-            attachmentArrays.forEach(element => { this.attachmentService.create(element, res.id) });
-        });
+        var result = await this.Section_Repository.save(create)
+        try {
+            attachmentArrays.forEach(element => { this.attachmentService.create(element, result.id) });
+        } catch (error) {}
         return result
     }
     async update(section_id: string, updateSection: Sections) {

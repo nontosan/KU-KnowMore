@@ -43,17 +43,16 @@ export class AppController {
     const user_info = await this.authService.validateToken(response.data.access_token);
     var u_id, status;
     try {
-      u_id = (await this.userService.findUserIDFromUID(user_info.uid));
+      u_id = await (await this.userService.findUserIDFromUID(user_info.uid)).id;
       status = 'Old'
     } catch (error) {
-      u_id = await this.userService.createNewUser(user_info)
-      console.log(u_id);
+      u_id = (await this.userService.createNewUser(user_info)).id;
       status = 'New'
     }
     var res;
     if ( response.data.error ) res = response.data;
     else {
-      const payload = {token: response.data.access_token, user_id: u_id.id};
+      const payload = {token: response.data.access_token, user_id: u_id};
       res = {
         "access_token": this.jwtService.sign(payload),
         "expires_in": response.data.expires_in,
@@ -61,7 +60,7 @@ export class AppController {
         "scope": response.data.scope,
         "refresh_token": response.data.refresh_token,
         "user_status": status,
-        "user_id": u_id.id
+        "user_id": u_id
       }  
     }
     return res

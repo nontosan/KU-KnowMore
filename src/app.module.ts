@@ -27,6 +27,8 @@ import { Report_Module } from './reports/reports.module';
 import { Attachment_Module } from './attachments/attachments.module';
 import { LoginPage_Module } from './loginpage/loginpage.module';
 import { AuthModule } from './auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
+import { jwtConstants } from './auth/constants';
 
 @Module({
   imports: [
@@ -64,7 +66,11 @@ import { AuthModule } from './auth/auth.module';
     Attachment_Module,
     LoginPage_Module,
     AuthModule,
-    HttpModule
+    HttpModule,
+    JwtModule.register({
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '60m' },
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
