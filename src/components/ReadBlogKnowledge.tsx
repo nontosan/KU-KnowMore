@@ -207,7 +207,7 @@ const ReadBlogKnowledge = (props:any) => {
                         <div style={{ float: "right" }}>
                           <Image className="gear-setting-pic blog-fl" src={GearEdit}></Image>
                           <Link to={`/editSection/${item.id}`}>
-                            <Button>Clickme</Button>
+                            <Button>Edit</Button>
                           </Link>
                           <Image className="delete-setting-pic blog-fl" src={minus}></Image>
                         </div>
