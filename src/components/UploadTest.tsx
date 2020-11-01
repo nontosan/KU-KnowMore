@@ -6,6 +6,9 @@ import { UploadOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
 class Demo extends React.Component<any,any> {
+  constructor(props:any) {
+    super(props);
+}
   state = { 
     fileList: [],
     uploading: false,
@@ -43,7 +46,7 @@ class Demo extends React.Component<any,any> {
       },
     });*/
     axios({
-        url: `http://188.166.178.33:3000/sections/5f872295f75b8a001bea596d/attachments`, //Sample API 
+        url: `http://188.166.178.33:3000/sections/${this.props.secid}/attachments`, //Sample API 
         method: "POST",
         headers:{
           "Content-Type": "multipart/form-data",

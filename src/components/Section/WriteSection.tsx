@@ -10,6 +10,7 @@ import Draft, { htmlToDraft, draftToHtml, EmptyState, rawToDraft, draftToRaw , d
 // IMPORT COMPONENT //
 import Photo from '../upload';
 import UploadFile from '../UploadFile';
+import Demo from '../UploadTest';
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
@@ -66,9 +67,6 @@ const WriteSection = (props:any) => {
                     value={editorValue} 
                     onChange={setEditorValue}
                 />
-            </div>
-            <div className="div-sectionname">
-                <Photo />
             </div>
             <div className="uploadtest">
                 <UploadFile />
