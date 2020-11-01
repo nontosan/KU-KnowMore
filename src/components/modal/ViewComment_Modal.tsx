@@ -14,7 +14,7 @@ const ViewComment_Modal = (props:any) => {
     const [commentData,setComment] = useState<Comment_Sch[]>([])
 
     async function fetchData(){
-        const res =  await fetch(`https://backend.ku-knowmore.xyz/comments/${props.rblog.content_id}`)
+        const res =  await fetch(`http://188.166.178.33:3000/comments/${props.rblog.content_id}`)
         res
             .json()
             .then(res => setComment(res))
@@ -24,7 +24,8 @@ const ViewComment_Modal = (props:any) => {
     useEffect(() =>{ 
         fetchData();
     },[])
-
+    let reason = props.rblog.report_reason.split(',')
+    const newreason = reason.slice(0, reason.length - 1);
     return(
         <div className="element"> 
             <a href='#' onClick={handleShow}>
@@ -34,7 +35,7 @@ const ViewComment_Modal = (props:any) => {
                     onHide={handleClose}
                     backdrop="static"
                     keyboard={false}
-                    size="lg"
+                    size="sm"
                     aria-labelledby="contained-modal-title-vcenter"
                     centered
                 >
@@ -43,13 +44,16 @@ const ViewComment_Modal = (props:any) => {
                     </Modal.Title>
                     <Modal.Body> 
                         <div>
-                            {props.rblog.report_reason}
+                        {newreason.map((r:any)=>(
+                        <ListGroup.Item variant="danger">
+                            reason: {r}
+                        </ListGroup.Item>))}
                         </div>
                         <div>
                             {props.report_string}
                         </div>
                         {commentData.map(data => (
-                            <ListGroup.Item>
+                            <ListGroup.Item variant="danger">
                                 {data.content}
                             </ListGroup.Item>
                         ))}

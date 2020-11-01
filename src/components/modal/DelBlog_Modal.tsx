@@ -26,7 +26,7 @@ const DelBlog_Modal = (props:any) => {
                 onHide={handleClose}
                 backdrop="static"
                 keyboard={false}
-                size="lg"
+                size="sm"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >

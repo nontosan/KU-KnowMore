@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Modal } from 'react-bootstrap'
+import { Button, Card, Modal } from 'react-bootstrap'
 import BlogsService from '../../services/BlogsService';
 
 const DelReport_Modal = (props:any) => {
@@ -28,23 +28,26 @@ const DelReport_Modal = (props:any) => {
                 onHide={handleClose}
                 backdrop="static"
                 keyboard={false}
-                size="lg"
+                size="sm"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
+
             >
                 <Modal.Header>
-                    <Modal.Title>คำเตือน</Modal.Title>
+                    คำเตือน
                 </Modal.Header>
-                <Modal.Title >
-                    <p>การดำเนินการนี้เป็นการลบ Report ไม่ใช่การลบ Blog ที่ถูกรายงาน</p>
-                </Modal.Title>
                 <Modal.Body> 
+                    <Card>
+                        <Card.Body>
+                            การดำเนินการนี้เป็นการลบ Report ไม่ใช่การลบ Blog ที่ถูกรายงาน
+                        </Card.Body>
+                    </Card>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button onClick={DeleteReport}>
+                    <Button variant="danger" onClick={DeleteReport}>
                         Confirm
                     </Button>
                 </Modal.Footer>

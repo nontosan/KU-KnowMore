@@ -43,35 +43,31 @@ const ViewBlog_Modal = (props:any) => {
                 onHide={handleClose}
                 backdrop="static"
                 keyboard={false}
-                size="lg"
+                size="sm"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <Modal.Title id="contained-modal-title-vcenter">
+                <Modal.Header id="contained-modal-title-vcenter">
                     Report
-                </Modal.Title>
+                </Modal.Header>
                 <Modal.Body> 
-                    <ListGroup.Item>
                     <div>
                         {newreason.map((r:any)=>(
-                        <ListGroup.Item>
+                        <ListGroup.Item variant="danger">
                             reason: {r}
                         </ListGroup.Item>))}
                     </div>
                     <div>
                         {props.report_string}
                     </div>
-                    </ListGroup.Item>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <ListGroup.Item>
                         <Link to= {`/read${props.rblog.content_type}/${props.rblog.content_id}`}>
-                            <Button>View Blog</Button>
+                            <Button variant="primary">View Blog</Button>
                         </Link>
-                    </ListGroup.Item>
                 </Modal.Footer>
             </Modal>
         </div>
