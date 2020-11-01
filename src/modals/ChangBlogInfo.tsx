@@ -21,7 +21,8 @@ import {Course_real} from "../interfaces/course"
 import CourseService from "../services/CourseService"
 import {Blog,create_Blog} from "../interfaces/blog"
 import BlogsService from "../services/BlogsService"
-
+import GearEdit from '../photo/gear-edit6.png';
+import GearEditBlack from '../photo/settings-8-xxl.png';
 const key = 'updatable';
 function EditBlogModal(props:any) {
   const resultLimit = 10
@@ -210,7 +211,7 @@ const ChangeBlogInfoModal=(props:any)=>{
       <Button onClick={() => 
         setModalShow(true)
       }>
-        Edit blog
+          <Image className="gear-setting-pic blog-fl" src={GearEdit}></Image>          
       </Button>
 
       <EditBlogModal

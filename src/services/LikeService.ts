@@ -16,7 +16,8 @@ async function createLike(blogId:string,data:any): Promise<boolean> {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({"user_id":"5f82fd5504eb8600aa617b6b"}),
     });
-    console.log(islike)
+    const likes = await islike.json();
+    console.log(likes)
     /*
     if(islike==="like"){
       return true
