@@ -2,6 +2,7 @@
 import React, { useState , useEffect , Component } from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { draftToHtml } from 'react-wysiwyg-typescript';
+import Image from 'react-bootstrap/Image';
 import axios from 'axios';
 // END OF IMPORT LIBRARY //
 
@@ -28,6 +29,11 @@ import { type } from 'os';
 import { convertToObject } from 'typescript';
 import { useLocation,useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
+import { Card } from 'react-bootstrap';
+
+import minus from '../../photo/minus_PNG39.png';
+import GearEdit from '../../photo/gear-edit6.png';
+import BlogsService from '../../services/BlogsService';
 
 //------------------------------------------------------------------//
 
@@ -42,11 +48,16 @@ const ReadSection = (props:any) => {
     const location=useLocation();
     const history=useHistory()
     const [sectionName, setSectionName] = useState<string>("");
+    const [author, setAuthor] = useState<string>('');
     console.log(sectionId)
 
     const fetchSection = () => {
         SectionService.fetchSectionsSpecific(sectionId)
             .then(sectioninfo => {
+                BlogsService.fetchBlogSpecific(sectioninfo[0].blog_id)
+                    .then(bloginfo => {
+                        setAuthor(bloginfo[0].user_id);
+                    })
                 setSectionsInformation(sectioninfo);
                 setstateCheck(true);
             })
@@ -77,12 +88,22 @@ const ReadSection = (props:any) => {
 
     return (
         <div>
-            <InputGroup size="lg" className="div-sectionname">
-                <InputGroup.Prepend >
-                    <InputGroup.Text id="inputGroup-sizing-lg">Section Name</InputGroup.Text>
-                    <InputGroup.Text id="inputGroup-sizing-lg">{sectionName}</InputGroup.Text>
-                </InputGroup.Prepend>
-            </InputGroup>
+            <div className="hot-kl">
+                <Card.Header>
+                    <strong>
+                        Section 
+                    </strong> : {sectionName}
+                    <div style={{ float: "right" }}>
+                        {author==localStorage.userId &&
+                        <div>
+                            <Image className="gear-setting-pic blog-fl" src={GearEdit}></Image>
+                            <Image className="delete-setting-pic blog-fl" src={minus}></Image>
+                        </div>
+                        }
+                    </div>
+                </Card.Header>
+            </div>
+            
             {afterFetch &&
                 <div className="div-sectionname" dangerouslySetInnerHTML={{__html: displayHTML}} />
             }

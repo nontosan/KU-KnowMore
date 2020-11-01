@@ -1,0 +1,19 @@
+.report-button{
+    background-color: unset;
+    border: 0px;
+}
+
+.input {
+    background-color:  #6c7179;
+    color: rgb(255, 255, 255)!important;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+  }
+
+.input::placeholder {
+    color: rgb(255, 255, 255);
+}
