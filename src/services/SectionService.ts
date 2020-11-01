@@ -59,6 +59,12 @@ async function fetchSectionFiles(secid:string): Promise<Attachments[]> {
     return files;
 }
 
+async function deleteattachments(att_id:string) {
+    const res = await fetch(`http://188.166.178.33:3000/attachments/${att_id}`,{
+        method: 'DELETE',
+    });    
+}
+
 export default {
-    createSection, fetchSections, fetchSectionsSpecific,deleteSection,fetchSectionFiles, editSection
+    createSection, fetchSections, fetchSectionsSpecific,deleteSection,fetchSectionFiles, editSection,deleteattachments
 };
