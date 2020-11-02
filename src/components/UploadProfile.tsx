@@ -3,9 +3,10 @@ import axios from 'axios'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
+import './editprofile.css';
 
 class Upload extends React.Component<any,any> {
-    
+    check = false;
     state = {
         file: ""
     }
@@ -19,14 +20,14 @@ class Upload extends React.Component<any,any> {
         //console.log(e.target.files[0], "$$$$");
     }
 
-    handleUpload(e:any){
+    async handleUpload(e:any){
         //console.log(this.state , "THE STATE ---- $$$$");
         const file = this.state.file
         const profile_pic = new FormData()
         profile_pic.append('profile_pic',file)
         //formdata.append('name','test')
 
-        axios({
+        await axios({
             url: `https://backend.ku-knowmore.xyz/users/${this.props.userID}/profile_pic`, //Sample API 
             method: "POST",
             headers:{
@@ -36,21 +37,26 @@ class Upload extends React.Component<any,any> {
             data: profile_pic
         });
         alert("Upload Complete");
+        window.location.replace(`/userpage/${this.props.userID}`);
     }
 
     render() {
         return (
             <div className="Up">
-                <h1>Upload Pic</h1>
+                <div className="header">
+                    <h2>Upload Pic</h2>
+                </div>
+                <div className="content">
                 <form>
-                    <div className="">
-                        <label>Select File </label>
+                        <label>Select Picture </label>{' '}
+                    <div className="pic_input">
                         <input type="file" multiple name="profile_pic" 
                         onChange={(e)=>this.handleFile(e)} />
                     </div>
                     <br />
                     <Button variant="primary"  onClick={(e)=>this.handleUpload(e)}>Upload</Button>
                 </form>
+                </div>
             </div>
         );
     }

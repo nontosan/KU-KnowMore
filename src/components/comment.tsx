@@ -6,6 +6,7 @@ import NavDropdown from 'react-bootstrap/esm/NavDropdown';
 // END OF IMPORT LIBRARY //
 
 // IMPORT COMPONENT //
+import DeleteCommentModal from '../modals/DeleteCommentModal';
 import UserCommentAuthor from "./UserCommentAuthor";
 import UserCommentName from "./userincomment/username"
 import UserCommentPic from "./userincomment/userpic"
@@ -60,6 +61,13 @@ const Comment_component=(props:any)=>{
     //const blog_id
     const blogId:string = window.location.pathname.split("/")[2]
 
+    
+    //CONST FOR DELETE MODAL//
+    const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+    const [statusDelete, setStatusDelete] = useState<boolean>(false);
+    const [deleteCommentId, setDeleteCommentId] = useState<string>('');
+    //END OF CONST FOR DELETE MODAL//
+
     const fetchblog=()=>{
     }
 
@@ -74,8 +82,10 @@ const Comment_component=(props:any)=>{
     }
     
 
-    const handledelete=()=>{
-        console.log("handledelete comment")
+    const handleDeleteComment=(commentId:string)=>{
+        console.log(commentId);
+        setShowDeleteModal(true);
+        setDeleteCommentId(commentId);
     }
 
     const handlereport=()=>{
@@ -87,6 +97,22 @@ const Comment_component=(props:any)=>{
         //https://www.youtube.com/watch?v=l2Kp2SzUdlg&ab_channel=Weibenfalk[!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!]
     }
 
+    const submitDeleteComment = () => {
+        setShowDeleteModal(false);
+        console.log(deleteCommentId);
+        CommentService.deleteComment(deleteCommentId)
+            .then(res => {
+                if (res) {
+                    setStatusDelete(true);
+                }
+                console.log(res);
+            })
+    }
+
+    const closeModal = () => {
+        setShowDeleteModal(false);
+    }
+
     
     useEffect(()=>{
         fetchCommentblog()
@@ -94,6 +120,12 @@ const Comment_component=(props:any)=>{
         //check is token id is userid then set deleteVisible ??[!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!]
     },[])
 
+    useEffect(() => {
+        if (statusDelete==true) {
+          fetchCommentblog();
+          setStatusDelete(false);
+        }
+      },[statusDelete]);
     //DOM
 
     return (
@@ -106,7 +138,7 @@ const Comment_component=(props:any)=>{
                         />
                     </div>
                     <div className="blog-fl black-font">
-                        {item.content}    
+                        {item.content}
                     </div>
                     <div className="blog-fl black-font">
                         {item.date_time}
@@ -119,7 +151,17 @@ const Comment_component=(props:any)=>{
                                 </div>
                                 } id="dropdown-nav" >
                                 {item.user_id==localStorage.userId &&
-                                    <NavDropdown.Item onClick={handledelete} className="more-option">Delete</NavDropdown.Item>
+                                    <NavDropdown.Item onClick={() => handleDeleteComment(item.id)} className="more-option">Delete</NavDropdown.Item>
+                                }
+                                {showDeleteModal && 
+                                    <div>
+                                        <DeleteCommentModal 
+                                            show = {showDeleteModal}
+                                            content = {item.content}
+                                            deleteComment = {submitDeleteComment}
+                                            cancel = {closeModal}
+                                        />
+                                    </div>
                                 }
                                 {item.user_id!==localStorage.userId &&
                                     <NavDropdown.Item onClick={handlereport} className="more-option">Report</NavDropdown.Item>
@@ -141,7 +183,7 @@ const Comment_component=(props:any)=>{
             onSubmit={(values,actions)=>{
                 const cont:any={
                         blog_id:blogId,
-                        user_id:"5f82fd2e04eb8600aa617b66",
+                        user_id:localStorage.userId,
                         content:values.CommentContent,
                     }
                 if(values.CommentContent!==""){

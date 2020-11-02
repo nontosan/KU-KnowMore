@@ -31,7 +31,7 @@ import 'antd/dist/antd.css';
 import { notification,message,AutoComplete } from 'antd';
   
 const key = 'updatable';
-function EditProfile (props:any) {
+function CreateNewProfile (props:any) {
   const userId = props.match.params.userId
   //console.log(userId)
   
@@ -39,9 +39,6 @@ function EditProfile (props:any) {
     ProfileService.fetchProfileSpecific(userId)
     .then(userInfo => {
       setUserInformation(userInfo);
-      setusername(userInfo[0].username);
-      setname(userInfo[0].name);
-      setdescriptions(userInfo[0].profile_description);
       console.log(userInfo);
     })
   }
@@ -85,8 +82,8 @@ function EditProfile (props:any) {
           setTimeout(() => {
             message.success({ content: 'Loaded!', key, duration: 2 });
           }, 1);
-          window.location.replace(`/userpage/${user_id}`);
         });
+      history.goBack()
   }; 
   const openMessage = () => {
     message.loading({ content: 'Loading...', key });
@@ -124,13 +121,13 @@ function EditProfile (props:any) {
       <div className="profile">
         <div className = "Name">
           {userInformation.map(UserInfo=>
-          <Form.Control type="text" value={nme}
+          <Form.Control type="text" placeholder={UserInfo.name} value={nme}
           onChange={e => setname(e.target.value)}/>
             )}
         </div>
         <div className = "Username">
           {userInformation.map(UserInfo=>
-          <Form.Control type="text" value={usrname}
+          <Form.Control type="text" placeholder={UserInfo.username} value={usrname}
           onChange={e => setusername(e.target.value)}/>
             )}
         </div>
@@ -143,7 +140,7 @@ function EditProfile (props:any) {
         <Button variant="success" onClick = {e=>{
           buttonstate()
           openMessage()
-          }}>Submit</Button>{' '}
+          }}>Submit</Button>
         <Button variant="danger" onClick={e=>openNotification()}> Cancel </Button>
         </div>
         <Upload userID={userId}/>
@@ -159,4 +156,4 @@ function EditProfile (props:any) {
   );
 }
 
-export default EditProfile;
+export default CreateNewProfile;

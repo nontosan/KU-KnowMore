@@ -50,6 +50,7 @@ import UserPage from "./components/UserPage";
 import KnowledgeBlog from './components/KnowledgeBlog';
 import ReviewBlog from './components/ReviewBlog';
 import EditProfile from './components/EditProfile';
+import CreateNewProfile from './components/CreateNewProfile';
 
 import './App.css';
 import './components/section.css';
@@ -123,6 +124,9 @@ const App = () => {
                         <Nav.Link href="/searchreviewblog">REVIEW BLOG</Nav.Link>
                         {false && /* true for debug */
                             <Nav.Link href="/dropdowntest">dropdowntest</Nav.Link>
+                        }
+                        {true &&
+                            <Nav.Link href={`/CreateNewProfile/${localStorage.userId}`}>CreateNewProfile</Nav.Link>
                         }
                     </Nav>
                     <Form inline >
@@ -200,6 +204,7 @@ const App = () => {
                     <Route path="/editSection/:sectionId" name="sectionId" component={EditSection}></Route>
                     <Route path="/userpage/:userId" name="userId" component={UserPage}></Route>
                     <Route path="/editProfile/:userId" name="userId" component={EditProfile}></Route>
+                    <Route path="/CreateNewProfile/:userId" name="userId" component={CreateNewProfile}></Route>
                     <Route path="/dropdowntest"><Dropdowntest /></Route>
                     <Route path="/portal" name="code">
                         <Portal loginCallback={handleUserLogin}/>

@@ -39,7 +39,12 @@ const LoginPage=(props:LoginFormProps)=> {
                                 if (props.loginCallback){
                                     props.loginCallback();
                                 }
-                                history.push('/');
+                                /*if(localStorage.userStatus=='New'){
+                                    history.push(`/CreateNewProfile/${localStorage.userId}`)
+                                }*/
+                                //else{
+                                    history.push('/');
+                                //}
                             }
                             actions.setSubmitting(false);
                         });
