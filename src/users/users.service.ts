@@ -62,9 +62,9 @@ export class User_Service {
             faculty_id: user['faculty-id'],
             type_person: user['type-person'],
             profile_description: '',
-            pic_name: '',
+            pic_name: 'profilepic.png',
             username: '',
-            pic_dir: ''       
+            pic_dir: 'profile_pic/profilepic.png'       
         }
         return this.User_Repository.save(createUser);
     }
