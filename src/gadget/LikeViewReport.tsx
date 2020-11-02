@@ -47,18 +47,18 @@ const LikeViewReport=(props:any)=> {
     useEffect(() => {
         fetchBlog()
         fetchLiker()
-        clicklike()
+        //clicklike()
     },[]);
 
     return (
         <div>
             <div className="hot-kl">
                 <Card.Header className="likeviewreportContainer">
-                    <div >
+                    <div className="like">
                         {like ? <button className="likebutton" onClick={clicklike}><LikeOutlined /></button> : <button className="likebutton" onClick={clicklike}><LikeTwoTone /></button> }
                         <div style={{ display: "inline" }}>{liker.length}</div>
                     </div>
-                    <div>
+                    <div className="like" >
                         <EyeOutlined />{bloginfo.map(x=>(<div style={{ display: "inline" }}>{x.viewers}</div>))}
                     </div>
                     <ReportModal/>

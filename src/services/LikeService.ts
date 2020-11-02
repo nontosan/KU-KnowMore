@@ -8,6 +8,12 @@ async function fetchLike(blogId:string): Promise<Like[]> {
     return likes;  
 }
 
+async function fetchView(blogId:string): Promise<Like[]> {
+  const res = await fetch(`https://backend.ku-knowmore.xyz/blogs/${blogId}/viewing`);
+  const views = await res.json();
+  return views;  
+}
+
 async function createLike(blogId:string,data:any): Promise<boolean> {
   console.log(blogId,data)
   console.log(JSON.stringify(data))
@@ -46,5 +52,5 @@ async function createLike(blogId:string,data:any): Promise<boolean> {
 
 
 export default {
-  fetchLike,createLike
+  fetchLike,createLike,fetchView
 };
