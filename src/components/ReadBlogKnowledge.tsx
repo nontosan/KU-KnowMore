@@ -82,6 +82,7 @@ const ReadBlogKnowledge = (props:any) => {
   //fetch blog from database
 
   //CONST FOR DELETE MODAL//
+  
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [BlogDelete, setBlogDelete] = useState<Blog>();
   const [statusDelete, setStatusDelete] = useState<boolean>(false);
@@ -252,11 +253,7 @@ const closeModal = () => {
       </div>
       <div className="hot-kl">
         <Card.Header>SECTION</Card.Header>
-        {!isHaveSections &&
-          <div className="show-nochapter">
-            <strong>No Chapter Yet</strong> 
-          </div>
-        }
+  
         {sectionsInformation.map(item=>{
           count++;
           {
