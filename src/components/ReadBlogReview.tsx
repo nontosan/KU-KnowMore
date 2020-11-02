@@ -50,6 +50,7 @@ import GearEdit from '../photo/gear-edit6.png';
 import GearEditBlack from '../photo/settings-8-xxl.png';
 // END OF IMPORT PHOTO //
 import ChangeBlogInfoModal from "../modals/ChangBlogInfo"
+import LikeService from '../services/LikeService';
 //------------------------------------------------------------------//
 
 const ReadBlogKnowledge = (props:any) => {
@@ -170,8 +171,14 @@ const fetchReview = () => {
         }
   })  // Done
 };
+
+  const increast_view = () => {
+    LikeService.fetchView(blogId);
+  };
+
   //refreh
   useEffect(()=>{
+    increast_view();
     fetchBlogs();
   },[])
 
