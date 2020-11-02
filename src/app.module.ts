@@ -32,10 +32,8 @@ import { jwtConstants } from './auth/constants';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mongodb',
-      // host: '188.166.178.33',
       host: 'mongo.ku-knowmore.xyz',  //For Test in local
-      // host: '172.17.0.4',          //For Deploy
-      //port: 27017,
+      // host: '172.17.0.2',          //For Deploy
       username: 'admin-backend',
       password: 'Rahat_Khao_Da_Ta_Bet',
       database: 'KU-KnowMore',

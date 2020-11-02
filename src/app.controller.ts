@@ -21,6 +21,7 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  // For localhost
   @Post('auth/token')
   async getToken(@Body() auth_code) {
     var data = JSON.stringify({
@@ -29,6 +30,52 @@ export class AppController {
       "client_secret": "e9157b30e2c9e5cd4b1ecf3aa42a137d3fa5da226e70ea041f239b30fb2f891d818aad34afaf01c8502e97",
       "code": auth_code.code,
       "redirect_uri": "http://localhost:3000/portal"
+    });
+
+    var config: AxiosRequestConfig = {
+      method: 'post',
+      url: 'https://sso-dev.ku.ac.th/idp/apps/token',
+      headers: { 
+        'Content-Type': 'application/json', 
+      },
+      data : data
+    };
+    const response = await this.http.request(config).toPromise();
+    const user_info = await this.authService.validateToken(response.data.access_token);
+    var u_id, status;
+    try {
+      u_id = await (await this.userService.findUserIDFromUID(user_info.uid)).id;
+      status = 'Old'
+    } catch (error) {
+      u_id = (await this.userService.createNewUser(user_info)).id;
+      status = 'New'
+    }
+    var res;
+    if ( response.data.error ) res = response.data;
+    else {
+      const payload = {token: response.data.access_token, user_id: u_id};
+      res = {
+        "access_token": this.jwtService.sign(payload),
+        "expires_in": response.data.expires_in,
+        "token_type": response.data.token_type,
+        "scope": response.data.scope,
+        "refresh_token": response.data.refresh_token,
+        "user_status": status,
+        "user_id": u_id
+      }  
+    }
+    return res
+  }
+
+  // For ku-knowmore.xyz
+  @Post('auth/token2')
+  async getTokenTest(@Body() auth_code) {
+    var data = JSON.stringify({
+      "grant_type": "authorization_code",
+      "client_id": "7fe6507ca550501a87254959a6b91b358ea",
+      "client_secret": "53d7b3d6c950f62590f112bf87e82f17b34367581055816e60b67479a23aa7b253d410b907b1634f18300c",
+      "code": auth_code.code,
+      "redirect_uri": "https://ku-knowmore.xyz/portal"
     });
 
     var config: AxiosRequestConfig = {
