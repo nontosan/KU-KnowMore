@@ -84,6 +84,7 @@
 .size-text-report{
     font-size: 16px;
     text-align: center;
+    display: inline;
 }
 
 /* for button X */
@@ -177,4 +178,12 @@
     padding: .75rem 1.25rem;
     width: 100%;
     color: white;
+  }
+  .d-flex{
+    margin-top: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+    border-bottom: 1x0px;
+    border-radius: calc(0.25rem - 1px);
+    background-color: #66CC66;
   }

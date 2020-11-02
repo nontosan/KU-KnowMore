@@ -18,10 +18,10 @@ const DelBlog_Modal = (props:any) => {
 
 
     return (
-        <div>    
-            <button onClick = {handleShow}>
-                DELETE
-            </button>
+        <div className="alignright">    
+            <Button variant="danger" onClick = {handleShow}>
+                Delete Blog
+            </Button>
             <Modal
                 show={show}
                 onHide={handleClose}
@@ -34,10 +34,8 @@ const DelBlog_Modal = (props:any) => {
                 <Modal.Header>
                     <Modal.Title>คำเตือน</Modal.Title>
                 </Modal.Header>
-                <Modal.Title >
-                    <p>ยืนยันการลบBlog</p>
-                </Modal.Title>
                 <Modal.Body> 
+                    <p>ยืนยันการลบBlog</p>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

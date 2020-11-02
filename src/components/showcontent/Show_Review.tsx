@@ -103,7 +103,6 @@ const Show_Review = (props:any) => {
   }
 
   // Fetch Review
-  
   const fetchReview = () => {
     BlogsService.fetchReviewOfBlog(blogId)
         .then(reviewArray => {
@@ -127,95 +126,92 @@ const Show_Review = (props:any) => {
 
   return (
     <div>
-      <div className ="div-scrollbar">
+
+      <div>
         {blogsInfomation.map(blogInformation=>(
-            <div className="Blog_Info">
-                <div className="Blog_frame1">
-                    <div className="Blog_name">ชื่อบล็อค </div>
-                    <div className="Blog_name2">{blogInformation.blog_name}</div>
-                    <div className="Blog_name">รหัสวิชา </div>
-                    <div className="Blog_name2">{selectCode}</div>
-                    <div className="Blog_name">ชื่อวิชา </div>
-                    <div className="Blog_name2">{selectNameEn}  ({selectNameTh})</div>
-                    <div className="Blog_name">ชื่อวิชา </div>
-                    <div className="Blog_name2">{selectTeacher}</div>
-                  </div>
-              </div>
+            <div>
+                <strong>รหัสวิชา </strong>: {selectCode}<br/>
+                <strong>ชื่อวิชา </strong>: {selectNameEn} ({selectNameTh})<br/>
+                <strong>อาจารย์ </strong>: {selectTeacher}<br/><br/>
+            </div>
         ))}
       </div>
-      <div className="div-scrollbar editor_text color-green" >
-        <div dangerouslySetInnerHTML={{ __html: editorValue }} />
+      
+      <div>  
+        <Card bg="light"> 
+          <Card.Body>
+            <div dangerouslySetInnerHTML={{ __html: editorValue }} />
+          </Card.Body>
+          <Container className="scoretask">
+            <div>
+              <Row>
+                  <Col sm={3}>
+                      <label>สอนได้เข้าใจ</label>
+                  </Col>
+                  <Col>
+                      <Progress percent={teachScore*20} showInfo={false}/>
+                  </Col>
+                  <Col>
+                      ({teachScore}/5)
+                  </Col>
+              </Row>
+            </div>
+            <div>
+              <Row>
+                  <Col sm={3}>
+                      <label>จำนวนงาน</label>
+                  </Col>
+                  <Col>
+                      <Progress percent={workScore*20} showInfo={false}/>
+                  </Col>
+                  <Col>
+                      ({workScore}/5)
+                  </Col>
+              </Row>
+            </div>
+            <div>
+              <Row>
+                  <Col sm={3}>
+                      <label>ความสำคัญในการเข้าเรียน</label>
+                  </Col>
+                  <Col >
+                      <Progress percent={roomScore*20} showInfo={false}/>
+                  </Col>
+                  <Col>
+                      ({roomScore}/5)
+                  </Col>
+              </Row>
+            </div>
+            <div>
+              <Row>
+                  <Col sm={3}>
+                    <label>ภาพรวม</label>
+                  </Col>
+                  <Col>
+                    <Progress percent={overallScore*20} showInfo={false}/>
+                  </Col>
+                  <Col>
+                    ({overallScore}/5)
+                  </Col>
+              </Row>
+            </div>
+          </Container>  
+          <LikeViewReport x={blogsInfomation}/>
+        </Card> 
       </div>
-            <div className ="div-scrollbar">
-                <Container>
-                    <Row>
-                        <Col sm={3}>
-                            <label className="label">สอนได้เข้าใจ</label>
-                        </Col>
-                        <Col>
-                            <Progress percent={teachScore*20} showInfo={false}/>
-                        </Col>
-                        <Col>
-                            ({teachScore}/5)
-                        </Col>
-                    </Row>
-                </Container>
-            </div>
-            <div className ="div-scrollbar">
-                <Container>
-                    <Row>
-                        <Col sm={3}>
-                            <label className="label">จำนวนงาน</label>
-                        </Col>
-                        <Col>
-                            <Progress percent={workScore*20} showInfo={false}/>
-                        </Col>
-                        <Col>
-                            ({workScore}/5)
-                        </Col>
-                    </Row>
-                </Container>
-            </div>
-            <div className ="div-scrollbar">
-                <Container>
-                    <Row>
-                        <Col sm={3}>
-                            <label className="label">ความสำคัญในการเข้าเรียน</label>
-                        </Col>
-                        <Col >
-                            <Progress percent={roomScore*20} showInfo={false}/>
-                        </Col>
-                        <Col>
-                            ({roomScore}/5)
-                        </Col>
-                    </Row>
-                </Container>
-            </div>
-            <div className ="div-scrollbar">
-                <Container>
-                    <Row>
-                        <Col sm={3}>
-                            <label className="label">ภาพรวม</label>
-                        </Col>
-                        <Col>
-                            <Progress percent={overallScore*20} showInfo={false}/>
-                        </Col>
-                        <Col>
-                            ({overallScore}/5)
-                        </Col>
-                    </Row>
-                </Container>
-            </div>
-        
-        
-      <LikeViewReport x={blogsInfomation}/>
-      <div  className="hot-kl">
-        <Card.Header>COMMENT</Card.Header>
-        <Comment_component 
-          blogId = {blogId}
-        />
+      
+      <br/>
+
+      <div>
+        <Card bg="light"> 
+          <Card.Header>
+            COMMENTS
+          </Card.Header>
+          <Card.Body>
+            <Comment_component blogId = {blogId}/>
+          </Card.Body>
+        </Card>
       </div>
-      <button onClick={e=>history.goBack()}>back</button>
     </div>
   );
 };

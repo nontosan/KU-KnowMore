@@ -1,0 +1,28 @@
+.main-container{
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+.bgcolor{
+    background: none;
+}
+
+.block{
+    display:inline;
+}
+
+.alignright{
+    float: right;
+}
+
+.alignleft{
+    float: left;
+}
+
+.scoretask{
+    margin: auto;
+    width: 50%;
+    border: 2px solid DarkGrey;
+    padding: 10px;
+}
+

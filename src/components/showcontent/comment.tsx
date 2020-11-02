@@ -29,6 +29,7 @@ import "./comment.css"
 //------------------------------------------------------------------//
 
 import {Formik,Form,Field,ErrorMessage} from "formik";
+import { Button, Card } from "react-bootstrap";
 
 
 type comment_loaded={
@@ -95,9 +96,7 @@ const Comment_component=(props:any)=>{
             {comments.map(item=>(
                 <div className="show-all-comment">
                     <div className="blog-fl black-font">
-                        <UserCommentAuthor 
-                            userid = {item.user_id}
-                        />
+                        <UserCommentAuthor userid = {item.user_id}/>
                     </div>
                     <div className="blog-fl black-font">
                         {item.content}    
@@ -119,48 +118,49 @@ const Comment_component=(props:any)=>{
                     </div>
                 </div>
             ))}
+            <br/>
             <Formik
-            initialValues={{CommentContent:"",errorMess:""}}
-            validate={(value)=>{
+                initialValues={{CommentContent:"",errorMess:""}}
+                validate={(value)=>{
                 const errors:any={};
                 if(value.CommentContent===""){
                     errors.errorMess="noCommentdata";
                 }
                 return errors
-            }}
-            onSubmit={(values,actions)=>{
-                const cont:any={
+                }}
+                onSubmit={(values,actions)=>{
+                    const cont:any={
                         blog_id:blogId,
                         user_id:"5f82fd2e04eb8600aa617b66",
                         content:values.CommentContent,
                     }
-                if(values.CommentContent!==""){
-                    //console.log(cont)
-                    CommentService.createComment(cont)
-                        .then(res=>{
-                            console.log('eiei')
-                            fetchCommentblog()
-                        })
-                }
-                else{
-                    actions.setSubmitting(true)
-                }
-                actions.setSubmitting(false)
-                values.CommentContent=""
-            }}
+                    if(values.CommentContent!==""){
+                        //console.log(cont)
+                        CommentService.createComment(cont)
+                            .then(res=>{
+                                console.log('eiei')
+                                fetchCommentblog()
+                            })
+                    }
+                    else{
+                        actions.setSubmitting(true)
+                    }
+                    actions.setSubmitting(false)
+                    values.CommentContent=""
+                }}
             >
-            {({isSubmitting})=>(
-                <Form autoComplete="off">
-                    <div className="Blog_frame1 content_container">
-                        <div className="cont">
-                            <Field type="input" className="input" name="CommentContent" placeholder="type something..."/>
-                            <ErrorMessage name="errorMess" component="div"/>
+                {({isSubmitting})=>(
+                    <Form autoComplete="off">
+                        <div className="content_container">
+                            <div className="cont">
+                                <Field type="typecomment" name="CommentContent" placeholder="type something..."/>
+                                <ErrorMessage name="errorMess" component="div"/>
+                                <Button variant="primary" disabled={isSubmitting}> send </Button>
+                            </div>
                         </div>
-                    </div>
-                    <button disabled={isSubmitting}> send </button>
-                </Form>
-            )}
-        </Formik>
+                    </Form>
+                )}
+            </Formik>
         </div>
     )
 }

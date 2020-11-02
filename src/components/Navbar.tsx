@@ -10,6 +10,7 @@ import { User_Sch } from '../interfaces/user';
 import LoginPage from './LoginPage';
 import Portal from './Portal';
 import { Link, Route, Router, Switch } from 'react-router-dom';
+import home from '../Photo/homeicon.png'
 
 const NavBar = () => {
     
@@ -36,11 +37,11 @@ const NavBar = () => {
         alert('ออกจากระบบแล้ว')
     };
     return (
-        
         <div>
             <Navbar className="navbar navbar-light bgNavbar">
                 <Navbar.Brand href="/">
                     <div className="size-KU-knowmore">
+                        <Image className="profile-page-pic picture-padding" src={home} roundedCircle />
                         KU-Knowmore
                     </div>
                 </Navbar.Brand>
@@ -69,7 +70,6 @@ const NavBar = () => {
                 </Nav>
             </Navbar>
         </div>
-        
     )
 }
 

@@ -124,15 +124,15 @@ const Show_Knowledge = (props:any) => {
     }
   
     const fetchsection = () => {
-        SectionService.fetchSections(blogId)
-          .then(Arraysections => {
-            console.log(Arraysections)
-            if(Arraysections.length == 0){
-              setIsHaveSections(false);
-            }
-            setSectionsInformations(Arraysections);
-          });
-      }
+      SectionService.fetchSections(blogId)
+        .then(Arraysections => {
+          console.log(Arraysections)
+          if(Arraysections.length == 0){
+            setIsHaveSections(false);
+          }
+          setSectionsInformations(Arraysections);
+        });
+    }
   
     const fetchProfile = () => {
       ProfileService.fetchProfileSpecific(author)
@@ -181,133 +181,107 @@ const Show_Knowledge = (props:any) => {
       }
     },[statusDelete]);
     //console.log(userInformation);
-    return (
+  return (
+
+    <div>
+      
       <div>
-        <div className="hot-kl">
-          {userInformation.map(item => (
-            <Card.Header>
+        {blogsInformation.map(blogInformation=>(
+          <div>
+            {courseInformation.map(item=>(
               <div>
-                <Link to={`/userpage/${item.id}`} style={{ float : "left" }}>
-                  <Suspense  fallback={<div>Loading... </div>}>
-                    <div className="blog-fl">
-                      <ImageComponent userid={item.pic_dir}/>
-                    </div>
-                  </Suspense>
-                </Link>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <Link to={`/userpage/${item.id}`} style={{ color : "white" }}>
-                  {item.name}
-                </Link>
+                  <strong>รหัสวิชา</strong> : {item.Code}
+                  <strong>วิชา</strong> : {item.NameEn} ({item.NameTh})                         
+                  <strong>อาจารย์</strong> : {item.Teacher}
               </div>
-            </Card.Header>
-          ))}
-  
-        </div>
-        <div className="hot-kl">
-          {blogsInformation.map(blogInformation=>(
-            <Card.Header>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      <br/>
+      
+      <div>
+        <Card>
+        <Card.Header>SECTION</Card.Header>
+        {!isHaveSections &&
+          <div className="show-nochapter">
+            <strong>No Chapter Yet</strong> 
+          </div>
+        }
+        {sectionsInformation.map(item=>{
+          count++;
+          {
+            return(
               <div>
-                <strong>Blog Name</strong> : {blogInformation.blog_name}
-                <div style={{ float: "right" }}>
-                  {author==localStorage.userId &&
-                    <div>
-                      <ChangeBlogInfoModal/>
-                      <button className="blog-delete-button" onClick={() => handleDeleteBlog(blogInformation)}>
-                        <Image className="delete-setting-pic blog-fl" src={minus} ></Image>
-                      </button>
-                      {showDeleteModal && 
-                        <div>
-                          <DeleteModal 
-                            show = {showDeleteModal}
-                            nameBlog = {BlogDelete?.blog_name}
-                            deleteBlog = {submitDeleteBlog}
-                            cancel = {closeModal}
-                          />
+                <Link className="show-all-section" to={`/readSection/${item.id}`}>
+                    <strong>Chapter {count} : {item.section_name}</strong> 
+                    <div style={{ float: "right" }}>
+                      {author==localStorage.userId &&
+                        <div style={{ float: "right" }}>
+                          {false &&
+                          <Link to={`/editSection/${item.id}`}>
+                            <Button>Edit</Button>
+                          </Link>}
                         </div>
                       }
                     </div>
-                  }
-                </div>
-              </div>
-              {courseInformation.map(item=>(
-                <div>
-                  <div>
-                    <strong>Code</strong> : {item.Code}
-                  </div>
-                  <div>
-                    <strong>Subject</strong> : {item.NameEn}
-                  </div>
-                  <div>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {item.NameTh}
-                  </div>
-                  <div>
-                    <strong>Teacher</strong> : {item.Teacher}
-                  </div>
-                </div>
-              ))}
-            </Card.Header>
-          ))}
-          
-        </div>
-        <div className="hot-kl">
-          <Card.Header>SECTION</Card.Header>
-          {!isHaveSections &&
-            <div className="show-nochapter">
-              <strong>No Chapter Yet</strong> 
-            </div>
-          }
-          {sectionsInformation.map(item=>{
-            count++;
-            {
-              return(
-                <div>
-                  <Link className="show-all-section" to={`/readSection/${item.id}`}>
-                      <strong>Chapter {count} : {item.section_name}</strong> 
-                      <div style={{ float: "right" }}>
-                        {author==localStorage.userId &&
-                          <div style={{ float: "right" }}>
-                            {false &&
-                            <Link to={`/editSection/${item.id}`}>
-                              <Button>Edit</Button>
-                            </Link>}
-                          </div>
-                        }
+                    {false &&
+                      <div>
+                        {item.blog_id} {item.id}
                       </div>
-                      {false &&
-                        <div>
-                          {item.blog_id} {item.id}
-                        </div>
-                        }
-                  </Link>
-                  {false &&
-                    <div>
-                      <Button variant="outline-danger">DELETE</Button>
-                      <Button variant="outline-warning">EDIT</Button>
-                    </div>
-                  }
-                </div>
-              )
-            }
-          })}
-          {author==localStorage.userId &&
-            <Link to={`/writeSection/${blogId}`}>
-              <Button variant="outline-secondary" className="button-addsection">
-                <Image className="addsection" src={AddSection} roundedCircle />
-              </Button>
-            </Link>
+                      }
+                </Link>
+                {false &&
+                  <div>
+                    <Button variant="outline-danger">DELETE</Button>
+                    <Button variant="outline-warning">EDIT</Button>
+                  </div>
+                }
+              </div>
+            )
           }
-          
-        </div>
-        <LikeViewReport x={blogsInformation}/>
-        <div  className="hot-kl">
-          <Card.Header>COMMENT</Card.Header>
-          <Comment_component 
-            blogId = {blogId}
-          />
-        </div>
-        <button onClick={e=>{history.goBack()}}>back</button>
+        })}
+        {author==localStorage.userId &&
+          <Link to={`/writeSection/${blogId}`}>
+            <Button variant="outline-secondary" className="button-addsection">
+              <Image className="addsection" src={AddSection} roundedCircle />
+            </Button>
+          </Link>
+        }
+        </Card>
       </div>
-    );
-  };
+
+      <br/>
+
+      <div>
+        <Card bg="light">
+          <Card.Header>COMMENTS</Card.Header>
+          <Card.Body><Comment_component blogId = {blogId}/></Card.Body>
+        </Card>
+      </div>
+      
+      <div className="block">
+        <LikeViewReport x={blogsInformation}/>
+        {userInformation.map(item => (
+          <div className="block">
+            <Link to={`/userpage/${item.id}`} style={{ float : "left" }}>
+              <Suspense  fallback={<div>Loading... </div>}>
+                <div className="blog-fl">
+                  <ImageComponent userid={item.pic_dir}/>
+                </div>
+              </Suspense>
+            </Link>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <Link to={`/userpage/${item.id}`} style={{ color : "white" }}>
+              {item.name}
+            </Link>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  );
+};
   
 export default Show_Knowledge

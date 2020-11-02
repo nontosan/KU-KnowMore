@@ -9,7 +9,7 @@ const DelReport_Modal = (props:any) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const handlerefresh = (e: any) => {
-        window.location.reload(false);
+        window.location.reload(true);
     }
     const DeleteReport = () => {
         BlogsService.deleteReport(props.rblog.id)

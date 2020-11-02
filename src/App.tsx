@@ -22,6 +22,7 @@ import './style/section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/Navbar';
 import ReadBlog_Admin from './Pages/ReadBlog_Admin';
+import readSection from './Pages/readSection'
 import Portal from './components/Portal';
 import LoginService from './services/LoginService';
 import { User_Sch } from './interfaces/user';
@@ -50,19 +51,18 @@ const App = () =>
         </Route>
 
         <Route path="/read:type/:blogId" name="blogId" component={ReadBlog_Admin} />
+        <Route path="/readSection/:sectionId" name="sectionId" component={readSection} />
   
         <Route path="/portal" name="code">
           <Portal loginCallback={handleUserLogin}/>
         </Route>
         
         <Route path="/login">
-          
           <LoginPage loginCallback={handleUserLogin}/>
         </Route>
-
       </Switch>
-  </Router>
-    </div>
+    </Router>
+  </div>
   )
 }
 

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { Reports_data } from "../../interfaces/reports";
 import { Blog, Review } from "../../interfaces/blog";
 import BlogsService from '../../services/BlogsService';
+import './t.css';
 
 const ViewBlog_Modal = (props:any) => {
     
@@ -35,7 +36,7 @@ const ViewBlog_Modal = (props:any) => {
 
     return(
         <div className="mr-auto p-2 size-text-report">
-            <a href='#' onClick={handleShow}>
+            <a className="t" href='#' onClick={handleShow}>
                 {blogname} 
             </a>  
             <Modal

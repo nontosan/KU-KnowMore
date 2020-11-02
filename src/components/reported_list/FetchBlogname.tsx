@@ -10,17 +10,14 @@ import '../../style/section.css';
 const FetchBlogname = (props:any) => {
     
     const [hasError,setErrors] = useState<boolean>(false)
-    const [blog,setBlog] = useState<Blog[]>([])
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [user,setUser] = useState<any[]>([])
     
 
     async function fetchData(){
-        const res =  await fetch(`https://backend.ku-knowmore.xyz/blogs/${props.rblog.content_id}`)
+        const res =  await fetch(`https://backend.ku-knowmore.xyz/users/${props.rblog.user_id}`)
         res
             .json()
-            .then(res => setBlog(res))
+            .then(res => setUser(res))
             .catch(err => setErrors(err))
     }
 
@@ -28,12 +25,12 @@ const FetchBlogname = (props:any) => {
         fetchData();
     },[])
 
+    const username = user.map(u=>u.name)
+
     return (
         <div>
             
-            <ListGroup.Item className="blogcontainer" >
-                
-                <div className="d-flex color-green" >
+                <div className="d-flex" >
                     <div className ="mr-auto p-2">
                     {(props.rblog.content_type!='comment')
                         ? <ViewBlog_Modal rblog = {props.rblog}/>
@@ -42,14 +39,14 @@ const FetchBlogname = (props:any) => {
                     </div>
                 
                     <div className="p-2 size-text-report">
-                        Reported by: {props.rblog.user_id}&nbsp;
+                        Reported by: {username}&nbsp;
                     </div>
 
                     <div className="p-2 cancel-button">
                         <DelReport_Modal rblog = {props.rblog}/> 
                     </div>
                 </div>
-            </ListGroup.Item>
+
         </div>
     )
 }
