@@ -17,3 +17,17 @@
     padding: '0.16666666666667em 0.5em';
     text-align: 'center';
   };
+ 
+  .edit{
+      margin-top: 20%;
+  }
+  .dropdownn{
+    padding:0em;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    justify-content: center;
+    text-align: center;
+  }
+  .editcontainer{
+     margin-bottom: 3em;
+  }

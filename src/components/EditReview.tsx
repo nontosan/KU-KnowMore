@@ -314,7 +314,7 @@ const formatGroupLabel = (data:any) => (
         ))}
         
       </div>
-      <div className="hot-kl">
+      <div className="hot-kl editcontainer">
         <Card.Header>Information</Card.Header>
         <div className="div-scrollbar editor_text" >
         <div className="Editor">
@@ -338,22 +338,14 @@ const formatGroupLabel = (data:any) => (
                         <Col>
                             ({teachScore}/5)
                         </Col>
-                        <Col >
-                            <div>{Number(teachScore)}</div>
-                            button modal edit value
-                        </Col>
-                        <Col>
-                          <Select
-                            defaultValue={ScoreValue[Number(workScore)]}
-                            options={ScoreValue}
-                            formatGroupLabel={formatGroupLabel}
-                            onChange={e=>{
-                              console.log(e)
-                              if(e!==undefined){
+                        <Col className="dropdown">
+                            <div className="edit">edit </div>
+                            <Select
+                              options={ScoreValue}
+                              onChange={(e:any)=>{
                                 setTeachScore(e.value)
-                              }
-                            }}
-                          />
+                              }}
+                            />
                         </Col>
                     </Row>
                 </Container>
@@ -370,8 +362,14 @@ const formatGroupLabel = (data:any) => (
                         <Col>
                             ({workScore}/5)
                         </Col>
-                        <Col >
-                            button modal edit value
+                        <Col className="dropdownn">
+                            <div className="edit">edit </div>
+                            <Select
+                              options={ScoreValue}
+                              onChange={(e:any)=>{
+                                setWorkScore(e.value)
+                              }}
+                            />
                         </Col>
                     </Row>
                 </Container>
@@ -388,8 +386,14 @@ const formatGroupLabel = (data:any) => (
                         <Col>
                             ({roomScore}/5)
                         </Col>
-                        <Col >
-                            button modal edit value
+                        <Col className="dropdown">
+                            <div className="edit">edit </div>
+                            <Select
+                              options={ScoreValue}
+                              onChange={(e:any)=>{
+                                setRoomScore(e.value)
+                              }}
+                            />
                         </Col>
                     </Row>
                 </Container>
@@ -406,8 +410,14 @@ const formatGroupLabel = (data:any) => (
                         <Col>
                             ({overallScore}/5)
                         </Col>
-                        <Col >
-                            button modal edit value
+                        <Col className="dropdown">
+                            <div className="edit">edit </div>
+                            <Select
+                              options={ScoreValue}
+                              onChange={(e:any)=>{
+                                setOverallScore(e.value)
+                              }}
+                            />
                         </Col>
                     </Row>
                 </Container>
