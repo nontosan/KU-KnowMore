@@ -179,6 +179,14 @@
   color:rgb(2, 212, 55)!important;
 }
 
+.knowledge{
+  background-color: #73C0EA;
+}
+
+.review{
+  background-color: #A3EBA3;
+}
+
 /* -------------------------------------------footer css------------------------------------------------------*/
 
 .three-column-footer-contact-form-container {

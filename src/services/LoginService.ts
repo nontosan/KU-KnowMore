@@ -20,6 +20,11 @@ async function UserLogin(userLogin: Login): Promise<any|null> {
     }
 }
 
+function KULogout(): void {
+    window.open('https://sso-dev.ku.ac.th/idp/apps/auth/signout', '_blank');
+    setTimeout (window.close, 100);
+}
+
 function UserLogout(): void {
     if (isUserLoggedIn ()) {
         //localStorage.removeItem("accessTokeneiei");
@@ -55,7 +60,7 @@ function getUserId(): string|null {
 async function portal(Code:any): Promise<any|null>{
     //may be edit path
     //console.log(JSON.stringify(code))
-    const res = await fetch(`http://188.166.178.33:3000/auth/token`,{
+    const res = await fetch(`https://backend.ku-knowmore.xyz/auth/token`,{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(Code),
@@ -85,5 +90,5 @@ async function portal(Code:any): Promise<any|null>{
     //}
 }
 export default {
-    UserLogin,isUserLoggedIn, getUsername, UserLogout, getUserId,portal
+    UserLogin,isUserLoggedIn, getUsername, UserLogout, getUserId,portal, KULogout
 };

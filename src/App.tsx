@@ -81,16 +81,17 @@ const App = () => {
         setUserId(LoginService.getUserId());
         setLog(false);
         console.log(LoginService.getUserId())
-        alert('ยินดีต้อนรับสู่ KU-KNOWMORE')
     }
 
     //console.log(username);
     const logout = () => {
         LoginService.UserLogout();
+        LoginService.KULogout();
         setUserInformation([]);
         setUsername(null);
         setLog(true);
         alert('ออกจากระบบแล้ว')
+        window.location.replace("/");
     };
     //console.log(localStorage.accessToken)
 
@@ -183,7 +184,7 @@ const App = () => {
                         )}
                     </Nav>
                 </Navbar>
-                {true &&
+                {false &&
                     <div>
                         <a href={"https://77up.app/"}>
                             <img src="//www.tvsod.com/images/banners/ohogame-728x90-20-2.gif" alt="banner" width="100%"></img>

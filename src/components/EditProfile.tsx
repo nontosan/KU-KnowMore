@@ -65,8 +65,6 @@ function EditProfile (props:any) {
       profile_description:descriptions,
       username:usrname,
     };
-
-
     /*
     console.log(newProfile);
     ProfileService.CreateProfile(newProfile) 
@@ -79,14 +77,19 @@ function EditProfile (props:any) {
       });*/
 
       console.log(editedProfile);
-      ProfileService.EditPro(editedProfile,userId)
-        .then(savedEditedProfile => {
-          //console.log(savedEditedProfile)
-          setTimeout(() => {
-            message.success({ content: 'Loaded!', key, duration: 2 });
-          }, 1);
-          window.location.replace(`/userpage/${user_id}`);
-        });
+      if(nme!=='' && usrname!== ''){
+        openMessage()
+        ProfileService.EditPro(editedProfile,userId)
+          .then(savedEditedProfile => {
+            //console.log(savedEditedProfile)
+            setTimeout(() => {
+              message.success({ content: 'Loaded!', key, duration: 2 });
+            }, 1);
+            window.location.replace(`/userpage/${user_id}`);
+          });
+      }else {
+        alert('กรุณาใส่ข้อมูลให้ครบถ้วน')
+      }
   }; 
   const openMessage = () => {
     message.loading({ content: 'Loading...', key });
@@ -123,26 +126,35 @@ function EditProfile (props:any) {
     <div className ="EditProfile">
       <div className="profile">
         <div className = "Name">
+          <div className="typeinfo">
+            NAME
+            <div className="reddok">*</div>
+          </div>
           {userInformation.map(UserInfo=>
           <Form.Control type="text" value={nme}
           onChange={e => setname(e.target.value)}/>
             )}
         </div>
         <div className = "Username">
+          <div className="typeinfo">
+            USERNAME<div className="reddok">*</div>
+          </div>
           {userInformation.map(UserInfo=>
           <Form.Control type="text" value={usrname}
           onChange={e => setusername(e.target.value)}/>
             )}
         </div>
         <div className = "Des">
-          Profile Descriptions: <br/>
+          <div className="typeinfo">
+            Profile Descriptions
+          </div>
+           <br/>
           <Form.Control as="textarea" rows={3}  name="paragraph_text" value={descriptions}
           onChange={e => setdescriptions(e.target.value)}/>
         </div>
         <div className="button">
         <Button variant="success" onClick = {e=>{
           buttonstate()
-          openMessage()
           }}>Submit</Button>{' '}
         <Button variant="danger" onClick={e=>openNotification()}> Cancel </Button>
         </div>
