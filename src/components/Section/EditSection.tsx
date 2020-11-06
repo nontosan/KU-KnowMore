@@ -127,12 +127,13 @@ const EditSection = (props:any) => {
                     onChange={setEditorValue}
                 />
             </div>
-            <div className="uploadtest">
-                <UploadMultiEditSection secid = {sectionId}/>
-            </div>
-            <div className="display">
-                <h4>File: </h4>
-            <DisplayFileandDel secid = {sectionId} fetchsection={fetchSection}/>
+            <div className="uploadanddel">
+                <div className="display">
+                    <DisplayFileandDel secid = {sectionId} fetchsection={fetchSection}/>
+                </div>
+                <div className="uploadtest">
+                    <UploadMultiEditSection secid = {sectionId}/>
+                </div>
             </div>
             <div className="div-sectionname">
                 <Button className="cancel-button" variant="outline-danger" onClick={e=>openNotification()}>Cancel</Button>
