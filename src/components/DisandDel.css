@@ -1,0 +1,17 @@
+.filecontainer{
+    width:100%;
+    padding:0;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    padding:1em
+}
+.outercont{
+    widows: 10em;;
+}
+.openfile{
+    width:70%;
+}
+.deletefile{
+    justify-content: right;
+    position: right;
+}

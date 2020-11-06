@@ -56,3 +56,13 @@
     justify-content: center;
     align-items: center; /* Optional */
 }
+
+.reddok{
+    color: red;
+    display: inline;
+}
+
+.typeinfo{
+    font-size: 22px;
+    display: inline;
+}

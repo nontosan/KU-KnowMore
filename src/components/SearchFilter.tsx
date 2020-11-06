@@ -2,10 +2,14 @@
 import React, { useEffect , useState , Component  } from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { useLocation } from 'react-router-dom';
+import {
+    Link, Redirect, NavLink
+  } from 'react-router-dom';
 // END OF IMPORT LIBRARY //
 
 // IMPORT COMPONENT //
 import Filtermodel from '../modals/filter'
+import UserAuthor from './UserAuthor';
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
@@ -44,16 +48,40 @@ const SearchFilter=()=>{
             <div className="main-div-main">
                 <Filtermodel />
             </div>
+            <div className="hot-kl">
             {blogs.map(blog => ( 
-                <ListGroup.Item className="blogcontainer" >
-                    <button id={blog.id} className="blogclick" onClick={readblog}>
-                        <div className="element">{blog.blog_name}</div>
-                        <div className="element">{blog.course_id}</div>
-                        <div className="element">  viwer {blog.viewers}</div>
-                        <div className="element">  last edit {blog.last_edit}</div>
-                    </button>
-                </ListGroup.Item>
+                <div>
+                    {true &&
+                        <Link className={`show-all-blog ${blog.type}`} to={`/${blog.type}/${blog.id}`}>
+                            <div className="blog-fl">
+                                {blog.blog_name}
+                            </div>
+                            <div className="blog-fl" style={{ textAlign : "center" }}>
+                                {blog.viewers} View
+                            </div>
+                            <div className="blog-fl" style={{ textAlign : "center" }}>
+                                Last Edit : {blog.last_edit}
+                            </div>
+                            <div className="blog-fl" style={{ textAlign : "center" }}>
+                                <UserAuthor
+                                    userid = {blog.user_id}
+                                />
+                            </div>
+                        </Link>
+                }
+            
+                    {false &&
+                        <ListGroup.Item className="blogcontainer" >
+                            <button id={blog.id} className="blogclick" onClick={readblog}>
+                                <div className="element">{blog.blog_name}</div>
+                                <div className="element">  viwer {blog.viewers}</div>
+                                <div className="element">  last edit {blog.last_edit}</div>
+                            </button>
+                        </ListGroup.Item>
+                    }
+                </div>
             ))}
+            </div>
         </div>
     )
 }

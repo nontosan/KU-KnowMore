@@ -5,6 +5,9 @@ import axios from 'axios'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import "./DisandDel.css"
 
 function DisplayFileandDel (props:any) { //This function is for EditSection
 
@@ -33,15 +36,17 @@ function DisplayFileandDel (props:any) { //This function is for EditSection
 
     return (
         <div className = "Display">
-            {attachmentsInformation.map(file=>(
-                <>
-                    <a href={`https://backend.ku-knowmore.xyz/${file.path}`}> {file.originalname}</a>
-                    <Button variant="danger" size="sm"  onClick={e => deletestate(file._id)}>{file.filename}</Button><br/>
-                </>
-            ))}
-            
-        
-            
+            <Card style={{ width: '18rem' }} className="outercont">
+                <Card.Header>All Files</Card.Header>
+                <ListGroup variant="flush" >
+                    {attachmentsInformation.map(file=>(
+                        <ListGroup.Item className="filecontainer" >    
+                            <a href={`https://backend.ku-knowmore.xyz/${file.path}`} className="openfile"> {file.originalname}</a>
+                            <Button variant="danger" size="sm" className="deletefile"  onClick={e => deletestate(file._id)}>DELETE</Button>
+                        </ListGroup.Item>
+                    ))}
+                </ListGroup>
+            </Card>
         </div>
     );
 };

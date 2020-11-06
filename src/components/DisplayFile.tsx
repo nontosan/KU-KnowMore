@@ -5,9 +5,11 @@ import axios from 'axios'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
+import ListGroup from 'react-bootstrap/ListGroup';
 import './section.css';
 import './file.css';
-
+import { CloudDownloadOutlined } from '@ant-design/icons';
+import "./DisplayFile.css"
 function DisplayFile (props:any) {//This function is for ReadSection
     const [checkNull, setCheckNull] = useState<boolean>(false);
 
@@ -31,15 +33,18 @@ function DisplayFile (props:any) {//This function is for ReadSection
     const [attachmentsInformation, setattachmentsInformation] = useState<Attachments[]>([]);
 
     return (
-        <div className = "Display blog-fl">
+        <div className = "bigcont" >
             {checkNull&&
                 <div>
                     &nbsp;&nbsp;&nbsp;No file
                 </div>
             }
             {attachmentsInformation.map(file=>
-            <a href={`https://backend.ku-knowmore.xyz/${file.path}`}> {file.originalname} <br/></a>
-                )}
+                <ListGroup.Item className="container">
+                    <a> {file.originalname}</a>
+                    <a href={`https://backend.ku-knowmore.xyz/${file.path}` } className="icon"><CloudDownloadOutlined /></a>
+                </ListGroup.Item>
+            )}
             
         </div>
     );
