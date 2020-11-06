@@ -51,7 +51,7 @@ const App = () =>
         </Route>
 
         <Route path="/read:type/:blogId" name="blogId" component={ReadBlog_Admin} />
-        <Route path="/readSection/:sectionId" name="sectionId" component={readSection} />
+        <Route path="/Section/:sectionId" name="sectionId" component={readSection} />
   
         <Route path="/portal" name="code">
           <Portal loginCallback={handleUserLogin}/>

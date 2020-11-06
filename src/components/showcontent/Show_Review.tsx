@@ -145,7 +145,7 @@ const Show_Review = (props:any) => {
           <Container className="scoretask">
             <div>
               <Row>
-                  <Col sm={3}>
+                  <Col >
                       <label>สอนได้เข้าใจ</label>
                   </Col>
                   <Col>
@@ -158,7 +158,7 @@ const Show_Review = (props:any) => {
             </div>
             <div>
               <Row>
-                  <Col sm={3}>
+                  <Col >
                       <label>จำนวนงาน</label>
                   </Col>
                   <Col>
@@ -171,20 +171,20 @@ const Show_Review = (props:any) => {
             </div>
             <div>
               <Row>
-                  <Col sm={3}>
+                  <Col >
                       <label>ความสำคัญในการเข้าเรียน</label>
                   </Col>
                   <Col >
                       <Progress percent={roomScore*20} showInfo={false}/>
                   </Col>
-                  <Col>
+                  <Col className="alignright">
                       ({roomScore}/5)
                   </Col>
               </Row>
             </div>
             <div>
               <Row>
-                  <Col sm={3}>
+                  <Col >
                     <label>ภาพรวม</label>
                   </Col>
                   <Col>

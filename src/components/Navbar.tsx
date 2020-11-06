@@ -51,7 +51,7 @@ const NavBar = () => {
                         <Image className="profile-page-pic picture-padding" src={ProfilePic} roundedCircle />
                     </div>
                     <Navbar.Text className="size-sign">
-                        Signed in as: <a href="#">Username</a>
+                        Signed in as: <a href="#">aaaaaaaa</a>
                     </Navbar.Text>
                 </Navbar.Collapse>
                 <Nav>

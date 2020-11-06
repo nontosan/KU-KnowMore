@@ -111,6 +111,9 @@ const Show_Knowledge = (props:any) => {
     const fetchBlogs = () => {
       BlogsService.fetchBlogSpecific(blogId)
         .then(blogInfo => {
+          console.log(blogId)  
+          console.log(blogInfo)
+          
           CourseService.fetchCourseWithId(blogInfo[0].course_id)
             .then(courseInfo => {
               setCourseInformation(courseInfo);
@@ -119,7 +122,7 @@ const Show_Knowledge = (props:any) => {
           setBlogsInformation(blogInfo);
           setAuthor(blogInfo[0].user_id);
           fetchCourse(blogInfo[0].course_id)
-          //console.log(blogInfo);
+          
         });
     }
   
@@ -190,8 +193,8 @@ const Show_Knowledge = (props:any) => {
           <div>
             {courseInformation.map(item=>(
               <div>
-                  <strong>รหัสวิชา</strong> : {item.Code}
-                  <strong>วิชา</strong> : {item.NameEn} ({item.NameTh})                         
+                  <strong>รหัสวิชา</strong> : {item.Code}<br/>
+                  <strong>วิชา</strong> : {item.NameEn} ({item.NameTh}) <br/>                        
                   <strong>อาจารย์</strong> : {item.Teacher}
               </div>
             ))}
@@ -214,41 +217,14 @@ const Show_Knowledge = (props:any) => {
           {
             return(
               <div>
-                <Link className="show-all-section" to={`/readSection/${item.id}`}>
+                <a className="show-all-section" href={`/Section/${item.id}`}>
                     <strong>Chapter {count} : {item.section_name}</strong> 
-                    <div style={{ float: "right" }}>
-                      {author==localStorage.userId &&
-                        <div style={{ float: "right" }}>
-                          {false &&
-                          <Link to={`/editSection/${item.id}`}>
-                            <Button>Edit</Button>
-                          </Link>}
-                        </div>
-                      }
-                    </div>
-                    {false &&
-                      <div>
-                        {item.blog_id} {item.id}
-                      </div>
-                      }
-                </Link>
-                {false &&
-                  <div>
-                    <Button variant="outline-danger">DELETE</Button>
-                    <Button variant="outline-warning">EDIT</Button>
-                  </div>
-                }
+                </a>
               </div>
             )
           }
         })}
-        {author==localStorage.userId &&
-          <Link to={`/writeSection/${blogId}`}>
-            <Button variant="outline-secondary" className="button-addsection">
-              <Image className="addsection" src={AddSection} roundedCircle />
-            </Button>
-          </Link>
-        }
+        
         </Card>
       </div>
 

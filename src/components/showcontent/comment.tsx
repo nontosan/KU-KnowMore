@@ -112,7 +112,6 @@ const Comment_component=(props:any)=>{
                                 </div>
                                 } id="dropdown-nav" >
                                 <NavDropdown.Item onClick={handledelete} className="more-option">Delete</NavDropdown.Item>
-                                <NavDropdown.Item onClick={handlereport} className="more-option">Report</NavDropdown.Item>
                             </NavDropdown>
                         }
                     </div>

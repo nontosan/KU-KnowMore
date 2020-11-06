@@ -25,7 +25,7 @@ const FetchBlogname = (props:any) => {
         fetchData();
     },[])
 
-    const username = user.map(u=>u.name)
+    const username = user.map(u=>u.name);
 
     return (
         <div>

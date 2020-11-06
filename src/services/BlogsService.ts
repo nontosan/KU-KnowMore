@@ -76,7 +76,7 @@ async function fetchReviewBlogs(): Promise<Blog[]> {
 }
 
 async function deleteBlog(blogid:string): Promise<string> {
-    const res = await fetch(`https://backend.ku-knowmore.xyz/blogs/${blogid}`,{
+    const res = await fetch(`https://backend.ku-knowmore.xyz/blogs/${blogid}/withreport`,{
         method: 'DELETE',
     });
     const blogs = await res.json();

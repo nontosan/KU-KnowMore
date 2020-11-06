@@ -16,7 +16,6 @@ const DelBlog_Modal = (props:any) => {
         })
     } 
 
-
     return (
         <div className="alignright">    
             <Button variant="danger" onClick = {handleShow}>
