@@ -136,4 +136,34 @@
     width: auto;
     margin: 20px;
   }
-  
+
+  .black-background{
+    min-height: 600px;
+    display: grid;
+  }
+
+
+  .link-login{
+    color: white;
+    transition: 0.4s;
+  }
+
+  .link-login:hover{
+    color: black;
+  }
+
+  .login-ku-button{
+    margin: auto;
+    font-size: 30px;
+    border: 0px;
+  }
+
+  .ku-logo{
+    margin: auto;
+  }
+
+  .welcome{
+    margin: auto;
+    color: rgb(2, 78, 66);
+    font-size: 70px;
+  }

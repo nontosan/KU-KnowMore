@@ -220,7 +220,7 @@ const DropdownCreateKnowledge=()=> {
                     >
                         {({isSubmitting})=>(
                             <div className="container_real">
-                            <div className="create_kl">Create knowledge</div>
+                            <div className="create_kl">Create Knowledge</div>
                             <Form className="blog_container" autoComplete="off">
                                 <Row className="Col">
                                     <Col sm={2}>

@@ -53,7 +53,7 @@ const Portal=(props:LoginFormProps)=> {
     },[])
     return (
         <div className="">
-            {code}
+            Pls Wait...
         </div>  
     );
 }
