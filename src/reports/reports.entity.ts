@@ -20,6 +20,9 @@ export class Reports {
 
     @Column()
     report_reason: string;
+
+    @Column()
+    date_time:string;
 }
 
 export default Reports;

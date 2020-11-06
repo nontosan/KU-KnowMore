@@ -12,4 +12,6 @@ export class CreateReportDto {
 
     @IsNotEmpty()
     report_reason?: string;
+
+    date_time?: string;
 }
