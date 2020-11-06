@@ -185,7 +185,7 @@ const closeModal = () => {
 
   useEffect(() => {
     if (statusDelete==true) {
-      window.location.replace('/');
+      window.location.replace(`/userpage/${author}`);
       setStatusDelete(false);
     }
   },[statusDelete]);
