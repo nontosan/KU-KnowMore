@@ -317,6 +317,7 @@ const formatGroupLabel = (data:any) => (
       </div>
       <div className="hot-kl editcontainer">
         <Card.Header>Information</Card.Header>
+        <div className="EditReview_Blog">
         <div className="div-scrollbar editor_text" >
         <div className="Editor">
             <ReactQuill 
@@ -422,6 +423,7 @@ const formatGroupLabel = (data:any) => (
                         </Col>
                     </Row>
                 </Container>
+            </div>
             </div>
       </div>
       <div className="Confirm"> 

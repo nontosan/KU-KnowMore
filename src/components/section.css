@@ -39,7 +39,10 @@
     padding-top: 50px;
     padding-left: 100px;
     padding-right: 100px;
-    
+}
+
+.editor{
+    background-color: white;
 }
 
 .div-section-content{
@@ -48,7 +51,7 @@
     margin-right: 100px;
     min-height: 500px;
     background-color: white;
-    padding: 20px;
+    padding: 16px;
 }
 
 .main-div {

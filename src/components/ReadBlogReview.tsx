@@ -267,6 +267,7 @@ const fetchReview = () => {
       </div>
       <div className="hot-kl">
         <Card.Header>Information</Card.Header>
+        <div className="Review_Blog">
         <div className="div-scrollbar editor_text" >
         <div dangerouslySetInnerHTML={{ __html: editorValue }} />
       </div>
@@ -329,6 +330,7 @@ const fetchReview = () => {
                         </Col>
                     </Row>
                 </Container>
+            </div>
             </div>
       </div>
       <LikeViewReport x={blogsInformation}/>
