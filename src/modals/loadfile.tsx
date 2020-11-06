@@ -48,7 +48,7 @@ function LoadFile(props:any) {
 const LoadFileModal=()=>{
     const [modalShow, setModalShow] = useState<boolean>(false);
     return (
-    <div>
+    <div className="modal_file">
       <Button variant="info" onClick={() => setModalShow(true)}>
         FILE
       </Button>

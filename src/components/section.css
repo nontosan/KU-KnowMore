@@ -141,3 +141,8 @@
       grid-template-columns: 1fr 1fr;
       width: 10%;
   }
+
+  .modal_file{
+      padding-left: 100px;
+      padding-top: 15px;
+  }

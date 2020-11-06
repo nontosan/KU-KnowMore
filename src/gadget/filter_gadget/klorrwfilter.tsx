@@ -10,7 +10,7 @@ function Choosefilter(props:any) {
     return (
       <ToggleButtonGroup type="checkbox" onChange={props.handle}> 
         <ToggleButton value={1}>ความรู้</ToggleButton>
-        <ToggleButton value={2}>รีวืว</ToggleButton>
+        <ToggleButton value={2}>รีวิว</ToggleButton>
       </ToggleButtonGroup>
     );
   }
