@@ -9,6 +9,7 @@ import axios from 'axios';
 // IMPORT COMPONENT //
 import DisplayFile from '../DisplayFile';
 import DisplayFileandDel from '../DisandDel';
+import LoadFileModal from "../../modals/loadfile"
 
 // IMPORT SERVICE //
 import SectionService from '../../services/SectionService';
@@ -158,10 +159,7 @@ const ReadSection = (props:any) => {
             {afterFetch &&
                 <div className="div-section-content" dangerouslySetInnerHTML={{__html: displayHTML}} />
             }
-            <div className="display_read">
-                <h4>Attachments:</h4>
-                <DisplayFile secid = {sectionId}/>
-            </div>
+            <LoadFileModal />
             <div className="read_button">
                 <Button variant="secondary" onClick={e=>history.goBack()}>back</Button>
             </div>

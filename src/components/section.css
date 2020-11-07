@@ -131,3 +131,8 @@
     width: 100%;
     color: white;
   }
+  .uploadanddel{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      width: 10%;
+  }
