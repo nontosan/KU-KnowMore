@@ -8,16 +8,17 @@ const DelReport_Modal = (props:any) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const handlerefresh = (e: any) => {
-        window.location.reload(true);
-    }
+    
     const DeleteReport = () => {
         BlogsService.deleteReport(props.rblog.id)
         .then(blogs => {
             console.log(blogs)
             console.log("done")
         })
-    } 
+    }
+    const handlerefresh = async (e: any) => {
+        await window.location.reload(true);
+    }
 
     
 

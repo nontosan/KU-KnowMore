@@ -19,8 +19,15 @@ async function createComment(comment:any): Promise<Comment_Sch> {
     return comments
 }
 
+async function deleteComment(commmentid:string): Promise<string> {
+    const res = await fetch(`https://backend.ku-knowmore.xyz/comments/${commmentid}`,{
+        method: 'DELETE',
+    });
+    const comments = await res.json();
+    return comments;  
+}
 
 
 export default {
-  createComment,fetchComment
+  createComment,fetchComment,deleteComment
 };

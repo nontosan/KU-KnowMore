@@ -6,6 +6,7 @@ import NavDropdown from 'react-bootstrap/esm/NavDropdown';
 // END OF IMPORT LIBRARY //
 
 // IMPORT COMPONENT //
+import DeleteCommentModal from '../modal/DelComment_inblog';
 import UserCommentAuthor from "./UserCommentAuthor";
 // END OF IMPORT COMPONENT //
 
@@ -29,7 +30,6 @@ import "./comment.css"
 //------------------------------------------------------------------//
 
 import {Formik,Form,Field,ErrorMessage} from "formik";
-import { Button, Card } from "react-bootstrap";
 
 
 type comment_loaded={
@@ -59,6 +59,13 @@ const Comment_component=(props:any)=>{
     //const blog_id
     const blogId:string = window.location.pathname.split("/")[2]
 
+    
+    //CONST FOR DELETE MODAL//
+    const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+    const [statusDelete, setStatusDelete] = useState<boolean>(false);
+    const [deleteCommentId, setDeleteCommentId] = useState<string>('');
+    //END OF CONST FOR DELETE MODAL//
+
     const fetchblog=()=>{
     }
 
@@ -73,22 +80,50 @@ const Comment_component=(props:any)=>{
     }
     
 
-    const handledelete=()=>{
-        console.log("handledelete comment")
+    const handleDeleteComment=(commentId:string)=>{
+        console.log(commentId);
+        setShowDeleteModal(true);
+        setDeleteCommentId(commentId);
     }
 
     const handlereport=()=>{
+        if(localStorage.accessToken==undefined){
+            alert('PLEASE LOGIN FIRST')
+        }
         console.log("handlereport comment")
         //popup form
         //https://www.youtube.com/watch?v=l2Kp2SzUdlg&ab_channel=Weibenfalk[!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!]
     }
 
+    const submitDeleteComment = () => {
+        setShowDeleteModal(false);
+        console.log(deleteCommentId);
+        CommentService.deleteComment(deleteCommentId)
+            .then(res => {
+                if (res) {
+                    setStatusDelete(true);
+                }
+                console.log(res);
+            })
+    }
+
+    const closeModal = () => {
+        setShowDeleteModal(false);
+    }
+
+    
     useEffect(()=>{
         fetchCommentblog()
         //console.log("HELLOEIEIZACOMMENT");
         //check is token id is userid then set deleteVisible ??[!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!]
     },[])
 
+    useEffect(() => {
+        if (statusDelete==true) {
+          fetchCommentblog();
+          setStatusDelete(false);
+        }
+      },[statusDelete]);
     //DOM
 
     return (
@@ -96,70 +131,88 @@ const Comment_component=(props:any)=>{
             {comments.map(item=>(
                 <div className="show-all-comment">
                     <div className="blog-fl black-font">
-                        <UserCommentAuthor userid = {item.user_id}/>
+                        <UserCommentAuthor 
+                            userid = {item.user_id}
+                        />
                     </div>
                     <div className="blog-fl black-font">
-                        {item.content}    
+                        {item.content}
                     </div>
                     <div className="blog-fl black-font">
                         {item.date_time}
                     </div>
                     <div className="blog-fr">
-                        {item.user_id==localStorage.userId &&
+                        
                             <NavDropdown className="dropdown-eiei blog-fr" title={
                                 <div className="border-more-pic">
                                     <Image className="more-pic blog-fr" src={ReportButton}></Image>
                                 </div>
                                 } id="dropdown-nav" >
-                                <NavDropdown.Item onClick={handledelete} className="more-option">Delete</NavDropdown.Item>
+                                {item.user_id==localStorage.userId &&
+                                    <NavDropdown.Item onClick={() => handleDeleteComment(item.comment_id)} className="more-option">Delete</NavDropdown.Item>
+                                }
+                                {showDeleteModal && 
+                                    <div>
+                                        <DeleteCommentModal 
+                                            show = {showDeleteModal}
+                                            content = {item.content}
+                                            deleteComment = {submitDeleteComment}
+                                            cancel = {closeModal}
+                                        />
+                                    </div>
+                                }
+                                {item.user_id!==localStorage.userId &&
+                                    <NavDropdown.Item onClick={handlereport} className="more-option">Report</NavDropdown.Item>
+                                }
                             </NavDropdown>
-                        }
                     </div>
                 </div>
             ))}
-            <br/>
-            <Formik
-                initialValues={{CommentContent:"",errorMess:""}}
-                validate={(value)=>{
+            {localStorage.accessToken!==undefined &&
+<Formik
+            initialValues={{CommentContent:"",errorMess:""}}
+            validate={(value)=>{
                 const errors:any={};
                 if(value.CommentContent===""){
                     errors.errorMess="noCommentdata";
                 }
                 return errors
-                }}
-                onSubmit={(values,actions)=>{
-                    const cont:any={
+            }}
+            onSubmit={(values,actions)=>{
+                const cont:any={
                         blog_id:blogId,
-                        user_id:"5f82fd2e04eb8600aa617b66",
+                        user_id:localStorage.userId,
                         content:values.CommentContent,
                     }
-                    if(values.CommentContent!==""){
-                        //console.log(cont)
-                        CommentService.createComment(cont)
-                            .then(res=>{
-                                console.log('eiei')
-                                fetchCommentblog()
-                            })
-                    }
-                    else{
-                        actions.setSubmitting(true)
-                    }
-                    actions.setSubmitting(false)
-                    values.CommentContent=""
-                }}
+                if(values.CommentContent!==""){
+                    //console.log(cont)
+                    CommentService.createComment(cont)
+                        .then(res=>{
+                            console.log('eiei')
+                            fetchCommentblog()
+                        })
+                }
+                else{
+                    actions.setSubmitting(true)
+                }
+                actions.setSubmitting(false)
+                values.CommentContent=""
+            }}
             >
-                {({isSubmitting})=>(
-                    <Form autoComplete="off">
-                        <div className="content_container">
-                            <div className="cont">
-                                <Field type="typecomment" name="CommentContent" placeholder="type something..."/>
-                                <ErrorMessage name="errorMess" component="div"/>
-                                <Button variant="primary" disabled={isSubmitting}> send </Button>
-                            </div>
+            {({isSubmitting})=>(
+                <Form autoComplete="off">
+                    <div >
+                        <button disabled={isSubmitting} className="btn btn-success send-button"> send </button>
+                        <div style={{color:"white"}}>
+                            <Field type="input" className="input" name="CommentContent" placeholder="type something..."/>
+                            <ErrorMessage name="errorMess" component="div"/>
                         </div>
-                    </Form>
-                )}
-            </Formik>
+                    </div>
+                </Form>
+            )}
+        </Formik>
+            }
+            
         </div>
     )
 }

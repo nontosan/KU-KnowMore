@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
@@ -39,7 +39,11 @@ const App = () =>
     setUserId(LoginService.getUserId());
     setLog(false);
     alert('ยินดีต้อนรับสู่ KU-KNOWMORE')
-}
+  }
+  useEffect(() => {
+    document.title = "Admin-KnowMore"
+  }, []);
+  
   return (
     <div>  
       <Router>

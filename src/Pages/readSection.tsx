@@ -33,7 +33,8 @@ import { Card } from 'react-bootstrap';
 
 import minus from '../Photo/minus_PNG39.png';
 import GearEdit from '../Photo/gear-edit6.png';
-
+import NavBar from '../components/Navbar';
+import '../style/readBlog.css'
 
 import 'antd/dist/antd.css';
 
@@ -135,7 +136,9 @@ const ReadSection = (props:any) => {
 
   return (
       <div>
-          <div className="hot-kl">
+        <NavBar/>
+        <div className="main-container">
+          <div>
               <Card.Header>
                   <strong>
                       Section 
@@ -143,17 +146,30 @@ const ReadSection = (props:any) => {
                 
               </Card.Header>
           </div>
+          <Card>
+          <Card.Body>
           {/*ข้อมูล*/}
-          {afterFetch &&
+            <Card.Title>
+              {afterFetch &&
                 <div className="div-section-content" dangerouslySetInnerHTML={{__html: displayHTML}} />
-            }
+              }
+            </Card.Title>
+          </Card.Body>
+          </Card>
           {/*ไฟล์*/}
-          <div className="display_read">
-              <h4>Attachments:</h4>
+          <br/>
+          <Card>
+            <div className="display_read">
+              <Card.Header>
+                <strong>Attachments:</strong>
+              </Card.Header>
               <DisplayFile secid = {sectionId}/>
-          </div>
+            </div>
+          </Card>
+          <br/>
           <div className="read_button">
               <Button variant="secondary" onClick={e=>history.goBack()}>back</Button>
+          </div>
           </div>
       </div>
   );

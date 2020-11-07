@@ -11,7 +11,7 @@ const ProfileAdmin = () => {
   const SelectContent = () => {
     
       return(
-          <Tabs defaultActiveKey="Profile" id="uncontrolled-tab-example">
+          <Tabs defaultActiveKey="review" id="uncontrolled-tab-example">
             <Tab eventKey="review" title="Review">
               <FetchReport content="review" />
             </Tab>

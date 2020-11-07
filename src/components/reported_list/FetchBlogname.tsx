@@ -11,7 +11,7 @@ const FetchBlogname = (props:any) => {
     
     const [hasError,setErrors] = useState<boolean>(false)
     const [user,setUser] = useState<any[]>([])
-    
+    const [report,setReport] = useState<any[]>([])
 
     async function fetchData(){
         const res =  await fetch(`https://backend.ku-knowmore.xyz/users/${props.rblog.user_id}`)
@@ -21,15 +21,23 @@ const FetchBlogname = (props:any) => {
             .catch(err => setErrors(err))
     }
 
+    async function fetchReport(){
+        const res =  await fetch(`https://backend.ku-knowmore.xyz/reports/${props.rblog.id}`)
+        res
+            .json()
+            .then(res => setReport(res))
+            .catch(err => setErrors(err))
+    }
+
     useEffect(() =>{ 
         fetchData();
+        fetchReport();
     },[])
-
-    const username = user.map(u=>u.name);
-
+    const username = user.map(u=>u.name)
+    const datetime = report.map(u=>u.date_time)
     return (
         <div>
-            
+            <div>
                 <div className="d-flex" >
                     <div className ="mr-auto p-2">
                     {(props.rblog.content_type!='comment')
@@ -37,16 +45,18 @@ const FetchBlogname = (props:any) => {
                         : <ViewComment_Modal rblog = {props.rblog}/>
                     }
                     </div>
-                
+                    
                     <div className="p-2 size-text-report">
                         Reported by: {username}&nbsp;
+                        Date_time: {datetime}&nbsp;
                     </div>
+                    
 
                     <div className="p-2 cancel-button">
                         <DelReport_Modal rblog = {props.rblog}/> 
                     </div>
                 </div>
-
+            </div>
         </div>
     )
 }
