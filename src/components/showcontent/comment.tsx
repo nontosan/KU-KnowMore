@@ -51,7 +51,7 @@ type comment_blog={
 }
 
 const Comment_component=(props:any)=>{
-    const [comments,setcomment] = useState<Comment_Sch[]>([])
+    const [comments,setcomment] = useState<any[]>([])
     const [user,setuser] = useState<User_Sch>()
     const [deleteVisible,setdelete] = useState<boolean>(false)
     /*const [cmt_blogs,setcmt_blog] = useState<comment_blog[]>([]);*/
@@ -65,9 +65,6 @@ const Comment_component=(props:any)=>{
     const [statusDelete, setStatusDelete] = useState<boolean>(false);
     const [deleteCommentId, setDeleteCommentId] = useState<string>('');
     //END OF CONST FOR DELETE MODAL//
-
-    const fetchblog=()=>{
-    }
 
     //load comment form database
 
@@ -140,6 +137,7 @@ const Comment_component=(props:any)=>{
                     </div>
                     <div className="blog-fl black-font">
                         {item.date_time}
+                        
                     </div>
                     <div className="blog-fr">
                         
@@ -149,7 +147,7 @@ const Comment_component=(props:any)=>{
                                 </div>
                                 } id="dropdown-nav" >
                                 {item.user_id==localStorage.userId &&
-                                    <NavDropdown.Item onClick={() => handleDeleteComment(item.comment_id)} className="more-option">Delete</NavDropdown.Item>
+                                    <NavDropdown.Item onClick={() => handleDeleteComment(item.id)} className="more-option">Delete</NavDropdown.Item>
                                 }
                                 {showDeleteModal && 
                                     <div>
