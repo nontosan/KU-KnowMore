@@ -15,6 +15,7 @@ export class CommentsService {
     constructor( 
     @InjectRepository(Comments)
     private commentsRepository: Repository<Comments>,
+    private reportService: Report_Service
     ){}
 
     getDate() : string {
@@ -45,6 +46,11 @@ export class CommentsService {
         return this.commentsRepository.delete(id);
 
       }
+
+    async deletewithreport(comment_id: string) {
+        await this.reportService.deletereportbycomment(comment_id);
+        return this.remove(comment_id);
+    }
 
     /*async delete(comment_id: ObjectID) {
         let removeComment = await this.commentsRepository.find({where:{_id: comment_id}})

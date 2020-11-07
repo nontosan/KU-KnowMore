@@ -11,6 +11,7 @@ import { CreateReportDto } from '../dto/create-reports.dto';
 
 import { CommentsService } from './comments.service';
 import { Report_Service } from '../reports/reports.service';
+import { SrvRecord } from 'dns';
 
 @Controller('comments')
 export class CommentsController {
@@ -41,6 +42,10 @@ export class CommentsController {
     return this.commentService.remove(id);
   }
 
+  @Delete('/:comment_id/withreport')
+  async deletewrp(@Param('comment_id') comment_id: string) {
+    return this.commentService.deletewithreport(comment_id);
+  }
 
   // @UseGuards(JwtAuthGuard)
   @Post('/:comment_id/reports')

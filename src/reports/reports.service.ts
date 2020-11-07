@@ -45,4 +45,8 @@ export class Report_Service {
         const repotkub=await this.Report_Repository.find({where:{content_id:blog_id}});
         this.Report_Repository.remove(repotkub);
     }
+    async deletereportbycomment(comment_id: string) {
+        const report = await this.Report_Repository.find({ where: { content_id: comment_id }});
+        return this.Report_Repository.remove(report);
+    }
 }
