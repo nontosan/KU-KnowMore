@@ -34,6 +34,7 @@ import { User_Sch } from '../interfaces/user';
 // IMPORT CSS //
 
 import '../App.css';
+import './readblogreview.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Container, Row } from 'react-bootstrap';
 import './readknowledge.css';
@@ -268,9 +269,11 @@ const fetchReview = () => {
       <div className="hot-kl">
         <Card.Header>Information</Card.Header>
         <div className="Review_Blog">
-        <div className="div-scrollbar editor_text" >
-        <div dangerouslySetInnerHTML={{ __html: editorValue }} />
-      </div>
+        <div className="helloworld">
+          <div className="div-scrollbar editor_text " >
+            <div dangerouslySetInnerHTML={{ __html: editorValue }} />
+          </div>
+        </div>
             <div className ="div-scrollbar">
                 <Container>
                     <Row>

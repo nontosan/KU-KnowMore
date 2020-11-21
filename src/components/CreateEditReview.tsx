@@ -113,9 +113,8 @@ const CreateEditSection = (props:any) => {
   const [courseInformation, setCourseInformation] = useState<Course_real[]>([]);
   const [blogsInformation,setBlogsInformation] = useState<Blog[]>([]);
   const [author, setAuthor] = useState<string>('');
-
-
-
+  const [aftercancel,setaftercancel] = useState<boolean>(false)
+  const [aftersave,setaftersave] = useState<boolean>(false)
   //fetch blog from database
   const fetchBlogs = () => {
     BlogsService.fetchBlogSpecific(blogId)
@@ -146,11 +145,12 @@ const CreateEditSection = (props:any) => {
         .then(savedNewReview => {
           if (savedNewReview !== null) {
             alert("บันทึก blog สำเร็จ");
+            setaftersave(true)
           } else{
             alert("บันทึก blog ล้มเหลว");
           }
         }); 
-      //window.location.replace("http://localhost:3000/")
+      
     }else{
       openNotificationnot()
     }
@@ -184,14 +184,15 @@ const CreateEditSection = (props:any) => {
   const openNotification = () => {
     const key = `open${Date.now()}`;
     const btn = (
-      <a href={"http://localhost:3000/"}>
           <Button type="primary"  onClick={() =>{
              BlogsService.deleteBlog(blogId)
              notification.close(key)
+             console.log("already delete")
+             setaftercancel(true)
           }}>
             Confirm
           </Button>
-      </a>
+      
     );
     notification.open({
       message: 'Notification',
@@ -376,9 +377,19 @@ const CreateEditSection = (props:any) => {
             <div className="Confirm"> 
             <div className="Cancel">
               <Button className="cancel-button" variant="danger" onClick={e=>openNotification()}>Cancel</Button>
+              {aftercancel &&
+                    <div>
+                      <Redirect to={`/`} />
+                  </div>
+              }
             </div>
             <div className="Submit">
               <Button className="submit-button" variant="success" onClick={e=>handleNewReviewSave(blogId)}>Submit</Button>
+              {aftersave &&
+                    <div>
+                      <Redirect to={`/`} />
+                  </div>
+              }
             </div>
         </div>
       </div>
