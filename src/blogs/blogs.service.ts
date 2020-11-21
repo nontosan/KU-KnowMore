@@ -128,7 +128,7 @@ export class Blog_Service {
             res = tmp;
         }
         // console.log(res);
-        console.log("Order Type: " + order_type)
+        // console.log("Order Type: " + order_type)
         return res;
     }
 
