@@ -12,8 +12,24 @@
     border-radius: 4px;
     cursor: pointer;
     display: block;
+    width:100%;
   }
 
 .input::placeholder {
     color: rgb(255, 255, 255);
+}
+.group_rp_type{
+    display:grid;
+    grid-template-columns: 1fr;
+}
+.blog{
+    margin:3px;
+}
+.input_container{
+    width:100%
+}
+.inputt{
+    margin:1em;
+    width:97%; 
+
 }

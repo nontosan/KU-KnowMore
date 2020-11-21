@@ -94,38 +94,16 @@ function MyVerticallyCenteredModal(props:any) {
                 {({isSubmitting,values})=>(
                     <Form autoComplete="off">
                       <Modal.Body>
-                        <div>
-                            {annoy?
-                              <Button variant="success" onClick={() => setannoy(!annoy)}>โพสก่อกวน</Button>
-                              :
-                              <Button variant="secondary" onClick={()=>setannoy(!annoy)}>โพสก่อกวน</Button>
-                            }
-                            {repeat?
-                              <Button variant="success" onClick={() => setrepeat(!repeat)}>โพสซ้ำ</Button>
-                              :
-                              <Button variant="secondary" onClick={()=>setrepeat(!repeat)}>โพสซ้ำ</Button>
-                            }
-                            {implicate?
-                              <Button variant="success" onClick={() => setimplicate(!implicate)}>โพสทำให้ผู้อื่นเสียหาย</Button>
-                              :
-                              <Button variant="secondary" onClick={()=>setimplicate(!implicate)}>โพสทำให้ผู้อื่นเสียหาย</Button>
-                            }
-                            {obscenity?
-                              <Button variant="success" onClick={() => setobscenity(!obscenity)}>โพสอนาจาร</Button>
-                              :
-                              <Button variant="secondary" onClick={()=>setobscenity(!obscenity)}>โพสอนาจาร</Button>}
-                            {wrongcontent?
-                              <Button variant="success" onClick={() => setwrongcontent(!wrongcontent)}>โพสไม่ตรงวิชา</Button>
-                              :
-                              <Button variant="secondary" onClick={()=>setwrongcontent(!wrongcontent)}>โพสไม่ตรงวิชา</Button>}
-                            {overthrow?
-                              <Button variant="success" onClick={() => setoverthrow(!overthrow)}>โพสล้มล้านสถาบัน</Button>
-                              :
-                              <Button variant="secondary" onClick={()=>setoverthrow(!wrongcontent)}>โพสล้มล้านสถาบัน</Button>
-                            }
+                        <div className="group_rp_type">
+                            {annoy?<Button variant="success" className="blog" onClick={() => setannoy(!annoy)}>โพสก่อกวน</Button>:<Button variant="secondary" className="blog" onClick={()=>setannoy(!annoy)}>โพสก่อกวน</Button>}
+                            {repeat?<Button variant="success" className="blog" onClick={() => setrepeat(!repeat)}>โพสซ้ำ</Button>:<Button variant="secondary"className="blog" onClick={()=>setrepeat(!repeat)}>โพสซ้ำ</Button>}
+                            {implicate?<Button variant="success" className="blog" onClick={() => setimplicate(!implicate)}>โพสทำให้ผู้อื่นเสียหาย</Button>:<Button variant="secondary" className="blog" onClick={()=>setimplicate(!implicate)}>โพสทำให้ผู้อื่นเสียหาย</Button>}
+                            {obscenity?<Button variant="success" className="blog" onClick={() => setobscenity(!obscenity)}>โพสอนาจาร</Button>:<Button variant="secondary" className="blog" onClick={()=>setobscenity(!obscenity)}>โพสอนาจาร</Button>}
+                            {wrongcontent?<Button variant="success" className="blog" onClick={() => setwrongcontent(!wrongcontent)}>โพสไม่ตรงวิชา</Button>:<Button variant="secondary" className="blog" onClick={()=>setwrongcontent(!wrongcontent)}>โพสไม่ตรงวิชา</Button>}
+                            {overthrow?<Button variant="success" className="blog" onClick={() => setoverthrow(!overthrow)}>โพสล้มล้านสถาบัน</Button>:<Button variant="secondary" className="blog" onClick={()=>setoverthrow(!wrongcontent)}>โพสล้มล้านสถาบัน</Button>}
                         </div>
-                        <div style={{height:"50px"}}>
-                          <Field className="input" type="input" name="etc"  placeholder="type something..."/>
+                        <div style={{height:"50px"}} className="input_container">
+                          <Field className="inputt" type="input" name="etc"  placeholder="type something..."/>
                         </div>
                       </Modal.Body>
                       <Modal.Footer>

@@ -1,0 +1,22 @@
+.Upp{
+    background-color: #F8CCF5;
+    margin: 10px;
+    border-style: dotted;
+}
+.btnn{
+    width:50%;
+    justify-content: end;
+    margin-top: 4em;
+    transition: width 0.5s;
+}
+.btnn:hover{
+    width:80%;
+}
+.content{height: 100%;}
+
+.uploading{
+    height:100%;
+    position: center;
+    margin-top:3em;
+    background-color: #BA9EF3 ;
+}
