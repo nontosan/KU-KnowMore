@@ -6,20 +6,30 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Filtermodel from '../modals/filter';
 import Showklinmain from "./ShowKnowledgeInMain";
 import Showrwinmain from "./ShowReviewInMain";
-
+import FilterBar from './NewSearchFilter';
 import '../App.css';
 import './section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import './Home.css';
 const Home = () => {
-
+    const [showFilter,setShowFilter] = useState<boolean>(false);
 
 
     return (
         <div>
-            <div className="main-div-main">
-                <Filtermodel />
-            </div>
+            {false &&
+                <div className="main-div-main">
+                    <Filtermodel />
+                </div>
+            }
+            <button className="main-div-main btn btn-success" onClick={() => setShowFilter(!showFilter)}>
+                filter
+            </button>
+            {showFilter&&
+                <div className="filter-bar" style={{ backgroundColor:"pink" }}>
+                    <FilterBar />
+                </div>
+            }
             <div className="hot-kl">
                 <Card.Header className="card-header">KNOWLEDGE BLOG</Card.Header>
                 <ListGroup variant="flush">
