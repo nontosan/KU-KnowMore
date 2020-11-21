@@ -6,6 +6,8 @@ import { ObjectID } from 'mongodb';
 import Users from './users.entity';
 import {CreateUserDto} from '../dto/create-users.dto';
 import { CreateSuperUserDto } from 'src/dto/create-superuser.dto';
+import { Blog_Service } from 'src/blogs/blogs.service';
+import { Like_Service } from 'src/likes/likes.service';
 
 export type User = any;
 
@@ -15,6 +17,8 @@ export class User_Service {
     constructor(
         @InjectRepository(Users)
         private User_Repository: Repository<Users>,
+        private blogService: Blog_Service,
+        private likeService: Like_Service,
     ) {
         this.users = [
             {
@@ -85,5 +89,34 @@ export class User_Service {
     async uploadUserProfilePic(user_id: ObjectID, uploadUserProfile): Promise<Users[]>{
         this.User_Repository.update(user_id.toString(), uploadUserProfile);
         return this.findUserFromUserID(user_id);
+    }
+
+    async hours_calculate(user_id: string) {
+        var sum = 0;
+        var blogs = await this.blogService.findUserBlogsID(user_id);
+       
+        for (let index = 0; index < blogs.length; index++) {
+            const blog = blogs[index];
+
+            var viewers = blog.viewers;
+            var viewers_sum = viewers * 60000;
+            if (viewers_sum > 3600000) viewers_sum = 3600000
+
+            var likes = await this.likeService.getAllLikesFromBlog(blog.id.toHexString());
+            var likes_sum = likes.length * 10 * 60000;
+
+            sum += (30 * 60000) + viewers_sum + likes_sum;
+        }
+
+        var res = new Date(sum)
+
+        var final_res = {
+            // hours: res.getHours() - 7, // for deploy
+            hours: res.getHours(),        // for localhost
+            minutes: res.getMinutes(),
+            seconds: res.getSeconds(),
+        }
+
+        return final_res;
     }
 }
