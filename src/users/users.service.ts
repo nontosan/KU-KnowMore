@@ -111,7 +111,8 @@ export class User_Service {
         var res = new Date(sum)
 
         var final_res = {
-            hours: res.getHours(),
+            // hours: res.getHours() - 7, // for deploy
+            hours: res.getHours(),        // for localhost
             minutes: res.getMinutes(),
             seconds: res.getSeconds(),
         }
