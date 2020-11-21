@@ -8,7 +8,7 @@ function Teacher(props:any){
         <div>
             <InputGroup>
                 <InputGroup.Prepend>
-                <InputGroup.Text>teacher</InputGroup.Text>
+                <InputGroup.Text>Teacher</InputGroup.Text>
                 </InputGroup.Prepend>
                 <input value={props.teacher} onChange={(e)=>props.setteacher(e.target.value)}/>
             </InputGroup>

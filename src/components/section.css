@@ -41,12 +41,17 @@
     padding-right: 100px;
 }
 
+.editor{
+    background-color: white;
+}
+
 .div-section-content{
     margin-top: 50px;
     margin-left: 100px;
     margin-right: 100px;
     min-height: 500px;
-    background-color: rgb(153, 153, 153);
+    background-color: white;
+    padding: 16px;
 }
 
 .main-div {
@@ -135,4 +140,9 @@
       display:grid;
       grid-template-columns: 1fr 1fr;
       width: 10%;
+  }
+
+  .modal_file{
+      padding-left: 100px;
+      padding-top: 15px;
   }

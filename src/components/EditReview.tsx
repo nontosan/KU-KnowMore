@@ -317,6 +317,7 @@ const formatGroupLabel = (data:any) => (
       </div>
       <div className="hot-kl editcontainer">
         <Card.Header>Information</Card.Header>
+        <div className="EditReview_Blog">
         <div className="div-scrollbar editor_text" >
         <div className="Editor">
             <ReactQuill 
@@ -339,7 +340,7 @@ const formatGroupLabel = (data:any) => (
                         <Col>
                             ({teachScore}/5)
                         </Col>
-                        <Col className="dropdown">
+                        <Col className="dropdownn">
                             <div className="edit">edit </div>
                             <Select
                               options={ScoreValue}
@@ -387,7 +388,7 @@ const formatGroupLabel = (data:any) => (
                         <Col>
                             ({roomScore}/5)
                         </Col>
-                        <Col className="dropdown">
+                        <Col className="dropdownn">
                             <div className="edit">edit </div>
                             <Select
                               options={ScoreValue}
@@ -411,7 +412,7 @@ const formatGroupLabel = (data:any) => (
                         <Col>
                             ({overallScore}/5)
                         </Col>
-                        <Col className="dropdown">
+                        <Col className="dropdownn">
                             <div className="edit">edit </div>
                             <Select
                               options={ScoreValue}
@@ -422,6 +423,7 @@ const formatGroupLabel = (data:any) => (
                         </Col>
                     </Row>
                 </Container>
+            </div>
             </div>
       </div>
       <div className="Confirm"> 

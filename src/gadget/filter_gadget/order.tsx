@@ -7,13 +7,13 @@ function Order(props:any){
 
     const radios = [
         { name: "Date", value: '1' },
-        { name: 'like', value: '2' },
-        { name: 'Viewer', value: '3' },
+        { name: 'Like', value: '2' },
+        { name: 'View count', value: '3' },
     ];
     //checked={props.radioValue === radio.value}
     return (
         <div>
-            <div>Order</div>
+            <div>Sort by <br/></div>
             <ButtonGroup toggle>
                 {radios.map((radio, idx) => (
                 <ToggleButton

@@ -120,12 +120,15 @@ const EditSection = (props:any) => {
                 <FormControl aria-label="Large" aria-describedby="inputGroup-sizing-sm" value={newSectionName} onChange={handleNewSectionNameChange}/>
             </InputGroup>
             <div className="div-sectionname">
+                <div className="editor">
                 <ReactQuill 
+                    background-color = "red"
                     placeholder={"เขียนรีวิวลงที่นี้"}
                     theme="snow" 
                     value={editorValue} 
                     onChange={setEditorValue}
                 />
+                </div>
             </div>
             <div className="uploadanddel">
                 <div className="display">

@@ -8,7 +8,7 @@ function Subjectname(props:any){
         <div>
             <InputGroup>
                 <InputGroup.Prepend>
-                <InputGroup.Text>Subject name</InputGroup.Text>
+                <InputGroup.Text>Subject Name</InputGroup.Text>
                 </InputGroup.Prepend>
                 <input value={props.subname} onChange={(e)=>props.setsubname(e.target.value)}/>
             </InputGroup>

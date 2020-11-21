@@ -1,5 +1,6 @@
+
 // IMPORT LIBRARY //
-import React, { useState,useEffect, useImperativeHandle } from 'react'
+import React, { useState,useEffect, useImperativeHandle,Suspense } from 'react'
 import { Redirect } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
@@ -22,6 +23,8 @@ import {Formik,Form,Field,ErrorMessage} from "formik"
 // IMPORT COMPONENT //
 import EditBlogContent from '../gadget/editblogcontent';
 import ReportModal from "../modals/ChangBlogInfo"
+import ChangeBlogInfoModal from "../modals/ChangBlogInfo"
+
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
@@ -34,9 +37,12 @@ import CourseService from "../services/CourseService"
 // IMPORT INTERFACE //
 import { Section_Edit } from '../interfaces/SectionEdit';
 import { Course, Course_real } from '../interfaces/course';
+import { User_Sch } from '../interfaces/user';
+
 // END OF IMPORT INTERFACE//
 
 // IMPORT CSS //
+import  "./createeditreview.css"
 import './section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'antd/dist/antd.css';
@@ -47,6 +53,10 @@ import {
   RadiusBottomleftOutlined,
   RadiusBottomrightOutlined,
 } from '@ant-design/icons';
+import Card from 'react-bootstrap/Card';
+import { Col, Container, Row } from 'react-bootstrap';
+import { Progress } from 'antd';
+import ImageComponent from './Display';
 
 // END OF IMPORT CSS //
 
@@ -63,6 +73,13 @@ type blogidformpagebefore={
   blog_id:string
 }
 const CreateEditSection = (props:any) => {
+  const ScoreValue = [
+    { value: '1', label: '1', color: '#FF8B00' },
+    { value: '2', label: '2', color: '#FFC400' },
+    { value: '3', label: '3', color: '#36B37E' },
+    { value: '4', label: '4', color: '#00875A' },
+    { value: '5', label: '5', color: '#253858' },
+  ];
   const [sectionsInformation, setSectionsInformation] = useState<Section[]>([]);
   const [sections,setsections] = useState<Section_Edit[]>([])
   const [blogsInfomation,setBlogsInfomation] = useState<Blog[]>([])
@@ -92,17 +109,29 @@ const CreateEditSection = (props:any) => {
   const [workScore, setWorkScore] = useState(0);
   const [roomScore, setRoomScore] = useState(0);
   const [overallScore, setOverallScore] = useState(0)
+  const [userInformation, setUserInformation] = useState<User_Sch[]>([]);
+  const [courseInformation, setCourseInformation] = useState<Course_real[]>([]);
+  const [blogsInformation,setBlogsInformation] = useState<Blog[]>([]);
+  const [author, setAuthor] = useState<string>('');
+
+
+
   //fetch blog from database
   const fetchBlogs = () => {
     BlogsService.fetchBlogSpecific(blogId)
-      .then(async(blogInfo) => {
-        //console.log(blogInfo)
-        setBlogsInfomation(blogInfo);
-        setSelectCourseId(blogInfo[0].course_id)
+      .then(blogInfo => {
+        CourseService.fetchCourseWithId(blogInfo[0].course_id)
+          .then(courseInfo => {
+            setCourseInformation(courseInfo);
+            console.log(courseInfo);
+          })
+        setBlogsInformation(blogInfo);
+        setAuthor(blogInfo[0].user_id);
         fetchCourse(blogInfo[0].course_id)
-        //finding course_i
-      })
+        //console.log(blogInfo);
+      });
   }
+
   const handleNewReviewSave = (blogid : string) => {
     if(teachScore!==0 && workScore!==0 && roomScore!==0 && overallScore!==0){
       const newReview: Review = {
@@ -185,23 +214,59 @@ const CreateEditSection = (props:any) => {
   },[])
   return (
     <div>
-          <div className="bg_color">
-            {visible &&
-              <div className="Blog_Info">
-              <div className="Blog_frame1">
-                  <div className="Blog_name">ชื่อบล็อค </div>
-                  <div className="Blog_name2">{blogsInfomation[0].blog_name}</div>
-                  <div className="Blog_name">รหัสวิชา </div>
-                  <div className="Blog_name2">{selectCode}</div>
-                  <div className="Blog_name">ชื่อวิชา </div>
-                  <div className="Blog_name2">{selectNameEn}  ({selectNameTh})</div>
-                  <div className="Blog_name">ชื่อวิชา </div>
-                  <div className="Blog_name2">{selectTeacher}</div>
-                </div>
-                <ReportModal fetchBlogs={fetchBlogs} />
+      <div className="hot-kl">
+        {userInformation.map(item => (
+          <Card.Header>
+            <div>
+              <Link to={`/userpage/${item.id}`} style={{ float : "left" }}>
+                <Suspense  fallback={<div>Loading... </div>}>
+                  <div className="blog-fl">
+                    <ImageComponent userid={item.pic_dir}/>
+                  </div>
+                </Suspense>
+              </Link>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to={`/userpage/${item.id}`} style={{ color : "white" }}>
+                {item.name}
+              </Link>
             </div>
-            }
+          </Card.Header>
+        ))}
+
+      </div>
+      <div className="hot-kl">
+        {blogsInformation.map(blogInformation=>(
+          <Card.Header>
+            <div>
+              <strong>Blog Name</strong> : {blogInformation.blog_name}
+            </div>
+            {courseInformation.map(item=>(
+              <div>
+                <div>
+                  <strong>Code</strong> : {item.Code}
+                </div>
+                <div>
+                  <strong>Subject</strong> : {item.NameEn}
+                </div>
+                <div>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {item.NameTh}
+                </div>
+                <div>
+                  <strong>Teacher</strong> : {item.Teacher}
+                </div>
+              </div>
+            ))}
+          </Card.Header>
+        ))}
+        
+      </div>
+          <div className="bg_color">
+
             <div className="Blog_Content">
+        <div className="hot-kl editcontainer">
+        <Card.Header>Information</Card.Header>
+        <div className="EditReview_Blog">
+        <div className="div-scrollbar editor_text" >
         <div className="Editor">
             <ReactQuill 
               placeholder={"เขียนรีวิวลงที่นี้"}
@@ -210,16 +275,105 @@ const CreateEditSection = (props:any) => {
               onChange={setEditorValue}
             />
         </div>
-        <div className="Slider">
-          <CreateReviewContent 
-          setTeachScore={setTeachScore} 
-          setWorkScore={setWorkScore} 
-          setRoomScore={setRoomScore} 
-          setOverallScore={setOverallScore} 
-          />
         </div>
-      </div>
-        <div className="Confirm"> 
+            <div className ="div-scrollbar">
+                <Container>
+                    <Row>
+                        <Col sm={3}>
+                            <label className="label">สอนได้เข้าใจ</label>
+                        </Col>
+                        <Col>
+                            <Progress percent={teachScore*20} showInfo={false}/>
+                        </Col>
+                        <Col>
+                            ({teachScore}/5)
+                        </Col>
+                        <Col className="dropdownn">
+                            <div className="edit">edit </div>
+                            <Select
+                              options={ScoreValue}
+                              onChange={(e:any)=>{
+                                setTeachScore(e.value)
+                              }}
+                            />
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+            <div className ="div-scrollbar">
+                <Container>
+                    <Row>
+                        <Col sm={3}>
+                            <label className="label">จำนวนงาน</label>
+                        </Col>
+                        <Col>
+                            <Progress percent={workScore*20} showInfo={false}/>
+                        </Col>
+                        <Col>
+                            ({workScore}/5)
+                        </Col>
+                        <Col className="dropdownn">
+                            <div className="edit">edit </div>
+                            <Select
+                              options={ScoreValue}
+                              onChange={(e:any)=>{
+                                setWorkScore(e.value)
+                              }}
+                            />
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+            <div className ="div-scrollbar">
+                <Container>
+                    <Row>
+                        <Col sm={3}>
+                            <label className="label">ความสำคัญในการเข้าเรียน</label>
+                        </Col>
+                        <Col >
+                            <Progress percent={roomScore*20} showInfo={false}/>
+                        </Col>
+                        <Col>
+                            ({roomScore}/5)
+                        </Col>
+                        <Col className="dropdownn">
+                            <div className="edit">edit </div>
+                            <Select
+                              options={ScoreValue}
+                              onChange={(e:any)=>{
+                                setRoomScore(e.value)
+                              }}
+                            />
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+            <div className ="div-scrollbar">
+                <Container>
+                    <Row>
+                        <Col sm={3}>
+                            <label className="label">ภาพรวม</label>
+                        </Col>
+                        <Col>
+                            <Progress percent={overallScore*20} showInfo={false}/>
+                        </Col>
+                        <Col>
+                            ({overallScore}/5)
+                        </Col>
+                        <Col className="dropdownn">
+                            <div className="edit">edit </div>
+                            <Select
+                              options={ScoreValue}
+                              onChange={(e:any)=>{
+                                setOverallScore(e.value)
+                              }}
+                            />
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+            </div>
+            <div className="Confirm"> 
             <div className="Cancel">
               <Button className="cancel-button" variant="danger" onClick={e=>openNotification()}>Cancel</Button>
             </div>
@@ -227,7 +381,10 @@ const CreateEditSection = (props:any) => {
               <Button className="submit-button" variant="success" onClick={e=>handleNewReviewSave(blogId)}>Submit</Button>
             </div>
         </div>
-          </div>     
+      </div>
+      
+      </div>
+        </div>     
             
       </div>
   );

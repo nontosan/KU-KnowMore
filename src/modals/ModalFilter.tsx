@@ -29,8 +29,11 @@ const ModalFilter = (props:any) => {
                     <div>Choose Blog type </div>
                     <Choosefilter handle={props.handle_type} />
                     <Order checked={props.checked} setChecked={props.setChecked} radioValue={props.radioValue} setRadioValue={props.setRadioValue}/>
+                    <br/>
                     <Subjectname subname={props.subname} setsubname={props.setsubname}/>
+                    <br/>
                     <Subjectid subid={props.subjectid} setsubid={props.setsubid}/>
+                    <br/>
                     <Teacher teacher={props.teacher} setteacher={props.setteacher}/>
                 </div>
             </Modal.Body>

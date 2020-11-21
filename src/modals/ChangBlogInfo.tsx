@@ -163,7 +163,7 @@ function EditBlogModal(props:any) {
               {visible &&
                   <div>
                       {codeoption[0]}
-                      <div>code</div>
+                      <div>Subject ID</div>
                           <Select 
                               options = {codeOptions} 
                               onChange={handleChangeCode}
@@ -171,12 +171,12 @@ function EditBlogModal(props:any) {
                               filterOption={({label}, query) => label.indexOf(query.toLowerCase()) >= 0 && i++ < resultLimit}
                               onInputChange={() => { i = 0 }}
                           />
-                      <div>NameTh</div>
+                      <div>Subject Name (TH)</div>
                           <Select 
                               isDisabled
                               placeholder={selectNameTh}
                           />
-                      <div>NameEn</div>
+                      <div>Subject Name (EN)</div>
                           <Select 
                               isDisabled
                               placeholder={selectNameEn}
