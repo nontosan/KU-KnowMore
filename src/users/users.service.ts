@@ -105,7 +105,7 @@ export class User_Service {
             var likes = await this.likeService.getAllLikesFromBlog(blog.id.toHexString());
             var likes_sum = likes.length * 10 * 60000;
 
-            sum = sum + viewers_sum + likes_sum;
+            sum += (30 * 60000) + viewers_sum + likes_sum;
         }
 
         var res = new Date(sum)
