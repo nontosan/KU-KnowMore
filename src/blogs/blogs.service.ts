@@ -95,7 +95,7 @@ export class Blog_Service {
             }
             // Sort For Index
             var sort = this.sortReturnIndex(likeList)
-            console.log(sort)
+            //console.log(sort)
             // Sort JSON
             var tmp = []
             for (var i = sort.length - 1; i >= 0; i--) {
