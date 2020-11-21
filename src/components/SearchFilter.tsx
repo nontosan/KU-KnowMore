@@ -28,7 +28,7 @@ const SearchFilter=()=>{
     const Url:string = window.location.search
     const [showFilter,setShowFilter] = useState<boolean>(false);
     let location = useLocation()
-
+    console.log(window.location)
     const fetchfilter = ()=>{
         BlogsService.fetchBlogfilter(Url).then(res=>{
             setBlogs(res)
@@ -37,11 +37,6 @@ const SearchFilter=()=>{
     const readblog=()=>{
         console.log("read this blog")
     }
-    useEffect(()=>{
-        
-        fetchfilter()
-        //window.location.reload()
-    },[])
     useEffect(()=>{
         fetchfilter()
         //window.location.reload()
@@ -55,7 +50,7 @@ const SearchFilter=()=>{
                 filter
             </button>
             {true&&
-                <div className="hot-kl filter-bar">
+                <div className="filter-bar" style={{ backgroundColor:"pink" }}>
                     <FilterBar />
                 </div>
             }

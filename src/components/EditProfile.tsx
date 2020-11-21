@@ -160,11 +160,13 @@ function EditProfile (props:any) {
         </div>
         <Upload userID={userId}/>
         <div className="Pro_pic">
-        <Suspense fallback={<div><Spin /></div>}>
-          {userInformation.map(a=>
-              <ImageComponent userid={a.pic_dir}/>
-          )}
-        </Suspense>
+        {false &&
+          <Suspense fallback={<div><Spin /></div>}>
+            {userInformation.map(a=>
+                <ImageComponent userid={a.pic_dir}/>
+            )}
+          </Suspense>
+        }
         </div>
         </div>
     </div>

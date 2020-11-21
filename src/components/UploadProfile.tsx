@@ -47,15 +47,15 @@ class Upload extends React.Component<any,any> {
                     <h2>Upload Pic</h2>
                 </div>
                 <div className="content">
-                <form>
-                        <label>Select Picture </label>{' '}
-                    <div className="pic_input">
-                        <input type="file" multiple name="profile_pic" 
-                        onChange={(e)=>this.handleFile(e)} />
-                    </div>
-                    <br />
-                    <Button variant="primary"  onClick={(e)=>this.handleUpload(e)}>Upload</Button>
-                </form>
+                    <form>
+                            <label>Select Picture </label>{' '}
+                        <div className="pic_input">
+                            <input className="inputfile" type="file" multiple name="profile_pic" 
+                            onChange={(e)=>this.handleFile(e)} />
+                        </div>
+                        <br />
+                        <Button variant="primary"  onClick={(e)=>this.handleUpload(e)}>Upload</Button>
+                    </form>
                 </div>
             </div>
         );

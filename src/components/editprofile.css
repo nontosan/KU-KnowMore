@@ -8,20 +8,20 @@
 }
 
 .Name {
-    padding: 10px;
+    padding: .75rem 1.25rem;
     
 }
 
 .Username {
-    padding: 10px
+    padding: .75rem 1.25rem;
 }
 
 .Des {
-    padding: 10px;
+    padding: .75rem 1.25rem;
 }
 
 .Pro_pic {
-    padding-top: 10px;
+    padding: .75rem 1.25rem;
     
 }
 
@@ -65,4 +65,8 @@
 .typeinfo{
     font-size: 22px;
     display: inline;
+}
+
+.inputfile{
+    float: right;
 }

@@ -11,3 +11,8 @@
 .filter-blog{
     padding: .75rem 1.25rem;
 }
+
+.margin-filter{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
