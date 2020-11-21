@@ -36,6 +36,11 @@ export class User_Controller {
     return this.Service.findUsersID(user_id);
   }
 
+  @Get('/:user_id/hours')
+  async findUserHours(@Param('user_id') user_id: string) {
+    return this.Service.hours_calculate(user_id);
+  }
+
   // @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() createuserDto: CreateUserDto): Promise<Users> {
