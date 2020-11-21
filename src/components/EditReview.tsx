@@ -340,7 +340,7 @@ const formatGroupLabel = (data:any) => (
                         <Col>
                             ({teachScore}/5)
                         </Col>
-                        <Col className="dropdown">
+                        <Col className="dropdownn">
                             <div className="edit">edit </div>
                             <Select
                               options={ScoreValue}
@@ -388,7 +388,7 @@ const formatGroupLabel = (data:any) => (
                         <Col>
                             ({roomScore}/5)
                         </Col>
-                        <Col className="dropdown">
+                        <Col className="dropdownn">
                             <div className="edit">edit </div>
                             <Select
                               options={ScoreValue}
@@ -412,7 +412,7 @@ const formatGroupLabel = (data:any) => (
                         <Col>
                             ({overallScore}/5)
                         </Col>
-                        <Col className="dropdown">
+                        <Col className="dropdownn">
                             <div className="edit">edit </div>
                             <Select
                               options={ScoreValue}
