@@ -193,7 +193,10 @@ export class Blog_Service {
                 // Find all course_id with the same course_code , then save into course_list
                 tmp = await this.courseService.findAllCoursesCode(sname)
                 for (var x in tmp) {	
-                    course_list.push(tmp[x].id.toString());	
+                    // as well for pname
+                    if (pname && tmp[x].Teacher != undefined) {
+                        if (tmp[x].Teacher.includes(pname)) course_list.push(tmp[x].id.toString());
+                    } else course_list.push(tmp[x].id.toString());
                 }
             }
             // for pname only
