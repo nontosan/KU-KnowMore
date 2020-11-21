@@ -164,14 +164,14 @@ export class Blog_Service {
         var sname = Obj.sname;
         var pname = Obj.pname;
         var order = (Obj.order ? parseInt(Obj.order) : 1);
-        
+        //console.log("Start")
         if (sname || pname) {
             // Find all course_id,
             var tmp = await this.courseService.findAllCourses()
-
+            
             // for sname
             if (sname && isNaN(sname)) {
-                // console.log("Start Search SName")
+                //console.log("Start Search SName")
                 // if (pname) console.log("And PName")
 
                 // Search the thing
@@ -188,9 +188,17 @@ export class Blog_Service {
                     }
                 }
             }
+            // Check if sname == code , else if sname == subjectname
+            else if (sname && !isNaN(sname)) {
+                // Find all course_id with the same course_code , then save into course_list
+                tmp = await this.courseService.findAllCoursesCode(sname)
+                for (var x in tmp) {	
+                    course_list.push(tmp[x].id.toString());	
+                }
+            }
             // for pname only
             else if (pname) {
-                console.log("Start Search PName")
+                //console.log("Start Search PName")
                 for (var x in tmp) {
                     if (tmp[x].Teacher != undefined) {
                         if (tmp[x].Teacher.includes(pname))
@@ -199,6 +207,7 @@ export class Blog_Service {
                 }
             }
         }
+        //console.log(course_list)
 
         // console.log("Start Search PName")
         // // If include teacher name
@@ -225,15 +234,17 @@ export class Blog_Service {
         // Make JSON
         // If searched for sname or pname: Check inside , else normal search
         if (sname || pname) {
-            // console.log("Preload")
+            //console.log("Preload")
             // Preload
             var tmp2 = await this.Blog_Repository.find();
             for (var x in tmp2) {
                 course_list_blogs.push(tmp2[x].course_id.toString());
             }
             for (var x in course_list_blogs) {
-                if (course_list.includes(course_list_blogs[x])) course_list_pos.push(course_list_blogs[x]);
+                if (course_list.includes(course_list_blogs[x]) && !course_list_pos.includes(course_list_blogs[x])) course_list_pos.push(course_list_blogs[x]);
             }
+            // console.log(course_list_blogs)
+            // console.log(course_list_pos)
             // console.log("Start Making JSON")
             // Specific Type, else all types
             for (var i = 0; i < course_list_pos.length; i++) {
@@ -242,6 +253,7 @@ export class Blog_Service {
                 else tmp2 = await this.Blog_Repository.find({where: {course_id: course_list_pos[i]} });
                 //Add into Result
                 if (tmp2.length != 0) for (var j = 0; j < tmp2.length; j++) res.push(tmp2[j]);
+                //console.log(tmp2)
             }
         } else {
             // console.log("Start Making JSON")
@@ -252,6 +264,7 @@ export class Blog_Service {
         }
         
         // console.log("Start Sorting")
+        //console.log(res)
         return this.sortJSON(res,order);
     }
 
