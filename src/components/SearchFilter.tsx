@@ -10,6 +10,7 @@ import {
 // IMPORT COMPONENT //
 import Filtermodel from '../modals/filter'
 import UserAuthor from './UserAuthor';
+import FilterBar from './NewSearchFilter';
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
@@ -25,15 +26,13 @@ import { Blog } from "../interfaces/blog"
 const SearchFilter=()=>{
     const [blogs, setBlogs] = useState<Blog[]>([]);
     const Url:string = window.location.search
-    
-
+    const [showFilter,setShowFilter] = useState<boolean>(false);
     let location = useLocation()
 
     const fetchfilter = ()=>{
         BlogsService.fetchBlogfilter(Url).then(res=>{
             setBlogs(res)
         })
-
     }   
     const readblog=()=>{
         console.log("read this blog")
@@ -43,11 +42,23 @@ const SearchFilter=()=>{
         fetchfilter()
         //window.location.reload()
     },[])
+    useEffect(()=>{
+        fetchfilter()
+        //window.location.reload()
+    },[Url])
     return(
         <div>
             <div className="main-div-main">
                 <Filtermodel />
             </div>
+            <button className="main-div-main" onClick={() => setShowFilter(!showFilter)}>
+                filter
+            </button>
+            {true&&
+                <div className="hot-kl filter-bar">
+                    <FilterBar />
+                </div>
+            }
             <div className="hot-kl">
             {blogs.map(blog => ( 
                 <div>

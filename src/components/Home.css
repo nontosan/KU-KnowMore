@@ -1,0 +1,13 @@
+.filter-bar{
+    margin-top: 50px;
+    margin-left: 100px;
+    margin-right: 100px;
+    border: rgba(0,0,0,.125) solid 0.1px;
+    border-bottom: 0px;
+    border-radius: calc(0.25rem - 1px);
+    padding-bottom: 40px;
+}
+
+.filter-blog{
+    padding: .75rem 1.25rem;
+}
