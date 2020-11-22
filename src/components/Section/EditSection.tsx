@@ -76,6 +76,7 @@ const EditSection = (props:any) => {
       };
     //////////////////antd end///////////////
     const handleSectionSave = () => {
+        if(newSectionName !=="" && editorValue!==""){
         const writeSection = {
             id: sectionId,
             section_name: newSectionName,
@@ -92,6 +93,10 @@ const EditSection = (props:any) => {
                 }
                 history.goBack()
             });
+        }
+        else{
+            alert("Please fille section name and content")
+        }
     };
 
     const fetchSection = () => {

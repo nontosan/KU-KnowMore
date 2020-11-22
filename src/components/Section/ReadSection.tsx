@@ -25,13 +25,14 @@ import '../section.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import '../file.css';
+import Card from 'react-bootstrap/Card';
 
 import { convertToRaw, EditorState } from 'draft-js';
 import { type } from 'os';
 import { convertToObject } from 'typescript';
 import { useLocation,useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import { Card } from 'react-bootstrap';
+
 
 import minus from '../../photo/minus_PNG39.png';
 import GearEdit from '../../photo/gear-edit6.png';
@@ -155,9 +156,11 @@ const ReadSection = (props:any) => {
                     </div>
                 </Card.Header>
             </div>
-            
             {afterFetch &&
-                <div className="div-section-content" dangerouslySetInnerHTML={{__html: displayHTML}} />
+                <div className="hot-kl">
+                    <Card.Header>Information</Card.Header>
+                    <div className="div-section-content" dangerouslySetInnerHTML={{__html: displayHTML}} />
+                </div>
             }
             <LoadFileModal />
             <div className="read_button">

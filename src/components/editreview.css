@@ -30,8 +30,15 @@
   }
   .editcontainer{
      margin-bottom: 3em;
+     font-size: 18px;
   }
 
   .EditReview_Blog{
       background-color: white;
+  }
+  .editor_text{
+    font-size: 18px;    
+  }
+  .ql-editor{
+      font-size: 18px;
   }
