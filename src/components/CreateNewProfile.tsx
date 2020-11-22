@@ -7,7 +7,7 @@ import DownloadFile from './DownloadFile';
 import ImageComponent from './Display';
 import UploadMulFile from './UploadMulFile';
 import Demo from './UploadTest';
-import { Col, Container, Row ,Form} from 'react-bootstrap';
+import { Col, Container, Row ,Form, Card} from 'react-bootstrap';
 
 // END OF IMPORT LIBRARY //
 
@@ -125,6 +125,60 @@ function CreateNewProfile (props:any) {
 
   return (
     <div className ="EditProfile">
+      {true &&
+        <div>
+      <div className="border-editprofile">
+      <Card.Header>Create User Information</Card.Header>
+      <div className="containerr">
+        <Upload  userID={userId}/>
+        <div className="profile">
+          <div className = "Name">
+            <div className="typeinfo">
+              NAME
+              <div className="reddok">*</div>
+            </div>
+            {userInformation.map(UserInfo=>
+            <Form.Control type="text" value={nme}
+            onChange={e => setname(e.target.value)}/>
+              )}
+          </div>
+          <div className = "Username">
+            <div className="typeinfo">
+              USERNAME<div className="reddok">*</div>
+            </div>
+            {userInformation.map(UserInfo=>
+            <Form.Control type="text" value={usrname}
+            onChange={e => setusername(e.target.value)}/>
+              )}
+          </div>
+          <div className = "Des">
+            <div className="typeinfo">
+              Profile Descriptions
+            </div>
+            <br/>
+            <Form.Control as="textarea" rows={3}  name="paragraph_text" value={descriptions}
+            onChange={e => setdescriptions(e.target.value)}/>
+          </div>
+          {false &&
+          <div className="Pro_pic">
+          <Suspense fallback={<div><Spin /></div>}>
+            {userInformation.map(a=>
+                <ImageComponent userid={a.pic_dir}/>
+            )}
+          </Suspense>
+          </div>
+          }
+        </div>
+      </div>
+      </div>
+        <div className="button">
+          <Button variant="success" onClick = {e=>{
+            buttonstate()
+            }}>Submit</Button>{' '}
+          <Button variant="danger" onClick={e=>openNotification()}> Cancel </Button>
+          </div></div>
+      }
+      {false &&
       <div className="profile">
         <div className = "Name">
           <div className="typeinfo">
@@ -160,13 +214,8 @@ function CreateNewProfile (props:any) {
         </div>
         <Upload userID={userId}/>
         <div className="Pro_pic">
-        <Suspense fallback={<div><Spin /></div>}>
-          {userInformation.map(a=>
-              <ImageComponent userid={a.pic_dir}/>
-          )}
-        </Suspense>
         </div>
-        </div>
+        </div>}
     </div>
   );
 }

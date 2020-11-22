@@ -38,11 +38,12 @@ const FilterBar = (props:any) => {
     let check = 0;
     const blogtype = window.location.pathname.split("/")[1]
     console.log(blogtype)
+    console.log(window.location.search.split("="))
     var [query,setquery]=useState('');
     const [knowledge,setknowledge] = useState<boolean>(false)
     const [review,setreview] = useState<boolean>(false)
-    const [knowledgeandreview,setknowledgeandreview] = useState<boolean>(true);
-    const [date,setdate] = useState<boolean>(true)
+    const [knowledgeandreview,setknowledgeandreview] = useState<boolean>(false);
+    const [date,setdate] = useState<boolean>(false)
     const [like,setlike] = useState<boolean>(false)
     const [viewer,setviewer] = useState<boolean>(false)
     const [allCourse,setAllCourse] = useState<any[]>([]);
@@ -156,6 +157,27 @@ const FilterBar = (props:any) => {
 
     useEffect(()=>{
         fetchCourse()
+        if(window.location.search.split("=")[0]!==''){
+            if(window.location.search.split("=")[1][0]=='1'){
+                setknowledge(true);
+            }
+            else if(window.location.search.split("=")[1][0]=='2'){
+                setreview(true);
+            }
+            else if(window.location.search.split("=")[1][0]=='3'){
+                console.log("HELLOISUS")
+                setknowledgeandreview(true);
+            }
+            if(window.location.search.split("=")[2][0]=='1'){
+                setdate(true);
+            }
+            else if(window.location.search.split("=")[2][0]=='2'){
+                setlike(true);
+            }
+            else if(window.location.search.split("=")[2][0]=='3'){
+                setviewer(true);
+            }
+        }
     },[])
 
     useEffect(()=>{
@@ -182,7 +204,7 @@ const FilterBar = (props:any) => {
             setTeacherOptions(Teacheroption);
         }
     },[selectCode])
-
+    console.log(knowledgeandreview)
     useEffect(()=>{
         if(selectCourseId!==undefined){
             console.log(selectCourseId);
@@ -198,34 +220,34 @@ const FilterBar = (props:any) => {
     //console.log(knowledge);
     //console.log(review);
     //console.log(knowledgeandreview);
-    useEffect(() => {
-        if(knowledge == false && review == false && knowledgeandreview == false) {
-            setknowledgeandreview(true);
-        }
-        if(knowledge == true && review == true) {
-            setknowledge(false);
-            setreview(false);
-            setknowledgeandreview(true);
-        }
-    },[knowledge,review,knowledgeandreview])
-    useEffect(() => {
-        if(date == false && like == false && viewer == false){
-            setdate(true);
-        }
-    },[date,like,viewer])
+//    useEffect(() => {
+//        if(knowledge == false && review == false && knowledgeandreview == false) {
+//            setknowledgeandreview(true);
+//        }
+//        if(knowledge == true && review == true) {
+//            setknowledge(false);
+//            setreview(false);
+//            setknowledgeandreview(true);
+//        }
+//    },[knowledge,review,knowledgeandreview])
+//    useEffect(() => {
+//        if(date == false && like == false && viewer == false){
+//            setdate(true);
+//        }
+//    },[date,like,viewer])
 return (
     <div className="filter-blog">
         <strong>CHOOSE BLOG TYPE</strong> &nbsp;&nbsp;&nbsp;
         <ToggleButtonGroup type="checkbox">
             {knowledge?
-                <Button variant="success" onClick={() => setknowledge(false)}>ความรู้</Button>
+                <Button variant="success" >ความรู้</Button>
             :
-                <Button variant="secondary" onClick={() => {setknowledge(true);setknowledgeandreview(false);}}>ความรู้</Button>
+                <Button variant="secondary" onClick={() => {setknowledge(true);setknowledgeandreview(false);setreview(false)}}>ความรู้</Button>
             }
             {review?
-                <Button variant="success" onClick={() => setreview(false)}>รีวิว</Button>
+                <Button variant="success" >รีวิว</Button>
             :
-                <Button variant="secondary" onClick={() => {setreview(true);setknowledgeandreview(false);}}>รีวิว</Button>
+                <Button variant="secondary" onClick={() => {setreview(true);setknowledgeandreview(false);setknowledge(false)}}>รีวิว</Button>
             }
             {knowledgeandreview?
                 <Button variant="success">ความรู้&รีวิว</Button>
@@ -241,12 +263,12 @@ return (
                 <Button variant="secondary" value={1} onClick={() => {setdate(true);setlike(false);setviewer(false);}}>Date</Button>
             }
             {like?
-                <Button variant="success" value={2} onClick={() => setlike(false)}>Like</Button>
+                <Button variant="success" value={2} >Like</Button>
             :
                 <Button variant="secondary" value={2} onClick={() => {setlike(true);setdate(false);setviewer(false);}}>Like</Button>
             }
             {viewer?
-                <Button variant="success" value={1} onClick={() => setviewer(false)}>Viewer</Button>
+                <Button variant="success" value={1} >Viewer</Button>
             :
                 <Button variant="secondary" value={1} onClick={() => {setviewer(true);setdate(false);setlike(false);}}>Viewer</Button>
             }
