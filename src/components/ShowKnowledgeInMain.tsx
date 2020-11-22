@@ -10,18 +10,22 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 // IMPORT COMPONENT //
 import UserAuthor from './UserAuthor';
+import ShowLike from './ShowLike';
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
 import BlogsService from "../services/BlogsService"
+import LikeServive from "../services/LikeService"
 // END OF IMPORT SERVICE //
 
 // IMPORT INTERFACE //
 import {Blog}  from "../interfaces/blog"
+import {Like} from "../interfaces/Like"
 // END OF IMPORT INTERFACE//
 
 // IMPORT CSS //
 import './section.css';
+import {LikeOutlined,LikeTwoTone,EyeOutlined} from '@ant-design/icons';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../css/blogforclick.css"
@@ -31,10 +35,11 @@ import "../css/blogforclick.css"
 
 const Showklinmain = () => {
     const [blogs, setBlogs] = useState<Blog[]>([]);
+    const [likes, setLikes] = useState<Like[]>([]);
     const fetchBlogs = () => {
         BlogsService.fetchBlogfilter("?type=1&order=1")
             .then(blogs => {
-                setBlogs(blogs.slice(0,7));
+                setBlogs(blogs.slice(0,10));
             });
     };
     useEffect(() => {
@@ -46,14 +51,16 @@ const Showklinmain = () => {
 
     return (
         <div>
-            {blogs.map(blog => (
+            {blogs.map(blog => 
+                (
                     <div>
                         <Link className="show-all-blog knowledge" to={`/${blog.type}/${blog.id}`}>
                             <div className="blog-fl">
                                 {blog.blog_name}
                             </div>
                             <div className="blog-fl" style={{ textAlign : "center" }}>
-                                {blog.viewers} View
+                                <ShowLike blogid={blog.id}/>
+                                <EyeOutlined />&nbsp;&nbsp;{blog.viewers} 
                             </div>
                             <div className="blog-fl" style={{ textAlign : "center" }}>
                                 Last Edit : {blog.last_edit}
@@ -63,7 +70,6 @@ const Showklinmain = () => {
                                     userid = {blog.user_id}
                                 />
                             </div>
-                            
                         </Link>
                     </div>
                 ))}

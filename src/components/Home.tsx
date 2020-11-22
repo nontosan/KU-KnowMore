@@ -22,9 +22,11 @@ const Home = () => {
                     <Filtermodel />
                 </div>
             }
-            <button className="main-div-main btn btn-success" onClick={() => setShowFilter(!showFilter)}>
-                SEARCH
-            </button>
+            {false &&
+                <button className="main-div-main btn btn-success" onClick={() => setShowFilter(!showFilter)}>
+                    SEARCH
+                </button>
+            }
             {true&&
                 <div className="filter-bar" style={{ backgroundColor:"pink" }}>
                     <FilterBar />

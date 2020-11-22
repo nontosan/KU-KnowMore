@@ -10,6 +10,7 @@ import {
 
 // IMPORT COMPONENT //
 import DeleteModal from '../modals/DeleteModal';
+import ShowLike from './ShowLike';
 import UserAuthor from './UserAuthor';
 // END OF IMPORT COMPONENT //
 
@@ -23,6 +24,7 @@ import { Blog } from '../interfaces/blog';
 
 // IMPORT CSS //
 import './section.css';
+import {LikeOutlined,LikeTwoTone,EyeOutlined} from '@ant-design/icons';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // END OF IMPORT CSS //
@@ -89,7 +91,8 @@ const KnowledgeBlog = () => {
                                 {blog.blog_name}
                             </div>
                             <div className="blog-fl" style={{ textAlign : "center" }}>
-                                {blog.viewers} View
+                                <ShowLike blogid={blog.id}/>
+                                <EyeOutlined />&nbsp;&nbsp;{blog.viewers} 
                             </div>
                             <div className="blog-fl" style={{ textAlign : "center" }}>
                                 Last Edit : {blog.last_edit}

@@ -4,3 +4,10 @@
 .review{
     background-color: #A3EBA3;
 }
+.showblog-profilepage{
+    margin-left: 100px;
+    margin-right: 100px;
+    border: rgba(0,0,0,.125) solid 1px;
+    border-bottom: 0px;
+    border-radius: calc(0.25rem - 1px);
+}

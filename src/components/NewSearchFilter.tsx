@@ -64,6 +64,7 @@ const FilterBar = (props:any) => {
     const [available,setAvailable] = useState<boolean>(false)
 
     const [input_subname,setsubname]= useState('');
+    const [input_teachername,setteachername] = useState('');
 
 
     const [UrlLink, setUrl]=useState<string>("");
@@ -130,17 +131,16 @@ const FilterBar = (props:any) => {
         else if(viewer == true){
             querystring+="&order="+"3"
         }
-        if(selectCode !== ""){
-            querystring+="&code="+selectCode
-        }
         if(input_subname!=""){
             querystring+="&subname="+input_subname
         }
-        if(selectTeacher!==""){
-            querystring+="&teachername="+selectTeacher
+        if(input_teachername!==""){
+            querystring+="&teachername="+input_teachername
         }
         setquery(querystring)
         console.log(querystring)
+        setsubname('')
+        setteachername('')
     }
 
     useEffect(()=>{
@@ -148,6 +148,11 @@ const FilterBar = (props:any) => {
           setFormVisible(!formVisible);
         }
       },[query])
+    useEffect(()=>{
+        if(formVisible==true){
+            window.location.reload()
+        }
+    },[formVisible])
 
     useEffect(()=>{
         fetchCourse()
@@ -300,17 +305,20 @@ return (
             </div>
         }
         <div className="margin-filter"><strong>Teacher</strong></div>
-        <FormControl onChange={(e)=>setsubname(e.target.value)}
+        <FormControl onChange={(e)=>setteachername(e.target.value)}
             placeholder="TYPE TEACHER NAME . . ."
             aria-label="TYPE TEACHER NAME . . ."
-            aria-describedby="basic-addon1"
+            aria-describedby="basic-addon2"
         />
         <br />
-        <div className="Cancel">
-            <Button style={{ float: "right" }} variant="danger"> Cancel </Button>
-        </div>
         
-        <button style={{ float: "right" }} className="btn btn-success submit-button" onClick={searchquery}> Submit </button>
+        {false &&
+            <div className="Cancel">
+                <Button style={{ float: "right" }} variant="danger"> Cancel </Button>
+            </div>
+        }
+        
+        <button style={{ float: "right" }} className="btn btn-success" onClick={searchquery}> Submit </button>
         {formVisible &&
         <div>
           <Redirect to={`/filter/search?${query}`} />

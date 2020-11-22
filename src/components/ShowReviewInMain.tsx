@@ -10,6 +10,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 // IMPORT COMPONENT //
 import UserAuthor from './UserAuthor';
+import ShowLike from './ShowLike';
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
@@ -23,6 +24,7 @@ import {Blog}  from "../interfaces/blog"
 // IMPORT CSS //
 import './section.css';
 import '../App.css';
+import {LikeOutlined,LikeTwoTone,EyeOutlined} from '@ant-design/icons';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../css/blogforclick.css"
 // END OF IMPORT CSS //
@@ -34,7 +36,7 @@ const Showrwinmain = () => {
     const fetchBlogs = () => {
         BlogsService.fetchBlogfilter("?type=2&order=1")
             .then(blogs => {
-                setBlogs(blogs.slice(0,7));
+                setBlogs(blogs.slice(0,10));
             });
     };
     useEffect(() => {
@@ -53,7 +55,8 @@ const Showrwinmain = () => {
                                 {blog.blog_name}
                             </div>
                             <div className="blog-fl" style={{ textAlign : "center" }}>
-                                {blog.viewers} View
+                                <ShowLike blogid={blog.id}/>
+                                <EyeOutlined />&nbsp;&nbsp;{blog.viewers} 
                             </div>
                             <div className="blog-fl" style={{ textAlign : "center" }}>
                                 Last Edit : {blog.last_edit}

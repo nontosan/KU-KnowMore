@@ -11,6 +11,7 @@ import {
 import Filtermodel from '../modals/filter'
 import UserAuthor from './UserAuthor';
 import FilterBar from './NewSearchFilter';
+import ShowLike from './ShowLike';
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
@@ -20,6 +21,14 @@ import BlogsService from "../services/BlogsService"
 // IMPORT INTERFACE //
 import { Blog } from "../interfaces/blog"
 // END OF IMPORT INTERFACE//
+
+// IMPORT CSS //
+import './section.css';
+import '../App.css';
+import {LikeOutlined,LikeTwoTone,EyeOutlined} from '@ant-design/icons';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "../css/blogforclick.css"
+// END OF IMPORT CSS //
 
 //------------------------------------------------------------------//
 
@@ -43,12 +52,16 @@ const SearchFilter=()=>{
     },[Url])
     return(
         <div>
-            <div className="main-div-main">
-                <Filtermodel />
-            </div>
-            <button className="main-div-main" onClick={() => setShowFilter(!showFilter)}>
-                filter
-            </button>
+            {false &&
+                <div>
+                    <div className="main-div-main">
+                        <Filtermodel />
+                    </div>
+                    <button className="main-div-main" onClick={() => setShowFilter(!showFilter)}>
+                        filter
+                    </button>
+                </div>
+            }
             {true&&
                 <div className="filter-bar" style={{ backgroundColor:"pink" }}>
                     <FilterBar />
@@ -63,7 +76,8 @@ const SearchFilter=()=>{
                                 {blog.blog_name}
                             </div>
                             <div className="blog-fl" style={{ textAlign : "center" }}>
-                                {blog.viewers} View
+                                <ShowLike blogid={blog.id}/>
+                                <EyeOutlined />&nbsp;&nbsp;{blog.viewers} 
                             </div>
                             <div className="blog-fl" style={{ textAlign : "center" }}>
                                 Last Edit : {blog.last_edit}
