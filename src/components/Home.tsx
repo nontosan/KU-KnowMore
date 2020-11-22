@@ -23,9 +23,9 @@ const Home = () => {
                 </div>
             }
             <button className="main-div-main btn btn-success" onClick={() => setShowFilter(!showFilter)}>
-                filter
+                SEARCH
             </button>
-            {showFilter&&
+            {true&&
                 <div className="filter-bar" style={{ backgroundColor:"pink" }}>
                     <FilterBar />
                 </div>

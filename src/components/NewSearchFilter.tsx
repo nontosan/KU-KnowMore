@@ -190,9 +190,9 @@ const FilterBar = (props:any) => {
           setafterSave(!afterSave);
         }
       },[UrlLink]);
-    console.log(knowledge);
-    console.log(review);
-    console.log(knowledgeandreview);
+    //console.log(knowledge);
+    //console.log(review);
+    //console.log(knowledgeandreview);
     useEffect(() => {
         if(knowledge == false && review == false && knowledgeandreview == false) {
             setknowledgeandreview(true);
@@ -210,7 +210,7 @@ const FilterBar = (props:any) => {
     },[date,like,viewer])
 return (
     <div className="filter-blog">
-        CHOOSE BLOG TYPE &nbsp;&nbsp;&nbsp;
+        <strong>CHOOSE BLOG TYPE</strong> &nbsp;&nbsp;&nbsp;
         <ToggleButtonGroup type="checkbox">
             {knowledge?
                 <Button variant="success" onClick={() => setknowledge(false)}>ความรู้</Button>
@@ -228,7 +228,7 @@ return (
                 <Button variant="secondary" onClick={() => {setknowledgeandreview(true);setknowledge(false);setreview(false);}}>ความรู้&รีวิว</Button>
             }
         </ToggleButtonGroup>
-        &nbsp;&nbsp;&nbsp; ORDER &nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp; <strong>ORDER</strong> &nbsp;&nbsp;&nbsp;
         <ToggleButtonGroup type="checkbox"> 
             {date?
                 <Button variant="success" value={1} >Date</Button>
@@ -246,73 +246,65 @@ return (
                 <Button variant="secondary" value={1} onClick={() => {setviewer(true);setdate(false);setlike(false);}}>Viewer</Button>
             }
         </ToggleButtonGroup>
-        <br/><br/>
-        {codeoption[0]}
-        <Row className="Col">
-            <Col sm={2}>
-                <div>Code</div>
-            </Col>
-            <Col>
-                <Select 
-                    options = {codeOptions} 
-                    onChange={handleChangeCode}
-                    isSearchable
-                    filterOption={({label}, query) => label.indexOf(query.toLowerCase()) >= 0 && i++ < resultLimit}
-                    onInputChange={() => { i = 0 }}
-                />
-            </Col>
-        </Row>
-        <Row>
-            <Col sm={2}>
-                <div>Subject Name</div>
-            </Col>
-            <Col>
-                <FormControl onChange={(e)=>setsubname(e.target.value)}
-                    placeholder="Subject"
-                    aria-label="Subject"
-                    aria-describedby="basic-addon1"
-                />
-            </Col>
-        </Row>
+        <br/>
         {false &&
-        <div>
-        <Row className="Col">
-            <Col sm={2}>
-                <div>Subject Name (Thai)</div>
-            </Col>
-            <Col>
-                <Select 
-                    isDisabled
-                    placeholder={selectNameTh}
-                />
-            </Col>
-        </Row>
-        <Row className="Col">
-            <Col sm={2}>
-                <div>Subject Name (English)</div>
-            </Col>
-            <Col>
-                <Select 
-                    isDisabled
-                    placeholder={selectNameEn}
-                />
-            </Col>
-        </Row>
-        </div>
+            <div>
+                {codeoption[0]}
+                <Row className="Col">
+                    
+                    <Col sm={2}>
+                        <div>Code</div>
+                    </Col>
+                    <Col>
+                        <Select 
+                            options = {codeOptions} 
+                            onChange={handleChangeCode}
+                            isSearchable
+                            filterOption={({label}, query) => label.indexOf(query.toLowerCase()) >= 0 && i++ < resultLimit}
+                            onInputChange={() => { i = 0 }}
+                        />
+                    </Col>
+                </Row>
+            </div>
         }
-        <br />
-        <Row >
-            <Col sm={2}>
-                <div>Teacher</div>
-            </Col>
-            <Col>
-                <Select 
-                    options = {teacherOptions} 
-                    onChange={handleChangeTeacher}
-                    isSearchable
-                />
-            </Col>
-        </Row>
+        <div className="margin-filter"><strong>Code or Subject Name</strong></div>
+        <FormControl onChange={(e)=>setsubname(e.target.value)}
+            placeholder="TYPE SUBJECT CODE OR SUBJECT NAME . . ."
+            aria-label="TYPE SUBJECT CODE OR SUBJECT NAME . . ."
+            aria-describedby="basic-addon1"
+        />
+        {false &&
+            <div>
+                <Row className="Col">
+                    <Col sm={2}>
+                        <div>Subject Name (Thai)</div>
+                    </Col>
+                    <Col>
+                        <Select 
+                            isDisabled
+                            placeholder={selectNameTh}
+                        />
+                    </Col>
+                </Row>
+                <Row className="Col">
+                    <Col sm={2}>
+                        <div>Subject Name (English)</div>
+                    </Col>
+                    <Col>
+                        <Select 
+                            isDisabled
+                            placeholder={selectNameEn}
+                        />
+                    </Col>
+                </Row>
+            </div>
+        }
+        <div className="margin-filter"><strong>Teacher</strong></div>
+        <FormControl onChange={(e)=>setsubname(e.target.value)}
+            placeholder="TYPE TEACHER NAME . . ."
+            aria-label="TYPE TEACHER NAME . . ."
+            aria-describedby="basic-addon1"
+        />
         <br />
         <div className="Cancel">
             <Button style={{ float: "right" }} variant="danger"> Cancel </Button>
