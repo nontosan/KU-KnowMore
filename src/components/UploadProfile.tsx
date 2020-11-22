@@ -1,6 +1,7 @@
-import React, { Component,useEffect,useState} from 'react';
+import React, { Component,useEffect,useState, Suspense } from 'react';
 import axios from 'axios'
 
+import ImageComponent from './DisplayOnProfilePage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import './editprofile.css';
@@ -8,14 +9,13 @@ import "./uploadprofile.css"
 class Upload extends React.Component<any,any> {
     check = false;
     state = {
-        file: ""
+        file: "",
     }
 
     handleFile(e:any){
 
         let file = e.target.files[0]
         this.setState({file: file})
-
         //console.log(e.target.files, "$$$$");
         //console.log(e.target.files[0], "$$$$");
     }
@@ -26,7 +26,6 @@ class Upload extends React.Component<any,any> {
         const profile_pic = new FormData()
         profile_pic.append('profile_pic',file)
         //formdata.append('name','test')
-
         await axios({
             url: `https://backend.ku-knowmore.xyz/users/${this.props.userID}/profile_pic`, //Sample API 
             method: "POST",
@@ -39,7 +38,6 @@ class Upload extends React.Component<any,any> {
         alert("Upload Complete");
         window.location.replace(`/userpage/${this.props.userID}`);
     }
-
     render() {
         return (
             <div className="Upp">

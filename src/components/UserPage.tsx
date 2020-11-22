@@ -15,6 +15,7 @@ import {
 // IMPORT COMPONENT //
 import DeleteModal from '../modals/DeleteModal';
 import UserAuthor from './UserAuthor';
+import ShowLike from './ShowLike';
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
@@ -29,6 +30,7 @@ import { User_Sch } from '../interfaces/user';
 import './section.css';
 import 'antd/dist/antd.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {LikeOutlined,LikeTwoTone,EyeOutlined} from '@ant-design/icons';
 import { Popconfirm, message } from 'antd';
 import  "./userpage.css"
 // END OF IMPORT CSS //
@@ -133,7 +135,7 @@ const UserPage = (props:any) => {
                 </Link>
                 }
             </div>
-            <div className="hot-kl" style={{ marginBottom : "50px" }}>
+            <div className="showblog-profilepage" style={{ marginBottom : "50px" }}>
                 <Card.Header className="card-header">MY BLOG</Card.Header>
                 {blogs.map(blog => {
                     if(blog.user_id==userId){
@@ -146,7 +148,8 @@ const UserPage = (props:any) => {
                                                 {blog.blog_name}
                                             </div>
                                             <div className="blog-fl" style={{ textAlign : "center" }}>
-                                                {blog.viewers} View
+                                                <ShowLike blogid={blog.id}/>
+                                                <EyeOutlined />&nbsp;&nbsp;{blog.viewers} 
                                             </div>
                                             <div className="blog-fl" style={{ textAlign : "center" }}>
                                                 Last Edit : {blog.last_edit}
@@ -165,7 +168,8 @@ const UserPage = (props:any) => {
                                                 {blog.blog_name}
                                             </div>
                                             <div className="blog-fl" style={{ textAlign : "center" }}>
-                                                {blog.viewers} View
+                                                <ShowLike blogid={blog.id}/>
+                                                <EyeOutlined />&nbsp;&nbsp;{blog.viewers} 
                                             </div>
                                             <div className="blog-fl" style={{ textAlign : "center" }}>
                                                 Last Edit : {blog.last_edit}
