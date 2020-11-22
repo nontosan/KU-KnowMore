@@ -31,7 +31,7 @@ export class Review_Controller {
 
   // @UseGuards(JwtAuthGuard)
   @Delete('/:id')
-  deleteReviews(@Param('id') id: string): Promise<void> {
+  deleteReviews(@Param('id') id: string): Promise<{}> {
     return this.Service.remove(id);
   }
 

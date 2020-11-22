@@ -15,6 +15,7 @@ import Reviews from './reviews/reviews.entity';
 import Likes from './likes/likes.entity';
 import Reports from './reports/reports.entity';
 import Attachments from './attachments/attachments.entity';
+import recycleSections from './sections/recyclesection.entity';
 
 import { Blog_Module } from './blogs/blogs.module';
 import { Course_Module } from './courses/courses.module';
@@ -28,6 +29,7 @@ import { Attachment_Module } from './attachments/attachments.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './auth/constants';
+import recycleReviews from './reviews/recyclereviews.entity';
 
 @Module({
   imports: [
@@ -38,7 +40,7 @@ import { jwtConstants } from './auth/constants';
       username: 'admin-backend',
       password: 'Rahat_Khao_Da_Ta_Bet',
       database: 'KU-KnowMore',
-      entities: [Blogs, Courses, Users, Sections, Comments, Reviews, Likes, Reports, Attachments, Recycle_blogs],
+      entities: [Blogs, Courses, Users, Sections, Comments, Reviews, Likes, Reports, Attachments, Recycle_blogs,recycleSections,recycleReviews],
       synchronize: true,
     }),
     ServeStaticModule.forRoot({
