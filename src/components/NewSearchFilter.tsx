@@ -272,7 +272,7 @@ return (
                 </Row>
             </div>
         }
-        <div className="margin-filter"><strong>Code or Subject Name</strong></div>
+        <div className="margin-filter"><strong>CODE OR SUBJECT NAME</strong></div>
         <FormControl onChange={(e)=>setsubname(e.target.value)}
             placeholder="TYPE SUBJECT CODE OR SUBJECT NAME . . ."
             aria-label="TYPE SUBJECT CODE OR SUBJECT NAME . . ."
@@ -304,7 +304,7 @@ return (
                 </Row>
             </div>
         }
-        <div className="margin-filter"><strong>Teacher</strong></div>
+        <div className="margin-filter"><strong>TEACHER</strong></div>
         <FormControl onChange={(e)=>setteachername(e.target.value)}
             placeholder="TYPE TEACHER NAME . . ."
             aria-label="TYPE TEACHER NAME . . ."
