@@ -1,4 +1,5 @@
 import { User_Sch } from '../interfaces/user';
+import {hours} from "../interfaces/hours"
 import { useImage } from 'react-image';
 
 
@@ -37,8 +38,14 @@ async function EditPro(editProfile: User_Sch,userid:string): Promise<User_Sch|nu
     });
     return editProfile;
 }
+async function fetchActivityHour(userId:any): Promise<hours>{
+    const res = await fetch(`https://backend.ku-knowmore.xyz/users/${userId}/hours`);
+    const hours = await res.json();
+    console.log(hours)
+    return hours;  
 
+}
 
 export default {
-    fetchProfileSpecific, CreateProfile, EditPro
+    fetchProfileSpecific, CreateProfile, EditPro,fetchActivityHour
 };

@@ -17,7 +17,7 @@ import { Course, Course_real } from '../interfaces/course';
 import '../App.css';
 import BlogsService from '../services/BlogsService';
 import {Blog,create_Blog} from "../interfaces/blog"
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row} from 'react-bootstrap';
 import 'antd/dist/antd.css';
 import {  notification,message , Divider, Space } from 'antd';
 import {
@@ -26,7 +26,6 @@ import {
     RadiusBottomleftOutlined,
     RadiusBottomrightOutlined,
   } from '@ant-design/icons';
-  
 const key = 'updatable';
 const DropdownCreateKnowledge=()=> {
     const resultLimit = 10

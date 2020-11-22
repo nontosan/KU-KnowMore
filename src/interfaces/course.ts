@@ -8,7 +8,7 @@ export interface Course_real{
     id:string;
     Code:string;
     NameTh:string;
-    NameEn:string
-    Teacher:string
+    NameEn:string;
+    Teacher:string;
 }
 

@@ -24,6 +24,7 @@ import ProfileService from '../services/ProfileService';
 
 // IMPORT INTERFACE //
 import { User_Sch } from '../interfaces/user';
+import {hours} from "../interfaces/hours"
 // END OF IMPORT INTERFACE//
 
 // IMPORT CSS //
@@ -46,7 +47,8 @@ const UserPage = (props:any) => {
     const [blogs,setBlogs] = useState<Blog[]>([])
     const [UrlLink, setUrl]=useState<string>("");
     const [afterSave, setafterSave] = useState<boolean>(false);
-    const userId = props.match.params.userId
+    const [hours,sethours] = useState<hours>();
+    const userId:string = props.match.params.userId
     const fetchBlogs=()=>{
         //may use userid from location
         BlogService.fetchBlogfilter(`?userid=${userId}`).then(res=>{
@@ -75,7 +77,13 @@ const UserPage = (props:any) => {
                 console.log(userInfo);
             })
     }
-
+    const fetchhour =()=>{
+        ProfileService.fetchActivityHour(userId)
+            .then(hoursinfo=>{
+                console.log(hoursinfo)
+                sethours(hoursinfo)
+            })
+    }
     const checktype=(item:string)=>{
         if(item==="knowledge"){
             return true
@@ -101,6 +109,7 @@ const UserPage = (props:any) => {
     useEffect(() => {
         fetchProfile();
         fetchBlogs();
+        fetchhour()
     },[])
 
     useEffect(() => {
@@ -126,7 +135,7 @@ const UserPage = (props:any) => {
                         <h4>Name : {userInformation.name}</h4>
                         <h4>Username : {userInformation.username}</h4>
                         <h4>Profile Description : {userInformation.profile_description} </h4>
-                        <h4>Activity Hour : </h4>
+                        <h4>Activity Hour : {hours?.hours}Hours   {hours?.minutes}minutes   {hours?.seconds}seconds</h4>
                     </div>
                 ))}
                 {userId == localStorage.userId &&

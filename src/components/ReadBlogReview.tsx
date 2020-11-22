@@ -262,7 +262,7 @@ const fetchReview = () => {
                     }
                     {showDeleteModal && 
                       <div>
-                        <DeleteModal 
+                        <DeleteModal className=""
                           show = {showDeleteModal}
                           nameBlog = {BlogDelete?.blog_name}
                           deleteBlog = {submitDeleteBlog}

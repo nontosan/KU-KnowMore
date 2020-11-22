@@ -84,4 +84,5 @@
     border: rgba(0,0,0,.125) solid 1px;
     border-top: 0px;
     border-radius: calc(0.25rem - 1px);
+    margin-bottom: 8em;
 }

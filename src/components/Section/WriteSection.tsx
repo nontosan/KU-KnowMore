@@ -61,7 +61,7 @@ const WriteSection = (props:any) => {
 
     console.log(history.go)
     return (
-        <div>
+        <div className="x">
             <InputGroup size="lg" className="div-sectionname">
                 <InputGroup.Prepend >
                     <InputGroup.Text id="inputGroup-sizing-lg">Section Name</InputGroup.Text>
