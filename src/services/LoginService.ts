@@ -49,6 +49,10 @@ function getUsername(): string|null {
     }
 }
 
+function getAccessToken(): string {
+    return localStorage.accessToken;
+}
+
 function getUserId(): string|null {
     if ( isUserLoggedIn() ) {
         console.log(localStorage.userId);
@@ -90,5 +94,5 @@ async function portal(Code:any): Promise<any|null>{
     //}
 }
 export default {
-    UserLogin,isUserLoggedIn, getUsername, UserLogout, getUserId,portal, KULogout
+    UserLogin,isUserLoggedIn, getUsername, UserLogout, getUserId,portal, KULogout, getAccessToken,
 };

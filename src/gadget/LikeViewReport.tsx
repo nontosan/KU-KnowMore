@@ -18,7 +18,8 @@ import "./gadgetclass.css"
 
 
 const LikeViewReport=(props:any)=> {
-    const [like,setLike] = useState<boolean>(false)
+    const [like,setLike] = useState<boolean>(false);
+    const [awaitload,setAwaitLoad] = useState<boolean>(false);
     const [liker ,setliker] = useState<Like[]>([]) 
     const [bloginfo,setbloginfo] = useState<Blog[]>([])
     const blogId = window.location.pathname.split("/")[2]
@@ -30,6 +31,14 @@ const LikeViewReport=(props:any)=> {
     const fetchLiker=()=>{
         LikeServive.fetchLike(blogId).then(res=>{
             setliker(res)
+            res.map(item => {
+                console.log(item.user_id)
+                console.log(localStorage.userId);
+                if(item.user_id==localStorage.userId){
+                    console.log("HELLO");
+                    setAwaitLoad(true);
+                }
+            })
         })
     }
     const clicklike=async()=>{
@@ -38,12 +47,14 @@ const LikeViewReport=(props:any)=> {
             user_id:localStorage.userId,
             //blog_id:blogId
         }
-        LikeServive.createLike(blogId,data).then(res=>{
-            console.log(res)
-            setLike(res)
+        LikeServive.createLike(blogId,data)
+        .then(res=>{
+            console.log(res);
+            setAwaitLoad(res);
+            fetchLiker();
         })
     }
-  
+    //console.log(like);
     useEffect(() => {
         fetchBlog()
         fetchLiker()
@@ -55,9 +66,13 @@ const LikeViewReport=(props:any)=> {
             <div className="hot-kl">
                 <Card.Header className="likeviewreportContainer">
                     <div className="like">
-                        {like ? <button className="likebutton" onClick={clicklike}><LikeOutlined /></button> : <button className="likebutton" onClick={clicklike}><LikeTwoTone /></button> }
-                        &nbsp;&nbsp;<div style={{ display: "inline" }} className="liketotal">{liker.length}</div>
-                    </div>
+                        {awaitload ? 
+                            <button className="likebutton" onClick={clicklike}><LikeTwoTone /></button> 
+                        : 
+                            <button className="likebutton" onClick={clicklike}><LikeOutlined /></button> 
+                        }
+                            &nbsp;&nbsp;<div style={{ display: "inline" }} className="liketotal">{liker.length}</div>
+                        </div>
                     <div className="like" >
                         &nbsp;&nbsp;&nbsp;&nbsp;<EyeOutlined />{bloginfo.map(x=>(<div style={{ display: "inline" }}>&nbsp;&nbsp;{x.viewers}</div>))}
                     </div>

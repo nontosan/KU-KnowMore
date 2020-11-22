@@ -124,7 +124,7 @@ function EditProfile (props:any) {
 
   return (
     <div className ="EditProfile">
-      <div className="hot-kl">
+      <div className="border-editprofile">
       <Card.Header>Edit User Information</Card.Header>
       <div className="containerr">
         <Upload  userID={userId}/>

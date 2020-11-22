@@ -20,7 +20,7 @@ async function createLike(blogId:string,data:any): Promise<boolean> {
   const islike = await fetch(`https://backend.ku-knowmore.xyz/blogs/${blogId}/likes`,{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({"user_id":"5f82fd5504eb8600aa617b6b"}),
+        body: JSON.stringify({"user_id":localStorage.userId}),
     });
     const like = await islike.json();
     console.log(like)
