@@ -10,9 +10,11 @@ import axios from 'axios';
 import DisplayFile from '../DisplayFile';
 import DisplayFileandDel from '../DisandDel';
 import LoadFileModal from "../../modals/loadfile"
+import Deletesection from "../../modals/DeleteSection"
 
 // IMPORT SERVICE //
 import SectionService from '../../services/SectionService';
+
 // END OF IMPORT SERVICE //
 
 // IMPORT INTERFACE //
@@ -55,7 +57,8 @@ const ReadSection = (props:any) => {
     const history=useHistory()
     const [sectionName, setSectionName] = useState<string>("");
     const [author, setAuthor] = useState<string>('');
-    
+    const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+    const [statusDelete, setStatusDelete] = useState<boolean>(false);
     const fetchSection = () => {
         SectionService.fetchSectionsSpecific(sectionId)
             .then(sectioninfo => {
@@ -83,7 +86,11 @@ const ReadSection = (props:any) => {
     }
     ////////antd//////////
     const key = 'updatable';
-
+    const handleDeleteBlog = () => {
+        console.log('handle delete blog')
+        setShowDeleteModal(true);
+    }
+        
     const openMessage = () => {
         console.log("hello")
         message.loading({ content: 'Loading...', key });
@@ -120,6 +127,9 @@ const ReadSection = (props:any) => {
           onClose: close,
         });
       };
+    const closeModal = () => {
+        setShowDeleteModal(false);
+    }
     //////////////////
     useEffect(() => {
         fetchSection();
@@ -134,7 +144,22 @@ const ReadSection = (props:any) => {
     //    initdraft();
     //    setafterFetch(!afterFetch);
     //},[sectionsInformation])
-
+    useEffect(() => {
+        if (statusDelete==true) {
+          window.location.replace(`/knowledge/${sectionsInformation[0]?.blog_id}`);
+          setStatusDelete(false);
+        }
+      },[statusDelete]);
+    const submitDeleteSection = () => {
+        console.log("fuck")
+        setShowDeleteModal(false);
+        SectionService.deleteSection(sectionId)
+            .then(res => {
+                if (res) {
+                    setStatusDelete(true);
+                }
+            })
+    }
     return (
         <div>
             {false &&
@@ -168,11 +193,21 @@ const ReadSection = (props:any) => {
                             {author==localStorage.userId &&
                             <div>
                                 <Button className="blog-delete-button" onClick={e=>window.location.replace(`http://localhost:3000/editSection/${sectionId}`)}>
-                                <Image className="gear-setting-pic blog-fl" src={GearEdit}></Image>
+                                    <Image className="gear-setting-pic blog-fl" src={GearEdit}></Image>
                                 </Button>
-                                <Button className="blog-delete-button" onClick={e=>openNotification()}>
+                                <Button className="blog-delete-button" onClick={() => handleDeleteBlog()}>
                                     <Image className="delete-setting-pic blog-fl" src={minus}></Image>
                                 </Button>
+                                {showDeleteModal && 
+                                    <div>
+                                        <Deletesection
+                                        show = {showDeleteModal}
+                                        nameSection = {sectionsInformation[0]?.section_name}
+                                        deleteBlog = {submitDeleteSection}
+                                        cancel = {closeModal}
+                                        />
+                                    </div>
+                                }
                             </div>
                             }
                         </div>
