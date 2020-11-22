@@ -42,3 +42,13 @@
   .ql-editor{
       font-size: 18px;
   }
+  .x{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr ;
+  }
+  .y{
+      padding-left:1em;
+  }
+  .z{
+      margin-top: 3em;
+  }
