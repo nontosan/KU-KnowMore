@@ -103,7 +103,7 @@ function MyVerticallyCenteredModal(props:any) {
                             {overthrow?<Button variant="success" className="blog" onClick={() => setoverthrow(!overthrow)}>โพสล้มล้านสถาบัน</Button>:<Button variant="secondary" className="blog" onClick={()=>setoverthrow(!wrongcontent)}>โพสล้มล้านสถาบัน</Button>}
                         </div>
                         <div style={{height:"50px"}} className="input_container">
-                          <Field className="input" type="input" name="etc"  placeholder="type something..."/>
+                          <Field className="inputt" type="input" name="etc"  placeholder="type something..."/>
                         </div>
                       </Modal.Body>
                       <Modal.Footer>
