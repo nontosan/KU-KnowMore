@@ -1,5 +1,6 @@
 .container_real{
-    border:none
+    border:none;
+    margin-bottom: 8em;
 }
 .blog_container{
     border-radius: 0 0 0 0;

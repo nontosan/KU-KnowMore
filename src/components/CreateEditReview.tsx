@@ -409,7 +409,10 @@ const CreateEditSection = (props:any) => {
             </div>
             <div className="Confirm"> 
             <div className="Cancel">
-              <Button className="cancel-button" variant="danger" onClick={e=>openNotification()}>Cancel</Button>
+              <Button className="cancel-button" variant="danger" onClick={e=>{
+                BlogsService.deleteBlog(blogId)
+                setaftercancel(true)
+              }}>Cancel</Button>
               {aftercancel &&
                     <div>
                       <Redirect to={`/`} />
