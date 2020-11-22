@@ -10,6 +10,7 @@ import DeleteCommentModal from '../modals/DeleteCommentModal';
 import UserCommentAuthor from "./UserCommentAuthor";
 import UserCommentName from "./userincomment/username"
 import UserCommentPic from "./userincomment/userpic"
+import ReportCmtModal from "../modals/report_cmt"
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
@@ -164,7 +165,13 @@ const Comment_component=(props:any)=>{
                                     </div>
                                 }
                                 {item.user_id!==localStorage.userId &&
-                                    <NavDropdown.Item onClick={handlereport} className="more-option">Report</NavDropdown.Item>
+                                    <ReportCmtModal 
+                                        id={item.id}
+                                        blogid={item.blog_id}
+                                        content={item.content}
+                                        datetime={item.date_time}
+                                        userid={item.user_id}
+                                />
                                 }
                             </NavDropdown>
                     </div>
