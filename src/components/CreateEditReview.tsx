@@ -30,6 +30,7 @@ import ChangeBlogInfoModal from "../modals/ChangBlogInfo"
 // IMPORT SERVICE //
 import  loadeditsection from "../services/loadeditsection";
 import BlogsService from "../services/BlogsService"
+import ProfileService from '../services/ProfileService';
 import SectionService from "../services/SectionService";
 import CourseService from "../services/CourseService"
 // END OF IMPORT SERVICE //
@@ -210,12 +211,47 @@ const CreateEditSection = (props:any) => {
         'Please complete assign value in form',
     });
   };
+
+  const fetchProfile = () => {
+    ProfileService.fetchProfileSpecific(author)
+      .then(userInfo => {
+        setUserInformation(userInfo);
+      })
+  }
+
+  useEffect(()=>{
+    if(author!==''){
+      console.log(author);
+      fetchProfile();
+    }
+  },[author])
   useEffect(()=>{
       fetchBlogs();
   },[])
   return (
     <div>
-      <div className="hot-kl">
+      {false &&
+        <div className="hot-kl">
+          {userInformation.map(item => (
+            <Card.Header>
+              <div>
+                <Link to={`/userpage/${item.id}`} style={{ float : "left" }}>
+                  <Suspense  fallback={<div>Loading... </div>}>
+                    <div className="blog-fl">
+                      <ImageComponent userid={item.pic_dir}/>
+                    </div>
+                  </Suspense>
+                </Link>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <Link to={`/userpage/${item.id}`} style={{ color : "white" }}>
+                  {item.name}
+                </Link>
+              </div>
+            </Card.Header>
+          ))}
+        </div>
+      }
+      <div className="hot-kl-noborder-top">
         {userInformation.map(item => (
           <Card.Header>
             <div>
@@ -233,9 +269,6 @@ const CreateEditSection = (props:any) => {
             </div>
           </Card.Header>
         ))}
-
-      </div>
-      <div className="hot-kl">
         {blogsInformation.map(blogInformation=>(
           <Card.Header>
             <div>

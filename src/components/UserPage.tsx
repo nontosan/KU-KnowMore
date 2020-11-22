@@ -126,7 +126,7 @@ const UserPage = (props:any) => {
                         <h4>Name : {userInformation.name}</h4>
                         <h4>Username : {userInformation.username}</h4>
                         <h4>Profile Description : {userInformation.profile_description} </h4>
-                        <h4>Activity : </h4>
+                        <h4>Activity Hour : </h4>
                     </div>
                 ))}
                 {userId == localStorage.userId &&
