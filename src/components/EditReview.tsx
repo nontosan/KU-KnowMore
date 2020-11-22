@@ -238,6 +238,9 @@ const formatGroupLabel = (data:any) => (
     fetchBlogs();
   },[])
 
+  const handleCallbackEdit = () => {
+    fetchBlogs();
+  }
   useEffect(()=>{
     if(author!==''){
       console.log(author);
@@ -300,7 +303,16 @@ const formatGroupLabel = (data:any) => (
               <div style={{ float: "right" }}>
                 {author==localStorage.userId &&
                   <div>
-                    <ChangeBlogInfoModal/>
+                    {courseInformation.map(item=>(
+                      <ChangeBlogInfoModal
+                        callback={handleCallbackEdit}
+                        nameblog = {blogInformation.blog_name}
+                        code = {item.Code}
+                        subnameth = {item.NameTh}
+                        subnameen = {item.NameEn}
+                        teacher = {item.Teacher}
+                      />
+                    ))}
                     <button className="blog-delete-button" onClick={() => handleDeleteBlog(blogInformation)}>
                       <Image className="delete-setting-pic blog-fl" src={minus} ></Image>
                     </button>
