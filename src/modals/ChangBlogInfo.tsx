@@ -38,8 +38,8 @@ function EditBlogModal(props:any) {
   const [course,setCourse] = useState<Course_real[]>([])
   const code:any[]=[]
   const [selectCode,setSelectCode] =useState<string>('');
-  const [selectNameTh, setSelectNameTh] = useState<string>('');
-  const [selectNameEn, setSelectNameEn] = useState<string>('');
+  const [selectNameTh, setSelectNameTh] = useState<string>(props.subnameth);
+  const [selectNameEn, setSelectNameEn] = useState<string>(props.subnameen);
   const [selectTeacher, setSelectTeacher] = useState<string>('');
   const [selectCourseId, setSelectCourseId] = useState<string>('');
   const [NameTh,setNameTh] =useState({})
@@ -51,11 +51,12 @@ function EditBlogModal(props:any) {
   const [bloginfo,setbloginfo] = useState<Blog[]>([])
   const patkh =window.location.pathname
   const blogId = window.location.pathname.split("/")[2]
-  const [blogname,setblogname] = useState<string>("")
+  const [blogname,setblogname] = useState<string>(props.blogname)
   const handleChangeCode = (selectedOption:any) => {
       code.push({ selectedOption })
       //console.log((code[0].selectedOption).value);
       setSelectCode((code[0].selectedOption).value);
+      setSelectTeacher('');
   }
 
   const handleChangeTeacher = (selectedOption:any) => {
@@ -83,6 +84,10 @@ function EditBlogModal(props:any) {
   const handleeditblog=()=>{
     console.log("editblog")
     if(selectCourseId!==""){
+      if(selectTeacher==''){
+        openNotificationNotTeacher()
+      }
+      else{
       const editblog:create_Blog={
         user_id: bloginfo[0].user_id,
         type: bloginfo[0].type,
@@ -95,6 +100,7 @@ function EditBlogModal(props:any) {
       })
       openMessage()
       props.onHide()
+      }
     }
     else{
       openNotificationNot()
@@ -106,6 +112,14 @@ function EditBlogModal(props:any) {
       setbloginfo(res)
       //console.log(res)
     })
+  }
+
+  const openNotificationNotTeacher = () => {
+    notification.info({
+      message: `Notification `,
+      description:
+        'Please select teacher',
+    });
   }
   const openNotificationNot = () => {
     notification.info({
@@ -171,6 +185,7 @@ function EditBlogModal(props:any) {
                       <div>Subject ID</div>
                           <Select 
                               options = {codeOptions} 
+                              defaultInputValue = {props.code}
                               onChange={handleChangeCode}
                               isSearchable
                               filterOption={({label}, query) => label.indexOf(query.toLowerCase()) >= 0 && i++ < resultLimit}
@@ -190,6 +205,7 @@ function EditBlogModal(props:any) {
                       <div>Teacher</div>
                           <Select 
                               options = {teacherOptions} 
+                              defaultInputValue = {props.teacher}
                               onChange={handleChangeTeacher}
                               isSearchable
                           />
@@ -211,6 +227,21 @@ function EditBlogModal(props:any) {
 
 const ChangeBlogInfoModal=(props:any)=>{
     const [modalShow, setModalShow] = useState<boolean>(false);
+    //const [code, setcode] = useState<string>('');
+    //const [teacher, setteacher] = useState<string>('');
+    //const init = () => {
+    //  CourseService.fetchCourseWithId(props.coursecode)
+    //  .then(res=>{
+    //    res.map(item=>{
+    //      setcode(item.Code);
+    //      setteacher(item.Teacher);
+    //    })
+    //  })
+    //}
+    //console.log(code);
+    //useEffect(()=>{
+    //  init();
+    //},[])
     return (
     <div>
       <Button className="blog-delete-button" onClick={() => 
@@ -221,6 +252,11 @@ const ChangeBlogInfoModal=(props:any)=>{
 
       <EditBlogModal
         show={modalShow}
+        blogname={props.nameblog}
+        code={props.code}
+        subnameth={props.subnameth}
+        subnameen={props.subnameen}
+        teacher={props.teacher}
         callback={props.callback}
         onHide={() => {
           setModalShow(false)
