@@ -12,6 +12,7 @@ import {
   Switch,
   Route,
   Link,
+  Redirect
 } from 'react-router-dom';
 import {useHistory} from "react-router"
 
@@ -78,6 +79,7 @@ const ReadBlogKnowledge = (props:any) => {
     const [selectNameEn, setSelectNameEn] = useState<string>('');
     const [selectTeacher, setSelectTeacher] = useState<string>('');
     const [selectCourseId, setSelectCourseId] = useState<string>('');
+    const [isedit,setisedit] = useState<boolean>(false)
   ///////////////////////////////end copy//////////////////////////////////
 
 
@@ -194,6 +196,7 @@ const handleEditReviewSave = (blogid : string) => {
       } else{
         alert("แก้ไข Review ไม่สำเร็จ");
       }
+      setisedit(true)
     });
 }
 /////////dropdown///////////////
@@ -433,10 +436,11 @@ const formatGroupLabel = (data:any) => (
                   <Button className="cancel-button" variant="danger">Cancel</Button>
                 </a>
               </div>
-              <div className="Submit">
-                <a href={`http://localhost:3000/review/${blogId}`}>
+              <div className="Submit">                
                   <Button className="submit-button" variant="success" onClick={e => handleEditReviewSave(blogId)}>Submit</Button>
-                </a>
+                  {isedit &&
+                    <Redirect to={`/review/${blogId}`} />
+                  }
               </div>
               
         </div>

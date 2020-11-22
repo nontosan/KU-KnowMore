@@ -37,19 +37,25 @@ const WriteSection = (props:any) => {
     };
     
     const handleSectionSave = () => {
-        const writeSection = {
-            section_name: newSectionName,
-            content: editorValue,
-            blog_id: blogId,
-        };
-
-        SectionService.createSection(blogId, writeSection)
-            .then(savedWriteSection => {
-                console.log("save success")
-                console.log(savedWriteSection)
-                window.location.replace(`http://localhost:3000/editSection/${savedWriteSection?.id}`)
-            });
-            //console.log(history)
+        if(newSectionName !=="" && editorValue!==""){
+            const writeSection = {
+                section_name: newSectionName,
+                content: editorValue,
+                blog_id: blogId,
+            };
+    
+            SectionService.createSection(blogId, writeSection)
+                .then(savedWriteSection => {
+                    console.log("save success")
+                    console.log(savedWriteSection)
+                    window.location.replace(`http://localhost:3000/editSection/${savedWriteSection?.id}`)
+                });
+                //console.log(history)    
+                console.log("already create section")
+        }
+        else{
+            alert("Please fille section name and content")
+        }
             
     };
 

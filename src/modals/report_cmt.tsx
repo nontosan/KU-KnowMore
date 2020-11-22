@@ -16,6 +16,8 @@ import {
 import {Formik,Form,Field} from "formik"
 import './report.css';
 import Alert from '../photo/alert.png';
+import NavDropdown from 'react-bootstrap/esm/NavDropdown';
+import UserCommentAuthor from "../components/UserCommentAuthor";
 function MyVerticallyCenteredModal(props:any) {
     const [annoy,setannoy] = useState<boolean>(false)
     const [repeat,setrepeat] = useState<boolean>(false)
@@ -94,6 +96,17 @@ function MyVerticallyCenteredModal(props:any) {
                 {({isSubmitting,values})=>(
                     <Form autoComplete="off">
                       <Modal.Body>
+                      <div className="show-all-comment">
+                            <div className="blog-fl black-font">
+                                <div>{props.userid}</div>
+                            </div>
+                        <div className="blog-fl black-font">
+                            {props.content}
+                        </div>
+                        <div className="blog-fl black-font">
+                            {props.datetime}
+                        </div>
+                    </div>
                         <div className="group_rp_type">
                             {annoy?<Button variant="success" className="blog" onClick={() => setannoy(!annoy)}>โพสก่อกวน</Button>:<Button variant="secondary" className="blog" onClick={()=>setannoy(!annoy)}>โพสก่อกวน</Button>}
                             {repeat?<Button variant="success" className="blog" onClick={() => setrepeat(!repeat)}>โพสซ้ำ</Button>:<Button variant="secondary"className="blog" onClick={()=>setrepeat(!repeat)}>โพสซ้ำ</Button>}
@@ -120,19 +133,22 @@ function MyVerticallyCenteredModal(props:any) {
     );
   }
 
-const ReportModal=()=>{
+const ReportCmtModal=(props:any)=>{
     const [modalShow, setModalShow] = useState<boolean>(false);
     return (
     <div>
-      <button className="report-button" onClick={() => setModalShow(true)}>
-        <Image style={{ display: "inline" }} className="likebar-pic" src={Alert}/>
-      </button>
+      <NavDropdown.Item onClick={() => setModalShow(true)} className="more-option">Report</NavDropdown.Item>
       <MyVerticallyCenteredModal
         show={modalShow}
         onHide={() => setModalShow(false)}
+        id={props.id}
+        blogid={props.blog_id}
+        content={props.content}
+        datetime={props.date_time}
+        userid={props.user_id}
       /> 
     </div>
   );
 }
 
-export default ReportModal
+export default ReportCmtModal
