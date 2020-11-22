@@ -6,6 +6,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 
 import Blogs from './blogs/blogs.entity';
+import Recycle_blogs from './blogs/recycle.entity';
 import Courses from './courses/courses.entity';
 import Users from './users/users.entity';
 import Sections from './sections/sections.entity';
@@ -37,7 +38,7 @@ import { jwtConstants } from './auth/constants';
       username: 'admin-backend',
       password: 'Rahat_Khao_Da_Ta_Bet',
       database: 'KU-KnowMore',
-      entities: [Blogs, Courses, Users, Sections, Comments, Reviews, Likes, Reports, Attachments],
+      entities: [Blogs, Courses, Users, Sections, Comments, Reviews, Likes, Reports, Attachments, Recycle_blogs],
       synchronize: true,
     }),
     ServeStaticModule.forRoot({

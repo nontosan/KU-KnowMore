@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { ObjectID } from 'mongodb';
 
 import Blogs from './blogs.entity';
+import Recycle_blogs from './recycle.entity';
 import Reports from '../reports/reports.entity';
 import { CreateBlogDto } from '../dto/create-blog.dto';
 import { Course_Service } from '../courses/courses.service';
@@ -16,9 +17,11 @@ export class Blog_Service {
                 private Blog_Repository: Repository<Blogs>,
                 private courseService: Course_Service,
                 private likeService: Like_Service,
+
+                @InjectRepository(Recycle_blogs)
+                private Recycle_Repository: Repository<Recycle_blogs>,
                 
                 @InjectRepository(Reports)
-                private Report_Repository: Repository<Reports>,
                 private ReportService:Report_Service
                 ) {}
 
@@ -291,8 +294,28 @@ export class Blog_Service {
     // ========================             DELETE           ==========================
     // --------------------------------------------------------------------------------
     async deleteblog(blog_id: string){
-        return this.Blog_Repository.delete(blog_id)
+        var Blogs = await this.findBlogsID(new ObjectID(blog_id));
+        var saveBlog = {
+            "old_id": Blogs[0].id,
+            "course_id": Blogs[0].course_id,
+            "user_id": Blogs[0].user_id,
+            "type": Blogs[0].type,
+            "viewers": Blogs[0].viewers,
+            "blog_name": Blogs[0].blog_name,
+            "last_edit": Blogs[0].last_edit
+        }
+        await this.Recycle_Repository.save(saveBlog)
+        try {
+            await this.Blog_Repository.delete(blog_id);
+            return { "status": blog_id.toString() + " have been successfully moved"};
+        } catch (error) {
+            return {
+                "statusCode": 500,
+                "message": "Internal server error"
+            }
+        }
     }
+    
     async deleteblogwithreport(blog_id: string) {
         this.ReportService.deletereportbyblog(blog_id);
         return this.Blog_Repository.delete(blog_id);
