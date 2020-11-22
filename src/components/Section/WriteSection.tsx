@@ -19,6 +19,7 @@ import SectionService from '../../services/SectionService';
 
 // IMPORT CSS //
 import '../section.css';
+import './writesection.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { convertToObject } from 'typescript';
 import { reverse } from 'dns';
@@ -69,9 +70,9 @@ const WriteSection = (props:any) => {
                     onChange={setEditorValue}
                 />
             </div>
-            <div className="div-sectionname">
-                <Button className="cancel-button" variant="outline-danger" onClick={e=>history.goBack()}>Cancel</Button>
-                <Button className="submit-button" variant="outline-success" onClick={handleSectionSave}>Submit</Button>
+            <div className="div-sectionname min-h">
+                <Button className="cancel-button" variant="danger" onClick={e=>history.goBack()}>Cancel</Button>
+                <Button className="submit-button" variant="success" onClick={handleSectionSave}>Submit</Button>
             </div>
         </div>
     );
