@@ -1,10 +1,10 @@
-import React, { Component} from 'react';
+import React, { Component,useEffect,useState} from 'react';
 import axios from 'axios'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import './editprofile.css';
-
+import "./uploadprofile.css"
 class Upload extends React.Component<any,any> {
     check = false;
     state = {
@@ -42,20 +42,19 @@ class Upload extends React.Component<any,any> {
 
     render() {
         return (
-            <div className="Up">
+            <div className="Upp">
                 <div className="header">
                     <h2>Upload Pic</h2>
                 </div>
                 <div className="content">
                 <form>
-                        <label>Select Picture </label>{' '}
                     <div className="pic_input">
-                        <input type="file" multiple name="profile_pic" 
+                        <input className="uploading" type="file" multiple name="profile_pic" 
                         onChange={(e)=>this.handleFile(e)} />
                     </div>
                     <br />
-                    <Button variant="primary"  onClick={(e)=>this.handleUpload(e)}>Upload</Button>
                 </form>
+                <Button variant="primary"  className="btnn" onClick={(e)=>this.handleUpload(e)}>Upload</Button>
                 </div>
             </div>
         );
