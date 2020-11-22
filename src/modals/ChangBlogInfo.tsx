@@ -89,6 +89,7 @@ function EditBlogModal(props:any) {
       }
       BlogsService.editBlog(editblog,blogId).then(e=>{
         console.log(e)
+        props.callback();
       })
       openMessage()
       props.onHide()
@@ -195,7 +196,7 @@ function EditBlogModal(props:any) {
         <Modal.Footer>
           <Button onClick={e=>{
             handleeditblog()
-          }}>Edit</Button>
+          }}>Submit</Button>
           <Button onClick={e=>{
               props.onHide()
           }}>Close</Button>
@@ -216,6 +217,7 @@ const ChangeBlogInfoModal=(props:any)=>{
 
       <EditBlogModal
         show={modalShow}
+        callback={props.callback}
         onHide={() => {
           setModalShow(false)
           console.log("edit???")

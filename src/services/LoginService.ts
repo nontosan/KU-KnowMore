@@ -8,7 +8,7 @@ async function UserLogin(userLogin: Login): Promise<any|null> {
         body: JSON.stringify(userLogin),
     });
     const Token = await res.json();
-    console.log(Token)
+    //console.log(Token)
     if (Token.access_token) {
         localStorage.setItem("accessToken", Token.access_token);
         localStorage.setItem("userId", Token.userid);

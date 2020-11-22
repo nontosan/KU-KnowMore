@@ -294,10 +294,7 @@ const CreateEditSection = (props:any) => {
         ))}
         
       </div>
-          <div className="bg_color">
-
-            <div className="Blog_Content">
-        <div className="hot-kl editcontainer">
+        <div className="hot-kl-noborder-top editcontainer">
         <Card.Header>Information</Card.Header>
         <div className="EditReview_Blog">
         <div className="div-scrollbar editor_text" >
@@ -407,32 +404,31 @@ const CreateEditSection = (props:any) => {
                 </Container>
             </div>
             </div>
+          </div> 
             <div className="Confirm"> 
-            <div className="Cancel">
-              <Button className="cancel-button" variant="danger" onClick={e=>{
-                BlogsService.deleteBlog(blogId)
-                setaftercancel(true)
-              }}>Cancel</Button>
-              {aftercancel &&
-                    <div>
-                      <Redirect to={`/`} />
-                  </div>
-              }
+              <div className="Cancel">
+                <Button className="cancel-button" variant="danger" onClick={e=>{
+                  BlogsService.deleteBlog(blogId)
+                  setaftercancel(true)
+                }}>Cancel</Button>
+                {aftercancel &&
+                      <div>
+                        <Redirect to={`/`} />
+                    </div>
+                }
+              </div>
+              <div className="Submit">
+                <Button className="submit-button" variant="success" onClick={e=>handleNewReviewSave(blogId)}>Submit</Button>
+                {aftersave &&
+                      <div>
+                        <Redirect to={`/`} />
+                    </div>
+                }
+              </div>
             </div>
-            <div className="Submit">
-              <Button className="submit-button" variant="success" onClick={e=>handleNewReviewSave(blogId)}>Submit</Button>
-              {aftersave &&
-                    <div>
-                      <Redirect to={`/`} />
-                  </div>
-              }
-            </div>
-        </div>
-      </div>
-      
-      </div>
-        </div>     
-            
+        <div className="editreview_button">
+          <Button variant="secondary" onClick={e=>{history.goBack()}}>BACK</Button>
+        </div>    
       </div>
   );
 };

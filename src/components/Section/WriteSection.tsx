@@ -76,10 +76,13 @@ const WriteSection = (props:any) => {
                     onChange={setEditorValue}
                 />
             </div>
-            <div className="div-sectionname min-h">
+            <div className="div-sectionname">
                 <Button className="cancel-button" variant="danger" onClick={e=>history.goBack()}>Cancel</Button>
                 <Button className="submit-button" variant="success" onClick={handleSectionSave}>Submit</Button>
             </div>
+      <div className="editreview_button">
+        <Button variant="secondary" onClick={e=>{history.goBack()}}>BACK</Button>
+      </div>
         </div>
     );
 }

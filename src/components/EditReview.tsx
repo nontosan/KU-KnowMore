@@ -61,6 +61,7 @@ const ReadBlogKnowledge = (props:any) => {
   const [blogsInformation,setBlogsInformation] = useState<Blog[]>([]);
   const [userInformation, setUserInformation] = useState<User_Sch[]>([]);
   const [courseInformation, setCourseInformation] = useState<Course_real[]>([]);
+  const [isReview, setIsReview] = useState<boolean>(false);
   const [author, setAuthor] = useState<string>('');
   const history = useHistory()
   //%%%%%%%%%%%%%%%%%%%%%%saatrt copy%%%%%%%%%%
@@ -175,8 +176,9 @@ const closeModal = () => {
             setRoomScore(review_info.classroom);
             setOverallScore(review_info.overall);
             setEditorValue(review_info.content);
+            setIsReview(true);
           }else{
-            alert("error review not found");
+            setIsReview(false);
           }
     })  // Done
   };
@@ -338,6 +340,9 @@ const formatGroupLabel = (data:any) => (
       </div>
       <div className="hot-kl-noborder-top editcontainer">
         <Card.Header>Information</Card.Header>
+        {!isReview ?
+          <div className="show-all-section">NO CONTENT YET</div>
+        :
         <div className="EditReview_Blog">
         <div className="div-scrollbar editor_text" >
         <div className="Editor">
@@ -446,6 +451,7 @@ const formatGroupLabel = (data:any) => (
                 </Container>
             </div>
             </div>
+          }
       </div>
       <div className="Confirm"> 
               
@@ -463,7 +469,7 @@ const formatGroupLabel = (data:any) => (
               
         </div>
         <div className="editreview_button">
-          <Button variant="secondary" onClick={e=>{history.goBack()}}>back</Button>
+          <Button variant="secondary" onClick={e=>{history.goBack()}}>BACK</Button>
         </div>
     </div>
   );

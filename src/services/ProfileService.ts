@@ -12,7 +12,10 @@ async function fetchProfileSpecific(userid:string): Promise<User_Sch[]> {
 async function CreateProfile(newProfile: User_Sch): Promise<User_Sch|null> {
     const res = await fetch(`https://backend.ku-knowmore.xyz/users`,{
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.accessToken}`,
+        },
         body: JSON.stringify(newProfile),
     });
     const savedNewProfile: User_Sch = await res.json();
@@ -26,7 +29,10 @@ async function CreateProfile(newProfile: User_Sch): Promise<User_Sch|null> {
 async function EditPro(editProfile: User_Sch,userid:string): Promise<User_Sch|null> {
     await fetch(`https://backend.ku-knowmore.xyz/users/${userid}`,{
         method: 'PUT',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.accessToken}`,
+        },
         body: JSON.stringify(editProfile)
     });
     return editProfile;
