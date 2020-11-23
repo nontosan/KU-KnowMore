@@ -20,7 +20,7 @@ import Modal from 'react-bootstrap/Modal';
 //------------------------------------------------------------------//
 import 'antd/dist/antd.css';
 import {  notification,message } from 'antd';
-  
+
 const key = 'updatable';
 const CreateKlBlog=()=> {
     const resultLimit = 10
