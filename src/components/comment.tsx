@@ -112,6 +112,7 @@ const Comment_component=(props:any)=>{
 
     const closeModal = () => {
         setShowDeleteModal(false);
+        console.log('eiei')
     }
 
     
@@ -144,6 +145,7 @@ const Comment_component=(props:any)=>{
                     <div className="blog-fl black-font">
                         {item.date_time}
                     </div>
+                    {item.user_id==localStorage.userId &&
                     <div className="blog-fr">
                         
                             <NavDropdown className="dropdown-eiei blog-fr" title={
@@ -158,13 +160,13 @@ const Comment_component=(props:any)=>{
                                     <div>
                                         <DeleteCommentModal 
                                             show = {showDeleteModal}
-                                            content = {item.content}
+                                            contentq = {item.content}
                                             deleteComment = {submitDeleteComment}
-                                            cancel = {closeModal}
+                                            closenaja = {closeModal}
                                         />
                                     </div>
                                 }
-                                {item.user_id!==localStorage.userId &&
+                                {false &&
                                     <ReportCmtModal 
                                         id={item.id}
                                         blogid={item.blog_id}
@@ -174,7 +176,7 @@ const Comment_component=(props:any)=>{
                                 />
                                 }
                             </NavDropdown>
-                    </div>
+                    </div>}
                 </div>
             ))}
             {localStorage.accessToken!==undefined &&

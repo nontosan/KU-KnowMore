@@ -15,8 +15,8 @@ import { couldStartTrivia } from "typescript";
 
 
 const DeleteCommentModal = (props:any) => {
-  console.log(props.nameBlog)
   console.log(props.show);
+  console.log(props.contentq)
   return (
     <Modal
       {...props}
@@ -30,12 +30,12 @@ const DeleteCommentModal = (props:any) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        CONTENT : {props.content}
+        CONTENT : {props.contentq}
         {props.show}
       </Modal.Body>
       <Modal.Footer>
         <div className="Cancel">
-          <Button className="cancel-button" variant="danger" onClick={props.cancel}>Cancel</Button>
+          <Button className="cancel-button" variant="danger" onClick={props.closenaja}>Cancel</Button>
         </div>
         <div className="Submit">
           <Button className="submit-button" variant="success" onClick={props.deleteComment}>Submit</Button>
