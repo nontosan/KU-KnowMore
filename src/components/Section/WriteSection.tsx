@@ -61,7 +61,7 @@ const WriteSection = (props:any) => {
 
     console.log(history.go)
     return (
-        <div>
+        <div className="x">
             <InputGroup size="lg" className="div-sectionname">
                 <InputGroup.Prepend >
                     <InputGroup.Text id="inputGroup-sizing-lg">Section Name</InputGroup.Text>
@@ -76,7 +76,7 @@ const WriteSection = (props:any) => {
                     onChange={setEditorValue}
                 />
             </div>
-            <div className="div-sectionname min-h">
+            <div className="div-sectionname-y min-h">
                 <Button className="cancel-button" variant="danger" onClick={e=>history.goBack()}>Cancel</Button>
                 <Button className="submit-button" variant="success" onClick={handleSectionSave}>Submit</Button>
             </div>

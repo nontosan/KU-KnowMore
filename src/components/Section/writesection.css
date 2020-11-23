@@ -10,3 +10,9 @@
     border-top: 0px;
     border-radius: calc(0.25rem - 1px);
   }
+  .div-sectionname-y{
+    margin-top: 50px;
+    margin-left: 100px;
+    margin-right: 100px;
+    background: none;
+  }

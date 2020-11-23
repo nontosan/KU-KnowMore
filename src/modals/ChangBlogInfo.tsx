@@ -2,6 +2,7 @@ import React,{useState,useEffect,useCallback} from "react"
 import ReactDOM from "react-dom";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Choosefilter from "../gadget/filter_gadget/klorrwfilter"
 import Order from "../gadget/filter_gadget/order"
@@ -14,7 +15,6 @@ import { notification,message } from 'antd';
 import {
   Link, Redirect
 } from 'react-router-dom'
-import {Formik,Form,Field} from "formik"
 import Select from 'react-select';
 import Alert from '../photo/alert.png';
 import {Course_real} from "../interfaces/course"
@@ -23,6 +23,7 @@ import {Blog,create_Blog} from "../interfaces/blog"
 import BlogsService from "../services/BlogsService"
 import GearEdit from '../photo/gear-edit6.png';
 import GearEditBlack from '../photo/settings-8-xxl.png';
+import "./changebloginfo.css"
 const key = 'updatable';
 function EditBlogModal(props:any) {
   const resultLimit = 10
@@ -50,6 +51,7 @@ function EditBlogModal(props:any) {
   const [bloginfo,setbloginfo] = useState<Blog[]>([])
   const patkh =window.location.pathname
   const blogId = window.location.pathname.split("/")[2]
+  const [blogname,setblogname] = useState<string>("")
   const handleChangeCode = (selectedOption:any) => {
       code.push({ selectedOption })
       //console.log((code[0].selectedOption).value);
@@ -84,7 +86,7 @@ function EditBlogModal(props:any) {
       const editblog:create_Blog={
         user_id: bloginfo[0].user_id,
         type: bloginfo[0].type,
-        blog_name: bloginfo[0].blog_name,
+        blog_name: blogname,
         course_id: selectCourseId,
       }
       BlogsService.editBlog(editblog,blogId).then(e=>{
@@ -159,9 +161,11 @@ function EditBlogModal(props:any) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="hot-kl">
+          <div className="hot-kl x">
               {visible &&
                   <div>
+                      <div>BLOG NAME</div>
+                      <Form.Control type="text" value={blogname} onChange={e => setblogname(e.target.value)} />
                       {codeoption[0]}
                       <div>Subject ID</div>
                           <Select 
