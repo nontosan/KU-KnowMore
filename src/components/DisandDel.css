@@ -6,7 +6,8 @@
     padding:1em
 }
 .outercont{
-    widows: 10em;;
+    margin: 0em;
+    width: 30rem;
 }
 .openfile{
     width:70%;

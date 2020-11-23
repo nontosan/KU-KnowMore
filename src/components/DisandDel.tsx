@@ -36,7 +36,7 @@ function DisplayFileandDel (props:any) { //This function is for EditSection
 
     return (
         <div className = "Display">
-            <div style={{ width: '18rem' }} className="outercont borderallfiles">
+            <div className="outercont borderallfiles">
                 <Card.Header>All Files</Card.Header>
                 <ListGroup variant="flush" >
                     {attachmentsInformation.map(file=>(
