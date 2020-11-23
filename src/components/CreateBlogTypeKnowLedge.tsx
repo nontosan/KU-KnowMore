@@ -226,7 +226,7 @@ const DropdownCreateKnowledge=()=> {
                             <Form className="blog_container" autoComplete="off" style={{ backgroundColor:"white" }}>
                                 <Row className="Col">
                                     <Col sm={2}>
-                                    <div><strong>Blog Name</strong></div>
+                                    <div><strong>BLOG NAME</strong></div>
                                     </Col>
                                     <Col>
                                     <Field className="input_blogname" type="input" name="nameblog"/>
@@ -238,7 +238,7 @@ const DropdownCreateKnowledge=()=> {
                                         {codeoption[0]}
                                         <Row className="Col">
                                             <Col sm={2}>
-                                                <div><strong>Subject Code</strong></div>
+                                                <div><strong>SUBJECT CODE</strong></div>
                                             </Col>
                                             <Col>
                                             <Select 
@@ -252,7 +252,7 @@ const DropdownCreateKnowledge=()=> {
                                         </Row>
                                         <Row className="Col">
                                             <Col sm={2}>
-                                                <div><strong>Subject Name ( Thai )</strong></div>
+                                                <div><strong>SUBJECT NAME (THAI)</strong></div>
                                             </Col>
                                             <Col>
                                             <Select 
@@ -263,7 +263,7 @@ const DropdownCreateKnowledge=()=> {
                                         </Row>
                                         <Row className="Col">
                                             <Col sm={2}>
-                                                <div><strong>Subject Name ( English )</strong></div>
+                                                <div><strong>SUBJECT NAME (ENGLISH)</strong></div>
                                             </Col>
                                             <Col>
                                             <Select 
@@ -274,7 +274,7 @@ const DropdownCreateKnowledge=()=> {
                                         </Row>
                                         <Row >
                                             <Col sm={2}>
-                                                <div><strong>Teacher</strong></div>
+                                                <div><strong>TEACHER</strong></div>
                                             </Col>
                                             <Col>
                                             <Select 

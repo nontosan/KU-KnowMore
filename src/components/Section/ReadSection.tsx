@@ -137,6 +137,7 @@ const ReadSection = (props:any) => {
 
     return (
         <div>
+            {false &&
             <div className="hot-kl">
                 <Card.Header>
                     <strong>
@@ -155,10 +156,27 @@ const ReadSection = (props:any) => {
                         }
                     </div>
                 </Card.Header>
-            </div>
+            </div>}
             {afterFetch &&
-                <div className="hot-kl">
-                    <Card.Header>Information</Card.Header>
+                <div className="hot-kl-noborder-top">
+                    {false &&<Card.Header>Information</Card.Header>}
+                    <Card.Header>
+                        <strong>
+                            Section 
+                        </strong> : {sectionName}
+                        <div style={{ float: "right" }}>
+                            {author==localStorage.userId &&
+                            <div>
+                                <Button className="blog-delete-button" onClick={e=>window.location.replace(`http://localhost:3000/editSection/${sectionId}`)}>
+                                <Image className="gear-setting-pic blog-fl" src={GearEdit}></Image>
+                                </Button>
+                                <Button className="blog-delete-button" onClick={e=>openNotification()}>
+                                    <Image className="delete-setting-pic blog-fl" src={minus}></Image>
+                                </Button>
+                            </div>
+                            }
+                        </div>
+                    </Card.Header>
                     <div className="div-section-content" dangerouslySetInnerHTML={{__html: displayHTML}} />
                 </div>
             }
