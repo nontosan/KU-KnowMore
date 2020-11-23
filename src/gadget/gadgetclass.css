@@ -15,3 +15,14 @@
     display: flex;
     flex-wrap: nowrap
 }
+.x{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    width:20%;
+    padding: 3px;
+    background-color: #8D8D8D;
+    margin:1em;
+    color: white;
+    border-radius: 10px;
+
+}

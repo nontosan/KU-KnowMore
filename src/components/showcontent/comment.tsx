@@ -141,76 +141,9 @@ const Comment_component=(props:any)=>{
                     </div>
                     <div className="blog-fr">
                         
-                            <NavDropdown className="dropdown-eiei blog-fr" title={
-                                <div className="border-more-pic">
-                                    <Image className="more-pic blog-fr" src={ReportButton}></Image>
-                                </div>
-                                } id="dropdown-nav" >
-                                {item.user_id==localStorage.userId &&
-                                    <NavDropdown.Item onClick={() => handleDeleteComment(item.id)} className="more-option">Delete</NavDropdown.Item>
-                                }
-                                {showDeleteModal && 
-                                    <div>
-                                        <DeleteCommentModal 
-                                            show = {showDeleteModal}
-                                            content = {item.content}
-                                            deleteComment = {submitDeleteComment}
-                                            cancel = {closeModal}
-                                        />
-                                    </div>
-                                }
-                                {item.user_id!==localStorage.userId &&
-                                    <NavDropdown.Item onClick={handlereport} className="more-option">Report</NavDropdown.Item>
-                                }
-                            </NavDropdown>
                     </div>
                 </div>
-            ))}
-            {localStorage.accessToken!==undefined &&
-<Formik
-            initialValues={{CommentContent:"",errorMess:""}}
-            validate={(value)=>{
-                const errors:any={};
-                if(value.CommentContent===""){
-                    errors.errorMess="noCommentdata";
-                }
-                return errors
-            }}
-            onSubmit={(values,actions)=>{
-                const cont:any={
-                        blog_id:blogId,
-                        user_id:localStorage.userId,
-                        content:values.CommentContent,
-                    }
-                if(values.CommentContent!==""){
-                    //console.log(cont)
-                    CommentService.createComment(cont)
-                        .then(res=>{
-                            console.log('eiei')
-                            fetchCommentblog()
-                        })
-                }
-                else{
-                    actions.setSubmitting(true)
-                }
-                actions.setSubmitting(false)
-                values.CommentContent=""
-            }}
-            >
-            {({isSubmitting})=>(
-                <Form autoComplete="off">
-                    <div >
-                        <button disabled={isSubmitting} className="btn btn-success send-button"> send </button>
-                        <div style={{color:"white"}}>
-                            <Field type="input" className="input" name="CommentContent" placeholder="type something..."/>
-                            <ErrorMessage name="errorMess" component="div"/>
-                        </div>
-                    </div>
-                </Form>
-            )}
-        </Formik>
-            }
-            
+            ))}     
         </div>
     )
 }

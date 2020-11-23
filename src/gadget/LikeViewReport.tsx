@@ -49,16 +49,13 @@ const LikeViewReport=(props:any)=> {
 
     return (
         <div>
-            <div >
-                {like 
-                    ?   (<button className="likebutton" onClick={clicklike}>
-                            <LikeOutlined />{liker.length}
-                        </button>) 
-                    :   (<button className="likebutton" onClick={clicklike}>
-                            <LikeTwoTone />{liker.length}
-                        </button>) 
-                }
-                <EyeOutlined />{bloginfo.map(x=>(<div style={{ display: "inline" }}>{x.viewers}</div>))}
+            <div  className="x">
+                <div className="likebutton" >
+                    <LikeOutlined />{liker.length}
+                </div>
+                <div>
+                    <EyeOutlined />{bloginfo.map(x=>(<div style={{ display: "inline" }}>{x.viewers}</div>))}
+                </div>
             </div>
         </div>
     );
