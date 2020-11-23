@@ -240,9 +240,9 @@ const App = () => {
                                 <div className="baseline">
                                     <div className="contact-details">
                                         <h6>Contact details</h6>
-                                        <p><i className="fa fa-phone fa-lg" aria-hidden="true"></i> 01234 567890</p>
-                                        <p><a href="#"><i className="fa fa-envelope-o" aria-hidden="true"></i> Contact us</a></p>
-                                        <p><i className="fa fa-map-marker fa-lg" aria-hidden="true"></i> Street, City, County, Country</p>
+                                        <p><i className="fa fa-phone fa-lg" aria-hidden="true"></i> 090-321-8841 , 095-814-3738</p>
+                                        <p><a href="#"><i className="fa fa-envelope-o" aria-hidden="true"></i> Contact Admin</a></p>
+                                        <p><i className="fa fa-map-marker fa-lg" aria-hidden="true"></i> nanun.s@ku.th</p>
                                     </div>
                                 </div>
                             </div>

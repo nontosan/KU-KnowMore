@@ -216,7 +216,6 @@ const Comment_component=(props:any)=>{
                         <button disabled={isSubmitting} className="btn btn-success send-button"> send </button>
                         <div style={{color:"white"}}>
                             <Field type="input" className="input" name="CommentContent" placeholder="type something..."/>
-                            <ErrorMessage name="errorMess" component="div"/>
                         </div>
                     </div>
                 </Form>
