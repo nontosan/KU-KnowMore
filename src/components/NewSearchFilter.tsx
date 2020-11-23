@@ -318,7 +318,7 @@ return (
             </div>
         }
         
-        <button style={{ float: "right" }} className="btn btn-success" onClick={searchquery}> Submit </button>
+        <button style={{ float: "right" }} className="btn btn-success" onClick={searchquery}> search </button>
         {formVisible &&
         <div>
           <Redirect to={`/filter/search?${query}`} />
