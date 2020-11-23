@@ -37,10 +37,10 @@ function EditBlogModal(props:any) {
   const [teacherOptions,setTeacherOptions] = useState<any[]>([]);
   const [course,setCourse] = useState<Course_real[]>([])
   const code:any[]=[]
-  const [selectCode,setSelectCode] =useState<string>('');
+  const [selectCode,setSelectCode] =useState<string>(props.code);
   const [selectNameTh, setSelectNameTh] = useState<string>(props.subnameth);
   const [selectNameEn, setSelectNameEn] = useState<string>(props.subnameen);
-  const [selectTeacher, setSelectTeacher] = useState<string>('');
+  const [selectTeacher, setSelectTeacher] = useState<string>(props.teacher);
   const [selectCourseId, setSelectCourseId] = useState<string>('');
   const [NameTh,setNameTh] =useState({})
   const [NameEn,setNameEn] =useState({})
@@ -85,7 +85,7 @@ function EditBlogModal(props:any) {
     console.log("editblog")
     if(selectCourseId!==""){
       if(selectTeacher==''){
-        openNotificationNotTeacher()
+        openNotificationNot()
       }
       else{
       const editblog:create_Blog={
@@ -185,7 +185,7 @@ function EditBlogModal(props:any) {
                       <div>Subject ID</div>
                           <Select 
                               options = {codeOptions} 
-                              defaultInputValue = {props.code}
+                              defaultInputValue = {selectCode}
                               onChange={handleChangeCode}
                               isSearchable
                               filterOption={({label}, query) => label.indexOf(query.toLowerCase()) >= 0 && i++ < resultLimit}
@@ -205,7 +205,7 @@ function EditBlogModal(props:any) {
                       <div>Teacher</div>
                           <Select 
                               options = {teacherOptions} 
-                              defaultInputValue = {props.teacher}
+                              defaultInputValue = {selectTeacher}
                               onChange={handleChangeTeacher}
                               isSearchable
                           />
