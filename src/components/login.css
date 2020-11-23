@@ -140,6 +140,7 @@
   .black-background{
     min-height: 600px;
     display: grid;
+    justify-content: center;
   }
 
 
@@ -156,6 +157,8 @@
     margin: auto;
     font-size: 30px;
     border: 0px;
+    padding: 1em;
+    border-radius: 70px;
   }
 
   .ku-logo{
@@ -167,3 +170,12 @@
     color: rgb(2, 78, 66);
     font-size: 70px;
   }
+  .container{
+    display: grid;
+    margin: 5em;
+    background: white;
+    border-radius: 70px;
+    max-width: 90em;
+    grid-template-columns: 1fr;
+  }
+  
