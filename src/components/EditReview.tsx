@@ -354,6 +354,7 @@ const formatGroupLabel = (data:any) => (
             />
         </div>
       </div>
+        <div>
             <div className ="div-scrollbar">
                 <Container>
                     <Row>
@@ -451,6 +452,7 @@ const formatGroupLabel = (data:any) => (
                 </Container>
             </div>
             </div>
+          </div>
           }
       </div>
       <div className="Confirm"> 
