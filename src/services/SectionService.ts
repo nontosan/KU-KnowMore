@@ -4,7 +4,10 @@ import { Attachments } from '../interfaces/blog'
 async function createSection(blogid:string,writeSection: any): Promise<Section|null> {
     const res = await fetch(`https://backend.ku-knowmore.xyz/blogs/${blogid}/sections`,{
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.accessToken}`,
+        },
         body: JSON.stringify(writeSection),
     });
     const savedWriteSection: Section = await res.json();
@@ -19,7 +22,10 @@ async function createSection(blogid:string,writeSection: any): Promise<Section|n
 async function editSection(sectionid:string,editSection: any): Promise<Section|null> {
     const res = await fetch(`https://backend.ku-knowmore.xyz/sections/${sectionid}`,{
         method: 'PUT',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.accessToken}`,
+        },
         body: JSON.stringify(editSection),
     });
     const savedEditSection: Section = await res.json();
@@ -45,6 +51,9 @@ async function fetchSectionsSpecific(sectionid:string): Promise<Section[]> {
 async function deleteSection(sectionId:string): Promise<string> {
     const res = await fetch(`https://backend.ku-knowmore.xyz/sections/${sectionId}`,{
         method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${localStorage.accessToken}`,
+        },
     });
     const sections = await res.json();
     return sections;  
@@ -62,6 +71,9 @@ async function fetchSectionFiles(secid:string): Promise<Attachments[]> {
 async function deleteattachments(att_id:string) {
     const res = await fetch(`https://backend.ku-knowmore.xyz/attachments/${att_id}`,{
         method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${localStorage.accessToken}`,
+        },
     });    
 }
 

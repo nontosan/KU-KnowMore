@@ -160,6 +160,9 @@ const ReadBlogKnowledge = (props:any) => {
             }
         })
 }
+  const handleCallbackEdit = () => {
+    fetchBlogs();
+  }
 
 const closeModal = () => {
   setShowDeleteModal(false);
@@ -238,7 +241,9 @@ const closeModal = () => {
               <div style={{ float: "right" }}>
                 {author==localStorage.userId &&
                   <div>
-                    <ChangeBlogInfoModal/>
+                    <ChangeBlogInfoModal
+                      callback={handleCallbackEdit}
+                    />
                     <button className="blog-delete-button" onClick={() => handleDeleteBlog(blogInformation)}>
                       <Image className="delete-setting-pic blog-fl" src={minus} ></Image>
                     </button>
@@ -265,7 +270,7 @@ const closeModal = () => {
                   <strong>Subject</strong> : {item.NameEn}
                 </div>
                 <div>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {item.NameTh}
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {item.NameTh}
                 </div>
                 <div>
                   <strong>Teacher</strong> : {item.Teacher}
@@ -329,7 +334,7 @@ const closeModal = () => {
         />
       </div>
       <div className="knowledge_button">
-        <Button variant="secondary" onClick={e=>{history.goBack()}}>back</Button>
+        <Button variant="secondary" onClick={e=>{history.goBack()}}>BACK</Button>
       </div>
     </div>
   );

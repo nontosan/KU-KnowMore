@@ -9,10 +9,13 @@ async function fetchComment(blogId:string): Promise<Comment_Sch[]> {
 
 
 async function createComment(comment:any): Promise<Comment_Sch> {
-    console.log(comment)
+    //console.log(comment)
     const res = await fetch(`https://backend.ku-knowmore.xyz/comments`,{
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.accessToken}`,
+        },
         body: JSON.stringify(comment),
     });
     const comments = await res.json()
@@ -22,6 +25,10 @@ async function createComment(comment:any): Promise<Comment_Sch> {
 async function deleteComment(commmentid:string): Promise<string> {
     const res = await fetch(`https://backend.ku-knowmore.xyz/comments/${commmentid}`,{
         method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.accessToken}`,
+        },
     });
     const comments = await res.json();
     return comments;  

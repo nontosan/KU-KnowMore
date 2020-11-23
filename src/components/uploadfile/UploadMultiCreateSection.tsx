@@ -74,6 +74,7 @@ class UploadMultiCreateSection extends React.Component<any,any> {
         method: "POST",
         headers:{
           "Content-Type": "multipart/form-data",
+          'Authorization': `Bearer ${localStorage.accessToken}`,
         },
         data: attachments
     });

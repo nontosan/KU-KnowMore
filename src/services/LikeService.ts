@@ -15,15 +15,18 @@ async function fetchView(blogId:string): Promise<Like[]> {
 }
 
 async function createLike(blogId:string,data:any): Promise<boolean> {
-  console.log(blogId,data)
-  console.log(JSON.stringify(data))
+  //console.log(blogId,data)
+  //console.log(JSON.stringify(data))
   const islike = await fetch(`https://backend.ku-knowmore.xyz/blogs/${blogId}/likes`,{
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.accessToken}`,
+        },
         body: JSON.stringify({"user_id":localStorage.userId}),
     });
     const like = await islike.json();
-    console.log(like)
+    //console.log(like)
     if(like.Status==="Like"){
       return true
     }
@@ -31,7 +34,7 @@ async function createLike(blogId:string,data:any): Promise<boolean> {
       return false
     }
     else{
-      console.log("cant like")
+      //console.log("cant like")
     }
   return true
 }

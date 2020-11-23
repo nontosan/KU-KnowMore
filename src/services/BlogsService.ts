@@ -27,7 +27,10 @@ async function createBlog(newBlog: create_Blog): Promise<Blog|null> {
 async function createReview(newReview: Review, blogid:string): Promise<Review|null> {
     const res = await fetch(`https://backend.ku-knowmore.xyz/blogs/${blogid}/reviews`,{
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.accessToken}`,
+        },
         body: JSON.stringify(newReview),
     });
     const savedNewReview: Review = await res.json();
@@ -60,7 +63,7 @@ async function fetchBlogSpecific(blogid:string): Promise<Blog[]> {
 
 async function fetchBlogfilter(blogid:string): Promise<Blog[]> {
     const api:string = `https://backend.ku-knowmore.xyz/blogs/search/`+blogid
-    console.log(api)
+    //console.log(api)
     const res = await fetch(api);
     const blog = await res.json();
     return blog;  
@@ -81,6 +84,10 @@ async function fetchReviewBlogs(): Promise<Blog[]> {
 async function deleteBlog(blogid:string): Promise<string> {
     const res = await fetch(`https://backend.ku-knowmore.xyz/blogs/${blogid}`,{
         method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.accessToken}`,
+        },
     });
     const blogs = await res.json();
     return blogs;  
@@ -94,13 +101,16 @@ async function fetchSectionOfBlog(blogid:string): Promise<Section[]> {
 
 
 async function editBlog(newcoursecode: create_Blog, blogId:string): Promise<Blog|null> {
-    console.log(newcoursecode)
+    //console.log(newcoursecode)
     const res = await fetch(`https://backend.ku-knowmore.xyz/blogs/${blogId}`,{
         method: 'PUT',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.accessToken}`,
+        },
         body: JSON.stringify(newcoursecode),
     });
-    console.log(res)
+    //console.log(res)
     const newblog: Blog = await res.json();
     if (newblog !== undefined) {
         return newblog;

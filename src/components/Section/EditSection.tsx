@@ -144,9 +144,12 @@ const EditSection = (props:any) => {
                 </div>
             </div>
             <div className="div-sectionname">
-                <Button className="cancel-button" variant="outline-danger" onClick={e=>openNotification()}>Cancel</Button>
-                <Button className="submit-button" variant="outline-success" onClick={handleSectionSave}>Submit</Button>
+                <Button className="cancel-button" variant="danger" onClick={e=>openNotification()}>Cancel</Button>
+                <Button className="submit-button" variant="success" onClick={handleSectionSave}>Submit</Button>
             </div>
+      <div className="editreview_button">
+        <Button variant="secondary" onClick={e=>{history.goBack()}}>BACK</Button>
+      </div>
         </div>
     );
 }

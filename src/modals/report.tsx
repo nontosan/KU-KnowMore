@@ -80,7 +80,7 @@ function MyVerticallyCenteredModal(props:any) {
                         }
                         console.log(values.etc)
                         const Report:any={
-                          user_id:"5f82fcc904eb8600aa617b60",
+                          user_id:localStorage.userId,
                           content_id:blogId,
                           report_string:values.etc,
                           report_reason:reportstr

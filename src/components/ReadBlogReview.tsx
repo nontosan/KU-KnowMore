@@ -26,7 +26,7 @@ import ProfileService from '../services/ProfileService';
 // END OF IMPORT SERVICE //
 
 // IMPORT INTERFACE //
-import { Blog }from '../interfaces/blog';
+import { Blog , Review}from '../interfaces/blog';
 import { Course,Course_real } from '../interfaces/course'
 import { User_Sch } from '../interfaces/user';
 // END OF IMPORT INTERFACE//
@@ -58,6 +58,7 @@ const ReadBlogKnowledge = (props:any) => {
   const [blogsInformation,setBlogsInformation] = useState<Blog[]>([]);
   const [userInformation, setUserInformation] = useState<User_Sch[]>([]);
   const [courseInformation, setCourseInformation] = useState<Course_real[]>([]);
+  const [isReview, setIsReview] = useState<boolean>(false);
   const [author, setAuthor] = useState<string>('');
   const history = useHistory()
   //%%%%%%%%%%%%%%%%%%%%%%saatrt copy%%%%%%%%%%
@@ -167,8 +168,9 @@ const fetchReview = () => {
           setRoomScore(review_info.classroom);
           setOverallScore(review_info.overall);
           setEditorValue(review_info.content);
+          setIsReview(true);
         }else{
-          alert("error review not found");
+          setIsReview(false);
         }
   })  // Done
 };
@@ -245,14 +247,19 @@ const fetchReview = () => {
               <div style={{ float: "right" }}>
                 {author==localStorage.userId &&
                   <div>
-                    <Link to={`/editReview/${blogId}`}>
-                      <button className="blog-delete-button" >
-                        <Image className="delete-setting-pic blog-fl" src={GearEdit} ></Image>
-                      </button>
-                    </Link>
-                    <button className="blog-delete-button" onClick={() => handleDeleteBlog(blogInformation)}>
-                      <Image className="delete-setting-pic blog-fl" src={minus} ></Image>
-                    </button>
+                    {!isReview ?
+                      <Link to={`/myReview/${blogId}`}>
+                        <button className="blog-delete-button" >
+                          <Image className="delete-setting-pic blog-fl" src={GearEdit} ></Image>
+                        </button>
+                      </Link>
+                    :
+                      <Link to={`/editReview/${blogId}`}>
+                        <button className="blog-delete-button" >
+                          <Image className="delete-setting-pic blog-fl" src={GearEdit} ></Image>
+                        </button>
+                      </Link>
+                    }
                     {showDeleteModal && 
                       <div>
                         <DeleteModal className=""
@@ -289,6 +296,9 @@ const fetchReview = () => {
       </div>
       <div className="hot-kl-noborder-top">
         <Card.Header>Information</Card.Header>
+        {!isReview ?
+          <div className="show-all-section">NO CONTENT YET</div>
+        :
         <div className="Review_Blog">
         <div className="helloworld">
           <div className="div-scrollbar editor_text " >
@@ -356,6 +366,7 @@ const fetchReview = () => {
                 </Container>
             </div>
             </div>
+        }
       </div>
       <LikeViewReport x={blogsInformation}/>
       <div  className="hot-kl">
@@ -365,7 +376,7 @@ const fetchReview = () => {
         />
       </div>
       <div className="review_button">
-        <Button variant="secondary" onClick={e=>{history.goBack()}}>back</Button>
+        <Button variant="secondary" onClick={e=>{history.goBack()}}>BACK</Button>
       </div>
     </div>
   );
