@@ -17,25 +17,23 @@
     width:100%;
 }
 .create_kl{
-    background-color: #90E328;
+    background-color: #73C0EA;
     color: white;
     font-weight: bold;
     border-radius: 100% 100% 0 0;
     text-align: center;
-    size:8em;
     padding:2em
+}
 
-
+.create-kl-font-size{
+    font-size:30px;
 }
 
 .create_rw{
-    background-color:#5DD4EB;
+    background-color:#A3EBA3;
     color: white;
     font-weight: bold;
     border-radius: 100% 100% 0 0;
     text-align: center;
-    size:8em;
     padding:2em
-
-
 }

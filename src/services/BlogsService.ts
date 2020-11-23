@@ -10,7 +10,10 @@ async function fetchBlogs(): Promise<Blog[]> {
 async function createBlog(newBlog: create_Blog): Promise<Blog|null> {
     const res = await fetch(`https://backend.ku-knowmore.xyz/blogs`,{
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.accessToken}`,
+        },
         body: JSON.stringify(newBlog),
     });
     const savedNewBlog: Blog = await res.json();

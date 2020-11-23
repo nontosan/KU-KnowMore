@@ -47,7 +47,7 @@ const ReviewBlog = () => {
     },[]);
     return (
         <div>
-            <div className="hot-kl" style={{ marginBottom : "50px" }}>
+            <div className="hot-kl-noborder-top" style={{ marginBottom : "50px" }}>
                 <Card.Header className="card-header">REVIEW BLOG</Card.Header>
                 {blogs.map(blog => (
                     <div>

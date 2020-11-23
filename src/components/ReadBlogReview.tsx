@@ -199,27 +199,45 @@ const fetchReview = () => {
   //console.log(userInformation);
   return (
     <div>
-      <div className="hot-kl">
+      {false &&
+        <div className="hot-kl">
+          {userInformation.map(item => (
+            <Card.Header>
+              <div>
+                <Link to={`/userpage/${item.id}`} style={{ float : "left" }}>
+                  <Suspense  fallback={<div>Loading... </div>}>
+                    <div className="blog-fl">
+                      <ImageComponent userid={item.pic_dir}/>
+                    </div>
+                  </Suspense>
+                </Link>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <Link to={`/userpage/${item.id}`} style={{ color : "white" }}>
+                  {item.name}
+                </Link>
+              </div>
+            </Card.Header>
+          ))}
+        </div>
+      }
+      <div className="hot-kl-noborder-top">
         {userInformation.map(item => (
-          <Card.Header>
-            <div>
-              <Link to={`/userpage/${item.id}`} style={{ float : "left" }}>
-                <Suspense  fallback={<div>Loading... </div>}>
-                  <div className="blog-fl">
-                    <ImageComponent userid={item.pic_dir}/>
-                  </div>
-                </Suspense>
-              </Link>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <Link to={`/userpage/${item.id}`} style={{ color : "white" }}>
-                {item.name}
-              </Link>
-            </div>
-          </Card.Header>
-        ))}
-
-      </div>
-      <div className="hot-kl">
+            <Card.Header>
+              <div>
+                <Link to={`/userpage/${item.id}`} style={{ float : "left" }}>
+                  <Suspense  fallback={<div>Loading... </div>}>
+                    <div className="blog-fl">
+                      <ImageComponent userid={item.pic_dir}/>
+                    </div>
+                  </Suspense>
+                </Link>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <Link to={`/userpage/${item.id}`} style={{ color : "white" }}>
+                  {item.name}
+                </Link>
+              </div>
+            </Card.Header>
+          ))}
         {blogsInformation.map(blogInformation=>(
           <Card.Header>
             <div>
@@ -266,7 +284,7 @@ const fetchReview = () => {
         ))}
         
       </div>
-      <div className="hot-kl">
+      <div className="hot-kl-noborder-top">
         <Card.Header>Information</Card.Header>
         <div className="Review_Blog">
         <div className="helloworld">
