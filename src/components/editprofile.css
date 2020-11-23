@@ -53,6 +53,7 @@
 .containerr{
     display:grid;
     grid-template-columns: 1fr 3fr;
+    background-color: white;
 }
 .upload{
     

@@ -132,17 +132,19 @@ const UserPage = (props:any) => {
                 </Suspense>
                 {userInformation.map(userInformation => (
                     <div className="profile-info blog-fl">
-                        <h4>Name : {userInformation.name}</h4>
-                        <h4>Username : {userInformation.username}</h4>
-                        <h4>Profile Description : {userInformation.profile_description} </h4>
-                        <h4>Activity Hour : {hours?.hours}Hours   {hours?.minutes}minutes   {hours?.seconds}seconds</h4>
+                        <h4 className="y">Name : {userInformation.name}</h4>
+                        <h4 className="y">Username : {userInformation.username}</h4>
+                        <h4 className="y">Profile Description : {userInformation.profile_description} </h4>
+                        <h4 className="y">Activity Hour : {hours?.hours}Hours   {hours?.minutes}minutes   {hours?.seconds}seconds</h4>
                     </div>
                 ))}
-                {userId == localStorage.userId &&
-                <Link className="blog-fr" to={`/editProfile/${userId}`}>
-                    <Button className="blog-fr" variant="danger">EDIT USER INFORMATION</Button>
-                </Link>
-                }
+                <div>
+                    {userId == localStorage.userId &&
+                    <Link className="blog-fr" to={`/editProfile/${userId}`}>
+                        <Button className="blog-fr" variant="danger">EDIT USER INFORMATION</Button>
+                    </Link>
+                    }
+                </div>
             </div>
             <div className="showblog-profilepage" style={{ marginBottom : "50px" }}>
                 <Card.Header className="card-header">MY BLOG</Card.Header>

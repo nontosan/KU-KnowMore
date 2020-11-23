@@ -11,3 +11,19 @@
     border-bottom: 0px;
     border-radius: calc(0.25rem - 1px);
 }
+
+.userpage-top-div{
+    padding:2em;
+    padding-bottom: 0em;
+    margin-bottom: 2em;
+    background-color: #2B2B2B;
+    color:white;
+    border-radius: 20px
+    ;
+}
+.profile-info {
+    color: white;
+}
+.y{
+    color:#8D8D8D
+}
