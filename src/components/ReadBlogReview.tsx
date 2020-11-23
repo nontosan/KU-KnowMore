@@ -250,9 +250,12 @@ const fetchReview = () => {
                         <Image className="delete-setting-pic blog-fl" src={GearEdit} ></Image>
                       </button>
                     </Link>
+                    <button className="blog-delete-button" onClick={() => handleDeleteBlog(blogInformation)}>
+                      <Image className="delete-setting-pic blog-fl" src={minus} ></Image>
+                    </button>
                     {showDeleteModal && 
                       <div>
-                        <DeleteModal 
+                        <DeleteModal className=""
                           show = {showDeleteModal}
                           nameBlog = {BlogDelete?.blog_name}
                           deleteBlog = {submitDeleteBlog}
