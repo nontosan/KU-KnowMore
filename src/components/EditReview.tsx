@@ -354,20 +354,19 @@ const formatGroupLabel = (data:any) => (
             />
         </div>
       </div>
-        <div>
+        <div className="z">
             <div className ="div-scrollbar">
-                <Container>
-                    <Row>
-                        <Col sm={3}>
+                    <div className="x">
+                        <div className="y">
                             <label className="label">สอนได้เข้าใจ</label>
-                        </Col>
-                        <Col>
+                        </div>
+                        <div>
                             <Progress percent={teachScore*20} showInfo={false}/>
-                        </Col>
-                        <Col>
+                        </div>
+                        <div>
                             ({teachScore}/5)
-                        </Col>
-                        <Col className="dropdownn">
+                        </div>
+                        <div className="dropdownn">
                             <div className="edit">edit </div>
                             <Select
                               options={ScoreValue}
@@ -375,23 +374,21 @@ const formatGroupLabel = (data:any) => (
                                 setTeachScore(e.value)
                               }}
                             />
-                        </Col>
-                    </Row>
-                </Container>
+                        </div>
+                    </div>
             </div>
             <div className ="div-scrollbar">
-                <Container>
-                    <Row>
-                        <Col sm={3}>
+                    <div className="x">
+                        <div className="y">
                             <label className="label">จำนวนงาน</label>
-                        </Col>
-                        <Col>
+                        </div>
+                        <div>
                             <Progress percent={workScore*20} showInfo={false}/>
-                        </Col>
-                        <Col>
+                        </div>
+                        <div>
                             ({workScore}/5)
-                        </Col>
-                        <Col className="dropdownn">
+                        </div>
+                        <div className="dropdownn">
                             <div className="edit">edit </div>
                             <Select
                               options={ScoreValue}
@@ -399,23 +396,21 @@ const formatGroupLabel = (data:any) => (
                                 setWorkScore(e.value)
                               }}
                             />
-                        </Col>
-                    </Row>
-                </Container>
+                        </div>
+                    </div>
             </div>
             <div className ="div-scrollbar">
-                <Container>
-                    <Row>
-                        <Col sm={3}>
+                    <div className="x">
+                        <div className="y">
                             <label className="label">ความสำคัญในการเข้าเรียน</label>
-                        </Col>
-                        <Col >
+                        </div>
+                        <div >
                             <Progress percent={roomScore*20} showInfo={false}/>
-                        </Col>
-                        <Col>
+                        </div>
+                        <div>
                             ({roomScore}/5)
-                        </Col>
-                        <Col className="dropdownn">
+                        </div>
+                        <div className="dropdownn">
                             <div className="edit">edit </div>
                             <Select
                               options={ScoreValue}
@@ -423,23 +418,21 @@ const formatGroupLabel = (data:any) => (
                                 setRoomScore(e.value)
                               }}
                             />
-                        </Col>
-                    </Row>
-                </Container>
+                        </div>
+                    </div>
             </div>
             <div className ="div-scrollbar">
-                <Container>
-                    <Row>
-                        <Col sm={3}>
+                    <div className="x">
+                        <div className="y">
                             <label className="label">ภาพรวม</label>
-                        </Col>
-                        <Col>
+                        </div>
+                        <div>
                             <Progress percent={overallScore*20} showInfo={false}/>
-                        </Col>
-                        <Col>
+                        </div>
+                        <div>
                             ({overallScore}/5)
-                        </Col>
-                        <Col className="dropdownn">
+                        </div>
+                        <div className="dropdownn">
                             <div className="edit">edit </div>
                             <Select
                               options={ScoreValue}
@@ -447,9 +440,8 @@ const formatGroupLabel = (data:any) => (
                                 setOverallScore(e.value)
                               }}
                             />
-                        </Col>
-                    </Row>
-                </Container>
+                        </div>
+                    </div>
             </div>
             </div>
           </div>
