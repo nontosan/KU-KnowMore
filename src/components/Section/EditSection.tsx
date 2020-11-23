@@ -13,6 +13,7 @@ import UploadFile from '../UploadFile';
 import Demo from '../UploadTest';
 import UploadMultiEditSection from "../uploadfile/UploadMultiEditSection"
 import DisplayFileandDel from '../DisandDel';
+import UploadMulFile from "../UploadMulFile"
 // END OF IMPORT COMPONENT //
 
 // IMPORT SERVICE //
@@ -99,6 +100,10 @@ const EditSection = (props:any) => {
         }
     };
 
+    const uploadCallback = () => {
+        window.location.reload();
+    }
+    
     const fetchSection = () => {
         SectionService.fetchSectionsSpecific(sectionId)
             .then(sectioninfo => {
@@ -140,7 +145,9 @@ const EditSection = (props:any) => {
                     <DisplayFileandDel secid = {sectionId} fetchsection={fetchSection}/>
                 </div>
                 <div className="uploadtest">
-                    <UploadMultiEditSection secid = {sectionId}/>
+                    <UploadMulFile  
+                        secid = {sectionId}
+                        callback = {uploadCallback}/>
                 </div>
             </div>
             <div className="div-sectionname">
@@ -155,3 +162,4 @@ const EditSection = (props:any) => {
 }
 
 export default EditSection;
+/*<UploadMultiEditSection secid = {sectionId}/>*/

@@ -71,7 +71,7 @@ class UploadMultiEditSection extends React.Component<any,any> {
         <Upload {...props}>
           <Button icon={<UploadOutlined />}>Select File</Button>
         </Upload>
-        <a href={window.location.href}>
+        <a >
             <Button
             type="primary"
             onClick={this.handleUpload}

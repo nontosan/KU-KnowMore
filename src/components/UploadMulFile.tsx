@@ -4,8 +4,15 @@ import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    Redirect,
+} from 'react-router-dom';
 class UploadMulFile extends React.Component<any,any> {
-    
+    //const status = true
     state = {
         file: ""
     }
@@ -20,7 +27,7 @@ class UploadMulFile extends React.Component<any,any> {
         //console.log(e.target.files[0], "$$$$");
     }
 
-    handleUpload(e:any){
+    async handleUpload(e:any){
         //console.log(this.state , "THE STATE ---- $$$$");
         const files = this.state.file
         const attachments = new FormData()
@@ -28,8 +35,8 @@ class UploadMulFile extends React.Component<any,any> {
           attachments.append('attachments',files[i])
         }
 
-        axios({
-            url: `https://backend.ku-knowmore.xyz/sections/5f872295f75b8a001bea596d/attachments`, //Sample API 
+        await axios({
+            url: `https://backend.ku-knowmore.xyz/sections/${this.props.secid}/attachments`, //Sample API 
             method: "POST",
             headers:{
               "Content-Type": "multipart/form-data",
@@ -37,20 +44,21 @@ class UploadMulFile extends React.Component<any,any> {
             data: attachments
         });
         alert("Upload Complete");
+        gitthis.props.callback();
     }
 
     render() {
         return (
             <div className="Up">
-                <h1>Upload Mul File</h1>
                 <form>
                     <div className="">
-                        <label>Select File </label>
                         <input type="file" multiple name="attachments" 
                         onChange={(e)=>this.handleFile(e)} />
                     </div>
                     <br />
-                    <Button variant="primary" size="sm"  onClick={(e)=>this.handleUpload(e)}>UploadFile Mul</Button>
+                    <Button variant="primary" size="sm"  className="btnuploadfile" onClick={(e)=>this.handleUpload(e)}>
+                        UploadFile Mul
+                    </Button>
                 </form>
             </div>
         );
