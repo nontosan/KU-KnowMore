@@ -126,7 +126,7 @@ const App = () => {
                         {false && /* true for debug */
                             <Nav.Link href="/dropdowntest">dropdowntest</Nav.Link>
                         }
-                        {true &&
+                        {false &&
                             <Nav.Link href={`/CreateNewProfile/${localStorage.userId}`}>CreateNewProfile</Nav.Link>
                         }
                     </Nav>

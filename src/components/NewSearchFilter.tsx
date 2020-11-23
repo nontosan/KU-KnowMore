@@ -42,8 +42,8 @@ const FilterBar = (props:any) => {
     var [query,setquery]=useState('');
     const [knowledge,setknowledge] = useState<boolean>(false)
     const [review,setreview] = useState<boolean>(false)
-    const [knowledgeandreview,setknowledgeandreview] = useState<boolean>(false);
-    const [date,setdate] = useState<boolean>(false)
+    const [knowledgeandreview,setknowledgeandreview] = useState<boolean>(true);
+    const [date,setdate] = useState<boolean>(true)
     const [like,setlike] = useState<boolean>(false)
     const [viewer,setviewer] = useState<boolean>(false)
     const [allCourse,setAllCourse] = useState<any[]>([]);
@@ -159,23 +159,23 @@ const FilterBar = (props:any) => {
         fetchCourse()
         if(window.location.search.split("=")[0]!==''){
             if(window.location.search.split("=")[1][0]=='1'){
-                setknowledge(true);
+                setknowledge(true);setreview(false);setknowledgeandreview(false);
             }
             else if(window.location.search.split("=")[1][0]=='2'){
-                setreview(true);
+                setreview(true);setknowledgeandreview(false);setknowledge(false);
             }
             else if(window.location.search.split("=")[1][0]=='3'){
                 console.log("HELLOISUS")
-                setknowledgeandreview(true);
+                setknowledgeandreview(true);setreview(false);setknowledge(false);
             }
             if(window.location.search.split("=")[2][0]=='1'){
-                setdate(true);
+                setdate(true);setlike(false);setviewer(false);
             }
             else if(window.location.search.split("=")[2][0]=='2'){
-                setlike(true);
+                setlike(true);setdate(false);setviewer(false);
             }
             else if(window.location.search.split("=")[2][0]=='3'){
-                setviewer(true);
+                setviewer(true);setlike(false);setdate(false);
             }
         }
     },[])
