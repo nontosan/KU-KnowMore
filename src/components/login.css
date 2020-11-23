@@ -102,6 +102,8 @@
   }
   
   .session {
+    padding-left: 50%;
+    padding-top:50%;
     display: -webkit-box;
     display: flex;
     -webkit-box-orient: horizontal;
@@ -119,9 +121,15 @@
   }
   .bg{
     background: black;
+    width: 200em;
+    height: 70em;
+    padding-left: 40em;
+    padding-top: 20em;
+    
   }
   
   .left {
+
     width: 220px;
     height: auto;
     min-height: 100%;
