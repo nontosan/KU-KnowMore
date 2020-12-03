@@ -44,7 +44,7 @@ class UploadMulFile extends React.Component<any,any> {
             data: attachments
         });
         alert("Upload Complete");
-        gitthis.props.callback();
+        this.props.callback();
     }
 
     render() {

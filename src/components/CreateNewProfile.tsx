@@ -108,7 +108,7 @@ function CreateNewProfile (props:any) {
       const btn = (
         <Button type="primary"  onClick={() => {
           notification.close(key)
-          window.location.replace(`http://localhost:3000/userpage/${user_id}`);
+          window.location.replace(`https://backend.ku-knowmore.xyz/userpage/${user_id}`);
         }}>
           Confirm
         </Button>

@@ -126,7 +126,7 @@ const CreateKlBlog=()=> {
         const btn = (
           <Button type="primary"  onClick={() => {
             notification.close(key)
-            window.location.replace("http://localhost:3000/");
+            window.location.replace("https://backend.ku-knowmore.xyz/");
           }}>
             Confirm
           </Button>
