@@ -46,7 +46,7 @@ class Demo extends React.Component<any,any> {
       },
     });*/
     axios({
-        url: `https://backend.ku-knowmore.xyz/sections/${this.props.secid}/attachments`, //Sample API 
+        url: `https://ku-knowmore.xyz/sections/${this.props.secid}/attachments`, //Sample API 
         method: "POST",
         headers:{
           "Content-Type": "multipart/form-data",

@@ -41,7 +41,7 @@ function DisplayFileandDel (props:any) { //This function is for EditSection
                 <ListGroup variant="flush" >
                     {attachmentsInformation.map(file=>(
                         <ListGroup.Item className="filecontainer" >    
-                            <a href={`https://backend.ku-knowmore.xyz/${file.path}`} className="openfile"> {file.originalname}</a>
+                            <a href={`https://ku-knowmore.xyz/${file.path}`} className="openfile"> {file.originalname}</a>
                             <Button variant="danger" size="sm" className="deletefile"  onClick={e => deletestate(file._id)}>DELETE</Button>
                         </ListGroup.Item>
                     ))}

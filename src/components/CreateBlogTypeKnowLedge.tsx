@@ -102,7 +102,7 @@ const DropdownCreateKnowledge=()=> {
         const btn = (
           <Button type="primary"  onClick={() => {
             notification.close(key)
-            window.location.replace("https://backend.ku-knowmore.xyz/");
+            window.location.replace("https://ku-knowmore.xyz/");
           }}>
             Confirm
           </Button>

@@ -462,7 +462,7 @@ const formatGroupLabel = (data:any) => (
       <div className="Confirm"> 
               
               <div className="Cancel">
-                <a href={`https://backend.ku-knowmore.xyz/review/${blogId}`}>
+                <a href={`https://ku-knowmore.xyz/review/${blogId}`}>
                   <Button className="cancel-button" variant="danger">Cancel</Button>
                 </a>
               </div>

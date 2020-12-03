@@ -43,7 +43,7 @@ function DisplayFile (props:any) {//This function is for ReadSection
                 <ListGroup.Item >
                     <div className="containerrr">
                         <a> {file.originalname}</a>
-                        <a href={`https://backend.ku-knowmore.xyz/${file.path}`}  target="popup" className="icon"><CloudDownloadOutlined /></a>
+                        <a href={`https://ku-knowmore.xyz/${file.path}`}  target="popup" className="icon"><CloudDownloadOutlined /></a>
                     </div>
                 </ListGroup.Item>
             )}
