@@ -82,7 +82,7 @@ const ReadSection = (props:any) => {
     const deletesection=()=>{
         console.log("delete seciton")
         SectionService.deleteSection(sectionId)
-        //window.location.replace(`http://localhost:3000/knowledge/${sectionsInformation[0].blog_id}`)
+        //window.location.replace(`http://ku-knowmore.xyz/knowledge/${sectionsInformation[0].blog_id}`)
     }
     ////////antd//////////
     const key = 'updatable';
@@ -108,7 +108,7 @@ const ReadSection = (props:any) => {
     const openNotification = () => {
         const key = `open${Date.now()}`;
         const btn = (
-        <a href={`http://localhost:3000/knowledge/${sectionsInformation[0].blog_id}`}>
+        <a href={`http://ku-knowmore.xyz/knowledge/${sectionsInformation[0].blog_id}`}>
           <Button type="primary"  onClick={() => {
             notification.close(key)
             openMessage()
@@ -171,7 +171,7 @@ const ReadSection = (props:any) => {
                     <div style={{ float: "right" }}>
                         {author==localStorage.userId &&
                         <div>
-                            <Button className="blog-delete-button" onClick={e=>window.location.replace(`http://localhost:3000/editSection/${sectionId}`)}>
+                            <Button className="blog-delete-button" onClick={e=>window.location.replace(`http://ku-knowmore.xyz/editSection/${sectionId}`)}>
                               <Image className="gear-setting-pic blog-fl" src={GearEdit}></Image>
                             </Button>
                             <Button className="blog-delete-button" onClick={e=>openNotification()}>
@@ -192,7 +192,7 @@ const ReadSection = (props:any) => {
                         <div style={{ float: "right" }}>
                             {author==localStorage.userId &&
                             <div>
-                                <Button className="blog-delete-button" onClick={e=>window.location.replace(`http://localhost:3000/editSection/${sectionId}`)}>
+                                <Button className="blog-delete-button" onClick={e=>window.location.replace(`http://ku-knowmore.xyz/editSection/${sectionId}`)}>
                                     <Image className="gear-setting-pic blog-fl" src={GearEdit}></Image>
                                 </Button>
                                 <Button className="blog-delete-button" onClick={() => handleDeleteBlog()}>

@@ -48,7 +48,7 @@ const WriteSection = (props:any) => {
                 .then(savedWriteSection => {
                     console.log("save success")
                     console.log(savedWriteSection)
-                    window.location.replace(`http://localhost:3000/editSection/${savedWriteSection?.id}`)
+                    window.location.replace(`http://ku-knowmore.xyz/editSection/${savedWriteSection?.id}`)
                 });
                 //console.log(history)    
                 console.log("already create section")

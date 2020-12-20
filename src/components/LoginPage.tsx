@@ -83,11 +83,11 @@ const LoginPage=(props:LoginFormProps)=> {
                     <Image className="ku-logo-pic" src={KU}></Image>
                 </div>
                 {false &&
-                <Link className="login-ku-button btn btn-success submit-button" to="https://sso-dev.ku.ac.th/idp/apps/authz?response_type=code&scope=user_info&client_id=38d38f02785c632dc6df02461443b84a936&redirect_uri=http://localhost:3000/portal">
+                <Link className="login-ku-button btn btn-success submit-button" to="https://sso-dev.ku.ac.th/idp/apps/authz?response_type=code&scope=user_info&client_id=38d38f02785c632dc6df02461443b84a936&redirect_uri=http://ku-knowmore.xyz/portal">
                     LOGIN WITH NONTRI ACCOUNT
                 </Link>}
 
-                <a onClick={e=>console.log(document.cookie)} className="link-login login-ku-button btn btn-success submit-button" href="https://sso-dev.ku.ac.th/idp/apps/authz?response_type=code&scope=user_info&client_id=38d38f02785c632dc6df02461443b84a936&redirect_uri=http://localhost:3000/portal">
+                <a onClick={e=>console.log(document.cookie)} className="link-login login-ku-button btn btn-success submit-button" href="https://sso-dev.ku.ac.th/idp/apps/authz?response_type=code&scope=user_info&client_id=38d38f02785c632dc6df02461443b84a936&redirect_uri=http://ku-knowmore.xyz/portal">
                     LOGIN WITH NONTRI ACCOUNT
                 </a>
                 {false &&
