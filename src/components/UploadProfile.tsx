@@ -27,7 +27,7 @@ class Upload extends React.Component<any,any> {
         profile_pic.append('profile_pic',file)
         //formdata.append('name','test')
         await axios({
-            url: `https://ku-knowmore.xyz/users/${this.props.userID}/profile_pic`, //Sample API 
+            url: `https://backend.ku-knowmore.xyz/users/${this.props.userID}/profile_pic`, //Sample API 
             method: "POST",
             headers:{
                 authorization: 'test',

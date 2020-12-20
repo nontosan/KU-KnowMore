@@ -22,7 +22,7 @@ class DownloadFile extends React.Component {
                 });
             });*/
             axios({
-                url: 'https://ku-knowmore.xyz/profile_pic/Horse-1200x900_91c3.jpg', //download random pic from this API 
+                url: 'https://backend.ku-knowmore.xyz/profile_pic/Horse-1200x900_91c3.jpg', //download random pic from this API 
                 method: 'GET',
                 responseType: 'blob', // important
               }).then((response) => {
@@ -52,7 +52,7 @@ class DownloadFile extends React.Component {
     
     downloadFile = () => { //Not complete yet
         axios({
-            url: 'https://ku-knowmore.xyz/attachments_dir/pdf-test_4710c.pdf',
+            url: 'https://backend.ku-knowmore.xyz/attachments_dir/pdf-test_4710c.pdf',
             method: 'GET',
             responseType: 'blob', // important
           }).then((response) => {
@@ -77,7 +77,7 @@ class DownloadFile extends React.Component {
                 <a href='#' onClick={this.downloadDataTest}>Download this Image</a>
                 <h3>Download Attachments from Sections</h3>
                 <Button variant="secondary" onClick={this.downloadFile}>Download<br/></Button>
-                <a href="https://ku-knowmore.xyz/attachments_dir/test_41013.pdf">Open File in New Tab</a>
+                <a href="https://backend.ku-knowmore.xyz/attachments_dir/test_41013.pdf">Open File in New Tab</a>
             </div>
         )
     }
