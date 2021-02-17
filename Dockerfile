@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:14.10.1
+FROM node:15.8.0-alpine3.10
 
 RUN apk add --no-cache tzdata
 ENV TZ=Asia/Bangkok

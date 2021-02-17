@@ -35,8 +35,8 @@ import recycleReviews from './reviews/recyclereviews.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mongodb',
-      host: 'mongo.ku-knowmore.xyz',  //For Test in local
-      // host: '172.17.0.2',          //For Deploy
+      // host: 'mongo.ku-knowmore.xyz',  //For Test in local
+      host: '172.17.0.5',          //For Deploy
       username: 'admin-backend',
       password: 'Rahat_Khao_Da_Ta_Bet',
       database: 'KU-KnowMore',
