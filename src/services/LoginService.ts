@@ -64,7 +64,7 @@ function getUserId(): string|null {
 async function portal(Code:any): Promise<any|null>{
     //may be edit path
     //console.log(JSON.stringify(code))
-    const res = await fetch(`https://backend.ku-knowmore.xyz/auth/token`,{
+    const res = await fetch(`https://backend.ku-knowmore.xyz/auth/token2`,{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(Code),
